@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <Item>
+      <tokenurl>http://117.78.48.5/api/v1/at/auth/</tokenurl>
+      <inputMobile>400</inputMobile>
+      <inputPassword>12345678</inputPassword>
+      <orderurl>http://117.78.48.5/api/v1/at/orders/</orderurl>
+    </Item>
+ 

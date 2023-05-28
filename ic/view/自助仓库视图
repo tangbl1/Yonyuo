@@ -1,0 +1,67 @@
+V_IC_ONHANDNUM_NOSTOR_CC
+create or replace view v_ic_onhandnum_nostor_cc as
+(
+select "ORGCODE","STORCODE","MATERIALCODE","MATERIALNAME","CLOCATIONCODE","MATERIALMODEL","SPECIFICATION","UNITCODE","NONHANDNUM" from V_IC_ONHANDNUM_NOSTOR  Where (storcode,ClocationCode) In
+       (Select storcode,ClocationCode
+          From V_IC_ONHANDNUM_NOSTOR
+         Group By storcode,ClocationCode
+        Having Count(*) =1 )
+union all
+Select "ORGCODE","STORCODE","MATERIALCODE","MATERIALNAME","CLOCATIONCODE","MATERIALMODEL","SPECIFICATION","UNITCODE","NONHANDNUM"
+  From V_IC_ONHANDNUM_NOSTOR t
+ Where (storcode,ClocationCode) In
+       (Select storcode,ClocationCode
+          From V_IC_ONHANDNUM_NOSTOR
+         Group By storcode,ClocationCode
+        Having Count(*) > 1  )
+        and nonhandnum > 0
+);
+
+
+
+
+
+V_IC_ONHANDNUM_NOSTOR
+
+CREATE OR REPLACE VIEW V_IC_ONHANDNUM_NOSTOR AS
+select OrgCode,
+StorCode,
+ MaterialCode,
+ MaterialName,
+ClocationCode,
+MaterialModel,
+ Specification,
+ UnitCode, NOnhandNum
+  from
+  (SELECT
+       o1.code         as OrgCode,
+        b1.code         as StorCode,
+       b2.code         as MaterialCode,
+       b2.name         as MaterialName,
+       r.code         as ClocationCode,
+       b2.materialspec as MaterialModel,
+       b2.materialtype as Specification,
+       b3.name         as UnitCode,
+       sum(h.nonhandnum) as nonhandnum
+  FROM ic_onhandnum h
+ inner join ic_onhanddim d
+    ON h. pk_onhanddim = d.pk_onhanddim and h.dr = 0  and
+   d.pk_org IN ( '0001A2100000000027SB', '0001A2100000000027T0', '0001A2100000000027RM', '0001A2100000000027QM', '0001A2100000000027UH' )
+ inner join org_stockorg o1
+ on d.pk_org = o1.pk_stockorg
+  inner join bd_stordoc b1
+    on b1.pk_stordoc = d.cwarehouseid and b1.gubflag = 'N'
+      LEFT  join bd_material_v b2
+    on d.cmaterialvid = b2.pk_source
+  left join bd_measdoc b3  on b3.pk_measdoc  =d.castunitid
+  left join bd_rack r
+  ON d.clocationid  = r.pk_rack and r.enablestate =2
+ group by  o1.code       ,
+        b1.code       ,
+       b2.code      ,
+       b2.name      ,
+       r.code      ,
+       b2.materialspec,
+       b2.materialtype ,
+       b3.name
+      ) i2;

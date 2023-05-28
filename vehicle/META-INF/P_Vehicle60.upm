@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding='gb2312'?>
+<module name="vehicle">
+  <public>
+	<component remote="true" singleton="true"  tx="CMT">
+	  <interface>nc.itf.vehicle.IVehicleMaintain</interface>
+	  <implementation>nc.impl.vehicle.VehicleMaintainImpl</implementation>
+	</component>
+
+  </public> 
+</module> 

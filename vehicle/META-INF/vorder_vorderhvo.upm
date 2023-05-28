@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="gb2312"?>
+<module name="vehicle">
+	<public>
+		<component priority="0" singleton="true" remote="true" tx="CMT" supportAlias="true">
+			<interface>nc.itf.vehicle.vorder.vorderhvo.IVorderHVOService</interface>
+			<implementation>nc.impl.vehicle.vorder.vorderhvo.VorderHVOServiceImpl</implementation>
+		</component>
+	</public>
+</module>

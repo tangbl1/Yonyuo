@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<authorizes>
+  <authorize>
+  	<appcode>40H40101,40H40101L,40H40101P</appcode>
+  	<actions>
+       <action>stgl.xfmx.SaveXfmxAction</action>
+       <action>stgl.xfmx.LoadXfmxAction</action>
+       <action>stgl.xfmx.CopyXfmxAction</action>
+       <action>stgl.xfmx.PrintXfmxAction</action>
+       <action>stgl.xfmx.EditXfmxAction</action>
+       <action>stgl.xfmx.ListXfmxAction</action>
+       <action>stgl.xfmx.DeleteXfmxAction</action>
+       <action>stgl.xfmx.AddXfmxAction</action>
+	</actions>
+   </authorize>
+    <authorize>
+        <appcode>*</appcode>
+        <actions>
+            <action>stgl.xfmx.XfmxDefaultGridRefAction</action>
+        </actions>
+    </authorize>
+</authorizes>

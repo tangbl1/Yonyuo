@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<authorizes>
+  <authorize>
+  	<appcode>DDH20101,DDH20101L,DDH20101P</appcode>
+  	<actions>
+       <action>dd.refreshcost.SaveRefreshCostHVOAction</action>
+       <action>dd.refreshcost.CopyRefreshCostHVOAction</action>
+       <action>dd.refreshcost.PrintRefreshCostHVOAction</action>
+       <action>dd.refreshcost.EditRefreshCostHVOAction</action>
+       <action>dd.refreshcost.RefreshCostHVOGridRefAction</action>
+       <action>dd.refreshcost.PFlowRefreshCostHVOAction</action>
+       <action>dd.refreshcost.AddRefreshCostHVOAction</action>
+       <action>dd.refreshcost.LoadRefreshCostHVOAction</action>
+       <action>dd.refreshcost.RefreshCostHVOTreeRefAction</action>
+       <action>dd.refreshcost.ListSlaveRefreshCostHVOAction</action>
+       <action>dd.refreshcost.ListRefreshCostHVOAction</action>
+       <action>dd.refreshcost.DeleteRefreshCostHVOAction</action>
+       <action>dd.refreshcost.TranSmitRefreshCostHVOAction</action>
+	</actions>
+   </authorize>
+    <authorize>
+        <appcode>*</appcode>
+        <actions>
+            <action>dd.refreshcost.RefreshCostHVODefaultGridRefAction</action>
+        </actions>
+    </authorize>
+</authorizes>

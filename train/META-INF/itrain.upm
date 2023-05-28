@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<module name="train">
+	<public>
+		<component>
+			<interface>nc.itf.hi.psndoc.ITrainService1</interface>
+			<implementation>nc.impl.hi.psndoc.TrainServiceImpl1</implementation>
+			<extension class="nc.uap.ws.deploy.OxbWSExtensionProcessor">
+				<wsdl>/nc/itf/hi/psndoc/ITrainService1.wsdl</wsdl>
+				<address>/nc.itf.hi.psndoc.ITrainService1</address>
+			</extension>
+		</component>
+		
+	</public>
+	<private>
+	</private>
+</module>
+

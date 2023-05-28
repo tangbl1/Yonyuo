@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<authorizes>
+  <authorize>
+  	<appcode>101410PM,101410PML,101410PMP</appcode>
+  	<actions>
+       <action>uapbd.PriceManage.SavePriceManageAction</action>
+       <action>uapbd.PriceManage.LoadPriceManageAction</action>
+       <action>uapbd.PriceManage.CopyPriceManageAction</action>
+       <action>uapbd.PriceManage.ListSlavePriceManageAction</action>
+       <action>uapbd.PriceManage.EditPriceManageAction</action>
+       <action>uapbd.PriceManage.ListPriceManageAction</action>
+       <action>uapbd.PriceManage.DeletePriceManageAction</action>
+       <action>uapbd.PriceManage.AddPriceManageAction</action>
+	</actions>
+   </authorize>
+    <authorize>
+        <appcode>*</appcode>
+        <actions>
+            <action>uapbd.PriceManage.PriceManageDefaultGridRefAction</action>
+        </actions>
+    </authorize>
+</authorizes>

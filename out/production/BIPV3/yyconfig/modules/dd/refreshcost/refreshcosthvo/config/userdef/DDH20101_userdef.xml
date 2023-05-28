@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<userdefs>
+	<userdef>
+		<name>dd.RefreshCostBVO</name>
+		<prefix>vbmemo</prefix>
+		<processor>nccloud.web.uapbd.commons.web.UserDefCommonProcessor</processor>
+		<defrulecode></defrulecode>
+	</userdef>
+	<userdef>
+		<name>dd.RefreshCostBVO</name>
+		<prefix>vbdef</prefix>
+		<processor>nccloud.web.uapbd.commons.web.UserDefCommonProcessor</processor>
+		<defrulecode></defrulecode>
+	</userdef>
+	<userdef>
+		<name>dd.RefreshCostHVO</name>
+		<prefix>vdef</prefix>
+		<processor>nccloud.web.uapbd.commons.web.UserDefCommonProcessor</processor>
+		<defrulecode></defrulecode>
+	</userdef>
+</userdefs>

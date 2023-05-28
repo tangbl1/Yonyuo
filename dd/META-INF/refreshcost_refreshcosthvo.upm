@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="gb2312"?>
+<module name="dd">
+	<public>
+		<component priority="0" singleton="true" remote="true" tx="CMT" supportAlias="true">
+			<interface>nc.itf.dd.refreshcost.refreshcosthvo.IRefreshCostHVOService</interface>
+			<implementation>nc.impl.dd.refreshcost.refreshcosthvo.RefreshCostHVOServiceImpl</implementation>
+		</component>
+	</public>
+</module>

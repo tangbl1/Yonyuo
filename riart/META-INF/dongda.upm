@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="riart">
+	<public>
+		<component name="SyncInfoWS">
+			<interface>nc.itf.sync.baseinfo.ISyncBaseInfo</interface>
+			<implementation>nc.impl.sync.baseinfo.SyncBaseInfoImpl</implementation>
+			<extension class="nc.uap.ws.deploy.OxbWSExtensionProcessor">
+				<wsdl>/nc/itf/sync/baseinfo/ISyncBaseInfo.wsdl</wsdl>
+				<address>/nc.itf.sync.baseinfo.ISyncBaseInfo</address>
+			</extension>
+		</component>
+
+		
+	</public>
+</module>
+
+
+
+

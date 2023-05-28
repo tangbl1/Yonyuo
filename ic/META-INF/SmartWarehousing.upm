@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="ic">
+	<public>
+		<component >
+			<interface>nc.itf.sync.baseinfo.ISyncBaseInfocc</interface>
+			<implementation>nc.impl.sync.baseinfo.SyncBaseInfoccImpl</implementation>
+			<extension class="nc.uap.ws.deploy.OxbWSExtensionProcessor">
+				<wsdl>/nc/itf/sync/baseinfo/ISyncBaseInfocc.wsdl</wsdl>
+				<address>/nc.itf.sync.baseinfo.ISyncBaseInfocc</address>
+			</extension>
+		</component>
+	</public>
+	<private>
+	</private>
+</module>
+
+
+
+

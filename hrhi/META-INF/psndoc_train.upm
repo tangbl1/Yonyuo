@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="hrhi">
+	<public>
+		<component >
+            <interface>nc.itf.hi.psndoc.ITrainService</interface>
+			<implementation>nc.impl.hi.psndoc.TrainServiceImpl</implementation>
+			  <extension class="nc.uap.ws.deploy.OxbWSExtensionProcessor">
+				<wsdl>/nc/itf/hi/psndoc/ITrainService.wsdl</wsdl>
+				<address>/nc.itf.hi.psndoc.ITrainService</address>
+			   </extension>           
+		</component>
+	</public>
+	<private>
+	</private>
+</module>
+

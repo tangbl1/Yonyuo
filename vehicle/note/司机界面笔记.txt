@@ -1,0 +1,4 @@
+正式环境测试地址：
+http://49.4.14.203:8181/clgl/baseinfo/driver/driver.html?userjson={"postname":"行政主管","deptname":"综合管理部","pk_dept":"1001L910000000000A52","cuserid":"1001A310000000000U61","pk_org":"0001A2100000000027QM","pk_group":"0001A3100000000004NA"}
+
+测试8981环境地址：http://49.4.14.119:8981/clgl/baseinfo/driver/driver.html?userjson={"postname":"行政主管","deptname":"综合管理部","pk_dept":"1001L910000000000A52","cuserid":"1001A310000000000U61","pk_org":"0001A2100000000027QM","pk_group":"0001A3100000000004NA"}

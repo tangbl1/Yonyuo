@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding='gb2312'?>
+<module name="ic">
+  <public>
+	<component remote="true" singleton="true"  tx="CMT">
+   <interface>nc.itf.ic.base.ItransmitServer</interface>
+   <implementation>nc.impl.ic.m4d.transmitIpml</implementation>
+ </component>
+  </public> 
+</module> 
