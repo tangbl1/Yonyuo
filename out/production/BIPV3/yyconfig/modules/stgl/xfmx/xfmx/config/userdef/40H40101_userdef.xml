@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<userdefs>
-	<userdef>
-		<name>hanwang.xfmx</name>
-		<prefix>vdef</prefix>
-		<processor>nccloud.web.uapbd.commons.web.UserDefCommonProcessor</processor>
-		<defrulecode></defrulecode>
-	</userdef>
-</userdefs>

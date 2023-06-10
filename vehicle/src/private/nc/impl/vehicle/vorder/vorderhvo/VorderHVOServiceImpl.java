@@ -100,7 +100,8 @@ public class  VorderHVOServiceImpl extends ServiceSupport implements IVorderHVOS
 		if (ArrayUtils.isNotEmpty(orderPath)) {
 			sql.append(" order by ").append(StringUtils.join(orderPath, ", "));
 		}
-		return (String[]) dao.getBaseDAO().executeQuery(sql.toString(), (rs) -> {
+		return
+				(String[]) dao.getBaseDAO().executeQuery(sql.toString(), (rs) -> {
 			List<String> pks = new ArrayList<>();
 			while (rs.next()) {
 				pks.add(rs.getString(1));

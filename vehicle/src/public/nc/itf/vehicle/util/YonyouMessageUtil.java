@@ -1,10 +1,18 @@
 package nc.itf.vehicle.util;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.yonyou.iuap.corp.demo.crypto.SignHelper;
+import com.yonyou.iuap.corp.demo.model.AccessTokenResponse;
+import com.yonyou.iuap.corp.demo.model.GenericResponse;
+import com.yonyou.iuap.corp.demo.utils.RequestTool;
 
 /**
  * 友空间发送应用通知
@@ -13,19 +21,33 @@ import com.alibaba.fastjson.JSONObject;
  */
 public class YonyouMessageUtil {
 
-	// 第三方凭证id
-	public static final String APPID = "bf10f69e652adee3";
-	// 第三方凭证密钥
-	public static final String SECRET = "085a04a021322cf460f8c76c3f79e68335ada3bb8e28f0b45c6c197544d5";
-	// 企业自建应用获取access_token[get]
-	// https://open.yonyoucloud.com/developer/doc?id=f97cf7f5cc1abe83d1dad1454ceb1757
-	public static final String GETTOKEN_URL = "http://openapi.yonyoucloud.com/token?";
-	// 根据用户邮箱或手机获得友空间用户memberid[post]
-	// https://open.yonyoucloud.com/developer/doc?id=bd37dc6065d8375e14a05ecb711479a6
+//	// 第三方凭证id
+//	public static final String APPID = "bf10f69e652adee3";
+//	// 第三方凭证密钥
+//	public static final String SECRET = "085a04a021322cf460f8c76c3f79e68335ada3bb8e28f0b45c6c197544d5";
+//	//
+
+//	// https://open.yonyoucloud.com/developer/doc?id=f97cf7f5cc1abe83d1dad1454ceb1757
+//	public static final String GETTOKEN_URL = "http://openapi.yonyoucloud.com/token?";
+//	// 根据用户邮箱或手机获得友空间用户memberid[post]
+//	// https://open.yonyoucloud.com/developer/doc?id=bd37dc6065d8375e14a05ecb711479a6
 	public static final String GETMEMBERID_URL = "http://openapi.yonyoucloud.com/user/getMemberId?";
 	// 发送应用通知[post]
 	// https://open.yonyoucloud.com/developer/doc?id=87d473451c6ef88eeaf0f5f326a1c056
 	public static final String SENDMESSAGE_URL = "http://openapi.yonyoucloud.com/rest/message/app/share?";
+
+	// 2023-06-08修改 by tangbl
+	//友空间API调用授权
+	//appkey
+	static String appKey = "4b979c1ce03944d694be80c1e4242b77";
+	// 第三方凭证密钥
+	static String appSecret = "343c68bcfd4f4029a6dfa7afc357545a";
+
+	//企业自建应用获取access_token[get]
+	//https://yonbip.diwork.com/iuap-api-auth/open-auth/selfAppAuth/getAccessToken?appKey=4b979c1ce03944d694be80c1e4242b77&timestamp=1686029956013&signature=wgZHTV9jQNqUXJuiHtM3yYPkaqywIdC9VLh1FsZFeMs%3D
+	static String accessTokenUrl = "https://yonbip.diwork.com/iuap-api-auth/open-auth/selfAppAuth/getAccessToken";
+
+
 
 	/**
 	 * 企业自建应用获取access_token
@@ -33,12 +55,25 @@ public class YonyouMessageUtil {
 	 * @return
 	 */
 	public static String getAccessToken() {
+
 		String accessToken = "";
-		String tokenUrl = GETTOKEN_URL + "appid=" + APPID + "&secret=" + SECRET;
-//		JSONObject tokenRes = HttpRequest2.sendGet(tokenUrl, null);
-		JSONObject tokenRes = HttpRequest.sendGet(tokenUrl, new ArrayList<String>());
-		if (Integer.parseInt(String.valueOf(tokenRes.get("code"))) == 0) {
-			accessToken = tokenRes.getJSONObject("data").getString("access_token");
+		try {
+			Map<String, String> params = new HashMap<>();
+			// 除签名外的其他参数
+			params.put("appKey", appKey);
+			//时间戳
+			String timestamp = String.valueOf(System.currentTimeMillis());
+			params.put("timestamp",timestamp);
+			// 计算签名
+			String signature = null;
+			signature = SignHelper.sign(params, appSecret);
+			params.put("signature", signature);
+			GenericResponse<AccessTokenResponse> response = RequestTool.doGet(accessTokenUrl, params, new TypeReference<GenericResponse<AccessTokenResponse>>() {});
+			if (response.isSuccess()) {
+				accessToken = response.getData().getAccessToken();
+			}
+		} catch (Exception e) {
+			throw new RuntimeException("获取accessToken失败！");
 		}
 		return accessToken;
 	}
