@@ -20,11 +20,11 @@ public class GetDatasourceName {
         SAXBuilder builder = new SAXBuilder();
         Document doc = builder.build(fis);
         Element root = doc.getRootElement();
-        // ´ÓItem½ÚµãÖĞ»ñµÃappId½Úµã
+        // ä»ItemèŠ‚ç‚¹ä¸­è·å¾—appIdèŠ‚ç‚¹
         List<Element> childNodes = root.getChildren("datasourcename");
         String datasourcesname = childNodes.get(0).getText();
         if (datasourcesname == null) {
-            ExceptionUtils.wrappBusinessException("orderurlÎª¿Õ,Çë¼ì²éÅäÖÃÎÄ¼ş!!");
+            ExceptionUtils.wrappBusinessException("orderurlä¸ºç©º,è¯·æ£€æŸ¥é…ç½®æ–‡ä»¶!!");
         }
         return datasourcesname;
     }

@@ -17,7 +17,7 @@ public class N_VEHI_DELETE extends AbstractPfAction<AggVehicleMessageVO> {
 			Object userObj) {
 		CompareAroundProcesser<AggVehicleMessageVO> processor = new CompareAroundProcesser<AggVehicleMessageVO>(
 				VehiclePluginPoint.SCRIPT_DELETE);
-		// TODO ÔÚ´Ë´¦Ìí¼ÓÇ°ºó¹æÔò
+		// TODO åœ¨æ­¤å¤„æ·»åŠ å‰åè§„åˆ™
 		return processor;
 	}
 

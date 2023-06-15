@@ -7,7 +7,7 @@ import nc.impl.pubapp.pattern.rule.IRule;
 import nc.vo.vehicle.otherinfo.AggOtherInfoVO;
 
 /**
- * ±ê×¼µ¥¾İĞÂÔöBP
+ * æ ‡å‡†å•æ®æ–°å¢BP
  */
 public class AceOtherInfoInsertBP {
 
@@ -22,12 +22,12 @@ public class AceOtherInfoInsertBP {
 	}
 
 	/**
-	 * ĞÂÔöºó¹æÔò
+	 * æ–°å¢åè§„åˆ™
 	 * 
 	 * @param processor
 	 */
 	private void addAfterRule(AroundProcesser<AggOtherInfoVO> processor) {
-		// TODO ĞÂÔöºó¹æÔò
+		// TODO æ–°å¢åè§„åˆ™
 		IRule<AggOtherInfoVO> rule = null;
 		rule = new nc.bs.pubapp.pub.rule.BillCodeCheckRule();
 		((nc.bs.pubapp.pub.rule.BillCodeCheckRule) rule).setCbilltype("OINF");
@@ -40,12 +40,12 @@ public class AceOtherInfoInsertBP {
 	}
 
 	/**
-	 * ĞÂÔöÇ°¹æÔò
+	 * æ–°å¢å‰è§„åˆ™
 	 * 
 	 * @param processor
 	 */
 	private void addBeforeRule(AroundProcesser<AggOtherInfoVO> processer) {
-		// TODO ĞÂÔöÇ°¹æÔò
+		// TODO æ–°å¢å‰è§„åˆ™
 		IRule<AggOtherInfoVO> rule = null;
 		rule = new nc.bs.pubapp.pub.rule.FillInsertDataRule();
 		processer.addBeforeRule(rule);

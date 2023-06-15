@@ -37,49 +37,49 @@ public class VorderDriverServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	BaseDAO dao = new BaseDAO();
-	private static boolean TEST_FLAG = false;	//²âÊÔ±êÊ¶£ºtrue->²âÊÔ·şÎñÆ÷	false->ÕıÊ½·şÎñÆ÷
-	private static Map<String,String> state=new HashMap<String,String>();	//×´Ì¬Ó³Éä£¬ÓÃÓÚ»ñÈ¡×´Ì¬±àÂë¶ÔÓ¦µÄ×´Ì¬Ãû³Æ
+	private static boolean TEST_FLAG = false;	//æµ‹è¯•æ ‡è¯†ï¼štrue->æµ‹è¯•æœåŠ¡å™¨	false->æ­£å¼æœåŠ¡å™¨
+	private static Map<String,String> state=new HashMap<String,String>();	//çŠ¶æ€æ˜ å°„ï¼Œç”¨äºè·å–çŠ¶æ€ç¼–ç å¯¹åº”çš„çŠ¶æ€åç§°
 	static {
-		//µ¥¾İ×´Ì¬×öÓ³Éä£¬ÒÑÍê³É¡¢ÉêÇëÖĞ¡¢²¿ÃÅÉóÅúÍê³É¡¢×¼±¸³ö·¢¡¢³ö·¢¡¢µ½´ï¡¢·µ³Ì¡¢ĞİÏ¢¡¢Öµ°à¡£
-		state.put("1", "ÒÑÍê³É");
-		state.put("2", "ÉêÇëÖĞ");
-		state.put("3", "²¿ÃÅÉóÅúÍê³É");
-		state.put("4", "×¼±¸³ö·¢");
-		state.put("5", "³ö·¢");
-		state.put("6", "µ½´ï");
-		state.put("7", "·µ³Ì");
-		state.put("8", "ĞİÏ¢");
-		state.put("9", "²µ»Ø");
+		//å•æ®çŠ¶æ€åšæ˜ å°„ï¼Œå·²å®Œæˆã€ç”³è¯·ä¸­ã€éƒ¨é—¨å®¡æ‰¹å®Œæˆã€å‡†å¤‡å‡ºå‘ã€å‡ºå‘ã€åˆ°è¾¾ã€è¿”ç¨‹ã€ä¼‘æ¯ã€å€¼ç­ã€‚
+		state.put("1", "å·²å®Œæˆ");
+		state.put("2", "ç”³è¯·ä¸­");
+		state.put("3", "éƒ¨é—¨å®¡æ‰¹å®Œæˆ");
+		state.put("4", "å‡†å¤‡å‡ºå‘");
+		state.put("5", "å‡ºå‘");
+		state.put("6", "åˆ°è¾¾");
+		state.put("7", "è¿”ç¨‹");
+		state.put("8", "ä¼‘æ¯");
+		state.put("9", "é©³å›");
 	}
 	/**
-	 * Ë¾»úÉêÇëµ¥Ò³Ãæservlet
-	 * ÓÃÓÚ´¦ÀíË¾»úÒ³ÃæÇëÇó
-	 * @author ÖÜ¾²
+	 * å¸æœºç”³è¯·å•é¡µé¢servlet
+	 * ç”¨äºå¤„ç†å¸æœºé¡µé¢è¯·æ±‚
+	 * @author å‘¨é™
 	 * @date 2019-11-20
 	 * @param 
-	 * 	req Ç°Ì¨Ò³ÃæÇëÇó
-	 * 	resp ·µ»ØĞÅÏ¢
+	 * 	req å‰å°é¡µé¢è¯·æ±‚
+	 * 	resp è¿”å›ä¿¡æ¯
 	 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException {
-		JSONObject result = new JSONObject();	//·µ»ØÇ°Ì¨½á¹û
-		String errMsg = "";		//´íÎóĞÅÏ¢
-		String datasource = "";//Êı¾İÔ´
+		JSONObject result = new JSONObject();	//è¿”å›å‰å°ç»“æœ
+		String errMsg = "";		//é”™è¯¯ä¿¡æ¯
+		String datasource = "";//æ•°æ®æº
 		try {
 			datasource = new GetDatasourceName().doreadxml();
 		} catch (JDOMException e) {
-			throw new RuntimeException("ÅäÖÃÎÄ¼ş»ñÈ¡Êı¾İÔ´Ãû³ÆÊ§°Ü£¡");
+			throw new RuntimeException("é…ç½®æ–‡ä»¶è·å–æ•°æ®æºåç§°å¤±è´¥ï¼");
 		}
-		// ±ØĞë·ÅÔÚÊ×ĞĞ
-		InvocationInfoProxy.getInstance().setUserDataSource(datasource);	//Ö¸¶¨±¾´Î²Ù×÷Êı¾İµÄÊı¾İÔ´
-		req.setCharacterEncoding("utf-8");		//ÉèÖÃÇëÇóµÄ±àÂëÎªUTF-8
-		String method = req.getParameter("method");	//»ñÈ¡Ç°Ì¨´«µİmethod±êÊ¶£¬ÓÃÓÚÇø·Ö´¦Àí·½·¨
-		String json = req.getParameter("json");	//»ñÈ¡Ç°Ì¨´«µİ¹ıÀ´µÄ²ÎÊıJSON¶ÔÏó
+		// å¿…é¡»æ”¾åœ¨é¦–è¡Œ
+		InvocationInfoProxy.getInstance().setUserDataSource(datasource);	//æŒ‡å®šæœ¬æ¬¡æ“ä½œæ•°æ®çš„æ•°æ®æº
+		req.setCharacterEncoding("utf-8");		//è®¾ç½®è¯·æ±‚çš„ç¼–ç ä¸ºUTF-8
+		String method = req.getParameter("method");	//è·å–å‰å°ä¼ é€’methodæ ‡è¯†ï¼Œç”¨äºåŒºåˆ†å¤„ç†æ–¹æ³•
+		String json = req.getParameter("json");	//è·å–å‰å°ä¼ é€’è¿‡æ¥çš„å‚æ•°JSONå¯¹è±¡
 		
 		if(StringUtils.isBlank(method))
-			errMsg = "methodÎª¿Õ£¬²ÎÊı´«µİÒì³£!";
+			errMsg = "methodä¸ºç©ºï¼Œå‚æ•°ä¼ é€’å¼‚å¸¸!";
 		if(StringUtils.isBlank(json))
-			errMsg = "jsonÎª¿Õ£¬²ÎÊı´«µİÒì³£!";
+			errMsg = "jsonä¸ºç©ºï¼Œå‚æ•°ä¼ é€’å¼‚å¸¸!";
 		JSONObject jsonObject = new JSONObject();
 		try {
 			jsonObject = new JSONObject(json); //String->JSONObject
@@ -87,40 +87,40 @@ public class VorderDriverServlet extends HttpServlet {
 			ExceptionUtils.wrappException(e1);
 		}	
 		
-		// ½øĞĞNCĞéÄâµÇÂ¼
-		String username = "hwapp";		//ÓÃ»§Ãû
-		String password = "asdqwe123";	//ÃÜÂë
+		// è¿›è¡ŒNCè™šæ‹Ÿç™»å½•
+		String username = "hwapp";		//ç”¨æˆ·å
+		String password = "asdqwe123";	//å¯†ç 
 		IFwLogin loginService = (IFwLogin) NCLocator.getInstance().lookup(IFwLogin.class);
 		byte[] token = loginService.login(username, password, null);
 		NetStreamContext.setToken(token);
 		
-		//Í¨¹ıÓÃ»§±àÂë²éÑ¯¶ÔÓ¦cuserid,pk_group
+		//é€šè¿‡ç”¨æˆ·ç¼–ç æŸ¥è¯¢å¯¹åº”cuserid,pk_group
 		String sqluserid = "select cuserid,pk_group from sm_user where user_code='" + username + "'";
 		Map<String,String> map = null;
 		try {
 			map = (Map<String,String>) dao.executeQuery(sqluserid, new MapProcessor());
 			if(map==null || map.size() <= 0)
-				errMsg = "²éÑ¯hwappÓÃ»§Ê§°Ü£¬ÇëÁªÏµ¹ÜÀíÔ±£¡";
+				errMsg = "æŸ¥è¯¢hwappç”¨æˆ·å¤±è´¥ï¼Œè¯·è”ç³»ç®¡ç†å‘˜ï¼";
 		} catch (Exception e) {
-			errMsg = "cuserid,pk_group²éÑ¯Ê§°Ü£¡";
+			errMsg = "cuserid,pk_groupæŸ¥è¯¢å¤±è´¥ï¼";
 			ExceptionUtils.wrappBusinessException(errMsg);
 		}
 		
 		String userid = map.get("cuserid");
 		String pk_group = map.get("pk_group");
 		InvocationInfoProxy.getInstance().setUserCode(username);
-		InvocationInfoProxy.getInstance().setGroupId(pk_group);// ÈËÔ±»ù±¾ĞÅÏ¢±í
+		InvocationInfoProxy.getInstance().setGroupId(pk_group);// äººå‘˜åŸºæœ¬ä¿¡æ¯è¡¨
 		InvocationInfoProxy.getInstance().setUserId(userid);
 		try {
-			//²éÑ¯¶©µ¥
+			//æŸ¥è¯¢è®¢å•
 			if (method.equals("query")) {
-				result = queryVorder(jsonObject);//²éÑ¯¶©µ¥ÁĞ±í
+				result = queryVorder(jsonObject);//æŸ¥è¯¢è®¢å•åˆ—è¡¨
 			} else if (method.equals("updateStaue")) {
-				result = updateStaue(jsonObject);//¸üĞÂ×´Ì¬
+				result = updateStaue(jsonObject);//æ›´æ–°çŠ¶æ€
 			} else if(method.equals("querydetail")){
-				result = queryDetail(jsonObject);//²éÑ¯¶©µ¥ÏêÇé
+				result = queryDetail(jsonObject);//æŸ¥è¯¢è®¢å•è¯¦æƒ…
 			}else if (method.equals("query_remark")) {
-				result = queryRemark(jsonObject);//ÅĞ¶Ï¶©µ¥ÊÇ·ñÒÑ¾­±»ÆÀ¼Û
+				result = queryRemark(jsonObject);//åˆ¤æ–­è®¢å•æ˜¯å¦å·²ç»è¢«è¯„ä»·
 			}
 			if(StringUtils.isNotBlank(errMsg)){
 				result.put("success", false);
@@ -139,15 +139,15 @@ public class VorderDriverServlet extends HttpServlet {
 	}
 	
 	/**
-	 * Ë¾»ú¶Ë²éĞÂÓÃ³µÏêÇé
+	 * å¸æœºç«¯æŸ¥æ–°ç”¨è½¦è¯¦æƒ…
 	 * @param jsonObject
 	 * @return
 	 * @throws JSONException 
 	 */
 	private JSONObject queryDetail(JSONObject jsonObject) throws JSONException {
 		JSONObject result = new JSONObject();
-		String pk_vorder = jsonObject.getString("pk_vorder"); // ±íÍ·Ö÷¼ü
-		//²éÑ¯±íÍ·ĞÅÏ¢
+		String pk_vorder = jsonObject.getString("pk_vorder"); // è¡¨å¤´ä¸»é”®
+		//æŸ¥è¯¢è¡¨å¤´ä¿¡æ¯
 		String sql="select cl_vorder.billstate,cl_vorder.iscarpool,cl_vorder.pk_vehicle,"
 				+ "cl_vorder.startMileage,cl_vorder.backMileage,cl_vorder.travelMileage,cl_vorder_b.*"
 				+" from cl_vorder "
@@ -155,7 +155,7 @@ public class VorderDriverServlet extends HttpServlet {
 				+" on cl_vorder.pk_vorder=cl_vorder_b.pk_vorder and cl_vorder_b.dr=0"
 				+" and isfisrtapplier='Y'"
 				+" where cl_vorder.dr=0  and cl_vorder.pk_vorder='"+pk_vorder+"'";
-		//²éÑ¯±íÌåĞÅÏ¢
+		//æŸ¥è¯¢è¡¨ä½“ä¿¡æ¯
 		String sql_detail="select cl_vorder_b.*,sm_user.user_name username"
 				+" from cl_vorder_b"
 				+" left join sm_user on sm_user.cuserid  =cl_vorder_b.applier and sm_user.dr=0"
@@ -168,47 +168,47 @@ public class VorderDriverServlet extends HttpServlet {
 			map = (Map<String,String>) dao.executeQuery(sql, new  MapProcessor());
 			list_detail = (List<Map<String,String>>) dao.executeQuery(sql_detail, new  MapListProcessor());
 		} catch (DAOException e) {
-			ExceptionUtils.wrappBusinessException("²éÑ¯ÓÃ³µÉêÇëÊ§°Ü£¡");
+			ExceptionUtils.wrappBusinessException("æŸ¥è¯¢ç”¨è½¦ç”³è¯·å¤±è´¥ï¼");
 		}
 		JSONObject jsonVO = new JSONObject();
-		jsonVO.put("origin", map.get("origin"));//³ö·¢µØ
-		jsonVO.put("destarea", map.get("destarea"));//Ä¿±êÇøÓò
-		jsonVO.put("dest1", map.get("dest1")==null?"":(String)map.get("dest1"));//Ä¿µÄµØ1
-		//Èç¹ûÄ¿µÄµØÓĞÖµ¾ÍÏÔÊ¾£¬²¢ÇÒ¿ªÊ¼¼ÓºÅ²»ÏÔÊ¾
+		jsonVO.put("origin", map.get("origin"));//å‡ºå‘åœ°
+		jsonVO.put("destarea", map.get("destarea"));//ç›®æ ‡åŒºåŸŸ
+		jsonVO.put("dest1", map.get("dest1")==null?"":(String)map.get("dest1"));//ç›®çš„åœ°1
+		//å¦‚æœç›®çš„åœ°æœ‰å€¼å°±æ˜¾ç¤ºï¼Œå¹¶ä¸”å¼€å§‹åŠ å·ä¸æ˜¾ç¤º
 		if(StringUtils.isNotBlank(map.get("dest2"))){
-			jsonVO.put("dest2Div", "display: block;");//Ä¿µÄµØ2
+			jsonVO.put("dest2Div", "display: block;");//ç›®çš„åœ°2
 		}else{
-			jsonVO.put("dest2Div", "display: none;");//Ä¿µÄµØ2²»ÏÔÊ¾
+			jsonVO.put("dest2Div", "display: none;");//ç›®çš„åœ°2ä¸æ˜¾ç¤º
 		}
 		if(StringUtils.isNotBlank(map.get("dest3"))){
-			jsonVO.put("dest3Div", "display: block;");//Ä¿µÄµØ3
+			jsonVO.put("dest3Div", "display: block;");//ç›®çš„åœ°3
 		}else{
-			jsonVO.put("dest3Div", "display: none;");//Ä¿µÄµØ3²»ÏÔÊ¾
+			jsonVO.put("dest3Div", "display: none;");//ç›®çš„åœ°3ä¸æ˜¾ç¤º
 		}
-		jsonVO.put("dest2", map.get("dest2"));//Ä¿µÄµØ2
-		jsonVO.put("dest3", map.get("dest3"));//Ä¿µÄµØ3
-		jsonVO.put("departtime",gettime(map.get("departtime")));//ÓÃ³µÊ±¼ä
-		jsonVO.put("returntime",gettime(map.get("returntime")));//·µ»ØÊ±¼ä
-		jsonVO.put("iscarpool", "Y".equals(map.get("iscarpool"))?"ÊÇ":"·ñ");//ÄÜ·ñÆ´³µ
-		jsonVO.put("billstate", state.get(map.get("billstate")));//×´Ì¬
-		jsonVO.put("finaldest", map.get("finaldest"));//×îÖÕÄ¿µÄµØ
-		jsonVO.put("startMileage", map.get("startmileage"));//³ö·¢Àï³Ì
-		jsonVO.put("backMileage", map.get("backmileage"));//·µ»ØÀï³Ì
-		jsonVO.put("travelMileage", map.get("travelmileage"));//ĞĞÊ»Àï³Ì
-		jsonVO.put("pk_vehicle", map.get("pk_vehicle"));//³µÁ¾Ö÷¼ü
+		jsonVO.put("dest2", map.get("dest2"));//ç›®çš„åœ°2
+		jsonVO.put("dest3", map.get("dest3"));//ç›®çš„åœ°3
+		jsonVO.put("departtime",gettime(map.get("departtime")));//ç”¨è½¦æ—¶é—´
+		jsonVO.put("returntime",gettime(map.get("returntime")));//è¿”å›æ—¶é—´
+		jsonVO.put("iscarpool", "Y".equals(map.get("iscarpool"))?"æ˜¯":"å¦");//èƒ½å¦æ‹¼è½¦
+		jsonVO.put("billstate", state.get(map.get("billstate")));//çŠ¶æ€
+		jsonVO.put("finaldest", map.get("finaldest"));//æœ€ç»ˆç›®çš„åœ°
+		jsonVO.put("startMileage", map.get("startmileage"));//å‡ºå‘é‡Œç¨‹
+		jsonVO.put("backMileage", map.get("backmileage"));//è¿”å›é‡Œç¨‹
+		jsonVO.put("travelMileage", map.get("travelmileage"));//è¡Œé©¶é‡Œç¨‹
+		jsonVO.put("pk_vehicle", map.get("pk_vehicle"));//è½¦è¾†ä¸»é”®
 		
-		Boolean isreview = true;//ÅĞ¶Ï¶©µ¥ÊÇ·ñ±»ÆÀ¼Û(Ä¬ÈÏÎªÊÇ)
-		//Ñ­»·±íÌå£¬µÃµ½±íÌålist
-		JSONArray jsonDetails = new JSONArray(); //±íÌåJSONÊı¾İºÏ¼Æ
+		Boolean isreview = true;//åˆ¤æ–­è®¢å•æ˜¯å¦è¢«è¯„ä»·(é»˜è®¤ä¸ºæ˜¯)
+		//å¾ªç¯è¡¨ä½“ï¼Œå¾—åˆ°è¡¨ä½“list
+		JSONArray jsonDetails = new JSONArray(); //è¡¨ä½“JSONæ•°æ®åˆè®¡
 		for (Map<String, String> map_detail : list_detail) {
 			JSONObject jsonDetail = new JSONObject();
-			jsonDetail.put("selectedPNum", map_detail.get("selectpnum"));//ÈËÊı
-			jsonDetail.put("username", map_detail.get("username"));//ĞÕÃû
-			jsonDetail.put("userphone", map_detail.get("phone"));//ÁªÏµµç»°
-			jsonDetail.put("dest1", map_detail.get("dest1"));//Ä¿µÄµØ1
-			jsonDetail.put("finaldest", map_detail.get("finaldest"));//Ä¿µÄµØ
-			jsonDetail.put("remark", map_detail.get("remark"));//ÊÂÓÉ
-			if(map.get("starlevel")==null){//Èç¹ûÃ»ÓĞ±»ÆÀ¼Û£¬reviewÉèÖÃÎªfalse
+			jsonDetail.put("selectedPNum", map_detail.get("selectpnum"));//äººæ•°
+			jsonDetail.put("username", map_detail.get("username"));//å§“å
+			jsonDetail.put("userphone", map_detail.get("phone"));//è”ç³»ç”µè¯
+			jsonDetail.put("dest1", map_detail.get("dest1"));//ç›®çš„åœ°1
+			jsonDetail.put("finaldest", map_detail.get("finaldest"));//ç›®çš„åœ°
+			jsonDetail.put("remark", map_detail.get("remark"));//äº‹ç”±
+			if(map.get("starlevel")==null){//å¦‚æœæ²¡æœ‰è¢«è¯„ä»·ï¼Œreviewè®¾ç½®ä¸ºfalse
 				isreview = false;
 			}
 			jsonDetails.put(jsonDetail);
@@ -220,7 +220,7 @@ public class VorderDriverServlet extends HttpServlet {
 		return result;	
 	}
 	/**
-	 * ÅĞ¶Ï¸Ã¶©µ¥ÊÇ·ñÒÑ¾­ÆÀ¼Û
+	 * åˆ¤æ–­è¯¥è®¢å•æ˜¯å¦å·²ç»è¯„ä»·
 	 * @param jsonObject
 	 * @return
 	 * @throws DAOException 
@@ -228,11 +228,11 @@ public class VorderDriverServlet extends HttpServlet {
 	 */
 	private JSONObject queryRemark(JSONObject jsonObject) throws DAOException, JSONException {
 		JSONObject result = new JSONObject();
-		Boolean isreview = true;//ÅĞ¶Ï¶©µ¥ÊÇ·ñ±»ÆÀ¼Û(Ä¬ÈÏÎªÊÇ)
-		String pk_vorder = jsonObject.getString("pk_vorder"); // µ¥¾İÖ÷¼ü
-		String sql = "select count(starlevel) sumlevel,count(pk_vorder_b) sumpk from cl_vorder_b where pk_vorder='"+pk_vorder+"'";//²éÑ¯ÆÀ¼ÛºÍĞÇ¼¶
+		Boolean isreview = true;//åˆ¤æ–­è®¢å•æ˜¯å¦è¢«è¯„ä»·(é»˜è®¤ä¸ºæ˜¯)
+		String pk_vorder = jsonObject.getString("pk_vorder"); // å•æ®ä¸»é”®
+		String sql = "select count(starlevel) sumlevel,count(pk_vorder_b) sumpk from cl_vorder_b where pk_vorder='"+pk_vorder+"'";//æŸ¥è¯¢è¯„ä»·å’Œæ˜Ÿçº§
 		Map<String,Integer> map = (Map<String, Integer>) dao.executeQuery(sql, new MapProcessor());
-		if(map.get("sumlevel")!=map.get("sumpk")){//Èç¹ûÃ»ÓĞ±»ÆÀ¼Û£¬reviewÉèÖÃÎªfalse
+		if(map.get("sumlevel")!=map.get("sumpk")){//å¦‚æœæ²¡æœ‰è¢«è¯„ä»·ï¼Œreviewè®¾ç½®ä¸ºfalse
 			isreview = false;
 		}
 		result.put("isreview",isreview);
@@ -240,7 +240,7 @@ public class VorderDriverServlet extends HttpServlet {
 		return result;
 	}
 	/**
-	 * ¸üĞÂµ¥¾İ×´Ì¬
+	 * æ›´æ–°å•æ®çŠ¶æ€
 	 * @param json
 	 * @return
 	 * @throws DAOException 
@@ -248,29 +248,29 @@ public class VorderDriverServlet extends HttpServlet {
 	 */
 	private JSONObject updateStaue(JSONObject json) throws DAOException, JSONException {
 		JSONObject result = new JSONObject();
-		String pk_vorder = json.getString("pk_vorder"); // µ¥¾İÖ÷¼ü
-		String billstate = json.getString("billstate"); // µ¥¾İ×´Ì¬
-		String vstate = json.getString("vstate"); // ³µÁ¾×´Ì¬
-		String pk_vehicle = json.getString("pk_vehicle"); // ³µÁ¾Ö÷¼ü
-		//¸üĞÂ±íÍ·Êı¾İ×´Ì¬
+		String pk_vorder = json.getString("pk_vorder"); // å•æ®ä¸»é”®
+		String billstate = json.getString("billstate"); // å•æ®çŠ¶æ€
+		String vstate = json.getString("vstate"); // è½¦è¾†çŠ¶æ€
+		String pk_vehicle = json.getString("pk_vehicle"); // è½¦è¾†ä¸»é”®
+		//æ›´æ–°è¡¨å¤´æ•°æ®çŠ¶æ€
 		String sql="update cl_vorder set billstate='"+billstate
 				       +"' where pk_vorder='"+pk_vorder+"'";
-		//Í¬²½¸üĞÂ³µÁ¾µÄ×´Ì¬
+		//åŒæ­¥æ›´æ–°è½¦è¾†çš„çŠ¶æ€
 		String sql_vehicle="update cl_vehicle set vstate='"+vstate
 					 +"' where pk_vehicle='"+pk_vehicle+"'";
-		//¸üĞÂ×´Ì¬
+		//æ›´æ–°çŠ¶æ€
 		dao.executeUpdate(sql);
 		dao.executeUpdate(sql_vehicle);
-		if("1".equals(billstate)){//µ¥¾İÍê³ÉµÄÊ±ºò¸üĞÂ·µ»ØÀï³ÌºÍĞĞÊ»Àï³Ì
-		String startMileage = json.getString("startMileage"); // ³ö·¢Àï³Ì
-		String backMileage = json.getString("backMileage"); // ·µ»ØÀï³Ì
-		String travelMileage = json.getString("travelMileage"); // ĞĞÊ»Àï³Ì
+		if("1".equals(billstate)){//å•æ®å®Œæˆçš„æ—¶å€™æ›´æ–°è¿”å›é‡Œç¨‹å’Œè¡Œé©¶é‡Œç¨‹
+		String startMileage = json.getString("startMileage"); // å‡ºå‘é‡Œç¨‹
+		String backMileage = json.getString("backMileage"); // è¿”å›é‡Œç¨‹
+		String travelMileage = json.getString("travelMileage"); // è¡Œé©¶é‡Œç¨‹
 		String sql_mileage="update cl_vorder set startMileage='"+startMileage
 					+"', backMileage='"+backMileage
 					+"', travelMileage='"+travelMileage
 			       +"' where pk_vorder='"+pk_vorder+"'";
 		dao.executeUpdate(sql_mileage);
-		}else if("5".equals(billstate)){//¸üĞÂ¿ªÊ¼Ê±¼äºÍ³ö·¢Àï³Ì
+		}else if("5".equals(billstate)){//æ›´æ–°å¼€å§‹æ—¶é—´å’Œå‡ºå‘é‡Œç¨‹
 		String startMileage = json.getString("startMileage"); 
 		UFDateTime begintime = AppContext.getInstance().getServerTime();
 		String sql_begintime="update cl_vorder set begintime='"+begintime+"'"
@@ -289,7 +289,7 @@ public class VorderDriverServlet extends HttpServlet {
 	}
 
 	/**
-	 * Ë¾»ú¶Ë²éĞÂÓÃ³µÁĞ±í
+	 * å¸æœºç«¯æŸ¥æ–°ç”¨è½¦åˆ—è¡¨
 	 * @param json
 	 * @return
 	 * @throws DAOException 
@@ -297,11 +297,11 @@ public class VorderDriverServlet extends HttpServlet {
 	 */
 	private JSONObject queryVorder(JSONObject json) throws DAOException, JSONException{
 		//TEST_FLAG=true;
-		JSONArray jsonArr = new JSONArray(); //ÓÃÓÚ´æ´¢µ¥¾İĞÅÏ¢¼¯ºÏ
-		String cuserid = json.getString("cuserid"); //µ±Ç°µÇÂ¼ÈËÖ÷¼ü
-		int maxcount = json.getInt("maxcount"); // ×î´óÊıÁ¿
-		int mincount = json.getInt("mincount"); // ×îĞ¡ÊıÁ¿
-		//Ë¾»úÖ÷¼ü
+		JSONArray jsonArr = new JSONArray(); //ç”¨äºå­˜å‚¨å•æ®ä¿¡æ¯é›†åˆ
+		String cuserid = json.getString("cuserid"); //å½“å‰ç™»å½•äººä¸»é”®
+		int maxcount = json.getInt("maxcount"); // æœ€å¤§æ•°é‡
+		int mincount = json.getInt("mincount"); // æœ€å°æ•°é‡
+		//å¸æœºä¸»é”®
 		String sql_driver ="select pk_driver from cl_driver where vdef1='"+cuserid+"' and dr=0";
 		Object cudriver =  dao.executeQuery(sql_driver, new ColumnProcessor());
 		String cupk_driver="";
@@ -318,25 +318,25 @@ public class VorderDriverServlet extends HttpServlet {
 				+"	group BY cl_vorder_b.pk_vorder,cl_vorder_b.dr"
 				+" ) sum on sum.pk_vorder=cl_vorder.pk_vorder and sum.dr=0"
 				+" where cl_vorder.dr=0 "
-				//TODO:²âÊÔÓÃ
+				//TODO:æµ‹è¯•ç”¨
 				+ ((TEST_FLAG) ? "" : "and pk_driver='"+cupk_driver+"'")
 				+ "order by cl_vorder.ts desc) t where ROWNUM <= "+maxcount+") table_alias WHERE table_alias.rowno1 >"+mincount;
 		List<Map<String,Object>> list= (List<Map<String, Object>>) dao.executeQuery(sql, new  MapListProcessor());
 		
-		//Ñ­»·»ñÈ¡µ¥¾İĞÅÏ¢²¢´æ´¢³Éjson¶ÔÏó
+		//å¾ªç¯è·å–å•æ®ä¿¡æ¯å¹¶å­˜å‚¨æˆjsonå¯¹è±¡
 		for (Map<String, Object> map : list) {
 			JSONObject jsonObj = new JSONObject();
 			jsonObj.put("pk_vorder", map.get("pk_vorder"));
 			jsonObj.put("pk_vorder_b", map.get("pk_vorder_b"));
-			jsonObj.put("billstate",state.get(map.get("billstate")));//×´Ì¬
-			jsonObj.put("departtime",gettime((String)map.get("departtime")));//ÓÃ³µÊ±¼ä
-			jsonObj.put("returntime",gettime((String)map.get("returntime")));//·µ»ØÊ±¼ä
-			jsonObj.put("origin", map.get("origin"));//Ê¼·¢µØ
-			jsonObj.put("dest1", map.get("dest1")==null?"":(String)map.get("dest1"));//Ä¿µÄµØ1
-			jsonObj.put("finaldest", map.get("finaldest"));//×îÖÕÄ¿µÄµØ
-			jsonObj.put("selectedPNum", map.get("sumselectpnum"));//ÈËÊı
+			jsonObj.put("billstate",state.get(map.get("billstate")));//çŠ¶æ€
+			jsonObj.put("departtime",gettime((String)map.get("departtime")));//ç”¨è½¦æ—¶é—´
+			jsonObj.put("returntime",gettime((String)map.get("returntime")));//è¿”å›æ—¶é—´
+			jsonObj.put("origin", map.get("origin"));//å§‹å‘åœ°
+			jsonObj.put("dest1", map.get("dest1")==null?"":(String)map.get("dest1"));//ç›®çš„åœ°1
+			jsonObj.put("finaldest", map.get("finaldest"));//æœ€ç»ˆç›®çš„åœ°
+			jsonObj.put("selectedPNum", map.get("sumselectpnum"));//äººæ•°
 			UFDouble travelmileage=(map.get("travelmileage")==null?UFDouble.ZERO_DBL:new UFDouble(map.get("travelmileage").toString()));
-			jsonObj.put("travelMileage", travelmileage);//ĞĞÊ»Àï³Ì
+			jsonObj.put("travelMileage", travelmileage);//è¡Œé©¶é‡Œç¨‹
 			jsonArr.put(jsonObj);
 		}
 		JSONObject result = new JSONObject();
@@ -347,7 +347,7 @@ public class VorderDriverServlet extends HttpServlet {
 
 
 	/**
-	 * »ñÈ¡Ê±¼ä£¨½ØÈ¡µ½Ê±·Ö£¬²»ĞèÒªÃë£©
+	 * è·å–æ—¶é—´ï¼ˆæˆªå–åˆ°æ—¶åˆ†ï¼Œä¸éœ€è¦ç§’ï¼‰
 	 * @param time
 	 * @return
 	 */

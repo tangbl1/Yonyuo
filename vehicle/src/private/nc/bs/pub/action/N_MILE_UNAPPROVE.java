@@ -19,7 +19,7 @@ public class N_MILE_UNAPPROVE extends AbstractPfAction<AggDriverMileageHVO> {
 			Object userObj) {
 		CompareAroundProcesser<AggDriverMileageHVO> processor = new CompareAroundProcesser<AggDriverMileageHVO>(
 				DriverMileagePluginPoint.UNAPPROVE);
-		// TODO ÔÚ´Ë´¦Ìí¼ÓÇ°ºó¹æÔò
+		// TODO åœ¨æ­¤å¤„æ·»åŠ å‰åè§„åˆ™
 		processor.addBeforeRule(new UnapproveStatusCheckRule());
 
 		return processor;

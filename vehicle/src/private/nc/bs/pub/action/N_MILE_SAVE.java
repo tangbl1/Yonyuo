@@ -18,7 +18,7 @@ public class N_MILE_SAVE extends AbstractPfAction<AggDriverMileageHVO> {
 			Object userObj) {
 		CompareAroundProcesser<AggDriverMileageHVO> processor = new CompareAroundProcesser<AggDriverMileageHVO>(
 				DriverMileagePluginPoint.SEND_APPROVE);
-		// TODO ÔÚ´Ë´¦Ìí¼ÓÉóºËÇ°ºó¹æÔò
+		// TODO åœ¨æ­¤å¤„æ·»åŠ å®¡æ ¸å‰åè§„åˆ™
 		IRule<AggDriverMileageHVO> rule = new CommitStatusCheckRule();
 		processor.addBeforeRule(rule);
 		return processor;

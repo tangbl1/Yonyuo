@@ -19,7 +19,7 @@ public class N_DRIV_UNAPPROVE extends AbstractPfAction<AggDriverFiles> {
 			Object userObj) {
 		CompareAroundProcesser<AggDriverFiles> processor = new CompareAroundProcesser<AggDriverFiles>(
 				DriverFilesPluginPoint.UNAPPROVE);
-		// TODO ÔÚ´Ë´¦Ìí¼ÓÇ°ºó¹æÔò
+		// TODO åœ¨æ­¤å¤„æ·»åŠ å‰åè§„åˆ™
 		processor.addBeforeRule(new UnapproveStatusCheckRule());
 
 		return processor;

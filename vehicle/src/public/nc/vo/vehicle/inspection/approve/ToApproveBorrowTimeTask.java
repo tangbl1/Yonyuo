@@ -31,144 +31,144 @@ public class ToApproveBorrowTimeTask implements IBackgroundWorkPlugin {
 	}
 	
 	/**
-	 * ÅĞ¶Ï±£ÏÕµ¥ÊÇ·ñ»¹ÓĞÒ»¸öÔÂµ½ÆÚ
+	 * åˆ¤æ–­ä¿é™©å•æ˜¯å¦è¿˜æœ‰ä¸€ä¸ªæœˆåˆ°æœŸ
 	 * @param 
 	 * @return
 	 * @throws DAOException 
 	 */
 	private void isInsuExpire() throws DAOException{
-		//ÓÃÓÚ´æ·ÅÊı¾İ£¨½«Êı¾İ¸ù¾İµ¥¾İºÅ½øĞĞÕûÀí£©
+		//ç”¨äºå­˜æ”¾æ•°æ®ï¼ˆå°†æ•°æ®æ ¹æ®å•æ®å·è¿›è¡Œæ•´ç†ï¼‰
 		Map<String, List> vehMap = new HashMap<String, List>();
-		//ÓÃÓÚ´æ·ÅÏàÍ¬µ¥¾İºÅµÄÊı¾İµÄ¼¯ºÏ
+		//ç”¨äºå­˜æ”¾ç›¸åŒå•æ®å·çš„æ•°æ®çš„é›†åˆ
 		List vehList = new ArrayList<Object>();
-		//µÃµ½µ±Ç°ÈÕÆÚ¹²ÓĞ¶àÉÙ¸öÔÂ£¨Äê·İ*12+ÔÂ·İ£©
+		//å¾—åˆ°å½“å‰æ—¥æœŸå…±æœ‰å¤šå°‘ä¸ªæœˆï¼ˆå¹´ä»½*12+æœˆä»½ï¼‰
 		Integer nowMonth = getIntMonth();
-		//²éÑ¯±£ÏÕµ¥µ¥¾İºÅ£¬³µÅÆºÅ£¬±£ÏÕ¹«Ë¾£¬µ½ÆÚÈÕÆÚ
+		//æŸ¥è¯¢ä¿é™©å•å•æ®å·ï¼Œè½¦ç‰Œå·ï¼Œä¿é™©å…¬å¸ï¼Œåˆ°æœŸæ—¥æœŸ
 		String sql = "select h.billno,v.vehicleno, b.icompany, b.iexpiredate,"
 				+ " b.money, b.itype, b.ideadline from cl_insurance h "
 				+ "left join cl_vehicle v  on v.pk_vehicle = h.vehicleno "
 				+ "left join cl_insurance_b b on h.pk_insurance = "
 				+ "b.pk_insurance where h.dr = 0 and b.dr = 0";
-		//Ö´ĞĞsql
+		//æ‰§è¡Œsql
 		List<Map<String,String>> list= (List<Map<String, String>>) dao.executeQuery(sql, new  MapListProcessor());
-		//±éÀú
+		//éå†
 		for (Map<String,String> map : list) {
-			//µÃµ½µ¥¾İºÅ
+			//å¾—åˆ°å•æ®å·
 			String billno = map.get("billno");
-			//ÅĞ¶ÏvehMapÖĞÊÇ·ñÓĞbillonÕâ¸ökey
+			//åˆ¤æ–­vehMapä¸­æ˜¯å¦æœ‰billonè¿™ä¸ªkey
 			if(vehMap.containsKey(billno)){
-				//Èç¹ûÓĞ£¬¸ù¾İkeyµÄµ½value
+				//å¦‚æœæœ‰ï¼Œæ ¹æ®keyçš„åˆ°value
 				vehList = vehMap.get(billno);
 			}else{
-				//Ã»ÓĞĞÂ½¨¼¯ºÏ
+				//æ²¡æœ‰æ–°å»ºé›†åˆ
 				vehList = new ArrayList<Object>();
 			}
-			//½«map´æÈëvehList¼¯ºÏ
+			//å°†mapå­˜å…¥vehListé›†åˆ
 			vehList.add(map);
-			//½«¼¯ºÏ·ÅÈëvehMapÖĞ
+			//å°†é›†åˆæ”¾å…¥vehMapä¸­
 			vehMap.put(billno,vehList);
 		}
-		//ÌáÊ¾ĞÅÏ¢
+		//æç¤ºä¿¡æ¯
 		String message = "";
-		//µü´úÆ÷±éÀú
+		//è¿­ä»£å™¨éå†
 		Iterator it =  vehMap.keySet().iterator();
 		while(it.hasNext()){
 			String key = it.next().toString();
-			//µÃµ½value
+			//å¾—åˆ°value
 			List<Map<String,String>> onelist = vehMap.get(key);
-			//³µÅÆºÅ
+			//è½¦ç‰Œå·
 			String vehicleno = onelist.get(0).get("vehicleno");
-			//µ¥¾İºÅ
+			//å•æ®å·
 			String billno = onelist.get(0).get("billno");
-			//Æ´½ÓĞÅÏ¢
-			message += "\n"+vehicleno + "µÄ±£ÏÕµ¥¼´½«µ½ÆÚ¡£\nµ¥¾İºÅ£º"+billno;
-			//±éÀúvalue¼¯ºÏ
+			//æ‹¼æ¥ä¿¡æ¯
+			message += "\n"+vehicleno + "çš„ä¿é™©å•å³å°†åˆ°æœŸã€‚\nå•æ®å·ï¼š"+billno;
+			//éå†valueé›†åˆ
 			for (Map<String,String> map : onelist) {
-				//±£ÏÕ¹«Ë¾
+				//ä¿é™©å…¬å¸
 				String icompany = map.get("icompany");
-				//ÏÕÖÖ
+				//é™©ç§
 				String itype = map.get("itype");
-				//µ½ÆÚÈÕÆÚ
+				//åˆ°æœŸæ—¥æœŸ
 				String iexpiredate = map.get("iexpiredate");
-				//µ½ÆÚÈÕÆÚµÄÔÂ·İ
+				//åˆ°æœŸæ—¥æœŸçš„æœˆä»½
 				Integer expireMonth = Integer.parseInt(iexpiredate.substring(5, 7));
-				//µ½ÆÚÈÕÆÚµÄÄê·İ
+				//åˆ°æœŸæ—¥æœŸçš„å¹´ä»½
 				Integer expireYear = Integer.parseInt(iexpiredate.substring(0, 4));
-				//µ½ÆÚÈÕÆÚ¹²ÓĞ¶àÉÙÔÂ£¨Äê·İ*12+ÔÂ·İ£©
+				//åˆ°æœŸæ—¥æœŸå…±æœ‰å¤šå°‘æœˆï¼ˆå¹´ä»½*12+æœˆä»½ï¼‰
 				Integer subMonth = (expireYear*12+expireMonth) - nowMonth;
-				//ÏÕÖÖÃû³Æ
+				//é™©ç§åç§°
 				String itypeName = "";
 				if(subMonth == 1){
 					if("1".equals(itype)){
-						itypeName = "½»Ç¿ÏÕ";
+						itypeName = "äº¤å¼ºé™©";
 					}else if("2".equals(itype)){
-						itypeName = "³µËğÏÕ";
+						itypeName = "è½¦æŸé™©";
 					}else if("3".equals(itype)){
-						itypeName = "ÈıÕßÏÕ";
+						itypeName = "ä¸‰è€…é™©";
 					}else if("4".equals(itype)){
-						itypeName = "×ùÎ»ÏÕ";
+						itypeName = "åº§ä½é™©";
 					}else if("5".equals(itype)){
-						itypeName = "²£Á§ÏÕ";
+						itypeName = "ç»ç’ƒé™©";
 					}else if("6".equals(itype)){
-						itypeName = "ÎŞ·¨ÕÒµ½µÚÈı·½";
+						itypeName = "æ— æ³•æ‰¾åˆ°ç¬¬ä¸‰æ–¹";
 					}
-					//Æ´½Ó±£ÏÕÈÕÆÚ
-					message += "\n±£ÏÕ¹«Ë¾£º"+icompany+ ""
-							+ "\nÏÕÖÖ£º"+itypeName+"\nµ½ÆÚÈÕÆÚ£º"+iexpiredate.substring(0,10)+"¡£\n";
+					//æ‹¼æ¥ä¿é™©æ—¥æœŸ
+					message += "\nä¿é™©å…¬å¸ï¼š"+icompany+ ""
+							+ "\né™©ç§ï¼š"+itypeName+"\nåˆ°æœŸæ—¥æœŸï¼š"+iexpiredate.substring(0,10)+"ã€‚\n";
 				}
 			}
 		}
-		String name = "±£ÏÕµ¥";
-		//·¢ËÍÏûÏ¢
+		String name = "ä¿é™©å•";
+		//å‘é€æ¶ˆæ¯
 		sendYonyouMessage(message,name);
 	}
 	
 	/**
-	 * ÅĞ¶Ï¼ì³µµ¥ÊÇ·ñ»¹ÓĞÒ»¸öÔÂµ½ÆÚ
+	 * åˆ¤æ–­æ£€è½¦å•æ˜¯å¦è¿˜æœ‰ä¸€ä¸ªæœˆåˆ°æœŸ
 	 * @param 
 	 * @return
 	 * @throws DAOException 
 	 */
 	private void isInseExpire() throws DAOException{
-		//µ±Ç°ÈÕÆÚ¹²ÓĞ¶àÉÙ¸öÔÂ
+		//å½“å‰æ—¥æœŸå…±æœ‰å¤šå°‘ä¸ªæœˆ
 		Integer nowMonth = getIntMonth();
-		//²éÑ¯³µÅÆºÅ£¬¼ì³µµ¥ÓĞĞ§ÆÚµÄsql
+		//æŸ¥è¯¢è½¦ç‰Œå·ï¼Œæ£€è½¦å•æœ‰æ•ˆæœŸçš„sql
 		String sql = "select h.billno,v.vehicleno,b.iexpiredate from cl_inspection"
 				+ " h left join cl_vehicle v on v.pk_vehicle = h.vehicleno left"
 				+ " join cl_inspection_b b on h.pk_inspection = b.pk_inspection"
 				+ " where h.dr = 0 and b.dr = 0";
-		//Ö´ĞĞsql
+		//æ‰§è¡Œsql
 		List<Map<String,String>> list= (List<Map<String, String>>) dao.executeQuery(sql, new  MapListProcessor());
-		//ÌáÊ¾ĞÅÏ¢
+		//æç¤ºä¿¡æ¯
 		String message = "";
-		//±éÀú
+		//éå†
 		for (Map<String,String> map : list) {
-			//¼ì³µÓĞĞ§ÆÚ
+			//æ£€è½¦æœ‰æ•ˆæœŸ
 			String iexpiredate = map.get("iexpiredate");
-			//¼ì³µÓĞĞ§ÆÚÔÂ·İ
+			//æ£€è½¦æœ‰æ•ˆæœŸæœˆä»½
 			Integer expireMonth = Integer.parseInt(iexpiredate.substring(5, 7));
-			//¼ì³µÓĞĞ§ÆÚÄêÏŞ
+			//æ£€è½¦æœ‰æ•ˆæœŸå¹´é™
 			Integer expireYear = Integer.parseInt(iexpiredate.substring(0, 4));
-			//¼ì³µÓĞĞ§ÆÚ¹²ÓĞ¶àÉÙ¸öÔÂ
+			//æ£€è½¦æœ‰æ•ˆæœŸå…±æœ‰å¤šå°‘ä¸ªæœˆ
 			Integer subMonth = (expireYear*12+expireMonth) - nowMonth;
-			//Èç¹û¼ì³µÓĞĞ§ÆÚÔÂÊı-µ±Ç°ÈÕÆÚÔÂÊı <= 3¡£·¢ËÍÌáÊ¾ĞÅÏ¢
+			//å¦‚æœæ£€è½¦æœ‰æ•ˆæœŸæœˆæ•°-å½“å‰æ—¥æœŸæœˆæ•° <= 3ã€‚å‘é€æç¤ºä¿¡æ¯
 			if(subMonth <= 3){
-				//³µÅÆºÅ
+				//è½¦ç‰Œå·
 				String vehicleno = map.get("vehicleno");
-				//µ¥¾İºÅ
+				//å•æ®å·
 				String billno = map.get("billno");
-				//Æ´½ÓÌáÊ¾ĞÅÏ¢
-				message += vehicleno + "µÄ¼ì³µµ¥¼´½«µ½ÆÚ¡£\nµ¥¾İºÅ£º"+billno+"¡£\n¼ì³µÓĞĞ§ÆÚ£º"+iexpiredate.substring(0,10)+"¡£\n\n";	
+				//æ‹¼æ¥æç¤ºä¿¡æ¯
+				message += vehicleno + "çš„æ£€è½¦å•å³å°†åˆ°æœŸã€‚\nå•æ®å·ï¼š"+billno+"ã€‚\næ£€è½¦æœ‰æ•ˆæœŸï¼š"+iexpiredate.substring(0,10)+"ã€‚\n\n";	
 			}
 		}
-		String name = "¼ì³µµ¥";
-		//·¢ËÍĞÅÏ¢
+		String name = "æ£€è½¦å•";
+		//å‘é€ä¿¡æ¯
 		sendYonyouMessage(message,name);
 	}
 	
 	
 	/**
-	 * µÃµ½µ±Ç°ÈÕÆÚµÄÔÂ·İ£¨IntegerÀàĞÍ£©
+	 * å¾—åˆ°å½“å‰æ—¥æœŸçš„æœˆä»½ï¼ˆIntegerç±»å‹ï¼‰
 	 * @param 
 	 * @return Integer 
 	 */
@@ -183,23 +183,23 @@ public class ToApproveBorrowTimeTask implements IBackgroundWorkPlugin {
 	}
 	
 	/**
-	 * ·¢ËÍÓÑ¿Õ¼äÏûÏ¢
+	 * å‘é€å‹ç©ºé—´æ¶ˆæ¯
 	 * @param String message, String name
 	 * @return
 	 */
 	private boolean sendYonyouMessage( String message ,String name){
-		//Á¬½ÓÉóÅúµÄµØÖ·
+		//è¿æ¥å®¡æ‰¹çš„åœ°å€
 		boolean messageResult = false;
-		// »ñÈ¡access_token
+		// è·å–access_token
 		String accessToken = YonyouMessageUtil.getAccessToken();
-		// TODO ½ÓÊÕÈËĞèÒª¸ü¸ÄÎª³µ¹Ü
+		// TODO æ¥æ”¶äººéœ€è¦æ›´æ”¹ä¸ºè½¦ç®¡
 		String field = "17609814307";
 		String fieldtype = "1";
-		// »ñÈ¡MemberId£¨1£ºÊÖ»ú 2£ºÓÊÏä£©
+		// è·å–MemberIdï¼ˆ1ï¼šæ‰‹æœº 2ï¼šé‚®ç®±ï¼‰
 		String memberId = YonyouMessageUtil.getMemberId(accessToken, field, fieldtype);
 		List<String> tos = new ArrayList<String>();
 		tos.add(memberId);
-		String warnName = name + "µ½ÆÚÌáĞÑ";
+		String warnName = name + "åˆ°æœŸæé†’";
 		messageResult = YonyouMessageUtil.sendMessage(accessToken, YonyouMessageUtil.messagePojo(tos , warnName , message));
 		return messageResult;
 	}	

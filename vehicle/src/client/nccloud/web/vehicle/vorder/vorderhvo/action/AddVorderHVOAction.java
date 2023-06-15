@@ -13,20 +13,20 @@ import nc.itf.vehicle.vorder.vorderhvo.IVorderHVOService;
 
 
 /**
- * 新增Action
+ * 鏂板Action
  */
 public class AddVorderHVOAction extends BaseAction{
 
 	@Override
 	public Object doAction(IRequest request, RequstParamWapper paramWapper) throws Throwable{
-		//json数据转换
+		//json鏁版嵁杞崲
 		RequestDTO param = VOTransform.toVO(paramWapper.requestString,RequestDTO.class);
-		//获取参数
+		//鑾峰彇鍙傛暟
 		Map<String,Object> userJson = param.getUserJson();
 
 		AggVorderHVO[] vos = this.getVOs(param, AggVorderHVO.class);
 		
-		//获得实体VO
+		//鑾峰緱瀹炰綋VO
 		IVorderHVOService service = ServiceLocator.find(IVorderHVOService.class);
 		AggVorderHVO vo = service.preAddAggVorderHVO(vos[0],userJson);
 		Map<String,Object> externalData = new HashMap<>();

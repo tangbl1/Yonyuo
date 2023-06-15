@@ -16,17 +16,17 @@ import nc.vo.pub.VOStatus;
 import nc.vo.pubapp.pattern.exception.ExceptionUtils;
 
 public abstract class AceOtherInfoPubServiceImpl {
-	// ĞÂÔö
+	// æ–°å¢
 	public AggOtherInfoVO[] pubinsertBills(AggOtherInfoVO[] clientFullVOs,
 			AggOtherInfoVO[] originBills) throws BusinessException {
 		try {
-			// Êı¾İ¿âÖĞÊı¾İºÍÇ°Ì¨´«µİ¹ıÀ´µÄ²îÒìVOºÏ²¢ºóµÄ½á¹û
+			// æ•°æ®åº“ä¸­æ•°æ®å’Œå‰å°ä¼ é€’è¿‡æ¥çš„å·®å¼‚VOåˆå¹¶åçš„ç»“æœ
 			BillTransferTool<AggOtherInfoVO> transferTool = new BillTransferTool<AggOtherInfoVO>(
 					clientFullVOs);
-			// µ÷ÓÃBP
+			// è°ƒç”¨BP
 			AceOtherInfoInsertBP action = new AceOtherInfoInsertBP();
 			AggOtherInfoVO[] retvos = action.insert(clientFullVOs);
-			// ¹¹Ôì·µ»ØÊı¾İ
+			// æ„é€ è¿”å›æ•°æ®
 			return transferTool.getBillForToClient(retvos);
 		} catch (Exception e) {
 			ExceptionUtils.marsh(e);
@@ -34,27 +34,27 @@ public abstract class AceOtherInfoPubServiceImpl {
 		return null;
 	}
 
-	// É¾³ı
+	// åˆ é™¤
 	public void pubdeleteBills(AggOtherInfoVO[] clientFullVOs,
 			AggOtherInfoVO[] originBills) throws BusinessException {
 		try {
-			// µ÷ÓÃBP
+			// è°ƒç”¨BP
 			new AceOtherInfoDeleteBP().delete(clientFullVOs);
 		} catch (Exception e) {
 			ExceptionUtils.marsh(e);
 		}
 	}
 
-	// ĞŞ¸Ä
+	// ä¿®æ”¹
 	public AggOtherInfoVO[] pubupdateBills(AggOtherInfoVO[] clientFullVOs,
 			AggOtherInfoVO[] originBills) throws BusinessException {
 		try {
-			// ¼ÓËø + ¼ì²éts
+			// åŠ é” + æ£€æŸ¥ts
 			BillTransferTool<AggOtherInfoVO> transferTool = new BillTransferTool<AggOtherInfoVO>(
 					clientFullVOs);
 			AceOtherInfoUpdateBP bp = new AceOtherInfoUpdateBP();
 			AggOtherInfoVO[] retvos = bp.update(clientFullVOs, originBills);
-			// ¹¹Ôì·µ»ØÊı¾İ
+			// æ„é€ è¿”å›æ•°æ®
 			return transferTool.getBillForToClient(retvos);
 		} catch (Exception e) {
 			ExceptionUtils.marsh(e);
@@ -77,15 +77,15 @@ public abstract class AceOtherInfoPubServiceImpl {
 	}
 
 	/**
-	 * ÓÉ×ÓÀàÊµÏÖ£¬²éÑ¯Ö®Ç°¶ÔqueryScheme½øĞĞ¼Ó¹¤£¬¼ÓÈë×Ô¼ºµÄÂß¼­
+	 * ç”±å­ç±»å®ç°ï¼ŒæŸ¥è¯¢ä¹‹å‰å¯¹querySchemeè¿›è¡ŒåŠ å·¥ï¼ŒåŠ å…¥è‡ªå·±çš„é€»è¾‘
 	 * 
 	 * @param queryScheme
 	 */
 	protected void preQuery(IQueryScheme queryScheme) {
-		// ²éÑ¯Ö®Ç°¶ÔqueryScheme½øĞĞ¼Ó¹¤£¬¼ÓÈë×Ô¼ºµÄÂß¼­
+		// æŸ¥è¯¢ä¹‹å‰å¯¹querySchemeè¿›è¡ŒåŠ å·¥ï¼ŒåŠ å…¥è‡ªå·±çš„é€»è¾‘
 	}
 
-	// Ìá½»
+	// æäº¤
 	public AggOtherInfoVO[] pubsendapprovebills(
 			AggOtherInfoVO[] clientFullVOs, AggOtherInfoVO[] originBills)
 			throws BusinessException {
@@ -94,7 +94,7 @@ public abstract class AceOtherInfoPubServiceImpl {
 		return retvos;
 	}
 
-	// ÊÕ»Ø
+	// æ”¶å›
 	public AggOtherInfoVO[] pubunsendapprovebills(
 			AggOtherInfoVO[] clientFullVOs, AggOtherInfoVO[] originBills)
 			throws BusinessException {
@@ -103,7 +103,7 @@ public abstract class AceOtherInfoPubServiceImpl {
 		return retvos;
 	};
 
-	// ÉóÅú
+	// å®¡æ‰¹
 	public AggOtherInfoVO[] pubapprovebills(AggOtherInfoVO[] clientFullVOs,
 			AggOtherInfoVO[] originBills) throws BusinessException {
 		for (int i = 0; clientFullVOs != null && i < clientFullVOs.length; i++) {
@@ -114,7 +114,7 @@ public abstract class AceOtherInfoPubServiceImpl {
 		return retvos;
 	}
 
-	// ÆúÉó
+	// å¼ƒå®¡
 
 	public AggOtherInfoVO[] pubunapprovebills(AggOtherInfoVO[] clientFullVOs,
 			AggOtherInfoVO[] originBills) throws BusinessException {

@@ -18,7 +18,7 @@ public class N_INSU_UNSAVEBILL extends AbstractPfAction<AggInsuranceHVO> {
 			Object userObj) {
 		CompareAroundProcesser<AggInsuranceHVO> processor = new CompareAroundProcesser<AggInsuranceHVO>(
 				InsuranceFilesPluginPoint.UNSEND_APPROVE);
-		// TODO ÔÚ´Ë´¦Ìí¼ÓÇ°ºó¹æÔò
+		// TODO åœ¨æ­¤å¤„æ·»åŠ å‰åè§„åˆ™
 		processor.addBeforeRule(new UncommitStatusCheckRule());
 
 		return processor;

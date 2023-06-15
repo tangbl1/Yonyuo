@@ -6,13 +6,13 @@ import nc.vo.pub.VOStatus;
 import nc.vo.pub.pf.BillStatusEnum;
 
 /**
- * 标准单据收回的BP
+ * 鏍囧噯鍗曟嵁鏀跺洖鐨凚P
  */
 public class AceVorderUnSendApproveBP {
 
 	public AggVorderHVO[] unSend(AggVorderHVO[] clientBills,
 			AggVorderHVO[] originBills) {
-		// 把VO持久化到数据库中
+		// 鎶奦O鎸佷箙鍖栧埌鏁版嵁搴撲腑
 		this.setHeadVOStatus(clientBills);
 		BillUpdate<AggVorderHVO> update = new BillUpdate<AggVorderHVO>();
 		AggVorderHVO[] returnVos = update.update(clientBills, originBills);

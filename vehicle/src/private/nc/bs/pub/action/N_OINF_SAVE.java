@@ -18,7 +18,7 @@ public class N_OINF_SAVE extends AbstractPfAction<AggOtherInfoVO> {
 			Object userObj) {
 		CompareAroundProcesser<AggOtherInfoVO> processor = new CompareAroundProcesser<AggOtherInfoVO>(
 				OtherInfoPluginPoint.SEND_APPROVE);
-		// TODO ÔÚ´Ë´¦Ìí¼ÓÉóºËÇ°ºó¹æÔò
+		// TODO åœ¨æ­¤å¤„æ·»åŠ å®¡æ ¸å‰åè§„åˆ™
 		IRule<AggOtherInfoVO> rule = new CommitStatusCheckRule();
 		processor.addBeforeRule(rule);
 		return processor;

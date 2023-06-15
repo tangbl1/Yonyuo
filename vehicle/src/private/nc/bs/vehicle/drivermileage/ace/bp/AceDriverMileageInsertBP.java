@@ -7,7 +7,7 @@ import nc.impl.pubapp.pattern.rule.IRule;
 import nc.vo.vehicle.drivermileage.AggDriverMileageHVO;
 
 /**
- * ±ê×¼µ¥¾İĞÂÔöBP
+ * æ ‡å‡†å•æ®æ–°å¢BP
  */
 public class AceDriverMileageInsertBP {
 
@@ -22,12 +22,12 @@ public class AceDriverMileageInsertBP {
 	}
 
 	/**
-	 * ĞÂÔöºó¹æÔò
+	 * æ–°å¢åè§„åˆ™
 	 * 
 	 * @param processor
 	 */
 	private void addAfterRule(AroundProcesser<AggDriverMileageHVO> processor) {
-		// TODO ĞÂÔöºó¹æÔò
+		// TODO æ–°å¢åè§„åˆ™
 		IRule<AggDriverMileageHVO> rule = null;
 		rule = new nc.bs.pubapp.pub.rule.BillCodeCheckRule();
 		((nc.bs.pubapp.pub.rule.BillCodeCheckRule) rule).setCbilltype("MILE");
@@ -40,12 +40,12 @@ public class AceDriverMileageInsertBP {
 	}
 
 	/**
-	 * ĞÂÔöÇ°¹æÔò
+	 * æ–°å¢å‰è§„åˆ™
 	 * 
 	 * @param processor
 	 */
 	private void addBeforeRule(AroundProcesser<AggDriverMileageHVO> processer) {
-		// TODO ĞÂÔöÇ°¹æÔò
+		// TODO æ–°å¢å‰è§„åˆ™
 		IRule<AggDriverMileageHVO> rule = null;
 		rule = new nc.bs.pubapp.pub.rule.FillInsertDataRule();
 		processer.addBeforeRule(rule);

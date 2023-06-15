@@ -1,4 +1,5 @@
 package nc.itf.vehicle.util;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -12,45 +13,79 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.yonyou.iuap.corp.demo.crypto.SignHelper;
 import com.yonyou.iuap.corp.demo.model.AccessTokenResponse;
 import com.yonyou.iuap.corp.demo.model.GenericResponse;
+import com.yonyou.iuap.corp.demo.model.UserIdResponse;
 import com.yonyou.iuap.corp.demo.utils.RequestTool;
 
 /**
- * ÓÑ¿Õ¼ä·¢ËÍÓ¦ÓÃÍ¨Öª
+ * å‹ç©ºé—´å‘é€åº”ç”¨é€šçŸ¥
  * @author Zmy
  *
  */
 public class YonyouMessageUtil {
 
-//	// µÚÈı·½Æ¾Ö¤id
-//	public static final String APPID = "bf10f69e652adee3";
-//	// µÚÈı·½Æ¾Ö¤ÃÜÔ¿
-//	public static final String SECRET = "085a04a021322cf460f8c76c3f79e68335ada3bb8e28f0b45c6c197544d5";
-//	//
+/*	// ç¬¬ä¸‰æ–¹å‡­è¯id
+	public static final String APPID = "bf10f69e652adee3";
+	// ç¬¬ä¸‰æ–¹å‡­è¯å¯†é’¥
+	public static final String SECRET = "085a04a021322cf460f8c76c3f79e68335ada3bb8e28f0b45c6c197544d5";
+	//
 
-//	// https://open.yonyoucloud.com/developer/doc?id=f97cf7f5cc1abe83d1dad1454ceb1757
-//	public static final String GETTOKEN_URL = "http://openapi.yonyoucloud.com/token?";
-//	// ¸ù¾İÓÃ»§ÓÊÏä»òÊÖ»ú»ñµÃÓÑ¿Õ¼äÓÃ»§memberid[post]
-//	// https://open.yonyoucloud.com/developer/doc?id=bd37dc6065d8375e14a05ecb711479a6
+	// https://open.yonyoucloud.com/developer/doc?id=f97cf7f5cc1abe83d1dad1454ceb1757
+	public static final String GETTOKEN_URL = "http://openapi.yonyoucloud.com/token?";
+	// æ ¹æ®ç”¨æˆ·é‚®ç®±æˆ–æ‰‹æœºè·å¾—å‹ç©ºé—´ç”¨æˆ·memberid[post]
+	// https://open.yonyoucloud.com/developer/doc?id=bd37dc6065d8375e14a05ecb711479a6
 	public static final String GETMEMBERID_URL = "http://openapi.yonyoucloud.com/user/getMemberId?";
-	// ·¢ËÍÓ¦ÓÃÍ¨Öª[post]
+	// å‘é€åº”ç”¨é€šçŸ¥[post]
 	// https://open.yonyoucloud.com/developer/doc?id=87d473451c6ef88eeaf0f5f326a1c056
-	public static final String SENDMESSAGE_URL = "http://openapi.yonyoucloud.com/rest/message/app/share?";
+	public static final String SENDMESSAGE_URL = "http://openapi.yonyoucloud.com/rest/message/app/share?";*/
 
-	// 2023-06-08ĞŞ¸Ä by tangbl
-	//ÓÑ¿Õ¼äAPIµ÷ÓÃÊÚÈ¨
-	//appkey
-	static String appKey = "4b979c1ce03944d694be80c1e4242b77";
-	// µÚÈı·½Æ¾Ö¤ÃÜÔ¿
-	static String appSecret = "343c68bcfd4f4029a6dfa7afc357545a";
-
-	//ÆóÒµ×Ô½¨Ó¦ÓÃ»ñÈ¡access_token[get]
-	//https://yonbip.diwork.com/iuap-api-auth/open-auth/selfAppAuth/getAccessToken?appKey=4b979c1ce03944d694be80c1e4242b77&timestamp=1686029956013&signature=wgZHTV9jQNqUXJuiHtM3yYPkaqywIdC9VLh1FsZFeMs%3D
-	static String accessTokenUrl = "https://yonbip.diwork.com/iuap-api-auth/open-auth/selfAppAuth/getAccessToken";
+	/**
+	 * 2023-06-14 ä¿®æ”¹ by tangbl
+	 */
 
 
 
 	/**
-	 * ÆóÒµ×Ô½¨Ó¦ÓÃ»ñÈ¡access_token
+	 * è·å–ç§Ÿæˆ·æ‰€åœ¨æ•°æ®ä¸­å¿ƒåŸŸå
+	 *
+	 * @param URL ï¼š
+	 *            https://api.diwork.com/open-auth/dataCenter/getGatewayAddress?tenantId=itvqa0x6
+	 * @param request ï¼š
+	 *            get
+	 * @return
+	 *              {
+	 * 	  	"code": "00000",
+	 * 	 	"message": "æˆåŠŸï¼",
+	 * 	  	"data": {
+	 * 	  		"gatewayUrl": "https://yonbip.diwork.com/iuap-api-gateway",
+	 * 	  		"tokenUrl": "https://yonbip.diwork.com/iuap-api-auth"
+	 *             }
+	 */
+
+
+	//å‹ç©ºé—´APIè°ƒç”¨æˆæƒ
+	static String appKey = "4b979c1ce03944d694be80c1e4242b77";
+	// ç¬¬ä¸‰æ–¹å‡­è¯å¯†é’¥
+	static String appSecret = "343c68bcfd4f4029a6dfa7afc357545a";
+
+	//ä¼ä¸šè‡ªå»ºåº”ç”¨è·å–access_token[get]
+	//https://yonbip.diwork.com/iuap-api-auth/open-auth/selfAppAuth/getAccessToken?appKey=4b979c1ce03944d694be80c1e4242b77&timestamp=1686029956013&signature=wgZHTV9jQNqUXJuiHtM3yYPkaqywIdC9VLh1FsZFeMs%3D
+	static String accessTokenUrl = "https://yonbip.diwork.com/iuap-api-auth/open-auth/selfAppAuth/getAccessToken";
+
+	//æ ¹æ®ç”¨æˆ·é‚®ç®±æˆ–æ‰‹æœºè·å¾—å‹ç©ºé—´ç”¨æˆ·å‹æˆ·é€šuser_id [get]
+	//https://yonbip.diwork.com/iuap-api-gateway/yonbip/uspace/staff/info_by_mobile_email?access_token=0ec5b801bbba4cceb3116f6d5a98104b&field=18340319070&type=1
+	static String GETMEUSERID_URL = "https://yonbip.diwork.com/iuap-api-gateway/yonbip/uspace/staff/info_by_mobile_email";
+
+	// å‘é€åº”ç”¨å¹‚é€šçŸ¥[post]
+	// https://yonbip.diwork.com/iuap-api-gateway/yonbip/uspace/rest/openapi/idempotent/work/notify/push?access_token=5065f07441e24d7a9b0f3294dcb349da
+//	public static final String SENDMESSAGE_URL = "https://yonbip.diwork.com/iuap-api-gateway/yonbip/uspace/rest/openapi/idempotent/work/notify/push?";
+	//å‘é€å·¥ä½œé€šçŸ¥
+	//è¯·æ±‚åœ°å€
+	//https://yonbip.diwork.com/iuap-api-gateway/yonbip/uspace/notify/share?access_token=ccb76bcc22bb458dba8f9fe20f2f4646
+	public static final String SENDMESSAGE_URL = "https://yonbip.diwork.com/iuap-api-gateway/yonbip/uspace/notify/share?";
+
+
+	/**
+	 * ä¼ä¸šè‡ªå»ºåº”ç”¨è·å–access_token
 	 * 
 	 * @return
 	 */
@@ -59,116 +94,161 @@ public class YonyouMessageUtil {
 		String accessToken = "";
 		try {
 			Map<String, String> params = new HashMap<>();
-			// ³ıÇ©ÃûÍâµÄÆäËû²ÎÊı
+			// é™¤ç­¾åå¤–çš„å…¶ä»–å‚æ•°
 			params.put("appKey", appKey);
-			//Ê±¼ä´Á
+			//æ—¶é—´æˆ³
 			String timestamp = String.valueOf(System.currentTimeMillis());
 			params.put("timestamp",timestamp);
-			// ¼ÆËãÇ©Ãû
-			String signature = null;
-			signature = SignHelper.sign(params, appSecret);
+			// è®¡ç®—ç­¾å
+			String signature = SignHelper.sign(params, appSecret);
 			params.put("signature", signature);
 			GenericResponse<AccessTokenResponse> response = RequestTool.doGet(accessTokenUrl, params, new TypeReference<GenericResponse<AccessTokenResponse>>() {});
-			if (response.isSuccess()) {
+			if (response.isSuccess()) {//code :00000
 				accessToken = response.getData().getAccessToken();
 			}
 		} catch (Exception e) {
-			throw new RuntimeException("»ñÈ¡accessTokenÊ§°Ü£¡");
+			throw new RuntimeException("è·å–accessTokenå¤±è´¥ï¼");
 		}
 		return accessToken;
 	}
 
 	/**
-	 * ¸ù¾İÓÃ»§ÓÊÏä»òÊÖ»ú»ñµÃÓÑ¿Õ¼äÓÃ»§memberid
+	 * æ ¹æ®ç”¨æˆ·é‚®ç®±æˆ–æ‰‹æœºè·å¾—å‹ç©ºé—´ç”¨æˆ·user_id
 	 * 
 	 * @param accessToken
-	 *            µÇÂ¼Æ¾Ö¤
+	 *            ç™»å½•å‡­è¯
 	 * @param field
-	 *            ËÑË÷×Ö¶Î£¨Ä¿Ç°Ö§³ÖÓÊÏä»òÊÖ»ú)
+	 *            æœç´¢å­—æ®µï¼ˆç›®å‰æ”¯æŒé‚®ç®±æˆ–æ‰‹æœº)
 	 * @param type
-	 *            1£ºÊÖ»ú 2£ºÓÊÏä
+	 *            1ï¼šæ‰‹æœº 2ï¼šé‚®ç®±
 	 * @return
 	 */
 	public static String getMemberId(String accessToken, String field,
 			String type) {
 		/**
-		 * begin 2023-05-26 ½â¾ö³µ¹ÜÉóÅú±¨²Ù×÷Ê§°ÜµÄÎÊÌâ
+		 * begin 2023-05-26 è§£å†³è½¦ç®¡å®¡æ‰¹æŠ¥æ“ä½œå¤±è´¥çš„é—®é¢˜
 		 */
 		field = field.replace(" ","");
 		/**
 		 * end
 		 */
-		String memberId = "";
-		JSONObject json = new JSONObject();
-		String memberIdUrl = GETMEMBERID_URL + "access_token=" + accessToken
-				+ "&field=" + field + "&type=" + type;
-		JSONObject memberIdRes = JSON.parseObject(HttpRequest.sendPost(memberIdUrl, json.toJSONString()));
-		if (Integer.parseInt(String.valueOf(memberIdRes.get("code"))) == 0) {
-			memberId = memberIdRes.getJSONObject("data").getString("id");
+		String user_id = "";
+		Map<String, String> params = new HashMap<>();
+		// æ‰‹æœºå·
+		params.put("field", field);
+		// æŸ¥è¯¢ç±»å‹ï¼š1-æ‰‹æœºï¼Œ2-é‚®ç®±
+		params.put("type",type);
+
+		try {
+			GenericResponse<UserIdResponse> response = RequestTool.doGet(GETMEUSERID_URL, params, new TypeReference<GenericResponse<UserIdResponse>>() {});
+			if (response != null && Integer.valueOf(response.getCode()) == 200) {
+				user_id = response.getData().getUser_id();
+			}
+		} catch (IOException e) {
+			throw new RuntimeException("è·å¾—å‹ç©ºé—´ç”¨æˆ·user_idå¤±è´¥ï¼");
 		}
-		return memberId;
+		return  user_id;
+
 	}
 
 	/**
-	 * ·¢ËÍÓ¦ÓÃÍ¨Öª
+	 * å‘é€åº”ç”¨é€šçŸ¥
 	 * 
 	 * @param accessToken
-	 *            µÇÂ¼Æ¾Ö¤
+	 *            ç™»å½•å‡­è¯
 	 * @param param
-	 *            ²ÎÊı
+	 *            å‚æ•°
 	 * @return
 	 */
 	public static boolean sendMessage(String accessToken, List<Map<String, Object>> param) {
-		String memberIdUrl = SENDMESSAGE_URL + "access_token=" + accessToken;
-		JSONObject memberIdRes = HttpRequest.sendPost(memberIdUrl, param);
+		// begin modifly by 2023-06-15
+		String URL = SENDMESSAGE_URL + "access_token=" + accessToken;
+		JSONObject memberIdRes = HttpRequest.sendPost(URL, param);
 		if(memberIdRes != null && !memberIdRes.isEmpty()){
-			if (Integer.parseInt(String.valueOf(memberIdRes.get("flag"))) == 0) {
+
+			if (Integer.parseInt(memberIdRes.getString("code")) == 200) {
 				return true;
 			}
 		}
 		return false;
 	}
+	// end  modifly by 2023-06-15
+
+
+//		String yhtUserIds = SENDMESSAGE_URL + "access_token=" + accessToken;
+//		JSONObject memberIdRes = HttpRequest.sendPost(yhtUserIds, param);
+//		if(memberIdRes != null && !memberIdRes.isEmpty()){
+//			if (Integer.parseInt(String.valueOf(memberIdRes.get("flag"))) == 0) {
+//				return true;
+//			}
+//		}
+//		return false;
 
 	/**
-	 * ×é×°·¢ËÍÍ¨ÖªËùĞè²ÎÊı
-	 * @param tos ½ÓÊÕ¶ÔÏóÊı×é
-	 * @param title ±êÌâ
-	 * @param desc ÄÚÈİ
+	 * ç»„è£…å‘é€é€šçŸ¥æ‰€éœ€å‚æ•°
+	 * @param yhtUserIds æ¥æ”¶å¯¹è±¡æ•°ç»„
+	 * @param title æ ‡é¢˜
+	 * @param content å†…å®¹
 	 * @return
 	 */
-	public static List<Map<String, Object>> messagePojo(List<String> tos, String title, String desc) {
+	// begin modifly by 2023-06-15
+	public static List<Map<String, Object>> messagePojo(List<String> yhtUserIds, String title, String content) {
 		List<Map<String, Object>> paramlist = new ArrayList<Map<String, Object>>();
-		if(tos != null && tos.size() > 0){
+		if(yhtUserIds != null && yhtUserIds.size() > 0){
 			Map<String, Object> paramE = new HashMap<String, Object>();
-			// ¿Õ¼äId
-			paramE.put("spaceId", "121905");
-			// Ó¦ÓÃId
-			paramE.put("appId", "bf10f69e652adee3");
-			// ·¢ËÍÍ¾¾¶£¬appNotify:Ó¦ÓÃÍ¨Öª
-			paramE.put("sendThrough", "appNotify");
-			// ·¢ËÍ·¶Î§£¬all£ºµ±Ç°¿Õ¼äµÄÈ«²¿³ÉÔ±£¬list£ºtoÁĞ±íÖĞ³ÉÔ±
-			paramE.put("sendScope", "list");
-			// ·¢ËÍ¶ÔÏó£¬¿Õ¼äÓÃ»§memberId¼¯ºÏ
-			paramE.put("to", tos.toArray());
-			// ±êÌâ
-			paramE.put("title", title);
-			// ÄÚÈİÃèÊö
-			paramE.put("desc", desc);
-			// ÒÆ¶¯¶ËÌø×ªµØÖ·
+			// åº”ç”¨Id
+			paramE.put("appId", "158200");//http://49.4.14.203:8181/clgl/index.html?code=1748875378452594694&qzId=121905&groupname=æŠšé¡ºç½•ç‹å‚²ç‰›çŸ¿ä¸šè‚¡ä»½æœ‰é™å…¬å¸&appId=158200&serviceCode=f604dd8f-fcf8-be95-7d3b-f27250b546d7&locale=zh_CN&refimestamp=1686795890743
+			//æ ‡é¢˜
+			paramE.put("title",title);
+			//å†…å®¹
+			paramE.put("content",content);
+			//æ¥æ”¶èŒƒå›´
+			paramE.put("sendScope","list");
+			//yhtUserIdsåˆ—è¡¨
+			paramE.put("yhtUserIds",yhtUserIds.toArray());
+
 			paramlist.add(paramE);
 		}
 		return paramlist;
 	}
 
-	public static void main(String[] args) {
-		String accessToken = getAccessToken();
-//		String memberId = getMemberId(accessToken, "zhangmym@yonyou.com", "2");
-		String memberId = getMemberId(accessToken, "13032422361", "1");
-		List<String> tos = new ArrayList<String>();
-		tos.add(memberId);
-		boolean result = sendMessage(accessToken, messagePojo(tos ,"Ê³ÌÃÏû·ÑÌáĞÑ", "[Ôç²Í]£º12ÔªÕû¡£"));
-		System.out.println(result);
-		System.exit(0);
-	}
+	// end  modifly by 2023-06-15
+
+
+
+//	public static List<Map<String, Object>> messagePojo(List<String> tos, String title, String desc) {
+//		List<Map<String, Object>> paramlist = new ArrayList<Map<String, Object>>();
+//		if(tos != null && tos.size() > 0){
+//			Map<String, Object> paramE = new HashMap<String, Object>();
+//			// ç©ºé—´Id
+//			paramE.put("spaceId", "121905");
+//			// åº”ç”¨Id
+//			paramE.put("appId", "bf10f69e652adee3");
+//			// å‘é€é€”å¾„ï¼ŒappNotify:åº”ç”¨é€šçŸ¥
+//			paramE.put("sendThrough", "appNotify");
+//			// å‘é€èŒƒå›´ï¼Œallï¼šå½“å‰ç©ºé—´çš„å…¨éƒ¨æˆå‘˜ï¼Œlistï¼štoåˆ—è¡¨ä¸­æˆå‘˜
+//			paramE.put("sendScope", "list");
+//			// å‘é€å¯¹è±¡ï¼Œç©ºé—´ç”¨æˆ·memberIdé›†åˆ
+//			paramE.put("to", tos.toArray());
+//			// æ ‡é¢˜
+//			paramE.put("title", title);
+//			// å†…å®¹æè¿°
+//			paramE.put("desc", desc);
+//			// ç§»åŠ¨ç«¯è·³è½¬åœ°å€
+//			paramlist.add(paramE);
+//		}
+//		return paramlist;
+//	}
+
+//	public static void main(String[] args) {
+//		String accessToken = getAccessToken();
+////		String memberId = getMemberId(accessToken, "zhangmym@yonyou.com", "2");
+//		String memberId = getMemberId(accessToken, "13032422361", "1");
+//		List<String> tos = new ArrayList<String>();
+//		tos.add(memberId);
+//		boolean result = sendMessage(accessToken, messagePojo(tos ,"é£Ÿå ‚æ¶ˆè´¹æé†’", "[æ—©é¤]ï¼š12å…ƒæ•´ã€‚"));
+//		System.out.println(result);
+//		System.exit(0);
+//	}
 
 }

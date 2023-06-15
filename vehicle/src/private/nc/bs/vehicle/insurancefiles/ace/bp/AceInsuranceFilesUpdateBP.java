@@ -7,25 +7,25 @@ import nc.impl.pubapp.pattern.rule.IRule;
 import nc.vo.vehicle.insurance.AggInsuranceHVO;
 
 /**
- * ĞŞ¸Ä±£´æµÄBP
+ * ä¿®æ”¹ä¿å­˜çš„BP
  * 
  */
 public class AceInsuranceFilesUpdateBP {
 
 	public AggInsuranceHVO[] update(AggInsuranceHVO[] bills,
 			AggInsuranceHVO[] originBills) {
-		// µ÷ÓÃĞŞ¸ÄÄ£°å
+		// è°ƒç”¨ä¿®æ”¹æ¨¡æ¿
 		UpdateBPTemplate<AggInsuranceHVO> bp = new UpdateBPTemplate<AggInsuranceHVO>(
 				InsuranceFilesPluginPoint.UPDATE);
-		// Ö´ĞĞÇ°¹æÔò
+		// æ‰§è¡Œå‰è§„åˆ™
 		this.addBeforeRule(bp.getAroundProcesser());
-		// Ö´ĞĞºó¹æÔò
+		// æ‰§è¡Œåè§„åˆ™
 		this.addAfterRule(bp.getAroundProcesser());
 		return bp.update(bills, originBills);
 	}
 
 	private void addAfterRule(CompareAroundProcesser<AggInsuranceHVO> processer) {
-		// TODO ºó¹æÔò
+		// TODO åè§„åˆ™
 		IRule<AggInsuranceHVO> rule = null;
 		rule = new nc.bs.pubapp.pub.rule.BillCodeCheckRule();
 		((nc.bs.pubapp.pub.rule.BillCodeCheckRule) rule).setCbilltype("INSU");
@@ -39,7 +39,7 @@ public class AceInsuranceFilesUpdateBP {
 	}
 
 	private void addBeforeRule(CompareAroundProcesser<AggInsuranceHVO> processer) {
-		// TODO Ç°¹æÔò
+		// TODO å‰è§„åˆ™
 		IRule<AggInsuranceHVO> rule = null;
 		rule = new nc.bs.pubapp.pub.rule.FillUpdateDataRule();
 		processer.addBeforeRule(rule);

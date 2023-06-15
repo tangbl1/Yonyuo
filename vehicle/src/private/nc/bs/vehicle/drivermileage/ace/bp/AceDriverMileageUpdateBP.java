@@ -7,25 +7,25 @@ import nc.impl.pubapp.pattern.rule.IRule;
 import nc.vo.vehicle.drivermileage.AggDriverMileageHVO;
 
 /**
- * ĞŞ¸Ä±£´æµÄBP
+ * ä¿®æ”¹ä¿å­˜çš„BP
  * 
  */
 public class AceDriverMileageUpdateBP {
 
 	public AggDriverMileageHVO[] update(AggDriverMileageHVO[] bills,
 			AggDriverMileageHVO[] originBills) {
-		// µ÷ÓÃĞŞ¸ÄÄ£°å
+		// è°ƒç”¨ä¿®æ”¹æ¨¡æ¿
 		UpdateBPTemplate<AggDriverMileageHVO> bp = new UpdateBPTemplate<AggDriverMileageHVO>(
 				DriverMileagePluginPoint.UPDATE);
-		// Ö´ĞĞÇ°¹æÔò
+		// æ‰§è¡Œå‰è§„åˆ™
 		this.addBeforeRule(bp.getAroundProcesser());
-		// Ö´ĞĞºó¹æÔò
+		// æ‰§è¡Œåè§„åˆ™
 		this.addAfterRule(bp.getAroundProcesser());
 		return bp.update(bills, originBills);
 	}
 
 	private void addAfterRule(CompareAroundProcesser<AggDriverMileageHVO> processer) {
-		// TODO ºó¹æÔò
+		// TODO åè§„åˆ™
 		IRule<AggDriverMileageHVO> rule = null;
 		rule = new nc.bs.pubapp.pub.rule.BillCodeCheckRule();
 		((nc.bs.pubapp.pub.rule.BillCodeCheckRule) rule).setCbilltype("MILE");
@@ -39,7 +39,7 @@ public class AceDriverMileageUpdateBP {
 	}
 
 	private void addBeforeRule(CompareAroundProcesser<AggDriverMileageHVO> processer) {
-		// TODO Ç°¹æÔò
+		// TODO å‰è§„åˆ™
 		IRule<AggDriverMileageHVO> rule = null;
 		rule = new nc.bs.pubapp.pub.rule.FillUpdateDataRule();
 		processer.addBeforeRule(rule);

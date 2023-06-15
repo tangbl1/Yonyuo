@@ -6,17 +6,17 @@ import nc.vo.pub.VOStatus;
 import nc.vo.pub.pf.BillStatusEnum;
 
 /**
- * ±ê×¼µ¥¾İËÍÉóµÄBP
+ * æ ‡å‡†å•æ®é€å®¡çš„BP
  */
 public class AceDriverMileageSendApproveBP {
 	/**
-	 * ËÍÉó¶¯×÷
+	 * é€å®¡åŠ¨ä½œ
 	 * 
 	 * @param vos
-	 *            µ¥¾İVOÊı×é
+	 *            å•æ®VOæ•°ç»„
 	 * @param script
-	 *            µ¥¾İ¶¯×÷½Å±¾¶ÔÏó
-	 * @return ËÍÉóºóµÄµ¥¾İVOÊı×é
+	 *            å•æ®åŠ¨ä½œè„šæœ¬å¯¹è±¡
+	 * @return é€å®¡åçš„å•æ®VOæ•°ç»„
 	 */
 
 	public AggDriverMileageHVO[] sendApprove(AggDriverMileageHVO[] clientBills,
@@ -26,7 +26,7 @@ public class AceDriverMileageSendApproveBP {
 					BillStatusEnum.COMMIT.value());
 			clientFullVO.getParentVO().setStatus(VOStatus.UPDATED);
 		}
-		// Êı¾İ³Ö¾Ã»¯
+		// æ•°æ®æŒä¹…åŒ–
 		AggDriverMileageHVO[] returnVos = new BillUpdate<AggDriverMileageHVO>().update(
 				clientBills, originBills);
 		return returnVos;

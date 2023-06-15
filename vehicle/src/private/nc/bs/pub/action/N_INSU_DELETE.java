@@ -17,7 +17,7 @@ public class N_INSU_DELETE extends AbstractPfAction<AggInsuranceHVO> {
 			Object userObj) {
 		CompareAroundProcesser<AggInsuranceHVO> processor = new CompareAroundProcesser<AggInsuranceHVO>(
 				InsuranceFilesPluginPoint.SCRIPT_DELETE);
-		// TODO ÔÚ´Ë´¦Ìí¼ÓÇ°ºó¹æÔò
+		// TODO åœ¨æ­¤å¤„æ·»åŠ å‰åè§„åˆ™
 		return processor;
 	}
 

@@ -18,7 +18,7 @@ public class N_DRIV_UNSAVEBILL extends AbstractPfAction<AggDriverFiles> {
 			Object userObj) {
 		CompareAroundProcesser<AggDriverFiles> processor = new CompareAroundProcesser<AggDriverFiles>(
 				DriverFilesPluginPoint.UNSEND_APPROVE);
-		// TODO ÔÚ´Ë´¦Ìí¼ÓÇ°ºó¹æÔò
+		// TODO åœ¨æ­¤å¤„æ·»åŠ å‰åè§„åˆ™
 		processor.addBeforeRule(new UncommitStatusCheckRule());
 
 		return processor;

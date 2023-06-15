@@ -16,17 +16,17 @@ import nc.vo.pub.VOStatus;
 import nc.vo.pubapp.pattern.exception.ExceptionUtils;
 
 public abstract class AceDriverFilesPubServiceImpl {
-	// ĞÂÔö
+	// æ–°å¢
 	public AggDriverFiles[] pubinsertBills(AggDriverFiles[] clientFullVOs,
 			AggDriverFiles[] originBills) throws BusinessException {
 		try {
-			// Êı¾İ¿âÖĞÊı¾İºÍÇ°Ì¨´«µİ¹ıÀ´µÄ²îÒìVOºÏ²¢ºóµÄ½á¹û
+			// æ•°æ®åº“ä¸­æ•°æ®å’Œå‰å°ä¼ é€’è¿‡æ¥çš„å·®å¼‚VOåˆå¹¶åçš„ç»“æœ
 			BillTransferTool<AggDriverFiles> transferTool = new BillTransferTool<AggDriverFiles>(
 					clientFullVOs);
-			// µ÷ÓÃBP
+			// è°ƒç”¨BP
 			AceDriverFilesInsertBP action = new AceDriverFilesInsertBP();
 			AggDriverFiles[] retvos = action.insert(clientFullVOs);
-			// ¹¹Ôì·µ»ØÊı¾İ
+			// æ„é€ è¿”å›æ•°æ®
 			return transferTool.getBillForToClient(retvos);
 		} catch (Exception e) {
 			ExceptionUtils.marsh(e);
@@ -34,27 +34,27 @@ public abstract class AceDriverFilesPubServiceImpl {
 		return null;
 	}
 
-	// É¾³ı
+	// åˆ é™¤
 	public void pubdeleteBills(AggDriverFiles[] clientFullVOs,
 			AggDriverFiles[] originBills) throws BusinessException {
 		try {
-			// µ÷ÓÃBP
+			// è°ƒç”¨BP
 			new AceDriverFilesDeleteBP().delete(clientFullVOs);
 		} catch (Exception e) {
 			ExceptionUtils.marsh(e);
 		}
 	}
 
-	// ĞŞ¸Ä
+	// ä¿®æ”¹
 	public AggDriverFiles[] pubupdateBills(AggDriverFiles[] clientFullVOs,
 			AggDriverFiles[] originBills) throws BusinessException {
 		try {
-			// ¼ÓËø + ¼ì²éts
+			// åŠ é” + æ£€æŸ¥ts
 			BillTransferTool<AggDriverFiles> transferTool = new BillTransferTool<AggDriverFiles>(
 					clientFullVOs);
 			AceDriverFilesUpdateBP bp = new AceDriverFilesUpdateBP();
 			AggDriverFiles[] retvos = bp.update(clientFullVOs, originBills);
-			// ¹¹Ôì·µ»ØÊı¾İ
+			// æ„é€ è¿”å›æ•°æ®
 			return transferTool.getBillForToClient(retvos);
 		} catch (Exception e) {
 			ExceptionUtils.marsh(e);
@@ -77,16 +77,16 @@ public abstract class AceDriverFilesPubServiceImpl {
 	}
 
 	/**
-	 * ÓÉ×ÓÀàÊµÏÖ£¬²éÑ¯Ö®Ç°¶ÔqueryScheme½øĞĞ¼Ó¹¤£¬¼ÓÈë×Ô¼ºµÄÂß¼­
+	 * ç”±å­ç±»å®ç°ï¼ŒæŸ¥è¯¢ä¹‹å‰å¯¹querySchemeè¿›è¡ŒåŠ å·¥ï¼ŒåŠ å…¥è‡ªå·±çš„é€»è¾‘
 	 * 
 	 * @param queryScheme
 	 */
 	protected void preQuery(IQueryScheme queryScheme) {
-		// ²éÑ¯Ö®Ç°¶ÔqueryScheme½øĞĞ¼Ó¹¤£¬¼ÓÈë×Ô¼ºµÄÂß¼­
+		// æŸ¥è¯¢ä¹‹å‰å¯¹querySchemeè¿›è¡ŒåŠ å·¥ï¼ŒåŠ å…¥è‡ªå·±çš„é€»è¾‘
 		String sql = queryScheme.getWhereSQLOnly();
 	}
 
-	// Ìá½»
+	// æäº¤
 	public AggDriverFiles[] pubsendapprovebills(
 			AggDriverFiles[] clientFullVOs, AggDriverFiles[] originBills)
 			throws BusinessException {
@@ -95,7 +95,7 @@ public abstract class AceDriverFilesPubServiceImpl {
 		return retvos;
 	}
 
-	// ÊÕ»Ø
+	// æ”¶å›
 	public AggDriverFiles[] pubunsendapprovebills(
 			AggDriverFiles[] clientFullVOs, AggDriverFiles[] originBills)
 			throws BusinessException {
@@ -104,7 +104,7 @@ public abstract class AceDriverFilesPubServiceImpl {
 		return retvos;
 	};
 
-	// ÉóÅú
+	// å®¡æ‰¹
 	public AggDriverFiles[] pubapprovebills(AggDriverFiles[] clientFullVOs,
 			AggDriverFiles[] originBills) throws BusinessException {
 		for (int i = 0; clientFullVOs != null && i < clientFullVOs.length; i++) {
@@ -115,7 +115,7 @@ public abstract class AceDriverFilesPubServiceImpl {
 		return retvos;
 	}
 
-	// ÆúÉó
+	// å¼ƒå®¡
 
 	public AggDriverFiles[] pubunapprovebills(AggDriverFiles[] clientFullVOs,
 			AggDriverFiles[] originBills) throws BusinessException {

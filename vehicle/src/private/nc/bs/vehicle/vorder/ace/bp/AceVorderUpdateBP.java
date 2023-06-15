@@ -7,25 +7,25 @@ import nc.impl.pubapp.pattern.rule.IRule;
 import nc.vo.vehicle.vorder.AggVorderHVO;
 
 /**
- * ĞŞ¸Ä±£´æµÄBP
+ * ä¿®æ”¹ä¿å­˜çš„BP
  * 
  */
 public class AceVorderUpdateBP {
 
 	public AggVorderHVO[] update(AggVorderHVO[] bills,
 			AggVorderHVO[] originBills) {
-		// µ÷ÓÃĞŞ¸ÄÄ£°å
+		// è°ƒç”¨ä¿®æ”¹æ¨¡æ¿
 		UpdateBPTemplate<AggVorderHVO> bp = new UpdateBPTemplate<AggVorderHVO>(
 				VorderPluginPoint.UPDATE);
-		// Ö´ĞĞÇ°¹æÔò
+		// æ‰§è¡Œå‰è§„åˆ™
 		this.addBeforeRule(bp.getAroundProcesser());
-		// Ö´ĞĞºó¹æÔò
+		// æ‰§è¡Œåè§„åˆ™
 		this.addAfterRule(bp.getAroundProcesser());
 		return bp.update(bills, originBills);
 	}
 
 	private void addAfterRule(CompareAroundProcesser<AggVorderHVO> processer) {
-		// TODO ºó¹æÔò
+		// TODO åè§„åˆ™
 		IRule<AggVorderHVO> rule = null;
 		rule = new nc.bs.pubapp.pub.rule.BillCodeCheckRule();
 		((nc.bs.pubapp.pub.rule.BillCodeCheckRule) rule).setCbilltype("VORD");
@@ -39,7 +39,7 @@ public class AceVorderUpdateBP {
 	}
 
 	private void addBeforeRule(CompareAroundProcesser<AggVorderHVO> processer) {
-		// TODO Ç°¹æÔò
+		// TODO å‰è§„åˆ™
 		IRule<AggVorderHVO> rule = null;
 		rule = new nc.bs.pubapp.pub.rule.FillUpdateDataRule();
 		processer.addBeforeRule(rule);

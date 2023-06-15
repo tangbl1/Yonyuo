@@ -5,7 +5,7 @@ import nc.vo.vehicle.AggVehicleMessageVO;
 import nc.vo.pub.VOStatus;
 
 /**
- * 标准单据弃审的BP
+ * 鏍囧噯鍗曟嵁寮冨鐨凚P
  */
 public class AceVehicleUnApproveBP {
 

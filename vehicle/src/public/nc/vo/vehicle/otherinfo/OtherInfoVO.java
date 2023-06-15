@@ -9,11 +9,11 @@ import nc.vo.pub.lang.UFDouble;
 import nc.vo.pubapp.pattern.model.meta.entity.vo.VOMetaFactory;
 
 /**
- * <b> ´Ë´¦¼òÒªÃèÊö´ËÀà¹¦ÄÜ </b>
+ * <b> æ­¤å¤„ç®€è¦æè¿°æ­¤ç±»åŠŸèƒ½ </b>
  * <p>
- *   ´Ë´¦Ìí¼ÓÀÛµÄÃèÊöĞÅÏ¢
+ *   æ­¤å¤„æ·»åŠ ç´¯çš„æè¿°ä¿¡æ¯
  * </p>
- *  ´´½¨ÈÕÆÚ:2021-4-25
+ *  åˆ›å»ºæ—¥æœŸ:2021-4-25
  * @author yonyouBQ
  * @version NCPrj ??
  */
@@ -21,22 +21,22 @@ import nc.vo.pubapp.pattern.model.meta.entity.vo.VOMetaFactory;
 public class OtherInfoVO extends SuperVO {
 	
 /**
-*Ê±¼ä´Á
+*æ—¶é—´æˆ³
 */
 public UFDateTime ts;
     
     
 /**
-* ÊôĞÔ Éú³ÉÊ±¼ä´ÁµÄGetter·½·¨.ÊôĞÔÃû£ºÊ±¼ä´Á
-*  ´´½¨ÈÕÆÚ:2021-4-25
+* å±æ€§ ç”Ÿæˆæ—¶é—´æˆ³çš„Getteræ–¹æ³•.å±æ€§åï¼šæ—¶é—´æˆ³
+*  åˆ›å»ºæ—¥æœŸ:2021-4-25
 * @return nc.vo.pub.lang.UFDateTime
 */
 public UFDateTime getTs() {
 return this.ts;
 }
 /**
-* ÊôĞÔÉú³ÉÊ±¼ä´ÁµÄSetter·½·¨.ÊôĞÔÃû£ºÊ±¼ä´Á
-* ´´½¨ÈÕÆÚ:2021-4-25
+* å±æ€§ç”Ÿæˆæ—¶é—´æˆ³çš„Setteræ–¹æ³•.å±æ€§åï¼šæ—¶é—´æˆ³
+* åˆ›å»ºæ—¥æœŸ:2021-4-25
 * @param newts nc.vo.pub.lang.UFDateTime
 */
 public void setTs(UFDateTime ts){

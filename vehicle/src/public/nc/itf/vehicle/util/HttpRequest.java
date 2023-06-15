@@ -15,12 +15,12 @@ import com.alibaba.fastjson.JSONObject;
 public class HttpRequest {
 
 	/**
-	 * ·¢ËÍPOSTÇëÇó[JSON Param]
+	 * å‘é€POSTè¯·æ±‚[JSON Param]
 	 * 
 	 * @param urlPath
-	 *            µØÖ·
+	 *            åœ°å€
 	 * @param param
-	 *            ²ÎÊı
+	 *            å‚æ•°
 	 * @return JSONObject
 	 */
 	public static JSONObject sendPost(String urlPath,
@@ -41,7 +41,7 @@ public class HttpRequest {
 					"application/json; charset=UTF-8");
 			conn.setRequestProperty("accept", "application/json");
 			if (json != null && !TextUtils.isEmpty(json)) {
-				// È¥µôÇ°ºó[]
+				// å»æ‰å‰å[]
 				String subJson = json.substring(1, json.length() - 1);
 				OutputStreamWriter outwritestream = new OutputStreamWriter(conn.getOutputStream(), "utf-8");
 				outwritestream.write(subJson);
@@ -72,17 +72,17 @@ public class HttpRequest {
 	}
 
 	/**
-	 * ·¢ËÍPOSTÇëÇó[JSON Param]
+	 * å‘é€POSTè¯·æ±‚[JSON Param]
 	 * 
 	 * @param urlPath
-	 *            µØÖ·
+	 *            åœ°å€
 	 * @param list
-	 *            ²ÎÊı
+	 *            å‚æ•°
 	 * @return JSONObject
 	 */
 	public static JSONObject sendGet(String urlPath, List<String> list) {
 		String result = "";
-		// ½«´«ÈëµÄ²ÎÊıÆ´½Ó³ÉÏëÒªµÄ¸ñÊ½
+		// å°†ä¼ å…¥çš„å‚æ•°æ‹¼æ¥æˆæƒ³è¦çš„æ ¼å¼
 		String param = (list != null) ? param(list) : "";
 		BufferedReader in = null;
 		try {
@@ -116,7 +116,7 @@ public class HttpRequest {
 	}
 
 	/**
-	 * Æ´½Ó³ÉurlºóÃæĞèÒªÆ´½ÓµÄ¸ñÊ½ ²ÎÊıÒÔ¶ººÅ·Ö¸ô
+	 * æ‹¼æ¥æˆurlåé¢éœ€è¦æ‹¼æ¥çš„æ ¼å¼ å‚æ•°ä»¥é€—å·åˆ†éš”
 	 * 
 	 * @param list
 	 * @return
@@ -138,13 +138,13 @@ public class HttpRequest {
 	}
 
 	/**
-	 * ÏòÖ¸¶¨URL·¢ËÍGET·½·¨µÄÇëÇó[String Param]
+	 * å‘æŒ‡å®šURLå‘é€GETæ–¹æ³•çš„è¯·æ±‚[String Param]
 	 * 
 	 * @param url
-	 *            ·¢ËÍÇëÇóµÄURL
+	 *            å‘é€è¯·æ±‚çš„URL
 	 * @param param
-	 *            ÇëÇó²ÎÊı£¬ÇëÇó²ÎÊıÓ¦¸ÃÊÇ name1=value1&name2=value2 µÄĞÎÊ½¡£
-	 * @return URL Ëù´ú±íÔ¶³Ì×ÊÔ´µÄÏìÓ¦½á¹û
+	 *            è¯·æ±‚å‚æ•°ï¼Œè¯·æ±‚å‚æ•°åº”è¯¥æ˜¯ name1=value1&name2=value2 çš„å½¢å¼ã€‚
+	 * @return URL æ‰€ä»£è¡¨è¿œç¨‹èµ„æºçš„å“åº”ç»“æœ
 	 */
 	public static String sendGet(String url, String param) {
 		String result = "";
@@ -152,22 +152,22 @@ public class HttpRequest {
 		try {
 			String urlNameString = url + "?" + param;
 			URL realUrl = new URL(urlNameString);
-			// ´ò¿ªºÍURLÖ®¼äµÄÁ¬½Ó
+			// æ‰“å¼€å’ŒURLä¹‹é—´çš„è¿æ¥
 			URLConnection connection = realUrl.openConnection();
-			// ÉèÖÃÍ¨ÓÃµÄÇëÇóÊôĞÔ
+			// è®¾ç½®é€šç”¨çš„è¯·æ±‚å±æ€§
 			connection.setRequestProperty("accept", "*/*");
 			connection.setRequestProperty("connection", "Keep-Alive");
 			connection.setRequestProperty("user-agent",
 					"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
-			// ½¨Á¢Êµ¼ÊµÄÁ¬½Ó
+			// å»ºç«‹å®é™…çš„è¿æ¥
 			connection.connect();
-			// »ñÈ¡ËùÓĞÏìÓ¦Í·×Ö¶Î
+			// è·å–æ‰€æœ‰å“åº”å¤´å­—æ®µ
 			Map<String, List<String>> map = connection.getHeaderFields();
-			// ±éÀúËùÓĞµÄÏìÓ¦Í·×Ö¶Î
+			// éå†æ‰€æœ‰çš„å“åº”å¤´å­—æ®µ
 			for (String key : map.keySet()) {
 				System.out.println(key + "--->" + map.get(key));
 			}
-			// ¶¨Òå BufferedReaderÊäÈëÁ÷À´¶ÁÈ¡URLµÄÏìÓ¦
+			// å®šä¹‰ BufferedReaderè¾“å…¥æµæ¥è¯»å–URLçš„å“åº”
 			in = new BufferedReader(new InputStreamReader(
 					connection.getInputStream(), "UTF-8"));
 			String line;
@@ -175,11 +175,11 @@ public class HttpRequest {
 				result += line;
 			}
 		} catch (Exception e) {
-			Logger.info("·¢ËÍGETÇëÇó³öÏÖÒì³££¡"+e);
+			Logger.info("å‘é€GETè¯·æ±‚å‡ºç°å¼‚å¸¸ï¼"+e);
 			// TODO
 			e.printStackTrace();
 		}
-		// Ê¹ÓÃfinally¿éÀ´¹Ø±ÕÊäÈëÁ÷
+		// ä½¿ç”¨finallyå—æ¥å…³é—­è¾“å…¥æµ
 		finally {
 			try {
 				if (in != null) {
@@ -193,13 +193,13 @@ public class HttpRequest {
 	}
 
 	/**
-	 * ÏòÖ¸¶¨ URL ·¢ËÍPOST·½·¨µÄÇëÇó[String Param]
+	 * å‘æŒ‡å®š URL å‘é€POSTæ–¹æ³•çš„è¯·æ±‚[String Param]
 	 * 
 	 * @param url
-	 *            ·¢ËÍÇëÇóµÄ URL
+	 *            å‘é€è¯·æ±‚çš„ URL
 	 * @param param
-	 *            ÇëÇó²ÎÊı£¬ÇëÇó²ÎÊıÓ¦¸ÃÊÇ name1=value1&name2=value2 µÄĞÎÊ½¡£
-	 * @return Ëù´ú±íÔ¶³Ì×ÊÔ´µÄÏìÓ¦½á¹û
+	 *            è¯·æ±‚å‚æ•°ï¼Œè¯·æ±‚å‚æ•°åº”è¯¥æ˜¯ name1=value1&name2=value2 çš„å½¢å¼ã€‚
+	 * @return æ‰€ä»£è¡¨è¿œç¨‹èµ„æºçš„å“åº”ç»“æœ
 	 */
 	public static String sendPost(String url, String param) {
 		OutputStreamWriter out = null;
@@ -207,26 +207,26 @@ public class HttpRequest {
 		String result = "";
 		try {
 			URL realUrl = new URL(url);
-			// ´ò¿ªºÍURLÖ®¼äµÄÁ¬½Ó
+			// æ‰“å¼€å’ŒURLä¹‹é—´çš„è¿æ¥
 //			HttpURLConnection conn = (HttpURLConnection)realUrl.openConnection();
 
 		URLConnection conn = realUrl.openConnection();
-			// ÉèÖÃÍ¨ÓÃµÄÇëÇóÊôĞÔ
+			// è®¾ç½®é€šç”¨çš„è¯·æ±‚å±æ€§
 			conn.setRequestProperty("accept", "*/*");
 			conn.setRequestProperty("connection", "Keep-Alive");
 
 			conn.setRequestProperty("user-agent",
 					"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
-			// ·¢ËÍPOSTÇëÇó±ØĞëÉèÖÃÈçÏÂÁ½ĞĞ
+			// å‘é€POSTè¯·æ±‚å¿…é¡»è®¾ç½®å¦‚ä¸‹ä¸¤è¡Œ
 			conn.setDoOutput(true);
 			conn.setDoInput(true);
-			// »ñÈ¡URLConnection¶ÔÏó¶ÔÓ¦µÄÊä³öÁ÷
+			// è·å–URLConnectionå¯¹è±¡å¯¹åº”çš„è¾“å‡ºæµ
 			out = new OutputStreamWriter(conn.getOutputStream(), "utf-8");
-			// ·¢ËÍÇëÇó²ÎÊı
+			// å‘é€è¯·æ±‚å‚æ•°
 			out.write(param);
-			// flushÊä³öÁ÷µÄ»º³å
+			// flushè¾“å‡ºæµçš„ç¼“å†²
 			out.flush();
-			// ¶¨ÒåBufferedReaderÊäÈëÁ÷À´¶ÁÈ¡URLµÄÏìÓ¦
+			// å®šä¹‰BufferedReaderè¾“å…¥æµæ¥è¯»å–URLçš„å“åº”
 			in = new BufferedReader(new InputStreamReader(
 					conn.getInputStream(), "UTF-8"));
 			String line;
@@ -234,11 +234,11 @@ public class HttpRequest {
 				result += line;
 			}
 		} catch (Exception e) {
-			Logger.info("·¢ËÍ POST ÇëÇó³öÏÖÒì³££¡"+e);
+			Logger.info("å‘é€ POST è¯·æ±‚å‡ºç°å¼‚å¸¸ï¼"+e);
 			// TODO 
 			e.printStackTrace();
 		}
-		// Ê¹ÓÃfinally¿éÀ´¹Ø±ÕÊä³öÁ÷¡¢ÊäÈëÁ÷
+		// ä½¿ç”¨finallyå—æ¥å…³é—­è¾“å‡ºæµã€è¾“å…¥æµ
 		finally {
 			try {
 				if (out != null) {

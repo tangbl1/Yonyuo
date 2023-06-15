@@ -18,7 +18,7 @@ public class N_OINF_UNSAVEBILL extends AbstractPfAction<AggOtherInfoVO> {
 			Object userObj) {
 		CompareAroundProcesser<AggOtherInfoVO> processor = new CompareAroundProcesser<AggOtherInfoVO>(
 				OtherInfoPluginPoint.UNSEND_APPROVE);
-		// TODO ÔÚ´Ë´¦Ìí¼ÓÇ°ºó¹æÔò
+		// TODO åœ¨æ­¤å¤„æ·»åŠ å‰åè§„åˆ™
 		processor.addBeforeRule(new UncommitStatusCheckRule());
 
 		return processor;

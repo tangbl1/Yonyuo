@@ -5,12 +5,12 @@ import nc.vo.pub.VOStatus;
 import nc.vo.vehicle.AggVehicleMessageVO;
 
 /**
- * 标准单据审核的BP
+ * 鏍囧噯鍗曟嵁瀹℃牳鐨凚P
  */
 public class AceVehicleApproveBP {
 
 	/**
-	 * 审核动作
+	 * 瀹℃牳鍔ㄤ綔
 	 * 
 	 * @param vos
 	 * @param script

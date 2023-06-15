@@ -19,7 +19,7 @@ public class N_INSU_UNAPPROVE extends AbstractPfAction<AggInsuranceHVO> {
 			Object userObj) {
 		CompareAroundProcesser<AggInsuranceHVO> processor = new CompareAroundProcesser<AggInsuranceHVO>(
 				InsuranceFilesPluginPoint.UNAPPROVE);
-		// TODO ÔÚ´Ë´¦Ìí¼ÓÇ°ºó¹æÔò
+		// TODO åœ¨æ­¤å¤„æ·»åŠ å‰åè§„åˆ™
 		processor.addBeforeRule(new UnapproveStatusCheckRule());
 
 		return processor;

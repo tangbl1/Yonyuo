@@ -9,11 +9,11 @@ import nc.vo.pub.lang.UFDouble;
 import nc.vo.pubapp.pattern.model.meta.entity.vo.VOMetaFactory;
 
 /**
- * <b> ´Ë´¦¼òÒªÃèÊö´ËÀà¹¦ÄÜ </b>
+ * <b> æ­¤å¤„ç®€è¦æè¿°æ­¤ç±»åŠŸèƒ½ </b>
  * <p>
- *   ´Ë´¦Ìí¼ÓÀÛµÄÃèÊöĞÅÏ¢
+ *   æ­¤å¤„æ·»åŠ ç´¯çš„æè¿°ä¿¡æ¯
  * </p>
- *  ´´½¨ÈÕÆÚ:2019-10-29
+ *  åˆ›å»ºæ—¥æœŸ:2019-10-29
  * @author YONYOU NC
  * @version NCPrj ??
  */
@@ -21,42 +21,42 @@ import nc.vo.pubapp.pattern.model.meta.entity.vo.VOMetaFactory;
 public class InspectionFileBVO extends SuperVO {
 	
 /**
-*ÉÏ²ãµ¥¾İÖ÷¼ü
+*ä¸Šå±‚å•æ®ä¸»é”®
 */
 public String pk_inspection;
 /**
-*Ê±¼ä´Á
+*æ—¶é—´æˆ³
 */
 public UFDateTime ts;
     
     
 /**
-* ÊôĞÔ Éú³ÉÉÏ²ãÖ÷¼üµÄGetter·½·¨.ÊôĞÔÃû£ºÉÏ²ãÖ÷¼ü
-*  ´´½¨ÈÕÆÚ:2019-10-29
+* å±æ€§ ç”Ÿæˆä¸Šå±‚ä¸»é”®çš„Getteræ–¹æ³•.å±æ€§åï¼šä¸Šå±‚ä¸»é”®
+*  åˆ›å»ºæ—¥æœŸ:2019-10-29
 * @return String
 */
 public String getPk_inspection(){
 return this.pk_inspection;
 }
 /**
-* ÊôĞÔÉú³ÉÉÏ²ãÖ÷¼üµÄSetter·½·¨.ÊôĞÔÃû£ºÉÏ²ãÖ÷¼ü
-* ´´½¨ÈÕÆÚ:2019-10-29
+* å±æ€§ç”Ÿæˆä¸Šå±‚ä¸»é”®çš„Setteræ–¹æ³•.å±æ€§åï¼šä¸Šå±‚ä¸»é”®
+* åˆ›å»ºæ—¥æœŸ:2019-10-29
 * @param newPk_inspection String
 */
 public void setPk_inspection(String pk_inspection){
 this.pk_inspection=pk_inspection;
 } 
 /**
-* ÊôĞÔ Éú³ÉÊ±¼ä´ÁµÄGetter·½·¨.ÊôĞÔÃû£ºÊ±¼ä´Á
-*  ´´½¨ÈÕÆÚ:2019-10-29
+* å±æ€§ ç”Ÿæˆæ—¶é—´æˆ³çš„Getteræ–¹æ³•.å±æ€§åï¼šæ—¶é—´æˆ³
+*  åˆ›å»ºæ—¥æœŸ:2019-10-29
 * @return nc.vo.pub.lang.UFDateTime
 */
 public UFDateTime getTs() {
 return this.ts;
 }
 /**
-* ÊôĞÔÉú³ÉÊ±¼ä´ÁµÄSetter·½·¨.ÊôĞÔÃû£ºÊ±¼ä´Á
-* ´´½¨ÈÕÆÚ:2019-10-29
+* å±æ€§ç”Ÿæˆæ—¶é—´æˆ³çš„Setteræ–¹æ³•.å±æ€§åï¼šæ—¶é—´æˆ³
+* åˆ›å»ºæ—¥æœŸ:2019-10-29
 * @param newts nc.vo.pub.lang.UFDateTime
 */
 public void setTs(UFDateTime ts){

@@ -7,25 +7,25 @@ import nc.impl.pubapp.pattern.rule.IRule;
 import nc.vo.vehicle.AggVehicleMessageVO;
 
 /**
- * ĞŞ¸Ä±£´æµÄBP
+ * ä¿®æ”¹ä¿å­˜çš„BP
  * 
  */
 public class AceVehicleUpdateBP {
 
 	public AggVehicleMessageVO[] update(AggVehicleMessageVO[] bills,
 			AggVehicleMessageVO[] originBills) {
-		// µ÷ÓÃĞŞ¸ÄÄ£°å
+		// è°ƒç”¨ä¿®æ”¹æ¨¡æ¿
 		UpdateBPTemplate<AggVehicleMessageVO> bp = new UpdateBPTemplate<AggVehicleMessageVO>(
 				VehiclePluginPoint.UPDATE);
-		// Ö´ĞĞÇ°¹æÔò
+		// æ‰§è¡Œå‰è§„åˆ™
 		this.addBeforeRule(bp.getAroundProcesser());
-		// Ö´ĞĞºó¹æÔò
+		// æ‰§è¡Œåè§„åˆ™
 		this.addAfterRule(bp.getAroundProcesser());
 		return bp.update(bills, originBills);
 	}
 
 	private void addAfterRule(CompareAroundProcesser<AggVehicleMessageVO> processer) {
-		// TODO ºó¹æÔò
+		// TODO åè§„åˆ™
 		IRule<AggVehicleMessageVO> rule = null;
 		rule = new nc.bs.pubapp.pub.rule.BillCodeCheckRule();
 		((nc.bs.pubapp.pub.rule.BillCodeCheckRule) rule).setCbilltype("VEHI");
@@ -39,7 +39,7 @@ public class AceVehicleUpdateBP {
 	}
 
 	private void addBeforeRule(CompareAroundProcesser<AggVehicleMessageVO> processer) {
-		// TODO Ç°¹æÔò
+		// TODO å‰è§„åˆ™
 		IRule<AggVehicleMessageVO> rule = null;
 		rule = new nc.bs.pubapp.pub.rule.FillUpdateDataRule();
 		processer.addBeforeRule(rule);

@@ -7,25 +7,25 @@ import nc.impl.pubapp.pattern.rule.IRule;
 import nc.vo.vehicle.inspectionfiles.AggInspectionFileHVO;
 
 /**
- * ĞŞ¸Ä±£´æµÄBP
+ * ä¿®æ”¹ä¿å­˜çš„BP
  * 
  */
 public class AceInspectionFilesUpdateBP {
 
 	public AggInspectionFileHVO[] update(AggInspectionFileHVO[] bills,
 			AggInspectionFileHVO[] originBills) {
-		// µ÷ÓÃĞŞ¸ÄÄ£°å
+		// è°ƒç”¨ä¿®æ”¹æ¨¡æ¿
 		UpdateBPTemplate<AggInspectionFileHVO> bp = new UpdateBPTemplate<AggInspectionFileHVO>(
 				InspectionFilesPluginPoint.UPDATE);
-		// Ö´ĞĞÇ°¹æÔò
+		// æ‰§è¡Œå‰è§„åˆ™
 		this.addBeforeRule(bp.getAroundProcesser());
-		// Ö´ĞĞºó¹æÔò
+		// æ‰§è¡Œåè§„åˆ™
 		this.addAfterRule(bp.getAroundProcesser());
 		return bp.update(bills, originBills);
 	}
 
 	private void addAfterRule(CompareAroundProcesser<AggInspectionFileHVO> processer) {
-		// TODO ºó¹æÔò
+		// TODO åè§„åˆ™
 		IRule<AggInspectionFileHVO> rule = null;
 		rule = new nc.bs.pubapp.pub.rule.BillCodeCheckRule();
 		((nc.bs.pubapp.pub.rule.BillCodeCheckRule) rule).setCbilltype("INSP");
@@ -39,7 +39,7 @@ public class AceInspectionFilesUpdateBP {
 	}
 
 	private void addBeforeRule(CompareAroundProcesser<AggInspectionFileHVO> processer) {
-		// TODO Ç°¹æÔò
+		// TODO å‰è§„åˆ™
 		IRule<AggInspectionFileHVO> rule = null;
 		rule = new nc.bs.pubapp.pub.rule.FillUpdateDataRule();
 		processer.addBeforeRule(rule);

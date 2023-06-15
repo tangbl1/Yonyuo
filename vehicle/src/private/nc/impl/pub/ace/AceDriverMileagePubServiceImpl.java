@@ -16,17 +16,17 @@ import nc.vo.pub.VOStatus;
 import nc.vo.pubapp.pattern.exception.ExceptionUtils;
 
 public abstract class AceDriverMileagePubServiceImpl {
-	// ĞÂÔö
+	// æ–°å¢
 	public AggDriverMileageHVO[] pubinsertBills(AggDriverMileageHVO[] clientFullVOs,
 			AggDriverMileageHVO[] originBills) throws BusinessException {
 		try {
-			// Êı¾İ¿âÖĞÊı¾İºÍÇ°Ì¨´«µİ¹ıÀ´µÄ²îÒìVOºÏ²¢ºóµÄ½á¹û
+			// æ•°æ®åº“ä¸­æ•°æ®å’Œå‰å°ä¼ é€’è¿‡æ¥çš„å·®å¼‚VOåˆå¹¶åçš„ç»“æœ
 			BillTransferTool<AggDriverMileageHVO> transferTool = new BillTransferTool<AggDriverMileageHVO>(
 					clientFullVOs);
-			// µ÷ÓÃBP
+			// è°ƒç”¨BP
 			AceDriverMileageInsertBP action = new AceDriverMileageInsertBP();
 			AggDriverMileageHVO[] retvos = action.insert(clientFullVOs);
-			// ¹¹Ôì·µ»ØÊı¾İ
+			// æ„é€ è¿”å›æ•°æ®
 			return transferTool.getBillForToClient(retvos);
 		} catch (Exception e) {
 			ExceptionUtils.marsh(e);
@@ -34,27 +34,27 @@ public abstract class AceDriverMileagePubServiceImpl {
 		return null;
 	}
 
-	// É¾³ı
+	// åˆ é™¤
 	public void pubdeleteBills(AggDriverMileageHVO[] clientFullVOs,
 			AggDriverMileageHVO[] originBills) throws BusinessException {
 		try {
-			// µ÷ÓÃBP
+			// è°ƒç”¨BP
 			new AceDriverMileageDeleteBP().delete(clientFullVOs);
 		} catch (Exception e) {
 			ExceptionUtils.marsh(e);
 		}
 	}
 
-	// ĞŞ¸Ä
+	// ä¿®æ”¹
 	public AggDriverMileageHVO[] pubupdateBills(AggDriverMileageHVO[] clientFullVOs,
 			AggDriverMileageHVO[] originBills) throws BusinessException {
 		try {
-			// ¼ÓËø + ¼ì²éts
+			// åŠ é” + æ£€æŸ¥ts
 			BillTransferTool<AggDriverMileageHVO> transferTool = new BillTransferTool<AggDriverMileageHVO>(
 					clientFullVOs);
 			AceDriverMileageUpdateBP bp = new AceDriverMileageUpdateBP();
 			AggDriverMileageHVO[] retvos = bp.update(clientFullVOs, originBills);
-			// ¹¹Ôì·µ»ØÊı¾İ
+			// æ„é€ è¿”å›æ•°æ®
 			return transferTool.getBillForToClient(retvos);
 		} catch (Exception e) {
 			ExceptionUtils.marsh(e);
@@ -77,15 +77,15 @@ public abstract class AceDriverMileagePubServiceImpl {
 	}
 
 	/**
-	 * ÓÉ×ÓÀàÊµÏÖ£¬²éÑ¯Ö®Ç°¶ÔqueryScheme½øĞĞ¼Ó¹¤£¬¼ÓÈë×Ô¼ºµÄÂß¼­
+	 * ç”±å­ç±»å®ç°ï¼ŒæŸ¥è¯¢ä¹‹å‰å¯¹querySchemeè¿›è¡ŒåŠ å·¥ï¼ŒåŠ å…¥è‡ªå·±çš„é€»è¾‘
 	 * 
 	 * @param queryScheme
 	 */
 	protected void preQuery(IQueryScheme queryScheme) {
-		// ²éÑ¯Ö®Ç°¶ÔqueryScheme½øĞĞ¼Ó¹¤£¬¼ÓÈë×Ô¼ºµÄÂß¼­
+		// æŸ¥è¯¢ä¹‹å‰å¯¹querySchemeè¿›è¡ŒåŠ å·¥ï¼ŒåŠ å…¥è‡ªå·±çš„é€»è¾‘
 	}
 
-	// Ìá½»
+	// æäº¤
 	public AggDriverMileageHVO[] pubsendapprovebills(
 			AggDriverMileageHVO[] clientFullVOs, AggDriverMileageHVO[] originBills)
 			throws BusinessException {
@@ -94,7 +94,7 @@ public abstract class AceDriverMileagePubServiceImpl {
 		return retvos;
 	}
 
-	// ÊÕ»Ø
+	// æ”¶å›
 	public AggDriverMileageHVO[] pubunsendapprovebills(
 			AggDriverMileageHVO[] clientFullVOs, AggDriverMileageHVO[] originBills)
 			throws BusinessException {
@@ -103,7 +103,7 @@ public abstract class AceDriverMileagePubServiceImpl {
 		return retvos;
 	};
 
-	// ÉóÅú
+	// å®¡æ‰¹
 	public AggDriverMileageHVO[] pubapprovebills(AggDriverMileageHVO[] clientFullVOs,
 			AggDriverMileageHVO[] originBills) throws BusinessException {
 		for (int i = 0; clientFullVOs != null && i < clientFullVOs.length; i++) {
@@ -114,7 +114,7 @@ public abstract class AceDriverMileagePubServiceImpl {
 		return retvos;
 	}
 
-	// ÆúÉó
+	// å¼ƒå®¡
 
 	public AggDriverMileageHVO[] pubunapprovebills(AggDriverMileageHVO[] clientFullVOs,
 			AggDriverMileageHVO[] originBills) throws BusinessException {

@@ -27,7 +27,7 @@ public class N_INSU_SAVEBASE extends AbstractPfAction<AggInsuranceHVO> {
 			processor = new CompareAroundProcesser<AggInsuranceHVO>(
 					InsuranceFilesPluginPoint.SCRIPT_INSERT);
 		}
-		// TODO ÔÚ´Ë´¦Ìí¼ÓÇ°ºó¹æÔò
+		// TODO åœ¨æ­¤å¤„æ·»åŠ å‰åè§„åˆ™
 		IRule<AggInsuranceHVO> rule = null;
 
 		return processor;

@@ -20,31 +20,31 @@ public class PFlowVorderHVOAction extends BaseAction{
 		Map<String,String> tsMap = param.getTsMap();
 		String actionName = param.getActionName();
 		if(tsMap==null || tsMap.size()==0){
-			ExceptionUtils.wrapBusinessException("ÇëÑ¡ÔñĞèÒª²Ù×÷µÄÊı¾İ£¡");
+			ExceptionUtils.wrapBusinessException("è¯·é€‰æ‹©éœ€è¦æ“ä½œçš„æ•°æ®ï¼");
 		}
 		Map<String,Object> userJson = param.getUserJson();
-		Object assign=null;//Ö¸ÅÉĞÅÏ¢
-		if(userJson!=null&&userJson.get("assign")!=null) {//»ñÈ¡Ö¸ÅÉĞÅÏ¢
+		Object assign=null;//æŒ‡æ´¾ä¿¡æ¯
+		if(userJson!=null&&userJson.get("assign")!=null) {//è·å–æŒ‡æ´¾ä¿¡æ¯
 			assign = userJson.get("assign");
 		}
 		 
 		return this.exeFlow(actionName,tsMap,assign);
 	}
 	private Object exeFlow(String actionName,Map<String,String> tsMap,Object assign) throws BusinessException{
-		final String ACTION_SAVE="SAVE",ACTION_UNSAVE="UNSAVE";//Ìá½»¡¢ÊÕ»Ø
+		final String ACTION_SAVE="SAVE",ACTION_UNSAVE="UNSAVE";//æäº¤ã€æ”¶å›
 		IVorderHVOService service = ServiceLocator.find(IVorderHVOService.class);
 		Object res = null;
 		
-		if(tsMap.size()==1){//µ¥¸ö²Ù×÷
-			if(ACTION_SAVE.equals(actionName)){//µ¥¸öÌá½»
+		if(tsMap.size()==1){//å•ä¸ªæ“ä½œ
+			if(ACTION_SAVE.equals(actionName)){//å•ä¸ªæäº¤
 				res = service.commitAggVorderHVO(actionName,tsMap,assign);
-			}else if(ACTION_UNSAVE.equals(actionName)){//µ¥¸öÊÕ»Ø
+			}else if(ACTION_UNSAVE.equals(actionName)){//å•ä¸ªæ”¶å›
 				res = service.uncommitAggVorderHVO(actionName,tsMap);
 			}
-		}else{//ÅúÁ¿²Ù×÷
-			if(ACTION_SAVE.equals(actionName)){//ÅúÁ¿Ìá½»
+		}else{//æ‰¹é‡æ“ä½œ
+			if(ACTION_SAVE.equals(actionName)){//æ‰¹é‡æäº¤
 				res = service.batchCommitAggVorderHVO(actionName, tsMap);
-			}else if(ACTION_UNSAVE.equals(actionName)){//ÅúÁ¿ÊÕ»Ø
+			}else if(ACTION_UNSAVE.equals(actionName)){//æ‰¹é‡æ”¶å›
 				res = service.batchUncommitAggVorderHVO(actionName, tsMap);
 			}
 		}

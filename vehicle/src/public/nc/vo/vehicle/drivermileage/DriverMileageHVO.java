@@ -9,11 +9,11 @@ import nc.vo.pub.lang.UFDouble;
 import nc.vo.pubapp.pattern.model.meta.entity.vo.VOMetaFactory;
 
 /**
- * <b> ´Ë´¦¼òÒªÃèÊö´ËÀà¹¦ÄÜ </b>
+ * <b> æ­¤å¤„ç®€è¦æè¿°æ­¤ç±»åŠŸèƒ½ </b>
  * <p>
- *   ´Ë´¦Ìí¼ÓÀÛµÄÃèÊöĞÅÏ¢
+ *   æ­¤å¤„æ·»åŠ ç´¯çš„æè¿°ä¿¡æ¯
  * </p>
- *  ´´½¨ÈÕÆÚ:2019-12-12
+ *  åˆ›å»ºæ—¥æœŸ:2019-12-12
  * @author yonyouBQ
  * @version NCPrj ??
  */
@@ -21,302 +21,302 @@ import nc.vo.pubapp.pattern.model.meta.entity.vo.VOMetaFactory;
 public class DriverMileageHVO extends SuperVO {
 	
 /**
-*Ö÷¼ü
+*ä¸»é”®
 */
 public String pk_drivermile;
 /**
-*µ¥¾İºÅ
+*å•æ®å·
 */
 public String billno;
 /**
-*³µÅÆºÅ
+*è½¦ç‰Œå·
 */
 public String vehicleno;
 /**
-*±¾ÖÜÆğÊ¼¹«ÀïÊı
+*æœ¬å‘¨èµ·å§‹å…¬é‡Œæ•°
 */
 public UFDouble beginmile;
 /**
-*±¾ÖÜ½ØÖ¹¹«ÀïÊı
+*æœ¬å‘¨æˆªæ­¢å…¬é‡Œæ•°
 */
 public UFDouble endmile;
 /**
-*±¾ÖÜĞĞÊ»Àï³Ì
+*æœ¬å‘¨è¡Œé©¶é‡Œç¨‹
 */
 public UFDouble mile;
 /**
-*±¾ÖÜ¼ÓÓÍ
+*æœ¬å‘¨åŠ æ²¹
 */
 public UFDouble gas;
 /**
-*±¾ÖÜ¼ÓÓÍ½ğ¶î
+*æœ¬å‘¨åŠ æ²¹é‡‘é¢
 */
 public UFDouble gasmoney;
 /**
-*±¾ÖÜ°Ù¹«ÀïÓÍºÄ
+*æœ¬å‘¨ç™¾å…¬é‡Œæ²¹è€—
 */
 public String gascost;
 /**
-*ÆäËû³µÁ¾Àï³Ì
+*å…¶ä»–è½¦è¾†é‡Œç¨‹
 */
 public UFDouble othermile;
 /**
-*ÆäËû³µÁ¾½ğ¶î
+*å…¶ä»–è½¦è¾†é‡‘é¢
 */
 public UFDouble othermoney;
 /**
-*Àï³Ì±í½ğ¶î
+*é‡Œç¨‹è¡¨é‡‘é¢
 */
 public UFDouble odometermoney;
 /**
-*ºÏ¼Æ
+*åˆè®¡
 */
 public UFDouble sum;
 /**
-*±¾ÖÜ¿ÕĞĞÊ»¹«ÀïÊı
+*æœ¬å‘¨ç©ºè¡Œé©¶å…¬é‡Œæ•°
 */
 public UFDouble nullmile;
 /**
-*±¾ÖÜĞĞÊ»ÓĞĞ§Àï³Ì
+*æœ¬å‘¨è¡Œé©¶æœ‰æ•ˆé‡Œç¨‹
 */
 public UFDouble effectivemile;
 /**
-*¼¨Ğ§¹¤×Ê
+*ç»©æ•ˆå·¥èµ„
 */
 public UFDouble meritpay;
 /**
-*¼¨Ğ§½±·£
+*ç»©æ•ˆå¥–ç½š
 */
 public UFDouble meritother;
 /**
-*¼¨Ğ§ºÏ¼Æ
+*ç»©æ•ˆåˆè®¡
 */
 public UFDouble meritsum;
 /**
-*±¾ÖÜÖÜÄ©¼Ó°à´ÎÊı
+*æœ¬å‘¨å‘¨æœ«åŠ ç­æ¬¡æ•°
 */
 public UFDouble overtimecount;
 /**
-*ÖÜÄ©±»Ñ¡½ğ¶î
+*å‘¨æœ«è¢«é€‰é‡‘é¢
 */
 public UFDouble weekendmoney;
 /**
-*±¾ÖÜ³¬Ê±Ğ¡Ê±Êı
+*æœ¬å‘¨è¶…æ—¶å°æ—¶æ•°
 */
 public UFDouble overhourcount;
 /**
-*³¬Ê±¼Ó°à½ğ¶î
+*è¶…æ—¶åŠ ç­é‡‘é¢
 */
 public UFDouble overhourmoney;
 /**
-*±¾ÖÜÖÜÄ©Öµ°à¸öÊı
+*æœ¬å‘¨å‘¨æœ«å€¼ç­ä¸ªæ•°
 */
 public UFDouble ondutycount;
 /**
-*ÖÜÄ©Öµ°à½ğ¶î
+*å‘¨æœ«å€¼ç­é‡‘é¢
 */
 public UFDouble ondutymoney;
 /**
-*±¾ÖÜÒ¹°à¸öÊı
+*æœ¬å‘¨å¤œç­ä¸ªæ•°
 */
 public UFDouble nightcount;
 /**
-*Ò¹°à½ğ¶î
+*å¤œç­é‡‘é¢
 */
 public UFDouble nightmoney;
 /**
-*×éÖ¯
+*ç»„ç»‡
 */
 public String pk_org;
 /**
-*×éÖ¯°æ±¾
+*ç»„ç»‡ç‰ˆæœ¬
 */
 public String pk_org_v;
 /**
-*¼¯ÍÅ
+*é›†å›¢
 */
 public String pk_group;
 /**
-*µ¥¾İID
+*å•æ®ID
 */
 public String billid;
 /**
-*ËùÊô×éÖ¯
+*æ‰€å±ç»„ç»‡
 */
 public String pkorg;
 /**
-*ÒµÎñÀàĞÍ
+*ä¸šåŠ¡ç±»å‹
 */
 public String busitype;
 /**
-*ÖÆµ¥ÈË
+*åˆ¶å•äºº
 */
 public String billmaker;
 /**
-*ÉóÅúÈË
+*å®¡æ‰¹äºº
 */
 public String approver;
 /**
-*ÉóÅú×´Ì¬
+*å®¡æ‰¹çŠ¶æ€
 */
 public Integer approvestatus;
 /**
-*ÉóÅúÅúÓï
+*å®¡æ‰¹æ‰¹è¯­
 */
 public String approvenote;
 /**
-*ÉóÅúÊ±¼ä
+*å®¡æ‰¹æ—¶é—´
 */
 public UFDateTime approvedate;
 /**
-*½»Ò×ÀàĞÍ
+*äº¤æ˜“ç±»å‹
 */
 public String transtype;
 /**
-*µ¥¾İÀàĞÍ
+*å•æ®ç±»å‹
 */
 public String billtype;
 /**
-*½»Ò×ÀàĞÍpk
+*äº¤æ˜“ç±»å‹pk
 */
 public String transtypepk;
 /**
-*À´Ô´µ¥¾İÀàĞÍ
+*æ¥æºå•æ®ç±»å‹
 */
 public String srcbilltype;
 /**
-*À´Ô´µ¥¾İid
+*æ¥æºå•æ®id
 */
 public String srcbillid;
 /**
-*ĞŞ¶©Ã¶¾Ù
+*ä¿®è®¢æšä¸¾
 */
 public Integer emendenum;
 /**
-*µ¥¾İ°æ±¾pk
+*å•æ®ç‰ˆæœ¬pk
 */
 public String billversionpk;
 /**
-*´´½¨ÈË
+*åˆ›å»ºäºº
 */
 public String creator;
 /**
-*ÖÆµ¥Ê±¼ä
+*åˆ¶å•æ—¶é—´
 */
 public UFDateTime maketime;
 /**
-*×îºóĞŞ¸ÄÊ±¼ä
+*æœ€åä¿®æ”¹æ—¶é—´
 */
 public UFDateTime lastmaketime;
 /**
-*µ¥¾İÈÕÆÚ
+*å•æ®æ—¥æœŸ
 */
 public UFDate billdate;
 /**
-*´´½¨Ê±¼ä
+*åˆ›å»ºæ—¶é—´
 */
 public String creationtime;
 /**
-*ĞŞ¸ÄÈË
+*ä¿®æ”¹äºº
 */
 public String modifier;
 /**
-*ĞŞ¸ÄÊ±¼ä
+*ä¿®æ”¹æ—¶é—´
 */
 public UFDateTime modifiedtime;
 /**
-*ĞĞºÅ
+*è¡Œå·
 */
 public String rowno;
 /**
-*×Ô¶¨ÒåÏî1
+*è‡ªå®šä¹‰é¡¹1
 */
 public String def1;
 /**
-*×Ô¶¨ÒåÏî2
+*è‡ªå®šä¹‰é¡¹2
 */
 public String def2;
 /**
-*×Ô¶¨ÒåÏî3
+*è‡ªå®šä¹‰é¡¹3
 */
 public String def3;
 /**
-*×Ô¶¨ÒåÏî4
+*è‡ªå®šä¹‰é¡¹4
 */
 public String def4;
 /**
-*×Ô¶¨ÒåÏî5
+*è‡ªå®šä¹‰é¡¹5
 */
 public String def5;
 /**
-*×Ô¶¨ÒåÏî6
+*è‡ªå®šä¹‰é¡¹6
 */
 public String def6;
 /**
-*×Ô¶¨ÒåÏî7
+*è‡ªå®šä¹‰é¡¹7
 */
 public String def7;
 /**
-*×Ô¶¨ÒåÏî8
+*è‡ªå®šä¹‰é¡¹8
 */
 public String def8;
 /**
-*×Ô¶¨ÒåÏî9
+*è‡ªå®šä¹‰é¡¹9
 */
 public String def9;
 /**
-*×Ô¶¨ÒåÏî10
+*è‡ªå®šä¹‰é¡¹10
 */
 public String def10;
 /**
-*×Ô¶¨ÒåÏî11
+*è‡ªå®šä¹‰é¡¹11
 */
 public String def11;
 /**
-*×Ô¶¨ÒåÏî12
+*è‡ªå®šä¹‰é¡¹12
 */
 public String def12;
 /**
-*×Ô¶¨ÒåÏî13
+*è‡ªå®šä¹‰é¡¹13
 */
 public String def13;
 /**
-*×Ô¶¨ÒåÏî14
+*è‡ªå®šä¹‰é¡¹14
 */
 public String def14;
 /**
-*×Ô¶¨ÒåÏî15
+*è‡ªå®šä¹‰é¡¹15
 */
 public String def15;
 /**
-*×Ô¶¨ÒåÏî16
+*è‡ªå®šä¹‰é¡¹16
 */
 public String def16;
 /**
-*×Ô¶¨ÒåÏî17
+*è‡ªå®šä¹‰é¡¹17
 */
 public String def17;
 /**
-*×Ô¶¨ÒåÏî18
+*è‡ªå®šä¹‰é¡¹18
 */
 public String def18;
 /**
-*×Ô¶¨ÒåÏî19
+*è‡ªå®šä¹‰é¡¹19
 */
 public String def19;
 /**
-*×Ô¶¨ÒåÏî20
+*è‡ªå®šä¹‰é¡¹20
 */
 public String def20;
 /**
-*Ê±¼ä´Á
+*æ—¶é—´æˆ³
 */
 public UFDateTime ts;
     
     
 /**
-* ÊôĞÔ pk_drivermileµÄGetter·½·¨.ÊôĞÔÃû£ºÖ÷¼ü
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ pk_drivermileçš„Getteræ–¹æ³•.å±æ€§åï¼šä¸»é”®
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return java.lang.String
 */
 public String getPk_drivermile() {
@@ -324,8 +324,8 @@ return this.pk_drivermile;
 } 
 
 /**
-* ÊôĞÔpk_drivermileµÄSetter·½·¨.ÊôĞÔÃû£ºÖ÷¼ü
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§pk_drivermileçš„Setteræ–¹æ³•.å±æ€§åï¼šä¸»é”®
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newPk_drivermile java.lang.String
 */
 public void setPk_drivermile ( String pk_drivermile) {
@@ -333,8 +333,8 @@ this.pk_drivermile=pk_drivermile;
 } 
  
 /**
-* ÊôĞÔ billnoµÄGetter·½·¨.ÊôĞÔÃû£ºµ¥¾İºÅ
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ billnoçš„Getteræ–¹æ³•.å±æ€§åï¼šå•æ®å·
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return java.lang.String
 */
 public String getBillno() {
@@ -342,8 +342,8 @@ return this.billno;
 } 
 
 /**
-* ÊôĞÔbillnoµÄSetter·½·¨.ÊôĞÔÃû£ºµ¥¾İºÅ
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§billnoçš„Setteræ–¹æ³•.å±æ€§åï¼šå•æ®å·
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newBillno java.lang.String
 */
 public void setBillno ( String billno) {
@@ -351,8 +351,8 @@ this.billno=billno;
 } 
  
 /**
-* ÊôĞÔ vehiclenoµÄGetter·½·¨.ÊôĞÔÃû£º³µÅÆºÅ
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ vehiclenoçš„Getteræ–¹æ³•.å±æ€§åï¼šè½¦ç‰Œå·
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.vehicle.VehicleMessageVO
 */
 public String getVehicleno() {
@@ -360,8 +360,8 @@ return this.vehicleno;
 } 
 
 /**
-* ÊôĞÔvehiclenoµÄSetter·½·¨.ÊôĞÔÃû£º³µÅÆºÅ
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§vehiclenoçš„Setteræ–¹æ³•.å±æ€§åï¼šè½¦ç‰Œå·
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newVehicleno nc.vo.vehicle.VehicleMessageVO
 */
 public void setVehicleno ( String vehicleno) {
@@ -369,8 +369,8 @@ this.vehicleno=vehicleno;
 } 
  
 /**
-* ÊôĞÔ beginmileµÄGetter·½·¨.ÊôĞÔÃû£º±¾ÖÜÆğÊ¼¹«ÀïÊı
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ beginmileçš„Getteræ–¹æ³•.å±æ€§åï¼šæœ¬å‘¨èµ·å§‹å…¬é‡Œæ•°
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.pub.lang.UFDouble
 */
 public UFDouble getBeginmile() {
@@ -378,8 +378,8 @@ return this.beginmile;
 } 
 
 /**
-* ÊôĞÔbeginmileµÄSetter·½·¨.ÊôĞÔÃû£º±¾ÖÜÆğÊ¼¹«ÀïÊı
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§beginmileçš„Setteræ–¹æ³•.å±æ€§åï¼šæœ¬å‘¨èµ·å§‹å…¬é‡Œæ•°
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newBeginmile nc.vo.pub.lang.UFDouble
 */
 public void setBeginmile ( UFDouble beginmile) {
@@ -387,8 +387,8 @@ this.beginmile=beginmile;
 } 
  
 /**
-* ÊôĞÔ endmileµÄGetter·½·¨.ÊôĞÔÃû£º±¾ÖÜ½ØÖ¹¹«ÀïÊı
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ endmileçš„Getteræ–¹æ³•.å±æ€§åï¼šæœ¬å‘¨æˆªæ­¢å…¬é‡Œæ•°
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.pub.lang.UFDouble
 */
 public UFDouble getEndmile() {
@@ -396,8 +396,8 @@ return this.endmile;
 } 
 
 /**
-* ÊôĞÔendmileµÄSetter·½·¨.ÊôĞÔÃû£º±¾ÖÜ½ØÖ¹¹«ÀïÊı
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§endmileçš„Setteræ–¹æ³•.å±æ€§åï¼šæœ¬å‘¨æˆªæ­¢å…¬é‡Œæ•°
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newEndmile nc.vo.pub.lang.UFDouble
 */
 public void setEndmile ( UFDouble endmile) {
@@ -405,8 +405,8 @@ this.endmile=endmile;
 } 
  
 /**
-* ÊôĞÔ mileµÄGetter·½·¨.ÊôĞÔÃû£º±¾ÖÜĞĞÊ»Àï³Ì
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ mileçš„Getteræ–¹æ³•.å±æ€§åï¼šæœ¬å‘¨è¡Œé©¶é‡Œç¨‹
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.pub.lang.UFDouble
 */
 public UFDouble getMile() {
@@ -414,8 +414,8 @@ return this.mile;
 } 
 
 /**
-* ÊôĞÔmileµÄSetter·½·¨.ÊôĞÔÃû£º±¾ÖÜĞĞÊ»Àï³Ì
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§mileçš„Setteræ–¹æ³•.å±æ€§åï¼šæœ¬å‘¨è¡Œé©¶é‡Œç¨‹
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newMile nc.vo.pub.lang.UFDouble
 */
 public void setMile ( UFDouble mile) {
@@ -423,8 +423,8 @@ this.mile=mile;
 } 
  
 /**
-* ÊôĞÔ gasµÄGetter·½·¨.ÊôĞÔÃû£º±¾ÖÜ¼ÓÓÍ
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ gasçš„Getteræ–¹æ³•.å±æ€§åï¼šæœ¬å‘¨åŠ æ²¹
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.pub.lang.UFDouble
 */
 public UFDouble getGas() {
@@ -432,8 +432,8 @@ return this.gas;
 } 
 
 /**
-* ÊôĞÔgasµÄSetter·½·¨.ÊôĞÔÃû£º±¾ÖÜ¼ÓÓÍ
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§gasçš„Setteræ–¹æ³•.å±æ€§åï¼šæœ¬å‘¨åŠ æ²¹
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newGas nc.vo.pub.lang.UFDouble
 */
 public void setGas ( UFDouble gas) {
@@ -441,8 +441,8 @@ this.gas=gas;
 } 
  
 /**
-* ÊôĞÔ gasmoneyµÄGetter·½·¨.ÊôĞÔÃû£º±¾ÖÜ¼ÓÓÍ½ğ¶î
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ gasmoneyçš„Getteræ–¹æ³•.å±æ€§åï¼šæœ¬å‘¨åŠ æ²¹é‡‘é¢
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.pub.lang.UFDouble
 */
 public UFDouble getGasmoney() {
@@ -450,8 +450,8 @@ return this.gasmoney;
 } 
 
 /**
-* ÊôĞÔgasmoneyµÄSetter·½·¨.ÊôĞÔÃû£º±¾ÖÜ¼ÓÓÍ½ğ¶î
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§gasmoneyçš„Setteræ–¹æ³•.å±æ€§åï¼šæœ¬å‘¨åŠ æ²¹é‡‘é¢
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newGasmoney nc.vo.pub.lang.UFDouble
 */
 public void setGasmoney ( UFDouble gasmoney) {
@@ -459,8 +459,8 @@ this.gasmoney=gasmoney;
 } 
  
 /**
-* ÊôĞÔ gascostµÄGetter·½·¨.ÊôĞÔÃû£º±¾ÖÜ°Ù¹«ÀïÓÍºÄ
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ gascostçš„Getteræ–¹æ³•.å±æ€§åï¼šæœ¬å‘¨ç™¾å…¬é‡Œæ²¹è€—
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return java.lang.UFDouble
 */
 public String getGascost() {
@@ -468,8 +468,8 @@ return this.gascost;
 } 
 
 /**
-* ÊôĞÔgascostµÄSetter·½·¨.ÊôĞÔÃû£º±¾ÖÜ°Ù¹«ÀïÓÍºÄ
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§gascostçš„Setteræ–¹æ³•.å±æ€§åï¼šæœ¬å‘¨ç™¾å…¬é‡Œæ²¹è€—
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newGascost java.lang.UFDouble
 */
 public void setGascost ( String gascost) {
@@ -477,8 +477,8 @@ this.gascost=gascost;
 } 
  
 /**
-* ÊôĞÔ othermileµÄGetter·½·¨.ÊôĞÔÃû£ºÆäËû³µÁ¾Àï³Ì
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ othermileçš„Getteræ–¹æ³•.å±æ€§åï¼šå…¶ä»–è½¦è¾†é‡Œç¨‹
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.pub.lang.UFDouble
 */
 public UFDouble getOthermile() {
@@ -486,8 +486,8 @@ return this.othermile;
 } 
 
 /**
-* ÊôĞÔothermileµÄSetter·½·¨.ÊôĞÔÃû£ºÆäËû³µÁ¾Àï³Ì
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§othermileçš„Setteræ–¹æ³•.å±æ€§åï¼šå…¶ä»–è½¦è¾†é‡Œç¨‹
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newOthermile nc.vo.pub.lang.UFDouble
 */
 public void setOthermile ( UFDouble othermile) {
@@ -495,8 +495,8 @@ this.othermile=othermile;
 } 
  
 /**
-* ÊôĞÔ othermoneyµÄGetter·½·¨.ÊôĞÔÃû£ºÆäËû³µÁ¾½ğ¶î
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ othermoneyçš„Getteræ–¹æ³•.å±æ€§åï¼šå…¶ä»–è½¦è¾†é‡‘é¢
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.pub.lang.UFDouble
 */
 public UFDouble getOthermoney() {
@@ -504,8 +504,8 @@ return this.othermoney;
 } 
 
 /**
-* ÊôĞÔothermoneyµÄSetter·½·¨.ÊôĞÔÃû£ºÆäËû³µÁ¾½ğ¶î
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§othermoneyçš„Setteræ–¹æ³•.å±æ€§åï¼šå…¶ä»–è½¦è¾†é‡‘é¢
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newOthermoney nc.vo.pub.lang.UFDouble
 */
 public void setOthermoney ( UFDouble othermoney) {
@@ -513,8 +513,8 @@ this.othermoney=othermoney;
 } 
  
 /**
-* ÊôĞÔ odometermoneyµÄGetter·½·¨.ÊôĞÔÃû£ºÀï³Ì±í½ğ¶î
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ odometermoneyçš„Getteræ–¹æ³•.å±æ€§åï¼šé‡Œç¨‹è¡¨é‡‘é¢
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.pub.lang.UFDouble
 */
 public UFDouble getOdometermoney() {
@@ -522,8 +522,8 @@ return this.odometermoney;
 } 
 
 /**
-* ÊôĞÔodometermoneyµÄSetter·½·¨.ÊôĞÔÃû£ºÀï³Ì±í½ğ¶î
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§odometermoneyçš„Setteræ–¹æ³•.å±æ€§åï¼šé‡Œç¨‹è¡¨é‡‘é¢
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newOdometermoney nc.vo.pub.lang.UFDouble
 */
 public void setOdometermoney ( UFDouble odometermoney) {
@@ -531,8 +531,8 @@ this.odometermoney=odometermoney;
 } 
  
 /**
-* ÊôĞÔ sumµÄGetter·½·¨.ÊôĞÔÃû£ººÏ¼Æ
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ sumçš„Getteræ–¹æ³•.å±æ€§åï¼šåˆè®¡
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.pub.lang.UFDouble
 */
 public UFDouble getSum() {
@@ -540,8 +540,8 @@ return this.sum;
 } 
 
 /**
-* ÊôĞÔsumµÄSetter·½·¨.ÊôĞÔÃû£ººÏ¼Æ
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§sumçš„Setteræ–¹æ³•.å±æ€§åï¼šåˆè®¡
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newSum nc.vo.pub.lang.UFDouble
 */
 public void setSum ( UFDouble sum) {
@@ -549,8 +549,8 @@ this.sum=sum;
 } 
  
 /**
-* ÊôĞÔ nullmileµÄGetter·½·¨.ÊôĞÔÃû£º±¾ÖÜ¿ÕĞĞÊ»¹«ÀïÊı
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ nullmileçš„Getteræ–¹æ³•.å±æ€§åï¼šæœ¬å‘¨ç©ºè¡Œé©¶å…¬é‡Œæ•°
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.pub.lang.UFDouble
 */
 public UFDouble getNullmile() {
@@ -558,8 +558,8 @@ return this.nullmile;
 } 
 
 /**
-* ÊôĞÔnullmileµÄSetter·½·¨.ÊôĞÔÃû£º±¾ÖÜ¿ÕĞĞÊ»¹«ÀïÊı
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§nullmileçš„Setteræ–¹æ³•.å±æ€§åï¼šæœ¬å‘¨ç©ºè¡Œé©¶å…¬é‡Œæ•°
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newNullmile nc.vo.pub.lang.UFDouble
 */
 public void setNullmile ( UFDouble nullmile) {
@@ -567,8 +567,8 @@ this.nullmile=nullmile;
 } 
  
 /**
-* ÊôĞÔ effectivemileµÄGetter·½·¨.ÊôĞÔÃû£º±¾ÖÜĞĞÊ»ÓĞĞ§Àï³Ì
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ effectivemileçš„Getteræ–¹æ³•.å±æ€§åï¼šæœ¬å‘¨è¡Œé©¶æœ‰æ•ˆé‡Œç¨‹
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.pub.lang.UFDouble
 */
 public UFDouble getEffectivemile() {
@@ -576,8 +576,8 @@ return this.effectivemile;
 } 
 
 /**
-* ÊôĞÔeffectivemileµÄSetter·½·¨.ÊôĞÔÃû£º±¾ÖÜĞĞÊ»ÓĞĞ§Àï³Ì
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§effectivemileçš„Setteræ–¹æ³•.å±æ€§åï¼šæœ¬å‘¨è¡Œé©¶æœ‰æ•ˆé‡Œç¨‹
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newEffectivemile nc.vo.pub.lang.UFDouble
 */
 public void setEffectivemile ( UFDouble effectivemile) {
@@ -585,8 +585,8 @@ this.effectivemile=effectivemile;
 } 
  
 /**
-* ÊôĞÔ meritpayµÄGetter·½·¨.ÊôĞÔÃû£º¼¨Ğ§¹¤×Ê
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ meritpayçš„Getteræ–¹æ³•.å±æ€§åï¼šç»©æ•ˆå·¥èµ„
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.pub.lang.UFDouble
 */
 public UFDouble getMeritpay() {
@@ -594,8 +594,8 @@ return this.meritpay;
 } 
 
 /**
-* ÊôĞÔmeritpayµÄSetter·½·¨.ÊôĞÔÃû£º¼¨Ğ§¹¤×Ê
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§meritpayçš„Setteræ–¹æ³•.å±æ€§åï¼šç»©æ•ˆå·¥èµ„
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newMeritpay nc.vo.pub.lang.UFDouble
 */
 public void setMeritpay ( UFDouble meritpay) {
@@ -603,8 +603,8 @@ this.meritpay=meritpay;
 } 
  
 /**
-* ÊôĞÔ meritotherµÄGetter·½·¨.ÊôĞÔÃû£º¼¨Ğ§½±·£
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ meritotherçš„Getteræ–¹æ³•.å±æ€§åï¼šç»©æ•ˆå¥–ç½š
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.pub.lang.UFDouble
 */
 public UFDouble getMeritother() {
@@ -612,8 +612,8 @@ return this.meritother;
 } 
 
 /**
-* ÊôĞÔmeritotherµÄSetter·½·¨.ÊôĞÔÃû£º¼¨Ğ§½±·£
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§meritotherçš„Setteræ–¹æ³•.å±æ€§åï¼šç»©æ•ˆå¥–ç½š
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newMeritother nc.vo.pub.lang.UFDouble
 */
 public void setMeritother ( UFDouble meritother) {
@@ -621,8 +621,8 @@ this.meritother=meritother;
 } 
  
 /**
-* ÊôĞÔ meritsumµÄGetter·½·¨.ÊôĞÔÃû£º¼¨Ğ§ºÏ¼Æ
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ meritsumçš„Getteræ–¹æ³•.å±æ€§åï¼šç»©æ•ˆåˆè®¡
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.pub.lang.UFDouble
 */
 public UFDouble getMeritsum() {
@@ -630,8 +630,8 @@ return this.meritsum;
 } 
 
 /**
-* ÊôĞÔmeritsumµÄSetter·½·¨.ÊôĞÔÃû£º¼¨Ğ§ºÏ¼Æ
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§meritsumçš„Setteræ–¹æ³•.å±æ€§åï¼šç»©æ•ˆåˆè®¡
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newMeritsum nc.vo.pub.lang.UFDouble
 */
 public void setMeritsum ( UFDouble meritsum) {
@@ -639,8 +639,8 @@ this.meritsum=meritsum;
 } 
  
 /**
-* ÊôĞÔ overtimecountµÄGetter·½·¨.ÊôĞÔÃû£º±¾ÖÜÖÜÄ©¼Ó°à´ÎÊı
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ overtimecountçš„Getteræ–¹æ³•.å±æ€§åï¼šæœ¬å‘¨å‘¨æœ«åŠ ç­æ¬¡æ•°
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.pub.lang.UFDouble
 */
 public UFDouble getOvertimecount() {
@@ -648,8 +648,8 @@ return this.overtimecount;
 } 
 
 /**
-* ÊôĞÔovertimecountµÄSetter·½·¨.ÊôĞÔÃû£º±¾ÖÜÖÜÄ©¼Ó°à´ÎÊı
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§overtimecountçš„Setteræ–¹æ³•.å±æ€§åï¼šæœ¬å‘¨å‘¨æœ«åŠ ç­æ¬¡æ•°
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newOvertimecount nc.vo.pub.lang.UFDouble
 */
 public void setOvertimecount ( UFDouble overtimecount) {
@@ -657,8 +657,8 @@ this.overtimecount=overtimecount;
 } 
  
 /**
-* ÊôĞÔ weekendmoneyµÄGetter·½·¨.ÊôĞÔÃû£ºÖÜÄ©±»Ñ¡½ğ¶î
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ weekendmoneyçš„Getteræ–¹æ³•.å±æ€§åï¼šå‘¨æœ«è¢«é€‰é‡‘é¢
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.pub.lang.UFDouble
 */
 public UFDouble getWeekendmoney() {
@@ -666,8 +666,8 @@ return this.weekendmoney;
 } 
 
 /**
-* ÊôĞÔweekendmoneyµÄSetter·½·¨.ÊôĞÔÃû£ºÖÜÄ©±»Ñ¡½ğ¶î
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§weekendmoneyçš„Setteræ–¹æ³•.å±æ€§åï¼šå‘¨æœ«è¢«é€‰é‡‘é¢
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newWeekendmoney nc.vo.pub.lang.UFDouble
 */
 public void setWeekendmoney ( UFDouble weekendmoney) {
@@ -675,8 +675,8 @@ this.weekendmoney=weekendmoney;
 } 
  
 /**
-* ÊôĞÔ overhourcountµÄGetter·½·¨.ÊôĞÔÃû£º±¾ÖÜ³¬Ê±Ğ¡Ê±Êı
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ overhourcountçš„Getteræ–¹æ³•.å±æ€§åï¼šæœ¬å‘¨è¶…æ—¶å°æ—¶æ•°
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.pub.lang.UFDouble
 */
 public UFDouble getOverhourcount() {
@@ -684,8 +684,8 @@ return this.overhourcount;
 } 
 
 /**
-* ÊôĞÔoverhourcountµÄSetter·½·¨.ÊôĞÔÃû£º±¾ÖÜ³¬Ê±Ğ¡Ê±Êı
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§overhourcountçš„Setteræ–¹æ³•.å±æ€§åï¼šæœ¬å‘¨è¶…æ—¶å°æ—¶æ•°
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newOverhourcount nc.vo.pub.lang.UFDouble
 */
 public void setOverhourcount ( UFDouble overhourcount) {
@@ -693,8 +693,8 @@ this.overhourcount=overhourcount;
 } 
  
 /**
-* ÊôĞÔ overhourmoneyµÄGetter·½·¨.ÊôĞÔÃû£º³¬Ê±¼Ó°à½ğ¶î
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ overhourmoneyçš„Getteræ–¹æ³•.å±æ€§åï¼šè¶…æ—¶åŠ ç­é‡‘é¢
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.pub.lang.UFDouble
 */
 public UFDouble getOverhourmoney() {
@@ -702,8 +702,8 @@ return this.overhourmoney;
 } 
 
 /**
-* ÊôĞÔoverhourmoneyµÄSetter·½·¨.ÊôĞÔÃû£º³¬Ê±¼Ó°à½ğ¶î
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§overhourmoneyçš„Setteræ–¹æ³•.å±æ€§åï¼šè¶…æ—¶åŠ ç­é‡‘é¢
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newOverhourmoney nc.vo.pub.lang.UFDouble
 */
 public void setOverhourmoney ( UFDouble overhourmoney) {
@@ -711,8 +711,8 @@ this.overhourmoney=overhourmoney;
 } 
  
 /**
-* ÊôĞÔ ondutycountµÄGetter·½·¨.ÊôĞÔÃû£º±¾ÖÜÖÜÄ©Öµ°à¸öÊı
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ ondutycountçš„Getteræ–¹æ³•.å±æ€§åï¼šæœ¬å‘¨å‘¨æœ«å€¼ç­ä¸ªæ•°
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.pub.lang.UFDouble
 */
 public UFDouble getOndutycount() {
@@ -720,8 +720,8 @@ return this.ondutycount;
 } 
 
 /**
-* ÊôĞÔondutycountµÄSetter·½·¨.ÊôĞÔÃû£º±¾ÖÜÖÜÄ©Öµ°à¸öÊı
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ondutycountçš„Setteræ–¹æ³•.å±æ€§åï¼šæœ¬å‘¨å‘¨æœ«å€¼ç­ä¸ªæ•°
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newOndutycount nc.vo.pub.lang.UFDouble
 */
 public void setOndutycount ( UFDouble ondutycount) {
@@ -729,8 +729,8 @@ this.ondutycount=ondutycount;
 } 
  
 /**
-* ÊôĞÔ ondutymoneyµÄGetter·½·¨.ÊôĞÔÃû£ºÖÜÄ©Öµ°à½ğ¶î
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ ondutymoneyçš„Getteræ–¹æ³•.å±æ€§åï¼šå‘¨æœ«å€¼ç­é‡‘é¢
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.pub.lang.UFDouble
 */
 public UFDouble getOndutymoney() {
@@ -738,8 +738,8 @@ return this.ondutymoney;
 } 
 
 /**
-* ÊôĞÔondutymoneyµÄSetter·½·¨.ÊôĞÔÃû£ºÖÜÄ©Öµ°à½ğ¶î
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ondutymoneyçš„Setteræ–¹æ³•.å±æ€§åï¼šå‘¨æœ«å€¼ç­é‡‘é¢
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newOndutymoney nc.vo.pub.lang.UFDouble
 */
 public void setOndutymoney ( UFDouble ondutymoney) {
@@ -747,8 +747,8 @@ this.ondutymoney=ondutymoney;
 } 
  
 /**
-* ÊôĞÔ nightcountµÄGetter·½·¨.ÊôĞÔÃû£º±¾ÖÜÒ¹°à¸öÊı
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ nightcountçš„Getteræ–¹æ³•.å±æ€§åï¼šæœ¬å‘¨å¤œç­ä¸ªæ•°
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.pub.lang.UFDouble
 */
 public UFDouble getNightcount() {
@@ -756,8 +756,8 @@ return this.nightcount;
 } 
 
 /**
-* ÊôĞÔnightcountµÄSetter·½·¨.ÊôĞÔÃû£º±¾ÖÜÒ¹°à¸öÊı
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§nightcountçš„Setteræ–¹æ³•.å±æ€§åï¼šæœ¬å‘¨å¤œç­ä¸ªæ•°
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newNightcount nc.vo.pub.lang.UFDouble
 */
 public void setNightcount ( UFDouble nightcount) {
@@ -765,8 +765,8 @@ this.nightcount=nightcount;
 } 
  
 /**
-* ÊôĞÔ nightmoneyµÄGetter·½·¨.ÊôĞÔÃû£ºÒ¹°à½ğ¶î
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ nightmoneyçš„Getteræ–¹æ³•.å±æ€§åï¼šå¤œç­é‡‘é¢
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.pub.lang.UFDouble
 */
 public UFDouble getNightmoney() {
@@ -774,8 +774,8 @@ return this.nightmoney;
 } 
 
 /**
-* ÊôĞÔnightmoneyµÄSetter·½·¨.ÊôĞÔÃû£ºÒ¹°à½ğ¶î
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§nightmoneyçš„Setteræ–¹æ³•.å±æ€§åï¼šå¤œç­é‡‘é¢
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newNightmoney nc.vo.pub.lang.UFDouble
 */
 public void setNightmoney ( UFDouble nightmoney) {
@@ -783,8 +783,8 @@ this.nightmoney=nightmoney;
 } 
  
 /**
-* ÊôĞÔ pk_orgµÄGetter·½·¨.ÊôĞÔÃû£º×éÖ¯
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ pk_orgçš„Getteræ–¹æ³•.å±æ€§åï¼šç»„ç»‡
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.org.OrgVO
 */
 public String getPk_org() {
@@ -792,8 +792,8 @@ return this.pk_org;
 } 
 
 /**
-* ÊôĞÔpk_orgµÄSetter·½·¨.ÊôĞÔÃû£º×éÖ¯
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§pk_orgçš„Setteræ–¹æ³•.å±æ€§åï¼šç»„ç»‡
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newPk_org nc.vo.org.OrgVO
 */
 public void setPk_org ( String pk_org) {
@@ -801,8 +801,8 @@ this.pk_org=pk_org;
 } 
  
 /**
-* ÊôĞÔ pk_org_vµÄGetter·½·¨.ÊôĞÔÃû£º×éÖ¯°æ±¾
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ pk_org_vçš„Getteræ–¹æ³•.å±æ€§åï¼šç»„ç»‡ç‰ˆæœ¬
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.vorg.OrgVersionVO
 */
 public String getPk_org_v() {
@@ -810,8 +810,8 @@ return this.pk_org_v;
 } 
 
 /**
-* ÊôĞÔpk_org_vµÄSetter·½·¨.ÊôĞÔÃû£º×éÖ¯°æ±¾
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§pk_org_vçš„Setteræ–¹æ³•.å±æ€§åï¼šç»„ç»‡ç‰ˆæœ¬
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newPk_org_v nc.vo.vorg.OrgVersionVO
 */
 public void setPk_org_v ( String pk_org_v) {
@@ -819,8 +819,8 @@ this.pk_org_v=pk_org_v;
 } 
  
 /**
-* ÊôĞÔ pk_groupµÄGetter·½·¨.ÊôĞÔÃû£º¼¯ÍÅ
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ pk_groupçš„Getteræ–¹æ³•.å±æ€§åï¼šé›†å›¢
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.org.GroupVO
 */
 public String getPk_group() {
@@ -828,8 +828,8 @@ return this.pk_group;
 } 
 
 /**
-* ÊôĞÔpk_groupµÄSetter·½·¨.ÊôĞÔÃû£º¼¯ÍÅ
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§pk_groupçš„Setteræ–¹æ³•.å±æ€§åï¼šé›†å›¢
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newPk_group nc.vo.org.GroupVO
 */
 public void setPk_group ( String pk_group) {
@@ -837,8 +837,8 @@ this.pk_group=pk_group;
 } 
  
 /**
-* ÊôĞÔ billidµÄGetter·½·¨.ÊôĞÔÃû£ºµ¥¾İID
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ billidçš„Getteræ–¹æ³•.å±æ€§åï¼šå•æ®ID
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return java.lang.String
 */
 public String getBillid() {
@@ -846,8 +846,8 @@ return this.billid;
 } 
 
 /**
-* ÊôĞÔbillidµÄSetter·½·¨.ÊôĞÔÃû£ºµ¥¾İID
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§billidçš„Setteræ–¹æ³•.å±æ€§åï¼šå•æ®ID
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newBillid java.lang.String
 */
 public void setBillid ( String billid) {
@@ -855,8 +855,8 @@ this.billid=billid;
 } 
  
 /**
-* ÊôĞÔ pkorgµÄGetter·½·¨.ÊôĞÔÃû£ºËùÊô×éÖ¯
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ pkorgçš„Getteræ–¹æ³•.å±æ€§åï¼šæ‰€å±ç»„ç»‡
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return java.lang.String
 */
 public String getPkorg() {
@@ -864,8 +864,8 @@ return this.pkorg;
 } 
 
 /**
-* ÊôĞÔpkorgµÄSetter·½·¨.ÊôĞÔÃû£ºËùÊô×éÖ¯
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§pkorgçš„Setteræ–¹æ³•.å±æ€§åï¼šæ‰€å±ç»„ç»‡
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newPkorg java.lang.String
 */
 public void setPkorg ( String pkorg) {
@@ -873,8 +873,8 @@ this.pkorg=pkorg;
 } 
  
 /**
-* ÊôĞÔ busitypeµÄGetter·½·¨.ÊôĞÔÃû£ºÒµÎñÀàĞÍ
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ busitypeçš„Getteræ–¹æ³•.å±æ€§åï¼šä¸šåŠ¡ç±»å‹
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.pf.pub.BusitypeVO
 */
 public String getBusitype() {
@@ -882,8 +882,8 @@ return this.busitype;
 } 
 
 /**
-* ÊôĞÔbusitypeµÄSetter·½·¨.ÊôĞÔÃû£ºÒµÎñÀàĞÍ
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§busitypeçš„Setteræ–¹æ³•.å±æ€§åï¼šä¸šåŠ¡ç±»å‹
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newBusitype nc.vo.pf.pub.BusitypeVO
 */
 public void setBusitype ( String busitype) {
@@ -891,8 +891,8 @@ this.busitype=busitype;
 } 
  
 /**
-* ÊôĞÔ billmakerµÄGetter·½·¨.ÊôĞÔÃû£ºÖÆµ¥ÈË
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ billmakerçš„Getteræ–¹æ³•.å±æ€§åï¼šåˆ¶å•äºº
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.sm.UserVO
 */
 public String getBillmaker() {
@@ -900,8 +900,8 @@ return this.billmaker;
 } 
 
 /**
-* ÊôĞÔbillmakerµÄSetter·½·¨.ÊôĞÔÃû£ºÖÆµ¥ÈË
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§billmakerçš„Setteræ–¹æ³•.å±æ€§åï¼šåˆ¶å•äºº
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newBillmaker nc.vo.sm.UserVO
 */
 public void setBillmaker ( String billmaker) {
@@ -909,8 +909,8 @@ this.billmaker=billmaker;
 } 
  
 /**
-* ÊôĞÔ approverµÄGetter·½·¨.ÊôĞÔÃû£ºÉóÅúÈË
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ approverçš„Getteræ–¹æ³•.å±æ€§åï¼šå®¡æ‰¹äºº
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.sm.UserVO
 */
 public String getApprover() {
@@ -918,8 +918,8 @@ return this.approver;
 } 
 
 /**
-* ÊôĞÔapproverµÄSetter·½·¨.ÊôĞÔÃû£ºÉóÅúÈË
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§approverçš„Setteræ–¹æ³•.å±æ€§åï¼šå®¡æ‰¹äºº
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newApprover nc.vo.sm.UserVO
 */
 public void setApprover ( String approver) {
@@ -927,8 +927,8 @@ this.approver=approver;
 } 
  
 /**
-* ÊôĞÔ approvestatusµÄGetter·½·¨.ÊôĞÔÃû£ºÉóÅú×´Ì¬
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ approvestatusçš„Getteræ–¹æ³•.å±æ€§åï¼šå®¡æ‰¹çŠ¶æ€
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.pub.pf.BillStatusEnum
 */
 public Integer getApprovestatus() {
@@ -936,8 +936,8 @@ return this.approvestatus;
 } 
 
 /**
-* ÊôĞÔapprovestatusµÄSetter·½·¨.ÊôĞÔÃû£ºÉóÅú×´Ì¬
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§approvestatusçš„Setteræ–¹æ³•.å±æ€§åï¼šå®¡æ‰¹çŠ¶æ€
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newApprovestatus nc.vo.pub.pf.BillStatusEnum
 */
 public void setApprovestatus ( Integer approvestatus) {
@@ -945,8 +945,8 @@ this.approvestatus=approvestatus;
 } 
  
 /**
-* ÊôĞÔ approvenoteµÄGetter·½·¨.ÊôĞÔÃû£ºÉóÅúÅúÓï
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ approvenoteçš„Getteræ–¹æ³•.å±æ€§åï¼šå®¡æ‰¹æ‰¹è¯­
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return java.lang.String
 */
 public String getApprovenote() {
@@ -954,8 +954,8 @@ return this.approvenote;
 } 
 
 /**
-* ÊôĞÔapprovenoteµÄSetter·½·¨.ÊôĞÔÃû£ºÉóÅúÅúÓï
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§approvenoteçš„Setteræ–¹æ³•.å±æ€§åï¼šå®¡æ‰¹æ‰¹è¯­
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newApprovenote java.lang.String
 */
 public void setApprovenote ( String approvenote) {
@@ -963,8 +963,8 @@ this.approvenote=approvenote;
 } 
  
 /**
-* ÊôĞÔ approvedateµÄGetter·½·¨.ÊôĞÔÃû£ºÉóÅúÊ±¼ä
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ approvedateçš„Getteræ–¹æ³•.å±æ€§åï¼šå®¡æ‰¹æ—¶é—´
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.pub.lang.UFDateTime
 */
 public UFDateTime getApprovedate() {
@@ -972,8 +972,8 @@ return this.approvedate;
 } 
 
 /**
-* ÊôĞÔapprovedateµÄSetter·½·¨.ÊôĞÔÃû£ºÉóÅúÊ±¼ä
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§approvedateçš„Setteræ–¹æ³•.å±æ€§åï¼šå®¡æ‰¹æ—¶é—´
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newApprovedate nc.vo.pub.lang.UFDateTime
 */
 public void setApprovedate ( UFDateTime approvedate) {
@@ -981,8 +981,8 @@ this.approvedate=approvedate;
 } 
  
 /**
-* ÊôĞÔ transtypeµÄGetter·½·¨.ÊôĞÔÃû£º½»Ò×ÀàĞÍ
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ transtypeçš„Getteræ–¹æ³•.å±æ€§åï¼šäº¤æ˜“ç±»å‹
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.pub.billtype.BilltypeVO
 */
 public String getTranstype() {
@@ -990,8 +990,8 @@ return this.transtype;
 } 
 
 /**
-* ÊôĞÔtranstypeµÄSetter·½·¨.ÊôĞÔÃû£º½»Ò×ÀàĞÍ
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§transtypeçš„Setteræ–¹æ³•.å±æ€§åï¼šäº¤æ˜“ç±»å‹
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newTranstype nc.vo.pub.billtype.BilltypeVO
 */
 public void setTranstype ( String transtype) {
@@ -999,8 +999,8 @@ this.transtype=transtype;
 } 
  
 /**
-* ÊôĞÔ billtypeµÄGetter·½·¨.ÊôĞÔÃû£ºµ¥¾İÀàĞÍ
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ billtypeçš„Getteræ–¹æ³•.å±æ€§åï¼šå•æ®ç±»å‹
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.pub.billtype.BilltypeVO
 */
 public String getBilltype() {
@@ -1008,8 +1008,8 @@ return this.billtype;
 } 
 
 /**
-* ÊôĞÔbilltypeµÄSetter·½·¨.ÊôĞÔÃû£ºµ¥¾İÀàĞÍ
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§billtypeçš„Setteræ–¹æ³•.å±æ€§åï¼šå•æ®ç±»å‹
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newBilltype nc.vo.pub.billtype.BilltypeVO
 */
 public void setBilltype ( String billtype) {
@@ -1017,8 +1017,8 @@ this.billtype=billtype;
 } 
  
 /**
-* ÊôĞÔ transtypepkµÄGetter·½·¨.ÊôĞÔÃû£º½»Ò×ÀàĞÍpk
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ transtypepkçš„Getteræ–¹æ³•.å±æ€§åï¼šäº¤æ˜“ç±»å‹pk
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return java.lang.String
 */
 public String getTranstypepk() {
@@ -1026,8 +1026,8 @@ return this.transtypepk;
 } 
 
 /**
-* ÊôĞÔtranstypepkµÄSetter·½·¨.ÊôĞÔÃû£º½»Ò×ÀàĞÍpk
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§transtypepkçš„Setteræ–¹æ³•.å±æ€§åï¼šäº¤æ˜“ç±»å‹pk
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newTranstypepk java.lang.String
 */
 public void setTranstypepk ( String transtypepk) {
@@ -1035,8 +1035,8 @@ this.transtypepk=transtypepk;
 } 
  
 /**
-* ÊôĞÔ srcbilltypeµÄGetter·½·¨.ÊôĞÔÃû£ºÀ´Ô´µ¥¾İÀàĞÍ
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ srcbilltypeçš„Getteræ–¹æ³•.å±æ€§åï¼šæ¥æºå•æ®ç±»å‹
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return java.lang.String
 */
 public String getSrcbilltype() {
@@ -1044,8 +1044,8 @@ return this.srcbilltype;
 } 
 
 /**
-* ÊôĞÔsrcbilltypeµÄSetter·½·¨.ÊôĞÔÃû£ºÀ´Ô´µ¥¾İÀàĞÍ
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§srcbilltypeçš„Setteræ–¹æ³•.å±æ€§åï¼šæ¥æºå•æ®ç±»å‹
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newSrcbilltype java.lang.String
 */
 public void setSrcbilltype ( String srcbilltype) {
@@ -1053,8 +1053,8 @@ this.srcbilltype=srcbilltype;
 } 
  
 /**
-* ÊôĞÔ srcbillidµÄGetter·½·¨.ÊôĞÔÃû£ºÀ´Ô´µ¥¾İid
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ srcbillidçš„Getteræ–¹æ³•.å±æ€§åï¼šæ¥æºå•æ®id
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return java.lang.String
 */
 public String getSrcbillid() {
@@ -1062,8 +1062,8 @@ return this.srcbillid;
 } 
 
 /**
-* ÊôĞÔsrcbillidµÄSetter·½·¨.ÊôĞÔÃû£ºÀ´Ô´µ¥¾İid
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§srcbillidçš„Setteræ–¹æ³•.å±æ€§åï¼šæ¥æºå•æ®id
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newSrcbillid java.lang.String
 */
 public void setSrcbillid ( String srcbillid) {
@@ -1071,8 +1071,8 @@ this.srcbillid=srcbillid;
 } 
  
 /**
-* ÊôĞÔ emendenumµÄGetter·½·¨.ÊôĞÔÃû£ºĞŞ¶©Ã¶¾Ù
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ emendenumçš„Getteræ–¹æ³•.å±æ€§åï¼šä¿®è®¢æšä¸¾
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return java.lang.Integer
 */
 public Integer getEmendenum() {
@@ -1080,8 +1080,8 @@ return this.emendenum;
 } 
 
 /**
-* ÊôĞÔemendenumµÄSetter·½·¨.ÊôĞÔÃû£ºĞŞ¶©Ã¶¾Ù
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§emendenumçš„Setteræ–¹æ³•.å±æ€§åï¼šä¿®è®¢æšä¸¾
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newEmendenum java.lang.Integer
 */
 public void setEmendenum ( Integer emendenum) {
@@ -1089,8 +1089,8 @@ this.emendenum=emendenum;
 } 
  
 /**
-* ÊôĞÔ billversionpkµÄGetter·½·¨.ÊôĞÔÃû£ºµ¥¾İ°æ±¾pk
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ billversionpkçš„Getteræ–¹æ³•.å±æ€§åï¼šå•æ®ç‰ˆæœ¬pk
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return java.lang.String
 */
 public String getBillversionpk() {
@@ -1098,8 +1098,8 @@ return this.billversionpk;
 } 
 
 /**
-* ÊôĞÔbillversionpkµÄSetter·½·¨.ÊôĞÔÃû£ºµ¥¾İ°æ±¾pk
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§billversionpkçš„Setteræ–¹æ³•.å±æ€§åï¼šå•æ®ç‰ˆæœ¬pk
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newBillversionpk java.lang.String
 */
 public void setBillversionpk ( String billversionpk) {
@@ -1107,8 +1107,8 @@ this.billversionpk=billversionpk;
 } 
  
 /**
-* ÊôĞÔ creatorµÄGetter·½·¨.ÊôĞÔÃû£º´´½¨ÈË
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ creatorçš„Getteræ–¹æ³•.å±æ€§åï¼šåˆ›å»ºäºº
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.sm.UserVO
 */
 public String getCreator() {
@@ -1116,8 +1116,8 @@ return this.creator;
 } 
 
 /**
-* ÊôĞÔcreatorµÄSetter·½·¨.ÊôĞÔÃû£º´´½¨ÈË
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§creatorçš„Setteræ–¹æ³•.å±æ€§åï¼šåˆ›å»ºäºº
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newCreator nc.vo.sm.UserVO
 */
 public void setCreator ( String creator) {
@@ -1125,8 +1125,8 @@ this.creator=creator;
 } 
  
 /**
-* ÊôĞÔ maketimeµÄGetter·½·¨.ÊôĞÔÃû£ºÖÆµ¥Ê±¼ä
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ maketimeçš„Getteræ–¹æ³•.å±æ€§åï¼šåˆ¶å•æ—¶é—´
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.pub.lang.UFDateTime
 */
 public UFDateTime getMaketime() {
@@ -1134,8 +1134,8 @@ return this.maketime;
 } 
 
 /**
-* ÊôĞÔmaketimeµÄSetter·½·¨.ÊôĞÔÃû£ºÖÆµ¥Ê±¼ä
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§maketimeçš„Setteræ–¹æ³•.å±æ€§åï¼šåˆ¶å•æ—¶é—´
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newMaketime nc.vo.pub.lang.UFDateTime
 */
 public void setMaketime ( UFDateTime maketime) {
@@ -1143,8 +1143,8 @@ this.maketime=maketime;
 } 
  
 /**
-* ÊôĞÔ lastmaketimeµÄGetter·½·¨.ÊôĞÔÃû£º×îºóĞŞ¸ÄÊ±¼ä
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ lastmaketimeçš„Getteræ–¹æ³•.å±æ€§åï¼šæœ€åä¿®æ”¹æ—¶é—´
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.pub.lang.UFDateTime
 */
 public UFDateTime getLastmaketime() {
@@ -1152,8 +1152,8 @@ return this.lastmaketime;
 } 
 
 /**
-* ÊôĞÔlastmaketimeµÄSetter·½·¨.ÊôĞÔÃû£º×îºóĞŞ¸ÄÊ±¼ä
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§lastmaketimeçš„Setteræ–¹æ³•.å±æ€§åï¼šæœ€åä¿®æ”¹æ—¶é—´
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newLastmaketime nc.vo.pub.lang.UFDateTime
 */
 public void setLastmaketime ( UFDateTime lastmaketime) {
@@ -1161,8 +1161,8 @@ this.lastmaketime=lastmaketime;
 } 
  
 /**
-* ÊôĞÔ billdateµÄGetter·½·¨.ÊôĞÔÃû£ºµ¥¾İÈÕÆÚ
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ billdateçš„Getteræ–¹æ³•.å±æ€§åï¼šå•æ®æ—¥æœŸ
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.pub.lang.UFDate
 */
 public UFDate getBilldate() {
@@ -1170,8 +1170,8 @@ return this.billdate;
 } 
 
 /**
-* ÊôĞÔbilldateµÄSetter·½·¨.ÊôĞÔÃû£ºµ¥¾İÈÕÆÚ
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§billdateçš„Setteræ–¹æ³•.å±æ€§åï¼šå•æ®æ—¥æœŸ
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newBilldate nc.vo.pub.lang.UFDate
 */
 public void setBilldate ( UFDate billdate) {
@@ -1179,8 +1179,8 @@ this.billdate=billdate;
 } 
  
 /**
-* ÊôĞÔ creationtimeµÄGetter·½·¨.ÊôĞÔÃû£º´´½¨Ê±¼ä
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ creationtimeçš„Getteræ–¹æ³•.å±æ€§åï¼šåˆ›å»ºæ—¶é—´
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return java.lang.String
 */
 public String getCreationtime() {
@@ -1188,8 +1188,8 @@ return this.creationtime;
 } 
 
 /**
-* ÊôĞÔcreationtimeµÄSetter·½·¨.ÊôĞÔÃû£º´´½¨Ê±¼ä
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§creationtimeçš„Setteræ–¹æ³•.å±æ€§åï¼šåˆ›å»ºæ—¶é—´
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newCreationtime java.lang.String
 */
 public void setCreationtime ( String creationtime) {
@@ -1197,8 +1197,8 @@ this.creationtime=creationtime;
 } 
  
 /**
-* ÊôĞÔ modifierµÄGetter·½·¨.ÊôĞÔÃû£ºĞŞ¸ÄÈË
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ modifierçš„Getteræ–¹æ³•.å±æ€§åï¼šä¿®æ”¹äºº
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.sm.UserVO
 */
 public String getModifier() {
@@ -1206,8 +1206,8 @@ return this.modifier;
 } 
 
 /**
-* ÊôĞÔmodifierµÄSetter·½·¨.ÊôĞÔÃû£ºĞŞ¸ÄÈË
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§modifierçš„Setteræ–¹æ³•.å±æ€§åï¼šä¿®æ”¹äºº
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newModifier nc.vo.sm.UserVO
 */
 public void setModifier ( String modifier) {
@@ -1215,8 +1215,8 @@ this.modifier=modifier;
 } 
  
 /**
-* ÊôĞÔ modifiedtimeµÄGetter·½·¨.ÊôĞÔÃû£ºĞŞ¸ÄÊ±¼ä
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ modifiedtimeçš„Getteræ–¹æ³•.å±æ€§åï¼šä¿®æ”¹æ—¶é—´
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.pub.lang.UFDateTime
 */
 public UFDateTime getModifiedtime() {
@@ -1224,8 +1224,8 @@ return this.modifiedtime;
 } 
 
 /**
-* ÊôĞÔmodifiedtimeµÄSetter·½·¨.ÊôĞÔÃû£ºĞŞ¸ÄÊ±¼ä
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§modifiedtimeçš„Setteræ–¹æ³•.å±æ€§åï¼šä¿®æ”¹æ—¶é—´
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newModifiedtime nc.vo.pub.lang.UFDateTime
 */
 public void setModifiedtime ( UFDateTime modifiedtime) {
@@ -1233,8 +1233,8 @@ this.modifiedtime=modifiedtime;
 } 
  
 /**
-* ÊôĞÔ rownoµÄGetter·½·¨.ÊôĞÔÃû£ºĞĞºÅ
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ rownoçš„Getteræ–¹æ³•.å±æ€§åï¼šè¡Œå·
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return java.lang.String
 */
 public String getRowno() {
@@ -1242,8 +1242,8 @@ return this.rowno;
 } 
 
 /**
-* ÊôĞÔrownoµÄSetter·½·¨.ÊôĞÔÃû£ºĞĞºÅ
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§rownoçš„Setteræ–¹æ³•.å±æ€§åï¼šè¡Œå·
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newRowno java.lang.String
 */
 public void setRowno ( String rowno) {
@@ -1251,8 +1251,8 @@ this.rowno=rowno;
 } 
  
 /**
-* ÊôĞÔ def1µÄGetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî1
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ def1çš„Getteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹1
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return java.lang.String
 */
 public String getDef1() {
@@ -1260,8 +1260,8 @@ return this.def1;
 } 
 
 /**
-* ÊôĞÔdef1µÄSetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî1
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§def1çš„Setteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹1
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newDef1 java.lang.String
 */
 public void setDef1 ( String def1) {
@@ -1269,8 +1269,8 @@ this.def1=def1;
 } 
  
 /**
-* ÊôĞÔ def2µÄGetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî2
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ def2çš„Getteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹2
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return java.lang.String
 */
 public String getDef2() {
@@ -1278,8 +1278,8 @@ return this.def2;
 } 
 
 /**
-* ÊôĞÔdef2µÄSetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî2
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§def2çš„Setteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹2
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newDef2 java.lang.String
 */
 public void setDef2 ( String def2) {
@@ -1287,8 +1287,8 @@ this.def2=def2;
 } 
  
 /**
-* ÊôĞÔ def3µÄGetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî3
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ def3çš„Getteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹3
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return java.lang.String
 */
 public String getDef3() {
@@ -1296,8 +1296,8 @@ return this.def3;
 } 
 
 /**
-* ÊôĞÔdef3µÄSetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî3
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§def3çš„Setteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹3
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newDef3 java.lang.String
 */
 public void setDef3 ( String def3) {
@@ -1305,8 +1305,8 @@ this.def3=def3;
 } 
  
 /**
-* ÊôĞÔ def4µÄGetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî4
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ def4çš„Getteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹4
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return java.lang.String
 */
 public String getDef4() {
@@ -1314,8 +1314,8 @@ return this.def4;
 } 
 
 /**
-* ÊôĞÔdef4µÄSetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî4
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§def4çš„Setteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹4
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newDef4 java.lang.String
 */
 public void setDef4 ( String def4) {
@@ -1323,8 +1323,8 @@ this.def4=def4;
 } 
  
 /**
-* ÊôĞÔ def5µÄGetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî5
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ def5çš„Getteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹5
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return java.lang.String
 */
 public String getDef5() {
@@ -1332,8 +1332,8 @@ return this.def5;
 } 
 
 /**
-* ÊôĞÔdef5µÄSetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî5
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§def5çš„Setteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹5
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newDef5 java.lang.String
 */
 public void setDef5 ( String def5) {
@@ -1341,8 +1341,8 @@ this.def5=def5;
 } 
  
 /**
-* ÊôĞÔ def6µÄGetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî6
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ def6çš„Getteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹6
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return java.lang.String
 */
 public String getDef6() {
@@ -1350,8 +1350,8 @@ return this.def6;
 } 
 
 /**
-* ÊôĞÔdef6µÄSetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî6
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§def6çš„Setteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹6
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newDef6 java.lang.String
 */
 public void setDef6 ( String def6) {
@@ -1359,8 +1359,8 @@ this.def6=def6;
 } 
  
 /**
-* ÊôĞÔ def7µÄGetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî7
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ def7çš„Getteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹7
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return java.lang.String
 */
 public String getDef7() {
@@ -1368,8 +1368,8 @@ return this.def7;
 } 
 
 /**
-* ÊôĞÔdef7µÄSetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî7
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§def7çš„Setteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹7
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newDef7 java.lang.String
 */
 public void setDef7 ( String def7) {
@@ -1377,8 +1377,8 @@ this.def7=def7;
 } 
  
 /**
-* ÊôĞÔ def8µÄGetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî8
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ def8çš„Getteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹8
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return java.lang.String
 */
 public String getDef8() {
@@ -1386,8 +1386,8 @@ return this.def8;
 } 
 
 /**
-* ÊôĞÔdef8µÄSetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî8
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§def8çš„Setteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹8
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newDef8 java.lang.String
 */
 public void setDef8 ( String def8) {
@@ -1395,8 +1395,8 @@ this.def8=def8;
 } 
  
 /**
-* ÊôĞÔ def9µÄGetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî9
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ def9çš„Getteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹9
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return java.lang.String
 */
 public String getDef9() {
@@ -1404,8 +1404,8 @@ return this.def9;
 } 
 
 /**
-* ÊôĞÔdef9µÄSetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî9
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§def9çš„Setteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹9
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newDef9 java.lang.String
 */
 public void setDef9 ( String def9) {
@@ -1413,8 +1413,8 @@ this.def9=def9;
 } 
  
 /**
-* ÊôĞÔ def10µÄGetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî10
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ def10çš„Getteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹10
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return java.lang.String
 */
 public String getDef10() {
@@ -1422,8 +1422,8 @@ return this.def10;
 } 
 
 /**
-* ÊôĞÔdef10µÄSetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî10
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§def10çš„Setteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹10
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newDef10 java.lang.String
 */
 public void setDef10 ( String def10) {
@@ -1431,8 +1431,8 @@ this.def10=def10;
 } 
  
 /**
-* ÊôĞÔ def11µÄGetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî11
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ def11çš„Getteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹11
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return java.lang.String
 */
 public String getDef11() {
@@ -1440,8 +1440,8 @@ return this.def11;
 } 
 
 /**
-* ÊôĞÔdef11µÄSetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî11
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§def11çš„Setteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹11
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newDef11 java.lang.String
 */
 public void setDef11 ( String def11) {
@@ -1449,8 +1449,8 @@ this.def11=def11;
 } 
  
 /**
-* ÊôĞÔ def12µÄGetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî12
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ def12çš„Getteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹12
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return java.lang.String
 */
 public String getDef12() {
@@ -1458,8 +1458,8 @@ return this.def12;
 } 
 
 /**
-* ÊôĞÔdef12µÄSetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî12
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§def12çš„Setteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹12
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newDef12 java.lang.String
 */
 public void setDef12 ( String def12) {
@@ -1467,8 +1467,8 @@ this.def12=def12;
 } 
  
 /**
-* ÊôĞÔ def13µÄGetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî13
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ def13çš„Getteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹13
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return java.lang.String
 */
 public String getDef13() {
@@ -1476,8 +1476,8 @@ return this.def13;
 } 
 
 /**
-* ÊôĞÔdef13µÄSetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî13
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§def13çš„Setteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹13
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newDef13 java.lang.String
 */
 public void setDef13 ( String def13) {
@@ -1485,8 +1485,8 @@ this.def13=def13;
 } 
  
 /**
-* ÊôĞÔ def14µÄGetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî14
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ def14çš„Getteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹14
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return java.lang.String
 */
 public String getDef14() {
@@ -1494,8 +1494,8 @@ return this.def14;
 } 
 
 /**
-* ÊôĞÔdef14µÄSetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî14
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§def14çš„Setteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹14
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newDef14 java.lang.String
 */
 public void setDef14 ( String def14) {
@@ -1503,8 +1503,8 @@ this.def14=def14;
 } 
  
 /**
-* ÊôĞÔ def15µÄGetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî15
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ def15çš„Getteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹15
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return java.lang.String
 */
 public String getDef15() {
@@ -1512,8 +1512,8 @@ return this.def15;
 } 
 
 /**
-* ÊôĞÔdef15µÄSetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî15
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§def15çš„Setteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹15
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newDef15 java.lang.String
 */
 public void setDef15 ( String def15) {
@@ -1521,8 +1521,8 @@ this.def15=def15;
 } 
  
 /**
-* ÊôĞÔ def16µÄGetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî16
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ def16çš„Getteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹16
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return java.lang.String
 */
 public String getDef16() {
@@ -1530,8 +1530,8 @@ return this.def16;
 } 
 
 /**
-* ÊôĞÔdef16µÄSetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî16
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§def16çš„Setteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹16
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newDef16 java.lang.String
 */
 public void setDef16 ( String def16) {
@@ -1539,8 +1539,8 @@ this.def16=def16;
 } 
  
 /**
-* ÊôĞÔ def17µÄGetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî17
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ def17çš„Getteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹17
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return java.lang.String
 */
 public String getDef17() {
@@ -1548,8 +1548,8 @@ return this.def17;
 } 
 
 /**
-* ÊôĞÔdef17µÄSetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî17
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§def17çš„Setteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹17
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newDef17 java.lang.String
 */
 public void setDef17 ( String def17) {
@@ -1557,8 +1557,8 @@ this.def17=def17;
 } 
  
 /**
-* ÊôĞÔ def18µÄGetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî18
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ def18çš„Getteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹18
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return java.lang.String
 */
 public String getDef18() {
@@ -1566,8 +1566,8 @@ return this.def18;
 } 
 
 /**
-* ÊôĞÔdef18µÄSetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî18
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§def18çš„Setteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹18
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newDef18 java.lang.String
 */
 public void setDef18 ( String def18) {
@@ -1575,8 +1575,8 @@ this.def18=def18;
 } 
  
 /**
-* ÊôĞÔ def19µÄGetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî19
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ def19çš„Getteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹19
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return java.lang.String
 */
 public String getDef19() {
@@ -1584,8 +1584,8 @@ return this.def19;
 } 
 
 /**
-* ÊôĞÔdef19µÄSetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî19
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§def19çš„Setteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹19
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newDef19 java.lang.String
 */
 public void setDef19 ( String def19) {
@@ -1593,8 +1593,8 @@ this.def19=def19;
 } 
  
 /**
-* ÊôĞÔ def20µÄGetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî20
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ def20çš„Getteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹20
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return java.lang.String
 */
 public String getDef20() {
@@ -1602,8 +1602,8 @@ return this.def20;
 } 
 
 /**
-* ÊôĞÔdef20µÄSetter·½·¨.ÊôĞÔÃû£º×Ô¶¨ÒåÏî20
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§def20çš„Setteræ–¹æ³•.å±æ€§åï¼šè‡ªå®šä¹‰é¡¹20
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newDef20 java.lang.String
 */
 public void setDef20 ( String def20) {
@@ -1611,16 +1611,16 @@ this.def20=def20;
 } 
  
 /**
-* ÊôĞÔ Éú³ÉÊ±¼ä´ÁµÄGetter·½·¨.ÊôĞÔÃû£ºÊ±¼ä´Á
-*  ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ ç”Ÿæˆæ—¶é—´æˆ³çš„Getteræ–¹æ³•.å±æ€§åï¼šæ—¶é—´æˆ³
+*  åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @return nc.vo.pub.lang.UFDateTime
 */
 public UFDateTime getTs() {
 return this.ts;
 }
 /**
-* ÊôĞÔÉú³ÉÊ±¼ä´ÁµÄSetter·½·¨.ÊôĞÔÃû£ºÊ±¼ä´Á
-* ´´½¨ÈÕÆÚ:2019-12-12
+* å±æ€§ç”Ÿæˆæ—¶é—´æˆ³çš„Setteræ–¹æ³•.å±æ€§åï¼šæ—¶é—´æˆ³
+* åˆ›å»ºæ—¥æœŸ:2019-12-12
 * @param newts nc.vo.pub.lang.UFDateTime
 */
 public void setTs(UFDateTime ts){

@@ -18,7 +18,7 @@ public class N_DRIV_SAVE extends AbstractPfAction<AggDriverFiles> {
 			Object userObj) {
 		CompareAroundProcesser<AggDriverFiles> processor = new CompareAroundProcesser<AggDriverFiles>(
 				DriverFilesPluginPoint.SEND_APPROVE);
-		// TODO ÔÚ´Ë´¦Ìí¼ÓÉóºËÇ°ºó¹æÔò
+		// TODO åœ¨æ­¤å¤„æ·»åŠ å®¡æ ¸å‰åè§„åˆ™
 		IRule<AggDriverFiles> rule = new CommitStatusCheckRule();
 		processor.addBeforeRule(rule);
 		return processor;

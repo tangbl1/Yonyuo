@@ -44,24 +44,24 @@ public class QueryPostServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		JSONObject result = new JSONObject();	//·µ»ØÇ°Ì¨½á¹û
-		String errMsg = "";		//´íÎóĞÅÏ¢
-		String datasource = "";//Êı¾İÔ´
+		JSONObject result = new JSONObject();	//è¿”å›å‰å°ç»“æœ
+		String errMsg = "";		//é”™è¯¯ä¿¡æ¯
+		String datasource = "";//æ•°æ®æº
 		try {
 			datasource = new GetDatasourceName().doreadxml();
 		} catch (JDOMException e) {
-			throw new RuntimeException("ÅäÖÃÎÄ¼ş»ñÈ¡Êı¾İÔ´Ãû³ÆÊ§°Ü£¡");
+			throw new RuntimeException("é…ç½®æ–‡ä»¶è·å–æ•°æ®æºåç§°å¤±è´¥ï¼");
 		}
-		// ±ØĞë·ÅÔÚÊ×ĞĞ
-		InvocationInfoProxy.getInstance().setUserDataSource(datasource);	//Ö¸¶¨±¾´Î²Ù×÷Êı¾İµÄÊı¾İÔ´
-		req.setCharacterEncoding("utf-8");		//ÉèÖÃÇëÇóµÄ±àÂëÎªUTF-8
-		String method = req.getParameter("method");	//»ñÈ¡Ç°Ì¨´«µİmethod±êÊ¶£¬ÓÃÓÚÇø·Ö´¦Àí·½·¨
-		String json = req.getParameter("json");	//»ñÈ¡Ç°Ì¨´«µİ¹ıÀ´µÄ²ÎÊıJSON¶ÔÏó
+		// å¿…é¡»æ”¾åœ¨é¦–è¡Œ
+		InvocationInfoProxy.getInstance().setUserDataSource(datasource);	//æŒ‡å®šæœ¬æ¬¡æ“ä½œæ•°æ®çš„æ•°æ®æº
+		req.setCharacterEncoding("utf-8");		//è®¾ç½®è¯·æ±‚çš„ç¼–ç ä¸ºUTF-8
+		String method = req.getParameter("method");	//è·å–å‰å°ä¼ é€’methodæ ‡è¯†ï¼Œç”¨äºåŒºåˆ†å¤„ç†æ–¹æ³•
+		String json = req.getParameter("json");	//è·å–å‰å°ä¼ é€’è¿‡æ¥çš„å‚æ•°JSONå¯¹è±¡
 		
 		if(StringUtils.isBlank(method))
-			errMsg = "methodÎª¿Õ£¬²ÎÊı´«µİÒì³£!";
+			errMsg = "methodä¸ºç©ºï¼Œå‚æ•°ä¼ é€’å¼‚å¸¸!";
 		if(StringUtils.isBlank(json))
-			errMsg = "jsonÎª¿Õ£¬²ÎÊı´«µİÒì³£!";
+			errMsg = "jsonä¸ºç©ºï¼Œå‚æ•°ä¼ é€’å¼‚å¸¸!";
 		JSONObject jsonObject = new JSONObject();
 		try {
 			jsonObject = new JSONObject(json); //String->JSONObject
@@ -69,35 +69,35 @@ public class QueryPostServlet extends HttpServlet {
 			ExceptionUtils.wrappException(e1);
 		}	
 		
-		// ½øĞĞNCĞéÄâµÇÂ¼
-		String username = "hwapp";		//ÓÃ»§Ãû
-		String password = "asdqwe123";	//ÃÜÂë
+		// è¿›è¡ŒNCè™šæ‹Ÿç™»å½•
+		String username = "hwapp";		//ç”¨æˆ·å
+		String password = "asdqwe123";	//å¯†ç 
 		IFwLogin loginService = (IFwLogin) NCLocator.getInstance().lookup(IFwLogin.class);
 		byte[] token = loginService.login(username, password, null);
 		NetStreamContext.setToken(token);
 		
-		//Í¨¹ıÓÃ»§±àÂë²éÑ¯¶ÔÓ¦cuserid,pk_group
+		//é€šè¿‡ç”¨æˆ·ç¼–ç æŸ¥è¯¢å¯¹åº”cuserid,pk_group
 		String sqluserid = "select cuserid,pk_group from sm_user where user_code='" + username + "'";
 		Map<String,String> map = null;
 		try {
 			map = (Map<String,String>) dao.executeQuery(sqluserid, new MapProcessor());
 			if(map==null || map.size() <= 0)
-				errMsg = "²éÑ¯hwappÓÃ»§Ê§°Ü£¬ÇëÁªÏµ¹ÜÀíÔ±£¡";
+				errMsg = "æŸ¥è¯¢hwappç”¨æˆ·å¤±è´¥ï¼Œè¯·è”ç³»ç®¡ç†å‘˜ï¼";
 		} catch (Exception e) {
-			errMsg = "cuserid,pk_group²éÑ¯Ê§°Ü£¡";
+			errMsg = "cuserid,pk_groupæŸ¥è¯¢å¤±è´¥ï¼";
 			ExceptionUtils.wrappBusinessException(errMsg);
 		}
 		
 		String userid = map.get("cuserid");
 		String pk_group = map.get("pk_group");
 		InvocationInfoProxy.getInstance().setUserCode(username);
-		InvocationInfoProxy.getInstance().setGroupId(pk_group);// ÈËÔ±»ù±¾ĞÅÏ¢±í
+		InvocationInfoProxy.getInstance().setGroupId(pk_group);// äººå‘˜åŸºæœ¬ä¿¡æ¯è¡¨
 		InvocationInfoProxy.getInstance().setUserId(userid);
 		if (method.equals("queryPost")) {
 			try {
 				result = getUserPost(jsonObject);
 			} catch (Exception e) {
-				ExceptionUtils.wrappBusinessException("¸ÚÎ»²éÑ¯Òì³££¡"+e.getMessage());
+				ExceptionUtils.wrappBusinessException("å²—ä½æŸ¥è¯¢å¼‚å¸¸ï¼"+e.getMessage());
 			}
 		}
 		
@@ -109,25 +109,25 @@ public class QueryPostServlet extends HttpServlet {
 	}
 	
 	/**
-	 * ·µ»ØµÇÂ¼ÓÃ»§µÄ¸ÚÎ»
-	 * ²ÎÊı£ºJSONObject jsonObject
+	 * è¿”å›ç™»å½•ç”¨æˆ·çš„å²—ä½
+	 * å‚æ•°ï¼šJSONObject jsonObject
 	 * @return JSONObject
 	 * @throws Exception
 	 */
 	private JSONObject getUserPost(JSONObject json) throws Exception {
-		//·µ»ØµÄJSONObject
+		//è¿”å›çš„JSONObject
 		JSONObject jsonResult = new JSONObject();
-		//´æ·Å³µÅÆºÅµÄJSONArray
-		JSONArray jsonArray = new JSONArray(); //ÓÃÓÚ´æ´¢µ¥¾İĞÅÏ¢¼¯ºÏ
-		//»ñÈ¡´«ÈëµÄcode
+		//å­˜æ”¾è½¦ç‰Œå·çš„JSONArray
+		JSONArray jsonArray = new JSONArray(); //ç”¨äºå­˜å‚¨å•æ®ä¿¡æ¯é›†åˆ
+		//è·å–ä¼ å…¥çš„code
 		String code = json.getString("user_code");		
 		tokenParam tp = new tokenParam();
-		//»ñÈ¡token·½·¨
+		//è·å–tokenæ–¹æ³•
 		getToken getToken1 = new getToken();
 		token token1 = getToken1.getAccessToken(tp.getAppid(),tp.getScret());
-		//µÃµ½token
+		//å¾—åˆ°token
 		String accessToken = token1.getAccessToken();
-		//ÓÑ¿Õ¼äĞéÄâµÇÂ¼
+		//å‹ç©ºé—´è™šæ‹Ÿç™»å½•
 		String url = "https://openapi.yonyoucloud.com/certified/userInfo/"+code+"?access_token="+accessToken;
 		String json0="";
 		try {
@@ -139,21 +139,21 @@ public class QueryPostServlet extends HttpServlet {
 	         
 //		String json0 = HttpUtil.sendGet(url);
 		String str =new String(json0.getBytes("ISO-8859-1"),"utf-8");
-		//ÓÑ¿Õ¼äÈËÔ±ĞÅÏ¢
+		//å‹ç©ºé—´äººå‘˜ä¿¡æ¯
 		com.alibaba.fastjson.JSONObject jo = com.alibaba.fastjson.JSONObject.parseObject(str);
-		//ÈËÔ±±àÂë
+		//äººå‘˜ç¼–ç 
 		String staffNo = "";
 		if(jo.containsKey("data")){
-			//¸³Öµ
+			//èµ‹å€¼
 			staffNo = jo.getJSONObject("data").getString("staff_no");
 		}else{
-			ExceptionUtils.wrappBusinessException("code¹ıÆÚ£¡£¡");
+			ExceptionUtils.wrappBusinessException("codeè¿‡æœŸï¼ï¼");
 		}
 		
-		//²âÊÔË¾»úµÄstaffNo="200809003";
-		//²âÊÔÓÃ»§µÄstaffNo="201307003";
-		//²âÊÔ³µ¹ÜµÄstaffNo="200503001";
-		//Í¨¹ıÓÃ»§±àÂëµÃµ½Éí·İ£¨pk_psndoc£©£¬¸ù¾İÉí·İÕÒµ½ÈËÔ±µÄ¸ÚÎ»pk
+		//æµ‹è¯•å¸æœºçš„staffNo="200809003";
+		//æµ‹è¯•ç”¨æˆ·çš„staffNo="201307003";
+		//æµ‹è¯•è½¦ç®¡çš„staffNo="200503001";
+		//é€šè¿‡ç”¨æˆ·ç¼–ç å¾—åˆ°èº«ä»½ï¼ˆpk_psndocï¼‰ï¼Œæ ¹æ®èº«ä»½æ‰¾åˆ°äººå‘˜çš„å²—ä½pk
 		String sql = "select post.*,role.role_name from ( "
 				+ "select p.postname,d.name, u.cuserid,u.pk_org,u.pk_group,d.pk_dept "
 				+ "from om_post p, org_dept d,"
@@ -164,38 +164,38 @@ public class QueryPostServlet extends HttpServlet {
 				+ " where code = '"+staffNo+"'and dr = 0)) post left join "
 				+ "(select distinct u.cuserid,r.role_name from bd_psndoc p,sm_user u,sm_user_role ur,sm_role r "
 				+ "where p.pk_psndoc = u.pk_psndoc and u.cuserid = ur.cuserid and ur.pk_role = r.pk_role "
-				+ "and p.dr=0 and u.dr=0  and r.dr=0 and r.role_name = '³µÁ¾¹ÜÀíÔ±' and p.code = '"+staffNo
+				+ "and p.dr=0 and u.dr=0  and r.dr=0 and r.role_name = 'è½¦è¾†ç®¡ç†å‘˜' and p.code = '"+staffNo
 				+ "') role on post.cuserid = role.cuserid";
 		
 		
-		//´æ·Å¸ÚÎ»¸ÚÎ»ºÍ²¿ÃÅµÄ¼¯ºÏ
+		//å­˜æ”¾å²—ä½å²—ä½å’Œéƒ¨é—¨çš„é›†åˆ
 		List<Map<String,Object>> list = new ArrayList<>();
 		try {
-			//Ö´ĞĞsqlµÃµ½¸ÚÎ»Ãû³ÆºÍ²¿ÃÅÃû³ÆµÄ¼¯ºÏ
+			//æ‰§è¡Œsqlå¾—åˆ°å²—ä½åç§°å’Œéƒ¨é—¨åç§°çš„é›†åˆ
 			list = (List<Map<String, Object>>) dao.executeQuery(sql,
 					new MapListProcessor());
 		} catch (Exception e) {
-			ExceptionUtils.wrappBusinessException("¸ÚÎ»²éÑ¯³ö´í£¡£¡"+e.getMessage()+staffNo);
+			ExceptionUtils.wrappBusinessException("å²—ä½æŸ¥è¯¢å‡ºé”™ï¼ï¼"+e.getMessage()+staffNo);
 		}
-		//Ñ­»·»ñÈ¡µ¥¾İĞÅÏ¢²¢´æ´¢³Éjson¶ÔÏó
+		//å¾ªç¯è·å–å•æ®ä¿¡æ¯å¹¶å­˜å‚¨æˆjsonå¯¹è±¡
 		for (Map<String, Object> map : list) {
-				//´æ·ÅÒ»ÌõÊı¾İµÄjson
+				//å­˜æ”¾ä¸€æ¡æ•°æ®çš„json
 				JSONObject jsonObject = new JSONObject();
-				//¸ÚÎ»Ãû³Æ
+				//å²—ä½åç§°
 				jsonObject.put("postname", map.get("postname"));
-				//²¿ÃÅÃû³Æ
+				//éƒ¨é—¨åç§°
 				jsonObject.put("name", map.get("name"));
-				//²¿ÃÅÖ÷¼ü
+				//éƒ¨é—¨ä¸»é”®
 				jsonObject.put("pk_dept", map.get("pk_dept"));
-				//ÓÃ»§pk
+				//ç”¨æˆ·pk
 				jsonObject.put("cuserid", map.get("cuserid"));
-				//ÓÃ»§ËùÊô×éÖ¯
+				//ç”¨æˆ·æ‰€å±ç»„ç»‡
 				jsonObject.put("pk_org", map.get("pk_org"));
-				//ÓÃ»§ËùÊô¼¯ÍÅ
+				//ç”¨æˆ·æ‰€å±é›†å›¢
 				jsonObject.put("pk_group", map.get("pk_group"));
-				//ÓÃ»§ËùÊô¼¯ÍÅ
+				//ç”¨æˆ·æ‰€å±é›†å›¢
 				jsonObject.put("role_name", map.get("role_name")==null ? "" : map.get("role_name"));
-				//·ÅÈëjsonArray
+				//æ”¾å…¥jsonArray
 				jsonArray.put(jsonObject);
 		}
 		JSONObject result = new JSONObject();
@@ -211,11 +211,11 @@ public class QueryPostServlet extends HttpServlet {
 		doPost(req, resp);
 	}
 	public String getUser(String userurl) throws BusinessException {
-		/** ÍøÂçµÄurlµØÖ· */     
+		/** ç½‘ç»œçš„urlåœ°å€ */     
 	     URL url = null;           
-	        /** httpÁ¬½Ó */ 
+	        /** httpè¿æ¥ */ 
 	     HttpURLConnection httpConn = null;         
-	         /**//** ÊäÈëÁ÷ */
+	         /**//** è¾“å…¥æµ */
 	     BufferedReader in = null;
 	     StringBuffer sb = new StringBuffer();
 	     try{  

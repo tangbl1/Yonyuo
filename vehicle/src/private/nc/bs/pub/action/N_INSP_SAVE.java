@@ -18,7 +18,7 @@ public class N_INSP_SAVE extends AbstractPfAction<AggInspectionFileHVO> {
 			Object userObj) {
 		CompareAroundProcesser<AggInspectionFileHVO> processor = new CompareAroundProcesser<AggInspectionFileHVO>(
 				InspectionFilesPluginPoint.SEND_APPROVE);
-		// TODO ÔÚ´Ë´¦Ìí¼ÓÉóºËÇ°ºó¹æÔò
+		// TODO åœ¨æ­¤å¤„æ·»åŠ å®¡æ ¸å‰åè§„åˆ™
 		IRule<AggInspectionFileHVO> rule = new CommitStatusCheckRule();
 		processor.addBeforeRule(rule);
 		return processor;

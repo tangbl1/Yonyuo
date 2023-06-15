@@ -17,7 +17,7 @@ public class N_MILE_DELETE extends AbstractPfAction<AggDriverMileageHVO> {
 			Object userObj) {
 		CompareAroundProcesser<AggDriverMileageHVO> processor = new CompareAroundProcesser<AggDriverMileageHVO>(
 				DriverMileagePluginPoint.SCRIPT_DELETE);
-		// TODO ÔÚ´Ë´¦Ìí¼ÓÇ°ºó¹æÔò
+		// TODO åœ¨æ­¤å¤„æ·»åŠ å‰åè§„åˆ™
 		return processor;
 	}
 

@@ -15,7 +15,7 @@ import nc.itf.vehicle.vorder.vorderhvo.IVorderHVOService;
 import nc.vo.vehicle.vorder.AggVorderHVO;
 
 /**
- * ±£´æaction£¨Ö÷×Ó¡¢µ¥±í¡¢µ¥form£©
+ * ä¿å­˜actionï¼ˆä¸»å­ã€å•è¡¨ã€å•formï¼‰
  */
 public class SaveVorderHVOAction extends BaseAction{
 

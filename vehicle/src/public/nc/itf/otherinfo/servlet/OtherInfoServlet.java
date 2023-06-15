@@ -52,34 +52,34 @@ public class OtherInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	/**
-	 * ³µÁ¾»ù±¾ĞÅÏ¢ÆäËûĞÅÏ¢Ìî±¨Ò³Ãæservlet
-	 * ÓÃÓÚ´¦ÀíÆäËûĞÅÏ¢Ìî±¨Ò³ÃæÇëÇó
+	 * è½¦è¾†åŸºæœ¬ä¿¡æ¯å…¶ä»–ä¿¡æ¯å¡«æŠ¥é¡µé¢servlet
+	 * ç”¨äºå¤„ç†å…¶ä»–ä¿¡æ¯å¡«æŠ¥é¡µé¢è¯·æ±‚
 	 * @author 
 	 * @date 2021-04-25
 	 * @param 
-	 * 	req Ç°Ì¨Ò³ÃæÇëÇó
-	 * 	resp ·µ»ØĞÅÏ¢
+	 * 	req å‰å°é¡µé¢è¯·æ±‚
+	 * 	resp è¿”å›ä¿¡æ¯
 	 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		JSONObject result = new JSONObject();	//·µ»ØÇ°Ì¨½á¹û
-		String errMsg = "";		//´íÎóĞÅÏ¢
-		String datasource = "";//Êı¾İÔ´
+		JSONObject result = new JSONObject();	//è¿”å›å‰å°ç»“æœ
+		String errMsg = "";		//é”™è¯¯ä¿¡æ¯
+		String datasource = "";//æ•°æ®æº
 		try {
 			datasource = new GetDatasourceName().doreadxml();
 		} catch (JDOMException e) {
-			throw new RuntimeException("ÅäÖÃÎÄ¼ş»ñÈ¡Êı¾İÔ´Ãû³ÆÊ§°Ü£¡");
+			throw new RuntimeException("é…ç½®æ–‡ä»¶è·å–æ•°æ®æºåç§°å¤±è´¥ï¼");
 		}
-		// ±ØĞë·ÅÔÚÊ×ĞĞ
-		InvocationInfoProxy.getInstance().setUserDataSource(datasource);	//Ö¸¶¨±¾´Î²Ù×÷Êı¾İµÄÊı¾İÔ´
-		req.setCharacterEncoding("utf-8");		//ÉèÖÃÇëÇóµÄ±àÂëÎªUTF-8
-		String method = req.getParameter("method");	//»ñÈ¡Ç°Ì¨´«µİmethod±êÊ¶£¬ÓÃÓÚÇø·Ö´¦Àí·½·¨
-		String json = req.getParameter("json");	//»ñÈ¡Ç°Ì¨´«µİ¹ıÀ´µÄ²ÎÊıJSON¶ÔÏó
+		// å¿…é¡»æ”¾åœ¨é¦–è¡Œ
+		InvocationInfoProxy.getInstance().setUserDataSource(datasource);	//æŒ‡å®šæœ¬æ¬¡æ“ä½œæ•°æ®çš„æ•°æ®æº
+		req.setCharacterEncoding("utf-8");		//è®¾ç½®è¯·æ±‚çš„ç¼–ç ä¸ºUTF-8
+		String method = req.getParameter("method");	//è·å–å‰å°ä¼ é€’methodæ ‡è¯†ï¼Œç”¨äºåŒºåˆ†å¤„ç†æ–¹æ³•
+		String json = req.getParameter("json");	//è·å–å‰å°ä¼ é€’è¿‡æ¥çš„å‚æ•°JSONå¯¹è±¡
 		
 		if(StringUtils.isBlank(method))
-			errMsg = "methodÎª¿Õ£¬²ÎÊı´«µİÒì³£!";
+			errMsg = "methodä¸ºç©ºï¼Œå‚æ•°ä¼ é€’å¼‚å¸¸!";
 		if(StringUtils.isBlank(json))
-			errMsg = "jsonÎª¿Õ£¬²ÎÊı´«µİÒì³£!";
+			errMsg = "jsonä¸ºç©ºï¼Œå‚æ•°ä¼ é€’å¼‚å¸¸!";
 		JSONObject jsonObject = new JSONObject();
 		try {
 			jsonObject = new JSONObject(json); //String->JSONObject
@@ -87,48 +87,48 @@ public class OtherInfoServlet extends HttpServlet {
 			ExceptionUtils.wrappException(e1);
 		}	
 		
-		// ½øĞĞNCĞéÄâµÇÂ¼
-		String username = "hwapp";		//ÓÃ»§Ãû
-		String password = "asdqwe123";	//ÃÜÂë
+		// è¿›è¡ŒNCè™šæ‹Ÿç™»å½•
+		String username = "hwapp";		//ç”¨æˆ·å
+		String password = "asdqwe123";	//å¯†ç 
 		IFwLogin loginService = (IFwLogin) NCLocator.getInstance().lookup(IFwLogin.class);
 		byte[] token = loginService.login(username, password, null);
 		NetStreamContext.setToken(token);
 		
-		//Í¨¹ıÓÃ»§±àÂë²éÑ¯¶ÔÓ¦cuserid,pk_group
+		//é€šè¿‡ç”¨æˆ·ç¼–ç æŸ¥è¯¢å¯¹åº”cuserid,pk_group
 		String sqluserid = "select cuserid,pk_group from sm_user where user_code='" + username + "'";
 		Map<String,String> map = null;
 		try {
 			map = (Map<String,String>) dao.executeQuery(sqluserid, new MapProcessor());
 			if(map==null || map.size() <= 0)
-				errMsg = "²éÑ¯hwappÓÃ»§Ê§°Ü£¬ÇëÁªÏµ¹ÜÀíÔ±£¡";
+				errMsg = "æŸ¥è¯¢hwappç”¨æˆ·å¤±è´¥ï¼Œè¯·è”ç³»ç®¡ç†å‘˜ï¼";
 		} catch (Exception e) {
-			errMsg = "cuserid,pk_group²éÑ¯Ê§°Ü£¡";
+			errMsg = "cuserid,pk_groupæŸ¥è¯¢å¤±è´¥ï¼";
 			ExceptionUtils.wrappBusinessException(errMsg);
 		}
 		
 		String userid = map.get("cuserid");
 		String pk_group = map.get("pk_group");
 		InvocationInfoProxy.getInstance().setUserCode(username);
-		InvocationInfoProxy.getInstance().setGroupId(pk_group);// ÈËÔ±»ù±¾ĞÅÏ¢±í
+		InvocationInfoProxy.getInstance().setGroupId(pk_group);// äººå‘˜åŸºæœ¬ä¿¡æ¯è¡¨
 		InvocationInfoProxy.getInstance().setUserId(userid);
 		try {
-			//²éÑ¯¶©µ¥
+			//æŸ¥è¯¢è®¢å•
 			if ("save".equals(method)) {
-				result = saveOtherInfo(jsonObject);//ĞŞ¸Äºó±£´æ
+				result = saveOtherInfo(jsonObject);//ä¿®æ”¹åä¿å­˜
 			} else if ("add".equals(method)) {
-				result = addOtherInfo(jsonObject);//ĞÂÔöÆäËûĞÅÏ¢Ìî±¨
+				result = addOtherInfo(jsonObject);//æ–°å¢å…¶ä»–ä¿¡æ¯å¡«æŠ¥
 			} else if("delete".equals(method)){
-				result = deleOtherInfo(jsonObject);//É¾³ıÆäËûĞÅÏ¢Ìî±¨
+				result = deleOtherInfo(jsonObject);//åˆ é™¤å…¶ä»–ä¿¡æ¯å¡«æŠ¥
 			} else if("query".equals(method)){
-				result = queryOtherInfo(jsonObject);//²éÑ¯ÆäËûĞÅÏ¢Ìî±¨ÁĞ±í
+				result = queryOtherInfo(jsonObject);//æŸ¥è¯¢å…¶ä»–ä¿¡æ¯å¡«æŠ¥åˆ—è¡¨
 			} else if("updateStatus".equals(method)){
-				result = updateStatus(jsonObject);//¸üĞÂµ¥¾İ×´Ì¬
+				result = updateStatus(jsonObject);//æ›´æ–°å•æ®çŠ¶æ€
 				
 			}
 		} catch (Exception e) {
 			errMsg = e.getMessage();
 			if(StringUtils.isBlank(errMsg)) {
-				errMsg = "Î´Öª´íÎó";
+				errMsg = "æœªçŸ¥é”™è¯¯";
 			}
 //			ExceptionUtils.wrappException(e);
 		}
@@ -138,7 +138,7 @@ public class OtherInfoServlet extends HttpServlet {
 				result.put("success", false);
 				result.put("errMsg", errMsg);
 			} catch (JSONException e) {
-				ExceptionUtils.wrappBusinessException("Ê§°ÜµÄresult¸³ÖµÊ§°Ü!"+e.getMessage());
+				ExceptionUtils.wrappBusinessException("å¤±è´¥çš„resultèµ‹å€¼å¤±è´¥!"+e.getMessage());
 			}	
 		}
 		
@@ -149,23 +149,23 @@ public class OtherInfoServlet extends HttpServlet {
 	}
 	
 	/**
-	 * ÆäËûĞÅÏ¢Ìî±¨ĞŞ¸Ä±£´æ·½·¨
-	 * ²ÎÊı£ºJSONObject json
+	 * å…¶ä»–ä¿¡æ¯å¡«æŠ¥ä¿®æ”¹ä¿å­˜æ–¹æ³•
+	 * å‚æ•°ï¼šJSONObject json
 	 * @return JSONObject
 	 * @throws Exception
 	 */
 	private JSONObject saveOtherInfo(JSONObject json) throws Exception {
-		//ÓÃÓÚºóÃæ¶Ô±ÈÊÇ·ñÓĞ±»É¾³ıµÄ×Ó±í
+		//ç”¨äºåé¢å¯¹æ¯”æ˜¯å¦æœ‰è¢«åˆ é™¤çš„å­è¡¨
 		containVos = new HashMap<String, InsuranceBVO>();
-		JSONObject userjsonObject = json.getJSONObject("userjson"); // µÇÂ¼ÈË
-		String pk_org = userjsonObject.getString("pk_org"); //µ±Ç°µÇÂ¼ÈËËùÊô×éÖ¯
-		String pk_group = userjsonObject.getString("pk_group"); //µ±Ç°µÇÂ¼ÈËËùÊô¼¯ÍÅ
-		//ÓÃÓÚ·µ»ØÇ°Ì¨µÄJSONObject
+		JSONObject userjsonObject = json.getJSONObject("userjson"); // ç™»å½•äºº
+		String pk_org = userjsonObject.getString("pk_org"); //å½“å‰ç™»å½•äººæ‰€å±ç»„ç»‡
+		String pk_group = userjsonObject.getString("pk_group"); //å½“å‰ç™»å½•äººæ‰€å±é›†å›¢
+		//ç”¨äºè¿”å›å‰å°çš„JSONObject
 		JSONObject result = new JSONObject();
-		//µÃµ½ÆäËûĞÅÏ¢Ìî±¨Ö÷±ípk
+		//å¾—åˆ°å…¶ä»–ä¿¡æ¯å¡«æŠ¥ä¸»è¡¨pk
 		String pk_otherinfo = json.getString("pk_otherinfo");
 				
-		//ĞŞ¸ÄÖ÷±íµÄsql£¬¸ù¾İÆäËûĞÅÏ¢Ìî±¨Ö÷±ípk£¬ĞŞ¸Ä¶ÔÓ¦µ¥¾İµÄ³µÅÆºÅ
+		//ä¿®æ”¹ä¸»è¡¨çš„sqlï¼Œæ ¹æ®å…¶ä»–ä¿¡æ¯å¡«æŠ¥ä¸»è¡¨pkï¼Œä¿®æ”¹å¯¹åº”å•æ®çš„è½¦ç‰Œå·
 		String sql = "update cl_otherinfo set dayfuel = " + new UFDouble(json.getString("dayfuel")) 
 				+ ", amount = " + new UFDouble(json.getString("amount")) 
 				+ ", otherkm = " + new UFDouble(json.getString("otherkm"))
@@ -177,114 +177,114 @@ public class OtherInfoServlet extends HttpServlet {
 				+ "', def2 = '" + json.getString("def2")
 				+ "' where pk_otherinfo = '"+pk_otherinfo+"'";
 		dao.executeUpdate(sql);
-		//·µ»ØÊÇ·ñĞŞ¸Ä³É¹¦
+		//è¿”å›æ˜¯å¦ä¿®æ”¹æˆåŠŸ
 		result.put("success", true);
 		result.put("result", "true");
-		//½«½á¹û·µ»Ø¸øÇ°Ì¨
+		//å°†ç»“æœè¿”å›ç»™å‰å°
 		return result;
 	}
 	
 
 	/**
-	 * É¾³ıµ¥¾İ
-	 * ²ÎÊı£ºJSONObject json
+	 * åˆ é™¤å•æ®
+	 * å‚æ•°ï¼šJSONObject json
 	 * @return JSONObject
 	 * @throws JSONException 
 	 */
 	private JSONObject deleOtherInfo(JSONObject json) throws JSONException {
-		//ÓÃÓÚ·µ»ØÇ°Ì¨
+		//ç”¨äºè¿”å›å‰å°
 		JSONObject result = new JSONObject();
-		// µ¥¾İÖ÷¼ü
+		// å•æ®ä¸»é”®
 		String pk_otherinfo = json.getString("pk_otherinfo");
-//		//ÓÃÓÚµÃµ½Ö÷×Ó±íVOÊı×éµÄsql
+//		//ç”¨äºå¾—åˆ°ä¸»å­è¡¨VOæ•°ç»„çš„sql
 //		String sql = "update cl_otherinfo set dr = 1 where pk_otherinfo = '"+ pk_otherinfo + "'";
 		
 		try {
-			//É¾³ıÖ÷×Ó±íVOÊı×é
+			//åˆ é™¤ä¸»å­è¡¨VOæ•°ç»„
 			dao.deleteByPK(OtherInfoVO.class, pk_otherinfo);
 			result.put("success", true);
 			result.put("result", "true");
 		} catch (Exception e) {
-			ExceptionUtils.wrappBusinessException("É¾³ıÆäËûĞÅÏ¢Ìî±¨ĞÅÏ¢Ê§°Ü£¡"+e.getMessage());
+			ExceptionUtils.wrappBusinessException("åˆ é™¤å…¶ä»–ä¿¡æ¯å¡«æŠ¥ä¿¡æ¯å¤±è´¥ï¼"+e.getMessage());
 		}
-		//·µ»Ø
+		//è¿”å›
 		return result;
 	}
 	/**
-	 * ²éÑ¯ÆäËûĞÅÏ¢Ìî±¨
-	 * ²ÎÊı£ºJSONObject json
+	 * æŸ¥è¯¢å…¶ä»–ä¿¡æ¯å¡«æŠ¥
+	 * å‚æ•°ï¼šJSONObject json
 	 * @return 
 	 * @return 
 	 * @throws Exception
 	 */
 	private JSONObject queryOtherInfo(JSONObject json) throws Exception {
 		JSONObject result = new JSONObject();
-		//´æ·Å²éÑ¯µ½µÄËùÓĞÊı¾İ
+		//å­˜æ”¾æŸ¥è¯¢åˆ°çš„æ‰€æœ‰æ•°æ®
 		JSONArray jsonArray = new JSONArray();
-		JSONObject userjsonObject = json.getJSONObject("userjson"); // µÇÂ¼ÈË
-		String roleName = userjsonObject.getString("role_name"); //µ±Ç°µÇÂ¼ÈË½ÇÉ«
+		JSONObject userjsonObject = json.getJSONObject("userjson"); // ç™»å½•äºº
+		String roleName = userjsonObject.getString("role_name"); //å½“å‰ç™»å½•äººè§’è‰²
 //		postName = new String(postName.getBytes("iso-8859-1"),"UTF-8");
-		String cuserId = userjsonObject.getString("cuserid"); //µ±Ç°µÇÂ¼ÈËÖ÷¼ü
+		String cuserId = userjsonObject.getString("cuserid"); //å½“å‰ç™»å½•äººä¸»é”®
 		
-		int maxnum = json.getInt("maxcount"); // ×î´óÊıÁ¿
-		int minnum = json.getInt("mincount"); // ×îĞ¡ÊıÁ¿
-		//²éÑ¯Ö÷±ípk¡¢ÈÕÆÚ¡¢ÈÕ¼ÓÓÍÉı¡¢½ğ¶î¡¢ÈÕÆäËû³µÁ¾¹«ÀïÊı¡¢Ôç¿ÕÊ»¡¢Íí¿ÕÊ»¡¢ÈÕ½±·£½ğ¶îµÄsql
+		int maxnum = json.getInt("maxcount"); // æœ€å¤§æ•°é‡
+		int minnum = json.getInt("mincount"); // æœ€å°æ•°é‡
+		//æŸ¥è¯¢ä¸»è¡¨pkã€æ—¥æœŸã€æ—¥åŠ æ²¹å‡ã€é‡‘é¢ã€æ—¥å…¶ä»–è½¦è¾†å…¬é‡Œæ•°ã€æ—©ç©ºé©¶ã€æ™šç©ºé©¶ã€æ—¥å¥–ç½šé‡‘é¢çš„sql
 		
 		String sql="SELECT * FROM (SELECT ROWNUM AS rowno, t.* "
 				+ "FROM (select pk_otherinfo, infodate, dayfuel, amount, otherkm, emptytimesam, emptytimespm, bonuspenalty, wkdovertime, approvestatus,def1,def2,user_name "
 				+ "from cl_otherinfo,sm_user where  cl_otherinfo.creator = sm_user.cuserid and cl_otherinfo.dr=0 ";
-		if(roleName.equals("³µÁ¾¹ÜÀíÔ±")) {
+		if(roleName.equals("è½¦è¾†ç®¡ç†å‘˜")) {
 			sql += "and cl_otherinfo.approvestatus in ( 2, 3 )";
 		}else {
 			sql += "and cl_otherinfo.creator = '" + cuserId + "' ";
 		}
 		sql += "order by cl_otherinfo.infodate desc) t "
 				+ "where ROWNUM <= " + maxnum + ") table_alias WHERE table_alias.rowno > " + minnum	+ " ";
-		//ĞÂ½¨¼¯ºÏÓÃÓÚ´æ·Å²éÑ¯½á¹û
+		//æ–°å»ºé›†åˆç”¨äºå­˜æ”¾æŸ¥è¯¢ç»“æœ
 		List<Map<String,Object>> list= (List<Map<String, Object>>) dao.executeQuery(sql, new  MapListProcessor());
-		//±éÀú£¬½«²éÑ¯µ½µÄÊı¾İ·ÅÈëjson
+		//éå†ï¼Œå°†æŸ¥è¯¢åˆ°çš„æ•°æ®æ”¾å…¥json
 		for (Map<String,Object> map : list) {
-			//´æ·ÅÆäÖĞÒ»ÌõÊı¾İµÄjson
+			//å­˜æ”¾å…¶ä¸­ä¸€æ¡æ•°æ®çš„json
 			JSONObject jsonObj = new JSONObject();
 			
-			//¸³Öµ--ÆäËûĞÅÏ¢Ìî±¨Ö÷±ípk
+			//èµ‹å€¼--å…¶ä»–ä¿¡æ¯å¡«æŠ¥ä¸»è¡¨pk
 			jsonObj.put("pk_otherinfo", map.get("pk_otherinfo") == null ? "" : map.get("pk_otherinfo"));
-			//ÈÕÆÚ
+			//æ—¥æœŸ
 			jsonObj.put("infodate", map.get("infodate") == null ? "" : map.get("infodate"));
-			//ÈÕ¼ÓÓÍÉı
+			//æ—¥åŠ æ²¹å‡
 			jsonObj.put("dayfuel", map.get("dayfuel") == null ? "" : map.get("dayfuel"));
-			//½ğ¶î
+			//é‡‘é¢
 			jsonObj.put("amount", map.get("amount") == null ? "" : map.get("amount"));
-			//ÈÕÆäËû³µÁ¾¹«ÀïÊı
+			//æ—¥å…¶ä»–è½¦è¾†å…¬é‡Œæ•°
 			jsonObj.put("otherkm", map.get("otherkm") == null ? "" : map.get("otherkm"));
-			//Ôç¿ÕÊ»
+			//æ—©ç©ºé©¶
 			jsonObj.put("emptytimesam", map.get("emptytimesam") == null ? "" : map.get("emptytimesam"));
-			//Íí¿ÕÊ»
+			//æ™šç©ºé©¶
 			jsonObj.put("emptytimespm", map.get("emptytimespm") == null ? "" : map.get("emptytimespm"));
-			//ÈÕ½±·£½ğ¶î
+			//æ—¥å¥–ç½šé‡‘é¢
 			jsonObj.put("bonuspenalty", map.get("bonuspenalty") == null ? "" : map.get("bonuspenalty"));
-			//ÖÜÄ©¼Ó°à´ÎÊı
+			//å‘¨æœ«åŠ ç­æ¬¡æ•°
 			jsonObj.put("wkdovertime", map.get("wkdovertime") == null ? "" : map.get("wkdovertime"));
-			//°à³µÃ¿ÌìÆğÊ¼Àï³Ì
+			//ç­è½¦æ¯å¤©èµ·å§‹é‡Œç¨‹
 			jsonObj.put("def1", map.get("def1") == null ? "" : map.get("def1"));
-			//°à³µÃ¿Ìì½ØÖ¹Àï³Ì
+			//ç­è½¦æ¯å¤©æˆªæ­¢é‡Œç¨‹
 			jsonObj.put("def2", map.get("def2") == null ? "" : map.get("def2"));
-			//ÖÆµ¥ÈË
+			//åˆ¶å•äºº
 			jsonObj.put("user_name", map.get("user_name") == null ? "" : map.get("user_name"));
-			//×´Ì¬
+			//çŠ¶æ€
 			Integer approvestatus = Integer.valueOf(map.get("approvestatus").toString());
 			switch(approvestatus) {
-			case -1://×ÔÓÉ
-				jsonObj.put("approvestatus", "×ÔÓÉ");
+			case -1://è‡ªç”±
+				jsonObj.put("approvestatus", "è‡ªç”±");
 				break;
-			case 3://Ìá½»
-				jsonObj.put("approvestatus", "ÒÑÌá½»");
+			case 3://æäº¤
+				jsonObj.put("approvestatus", "å·²æäº¤");
 				break;
-			case 1://ÒÑÉóÅú
-				jsonObj.put("approvestatus", "ÒÑÉóÅú");
+			case 1://å·²å®¡æ‰¹
+				jsonObj.put("approvestatus", "å·²å®¡æ‰¹");
 				break;
 			default:
-				jsonObj.put("approvestatus", "´íÎó");
+				jsonObj.put("approvestatus", "é”™è¯¯");
 				break;
 			}
 			jsonArray.put(jsonObj);
@@ -296,52 +296,52 @@ public class OtherInfoServlet extends HttpServlet {
 	}
 		
 	/**
-	 * ĞÂÔöÆäËûĞÅÏ¢Ìî±¨
-	 * ²ÎÊı£ºJSONObject json
+	 * æ–°å¢å…¶ä»–ä¿¡æ¯å¡«æŠ¥
+	 * å‚æ•°ï¼šJSONObject json
 	 * @return JSONObject
 	 * @throws JSONException 
 	 */
 	private JSONObject addOtherInfo(JSONObject json) throws JSONException {
-		//ÓÃÓÚ·µ»ØµÄJSONObject
+		//ç”¨äºè¿”å›çš„JSONObject
 		JSONObject result = new JSONObject();
-		String infodate = json.getString("infodate"); // ÈÕÆÚ
-		JSONObject userjsonObject = json.getJSONObject("userjson"); // µÇÂ¼ÈË
-		String cuserid = userjsonObject.getString("cuserid"); //µ±Ç°µÇÂ¼ÈËÖ÷¼ü
-		String pk_org = userjsonObject.getString("pk_org"); //µ±Ç°µÇÂ¼ÈËËùÊô×éÖ¯
-		String pk_group = userjsonObject.getString("pk_group"); //µ±Ç°µÇÂ¼ÈËËùÊô¼¯ÍÅ
-		//ĞÂ½¨Ö÷±íVO	
+		String infodate = json.getString("infodate"); // æ—¥æœŸ
+		JSONObject userjsonObject = json.getJSONObject("userjson"); // ç™»å½•äºº
+		String cuserid = userjsonObject.getString("cuserid"); //å½“å‰ç™»å½•äººä¸»é”®
+		String pk_org = userjsonObject.getString("pk_org"); //å½“å‰ç™»å½•äººæ‰€å±ç»„ç»‡
+		String pk_group = userjsonObject.getString("pk_group"); //å½“å‰ç™»å½•äººæ‰€å±é›†å›¢
+		//æ–°å»ºä¸»è¡¨VO	
 		OtherInfoVO hvo = new OtherInfoVO();
 		hvo.setStatus(VOStatus.NEW);
-		//ÉèÖÃ¼¯ÍÅ--È¡ÓÃ»§ËùÊô¼¯ÍÅ
+		//è®¾ç½®é›†å›¢--å–ç”¨æˆ·æ‰€å±é›†å›¢
 		hvo.setAttributeValue("pk_group", pk_group);
-		//ÉèÖÃ×éÖ¯--È¡ÓÃ»§ËùÊô×éÖ¯
+		//è®¾ç½®ç»„ç»‡--å–ç”¨æˆ·æ‰€å±ç»„ç»‡
 		hvo.setAttributeValue("pk_org", pk_org);
-		//ÉèÖÃ´´½¨ÈË
+		//è®¾ç½®åˆ›å»ºäºº
 		hvo.setAttributeValue("creator", cuserid);
-		//ÉèÖÃµ¥¾İÈÕÆÚ
+		//è®¾ç½®å•æ®æ—¥æœŸ
 		hvo.setAttributeValue("billdate", new UFDate());
-		//ÉèÖÃµ¥¾İ×´Ì¬
+		//è®¾ç½®å•æ®çŠ¶æ€
 		hvo.setAttributeValue("approvestatus", BillStatusEnum.FREE.value());
 		
-		//ÉèÖÃÈÕÆÚ
+		//è®¾ç½®æ—¥æœŸ
 		hvo.setAttributeValue("infodate", new UFDate(infodate));
-		//ÉèÖÃÈÕ¼ÓÓÍÉı
+		//è®¾ç½®æ—¥åŠ æ²¹å‡
 		hvo.setAttributeValue("dayfuel", new UFDouble(json.getString("dayfuel")));
-		//ÉèÖÃ½ğ¶î
+		//è®¾ç½®é‡‘é¢
 		hvo.setAttributeValue("amount", new UFDouble(json.getString("amount")));
-		//ÉèÖÃÈÕÆäËû³µÁ¾¹«ÀïÊı
+		//è®¾ç½®æ—¥å…¶ä»–è½¦è¾†å…¬é‡Œæ•°
 		hvo.setAttributeValue("otherkm", new UFDouble(json.getString("otherkm")));
-		//ÉèÖÃÔç¿ÕÊ»
+		//è®¾ç½®æ—©ç©ºé©¶
 		hvo.setAttributeValue("emptytimesam", new UFBoolean(json.getBoolean("emptytimesam")));
-		//ÉèÖÃÍí¿ÕÊ»
+		//è®¾ç½®æ™šç©ºé©¶
 		hvo.setAttributeValue("emptytimespm", new UFBoolean(json.getBoolean("emptytimespm")));
-		//ÉèÖÃÈÕ½±·£½ğ¶î
+		//è®¾ç½®æ—¥å¥–ç½šé‡‘é¢
 		hvo.setAttributeValue("bonuspenalty", new UFDouble(json.getString("bonuspenalty")));
-		//ÉèÖÃÖÜÄ©¼Ó°à´ÎÊı
+		//è®¾ç½®å‘¨æœ«åŠ ç­æ¬¡æ•°
 		hvo.setAttributeValue("wkdovertime", new UFDouble(json.getString("wkdovertime")));
-		//°à³µÃ¿ÌìÆğÊ¼Àï³Ì
+		//ç­è½¦æ¯å¤©èµ·å§‹é‡Œç¨‹
 		hvo.setAttributeValue("def1", json.getString("def1"));
-		//°à³µÃ¿Ìì½ØÖ¹Àï³Ì
+		//ç­è½¦æ¯å¤©æˆªæ­¢é‡Œç¨‹
 		hvo.setAttributeValue("def2", json.getString("def2"));
 		AggOtherInfoVO otherInfoAggVO = new AggOtherInfoVO();
 		otherInfoAggVO.setParent(hvo);
@@ -350,59 +350,59 @@ public class OtherInfoServlet extends HttpServlet {
 			InvocationInfoProxy.getInstance().setGroupId(pk_group);
 			InvocationInfoProxy.getInstance().setUserId(cuserid);
 		} catch (Exception e1) {
-			ExceptionUtils.wrappBusinessException("Í¨ÓÃ´íÎóerror"+e1.getMessage());
+			ExceptionUtils.wrappBusinessException("é€šç”¨é”™è¯¯error"+e1.getMessage());
 		}
-		//Ë¾»ú+ÈÕÆÚÎ¨Ò»Ğ£Ñé
+		//å¸æœº+æ—¥æœŸå”¯ä¸€æ ¡éªŒ
 		String checksql = "select 1 from cl_otherinfo where creator = '" + cuserid
 				+ "' and substr(infodate,0,10) = '" + infodate + "'";
 		Integer checkresult = 0;
 		try {
 			checkresult = (Integer) dao.executeQuery(checksql, new ColumnProcessor());
 		} catch (DAOException e1) {
-			ExceptionUtils.wrappBusinessException("Ìí¼ÓÆäËûĞÅÏ¢Ìî±¨ĞÅÏ¢Ê§°Ü£¡"+e1.getMessage());
+			ExceptionUtils.wrappBusinessException("æ·»åŠ å…¶ä»–ä¿¡æ¯å¡«æŠ¥ä¿¡æ¯å¤±è´¥ï¼"+e1.getMessage());
 		}
 		if(checkresult != null && checkresult == 1) {
-			ExceptionUtils.wrappBusinessException("µ±Ç°ÈÕÆÚÒÑÓĞÊı¾İ,Çë²éÑ¯ºóĞŞ¸Ä");
+			ExceptionUtils.wrappBusinessException("å½“å‰æ—¥æœŸå·²æœ‰æ•°æ®,è¯·æŸ¥è¯¢åä¿®æ”¹");
 		}
-		//ÆäËûĞÅÏ¢Ìî±¨±ê×¼½Ó¿Ú
+		//å…¶ä»–ä¿¡æ¯å¡«æŠ¥æ ‡å‡†æ¥å£
 		IOtherInfoMaintain service = (IOtherInfoMaintain) NCLocator.getInstance().lookup(IOtherInfoMaintain.class);
 		try {
-			//µ÷ÓÃĞÂÔö·½·¨
+			//è°ƒç”¨æ–°å¢æ–¹æ³•
 			AggOtherInfoVO[] aggVos = service.insert(new AggOtherInfoVO[] {otherInfoAggVO}, null);
-			//TODO: Ìá½»,Ğ£Ñé
+			//TODO: æäº¤,æ ¡éªŒ
 			result.put("success", true);
 			result.put("result", "true");
 		} catch (nc.vo.pub.BusinessException e) {
-			ExceptionUtils.wrappBusinessException("Ìí¼ÓÆäËûĞÅÏ¢Ìî±¨ĞÅÏ¢Ê§°Ü£¡"+e.getMessage());
+			ExceptionUtils.wrappBusinessException("æ·»åŠ å…¶ä»–ä¿¡æ¯å¡«æŠ¥ä¿¡æ¯å¤±è´¥ï¼"+e.getMessage());
 		}
 		return result;
 	}
 
 	/**
-	 * ¸üĞÂµ¥¾İ×´Ì¬
-	 * ²ÎÊı£ºJSONObject json
+	 * æ›´æ–°å•æ®çŠ¶æ€
+	 * å‚æ•°ï¼šJSONObject json
 	 * @return JSONObject
 	 * @throws JSONException 
 	 */
 	private JSONObject updateStatus(JSONObject json) throws JSONException {
-		//ÓÃÓÚ·µ»ØÇ°Ì¨
+		//ç”¨äºè¿”å›å‰å°
 		JSONObject result = new JSONObject();
-		// µ¥¾İÖ÷¼ü
+		// å•æ®ä¸»é”®
 		String pk_otherinfo = json.getString("pk_otherinfo");
-		// ×´Ì¬
+		// çŠ¶æ€
 		Integer status = json.getInt("status");
 		String sql = "update cl_otherinfo set approvestatus = " + status 
 				+ " where pk_otherinfo = '"+ pk_otherinfo + "'";
 		
 		try {
-			//É¾³ıÖ÷×Ó±íVOÊı×é
+			//åˆ é™¤ä¸»å­è¡¨VOæ•°ç»„
 			dao.executeUpdate(sql);
 			result.put("success", true);
 			result.put("result", "true");
 		} catch (Exception e) {
-			ExceptionUtils.wrappBusinessException("¸üĞÂµ¥¾İ×´Ì¬Ê§°Ü£¡"+e.getMessage());
+			ExceptionUtils.wrappBusinessException("æ›´æ–°å•æ®çŠ¶æ€å¤±è´¥ï¼"+e.getMessage());
 		}
-		//·µ»Ø
+		//è¿”å›
 		return result;
 	}
 	

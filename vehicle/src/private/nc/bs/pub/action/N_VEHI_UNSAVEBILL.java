@@ -18,7 +18,7 @@ public class N_VEHI_UNSAVEBILL extends AbstractPfAction<AggVehicleMessageVO> {
 			Object userObj) {
 		CompareAroundProcesser<AggVehicleMessageVO> processor = new CompareAroundProcesser<AggVehicleMessageVO>(
 				VehiclePluginPoint.UNSEND_APPROVE);
-		// TODO ÔÚ´Ë´¦Ìí¼ÓÇ°ºó¹æÔò
+		// TODO åœ¨æ­¤å¤„æ·»åŠ å‰åè§„åˆ™
 		processor.addBeforeRule(new UncommitStatusCheckRule());
 
 		return processor;

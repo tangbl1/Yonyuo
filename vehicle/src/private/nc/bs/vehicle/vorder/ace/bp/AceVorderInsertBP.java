@@ -7,7 +7,7 @@ import nc.impl.pubapp.pattern.rule.IRule;
 import nc.vo.vehicle.vorder.AggVorderHVO;
 
 /**
- * ±ê×¼µ¥¾İĞÂÔöBP
+ * æ ‡å‡†å•æ®æ–°å¢BP
  */
 public class AceVorderInsertBP {
 
@@ -22,12 +22,12 @@ public class AceVorderInsertBP {
 	}
 
 	/**
-	 * ĞÂÔöºó¹æÔò
+	 * æ–°å¢åè§„åˆ™
 	 * 
 	 * @param processor
 	 */
 	private void addAfterRule(AroundProcesser<AggVorderHVO> processor) {
-		// TODO ĞÂÔöºó¹æÔò
+		// TODO æ–°å¢åè§„åˆ™
 		IRule<AggVorderHVO> rule = null;
 		rule = new nc.bs.pubapp.pub.rule.BillCodeCheckRule();
 		((nc.bs.pubapp.pub.rule.BillCodeCheckRule) rule).setCbilltype("VORD");
@@ -40,12 +40,12 @@ public class AceVorderInsertBP {
 	}
 
 	/**
-	 * ĞÂÔöÇ°¹æÔò
+	 * æ–°å¢å‰è§„åˆ™
 	 * 
 	 * @param processor
 	 */
 	private void addBeforeRule(AroundProcesser<AggVorderHVO> processer) {
-		// TODO ĞÂÔöÇ°¹æÔò
+		// TODO æ–°å¢å‰è§„åˆ™
 		IRule<AggVorderHVO> rule = null;
 		rule = new nc.bs.pubapp.pub.rule.FillInsertDataRule();
 		processer.addBeforeRule(rule);

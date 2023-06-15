@@ -5,7 +5,7 @@ import nc.vo.pubapp.pattern.model.meta.entity.vo.VOMetaFactory;
 
 public class VorderHVO extends SuperVO {
 
-	//¹¹Ôì·½·¨
+	//æ„é€ æ–¹æ³•
 	public VorderHVO() {
 		super();
 	}
@@ -205,9 +205,9 @@ public class VorderHVO extends SuperVO {
 	}
     
 	/**
-	 * <p>·µ»Ø±íÃû³Æ.
+	 * <p>è¿”å›è¡¨åç§°.
 	 * <p>
-	 * ´´½¨ÈÕÆÚ:
+	 * åˆ›å»ºæ—¥æœŸ:
 	 * @return java.lang.String
 	 */
 	@Override

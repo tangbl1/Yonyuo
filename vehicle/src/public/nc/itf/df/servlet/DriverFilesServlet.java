@@ -49,33 +49,33 @@ public class DriverFilesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	/**
-	 * ³µÁ¾»ù±¾ĞÅÏ¢Ë¾»úÒ³Ãæservlet
-	 * ÓÃÓÚ´¦ÀíË¾»úÒ³ÃæÇëÇó
+	 * è½¦è¾†åŸºæœ¬ä¿¡æ¯å¸æœºé¡µé¢servlet
+	 * ç”¨äºå¤„ç†å¸æœºé¡µé¢è¯·æ±‚
 	 * @author 
 	 * @date 2019-11-20
 	 * @param 
-	 * 	req Ç°Ì¨Ò³ÃæÇëÇó
-	 * 	resp ·µ»ØĞÅÏ¢
+	 * 	req å‰å°é¡µé¢è¯·æ±‚
+	 * 	resp è¿”å›ä¿¡æ¯
 	 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		JSONObject result = new JSONObject();	 //·µ»ØÇ°Ì¨½á¹û
-		String errMsg = "";		//´íÎóĞÅÏ¢
-		String datasource = "";//Êı¾İÔ´
+		JSONObject result = new JSONObject();	 //è¿”å›å‰å°ç»“æœ
+		String errMsg = "";		//é”™è¯¯ä¿¡æ¯
+		String datasource = "";//æ•°æ®æº
 		try {
 			datasource = new GetDatasourceName().doreadxml();
 		} catch (JDOMException e) {
-			throw new RuntimeException("ÅäÖÃÎÄ¼ş»ñÈ¡Êı¾İÔ´Ãû³ÆÊ§°Ü£¡");
+			throw new RuntimeException("é…ç½®æ–‡ä»¶è·å–æ•°æ®æºåç§°å¤±è´¥ï¼");
 		}
-		// ±ØĞë·ÅÔÚÊ×ĞĞ
-		InvocationInfoProxy.getInstance().setUserDataSource(datasource);	//Ö¸¶¨±¾´Î²Ù×÷Êı¾İµÄÊı¾İÔ´
-		req.setCharacterEncoding("utf-8");		//ÉèÖÃÇëÇóµÄ±àÂëÎªUTF-8
-		String method = req.getParameter("method");	//»ñÈ¡Ç°Ì¨´«µİmethod±êÊ¶£¬ÓÃÓÚÇø·Ö´¦Àí·½·¨
-		String json = req.getParameter("json");	//»ñÈ¡Ç°Ì¨´«µİ¹ıÀ´µÄ²ÎÊıJSON¶ÔÏó
+		// å¿…é¡»æ”¾åœ¨é¦–è¡Œ
+		InvocationInfoProxy.getInstance().setUserDataSource(datasource);	//æŒ‡å®šæœ¬æ¬¡æ“ä½œæ•°æ®çš„æ•°æ®æº
+		req.setCharacterEncoding("utf-8");		//è®¾ç½®è¯·æ±‚çš„ç¼–ç ä¸ºUTF-8
+		String method = req.getParameter("method");	//è·å–å‰å°ä¼ é€’methodæ ‡è¯†ï¼Œç”¨äºåŒºåˆ†å¤„ç†æ–¹æ³•
+		String json = req.getParameter("json");	//è·å–å‰å°ä¼ é€’è¿‡æ¥çš„å‚æ•°JSONå¯¹è±¡
 		if(StringUtils.isBlank(method))
-			errMsg = "methodÎª¿Õ£¬²ÎÊı´«µİÒì³£!";
+			errMsg = "methodä¸ºç©ºï¼Œå‚æ•°ä¼ é€’å¼‚å¸¸!";
 		if(StringUtils.isBlank(json))
-			errMsg = "jsonÎª¿Õ£¬²ÎÊı´«µİÒì³£!";
+			errMsg = "jsonä¸ºç©ºï¼Œå‚æ•°ä¼ é€’å¼‚å¸¸!";
 		JSONObject jsonObject = new JSONObject();
 		try {
 			jsonObject = new JSONObject(json); //String->JSONObject
@@ -83,34 +83,34 @@ public class DriverFilesServlet extends HttpServlet {
 			ExceptionUtils.wrappException(e1);
 		}	
 		
-		// ½øĞĞNCĞéÄâµÇÂ¼
-		String username = "hwapp";		//ÓÃ»§Ãû
-		String password = "asdqwe123";	//ÃÜÂë
+		// è¿›è¡ŒNCè™šæ‹Ÿç™»å½•
+		String username = "hwapp";		//ç”¨æˆ·å
+		String password = "asdqwe123";	//å¯†ç 
 		IFwLogin loginService = (IFwLogin) NCLocator.getInstance().lookup(IFwLogin.class);
 		byte[] token = loginService.login(username, password, null);
 		NetStreamContext.setToken(token);
 		
-		//Í¨¹ıÓÃ»§±àÂë²éÑ¯¶ÔÓ¦cuserid,pk_group
+		//é€šè¿‡ç”¨æˆ·ç¼–ç æŸ¥è¯¢å¯¹åº”cuserid,pk_group
 		String sqluserid = "select cuserid,pk_group from sm_user where user_code='" + username + "'";
 		Map<String,String> map = null;
 		try {
 			map = (Map<String,String>) dao.executeQuery(sqluserid, new MapProcessor());
 			if(map==null || map.size() <= 0)
-				errMsg = "²éÑ¯hwappÓÃ»§Ê§°Ü£¬ÇëÁªÏµ¹ÜÀíÔ±£¡";
+				errMsg = "æŸ¥è¯¢hwappç”¨æˆ·å¤±è´¥ï¼Œè¯·è”ç³»ç®¡ç†å‘˜ï¼";
 		} catch (Exception e) {
-			errMsg = "cuserid,pk_group²éÑ¯Ê§°Ü£¡";
+			errMsg = "cuserid,pk_groupæŸ¥è¯¢å¤±è´¥ï¼";
 			ExceptionUtils.wrappBusinessException(errMsg);
 		}
 		
 		String userid = map.get("cuserid");
 		String pk_group = map.get("pk_group");
 		InvocationInfoProxy.getInstance().setUserCode(username);
-		InvocationInfoProxy.getInstance().setGroupId(pk_group);// ÈËÔ±»ù±¾ĞÅÏ¢±í
+		InvocationInfoProxy.getInstance().setGroupId(pk_group);// äººå‘˜åŸºæœ¬ä¿¡æ¯è¡¨
 		InvocationInfoProxy.getInstance().setUserId(userid);
 		
 		
 		try {
-			//²éÑ¯¶©µ¥
+			//æŸ¥è¯¢è®¢å•
 			if ("add".equals(method)) {
 				result = addDriver(jsonObject);
 			} else if ("query".equals(method)) {
@@ -134,7 +134,7 @@ public class DriverFilesServlet extends HttpServlet {
 				result.put("success", false);
 				result.put("errMsg", errMsg);
 			} catch (JSONException e) {
-				ExceptionUtils.wrappBusinessException("Ê§°ÜµÄresult¸³ÖµÊ§°Ü!"+e.getMessage());
+				ExceptionUtils.wrappBusinessException("å¤±è´¥çš„resultèµ‹å€¼å¤±è´¥!"+e.getMessage());
 			}	
 		}
 		
@@ -145,43 +145,43 @@ public class DriverFilesServlet extends HttpServlet {
 	}
 	
 	/**
-	 * Ë¾»úµµ°¸²éÑ¯
+	 * å¸æœºæ¡£æ¡ˆæŸ¥è¯¢
 	 * @param JSONObject jsonObject
 	 * @return JSONObject
 	 * @throws DAOException 
 	 * @throws JSONException 
 	 */
 	private JSONObject queryDriver(JSONObject jsonObject) throws DAOException, JSONException {
-		JSONArray jsonArr = new JSONArray(); //ÓÃÓÚ´æ´¢µ¥¾İĞÅÏ¢¼¯ºÏ
+		JSONArray jsonArr = new JSONArray(); //ç”¨äºå­˜å‚¨å•æ®ä¿¡æ¯é›†åˆ
 		JSONObject result = new JSONObject();
 		JSONArray orgArray = new JSONArray();
-		//²éÑ¯¸ÚÎ»ÊÇË¾»úµÄÓÃ»§Ö÷¼üºÍÃû×ÖµÄsql
+		//æŸ¥è¯¢å²—ä½æ˜¯å¸æœºçš„ç”¨æˆ·ä¸»é”®å’Œåå­—çš„sql
 		/*String sql= " select sm_user.cuserid ,sm_user. user_name  "
 				+ " from sm_user"
 				+ " left join bd_psnjob on bd_psnjob.pk_psndoc=sm_user.pk_psndoc"
 				+ " left join om_post   on om_post.pk_post=bd_psnjob.pk_post  "
-				+ " where om_post.postname='Ë¾»ú'";*/
+				+ " where om_post.postname='å¸æœº'";*/
 		String sql = "select user_name, cuserid from sm_user where dr = 0 "
 				+ "and pk_psndoc in (select pk_psndoc from bd_psnjob where dr = 0 "
-				+ "and pk_post in (select pk_post from om_post where postname = 'Ë¾»ú') and dr = 0)";
-		//²éÑ¯dr = 0µÄÈËÁ¦×ÊÔ´×éÖ¯µÄsql(ÆôÓÃ×´Ì¬µÈÓÚ2¼´ÎªÒÑÆôÓÃµÄ),¸ù¾İ±àÂëÅÅĞò
+				+ "and pk_post in (select pk_post from om_post where postname = 'å¸æœº') and dr = 0)";
+		//æŸ¥è¯¢dr = 0çš„äººåŠ›èµ„æºç»„ç»‡çš„sql(å¯ç”¨çŠ¶æ€ç­‰äº2å³ä¸ºå·²å¯ç”¨çš„),æ ¹æ®ç¼–ç æ’åº
 		String sql_org="select name, pk_hrorg  from org_hrorg where dr=0 and enablestate =2 order by code";
-		//´æ·Å²éÑ¯µ½µÄË¾»úĞÅÏ¢µÄ¼¯ºÏ
+		//å­˜æ”¾æŸ¥è¯¢åˆ°çš„å¸æœºä¿¡æ¯çš„é›†åˆ
 		List<Map<String,String>> list= (List<Map<String, String>>) dao.executeQuery(sql, new  MapListProcessor());
 		List<Map<String,String>> list_org = (List<Map<String, String>>) dao.executeQuery(sql_org, new  MapListProcessor());
-		//Ñ­»·»ñÈ¡µ¥¾İĞÅÏ¢²¢´æ´¢³Éjson¶ÔÏó
+		//å¾ªç¯è·å–å•æ®ä¿¡æ¯å¹¶å­˜å‚¨æˆjsonå¯¹è±¡
 		for (Map<String, String> map : list) {
 			JSONObject jsonObj = new JSONObject();
-			jsonObj.put("cuserid", map.get("cuserid"));//ÓÃ»§Ö÷¼ü
-			jsonObj.put("user_name", map.get("user_name"));//ĞÕÃû	
+			jsonObj.put("cuserid", map.get("cuserid"));//ç”¨æˆ·ä¸»é”®
+			jsonObj.put("user_name", map.get("user_name"));//å§“å	
 			jsonArr.put(jsonObj);
 		}
-		//±éÀúÈËÁ¦×ÊÔ´×éÖ¯½á¹û¼¯
+		//éå†äººåŠ›èµ„æºç»„ç»‡ç»“æœé›†
 		for (Map<String,String> map : list_org) {
 			JSONObject orgJson = new JSONObject();
-			//×éÖ¯Ãû³Æ
+			//ç»„ç»‡åç§°
 			orgJson.put("name", map.get("name"));
-			//ÈËÁ¦×ÊÔ´×éÖ¯Ö÷¼ü
+			//äººåŠ›èµ„æºç»„ç»‡ä¸»é”®
 			orgJson.put("pk_hrorg", map.get("pk_hrorg"));
 			orgArray.put(orgJson); 
 		}
@@ -192,86 +192,86 @@ public class DriverFilesServlet extends HttpServlet {
 	}
 	
 	/**
-	 * Ë¾»úµµ°¸Ìí¼Ó 
+	 * å¸æœºæ¡£æ¡ˆæ·»åŠ  
 	 * @param JSONObject jsonObject
 	 * @return JSONObject
 	 * @throws JSONException 
 	 */
 	private JSONObject addDriver(JSONObject jsonObject) throws JSONException {
-		JSONArray jsonArr = new JSONArray(); //ÓÃÓÚ´æ´¢µ¥¾İĞÅÏ¢¼¯ºÏ
+		JSONArray jsonArr = new JSONArray(); //ç”¨äºå­˜å‚¨å•æ®ä¿¡æ¯é›†åˆ
 		JSONObject result = new JSONObject();
-		JSONObject userjsonObject = jsonObject.getJSONObject("userjson"); // µÇÂ¼ÈË
-		//ÓÃ»§Ö÷¼ü
+		JSONObject userjsonObject = jsonObject.getJSONObject("userjson"); // ç™»å½•äºº
+		//ç”¨æˆ·ä¸»é”®
 		String cuserid = userjsonObject.getString("cuserid");;
-		//ÓÃ»§×éÖ¯
+		//ç”¨æˆ·ç»„ç»‡
 		String pk_org = jsonObject.getString("pk_org");;
-		//ÓÃ»§¼¯ÍÅ
+		//ç”¨æˆ·é›†å›¢
 		String pk_group = userjsonObject.getString("pk_group");
 		
-		String dname = jsonObject.getString("driver"); // ÈËÔ±ĞÕÃû
-		String userid = jsonObject.getString("cuserid"); // ÈËÔ±Ö÷¼ü´æÎª×Ô¶¨ÒåÏî1
-		String dphone = jsonObject.getString("tel"); // µç»°
-		String dage = jsonObject.getString("driving_age"); // ¼İÁä
-		String iexpiredate = jsonObject.getString("iexpiredate");// ¼İÊ»Ö¤ÓĞĞ§ÆÚ
-		String dvtype = jsonObject.getString("dtype");// ×¼¼İ³µĞÍ
-		String dstate = jsonObject.getString("statue"); // ×´Ì¬
-		String starlevel = jsonObject.getString("star"); // ĞÇ¼¶
-		String image = jsonObject.getString("image"); // Í¼Æ¬
-		String fix_road_num = jsonObject.getString("fix_road_num"); // ¹Ì¶¨¹«Â·Êı
-		String driver_addr = jsonObject.getString("driver_addr"); // Ë¾»úµØÖ·
+		String dname = jsonObject.getString("driver"); // äººå‘˜å§“å
+		String userid = jsonObject.getString("cuserid"); // äººå‘˜ä¸»é”®å­˜ä¸ºè‡ªå®šä¹‰é¡¹1
+		String dphone = jsonObject.getString("tel"); // ç”µè¯
+		String dage = jsonObject.getString("driving_age"); // é©¾é¾„
+		String iexpiredate = jsonObject.getString("iexpiredate");// é©¾é©¶è¯æœ‰æ•ˆæœŸ
+		String dvtype = jsonObject.getString("dtype");// å‡†é©¾è½¦å‹
+		String dstate = jsonObject.getString("statue"); // çŠ¶æ€
+		String starlevel = jsonObject.getString("star"); // æ˜Ÿçº§
+		String image = jsonObject.getString("image"); // å›¾ç‰‡
+		String fix_road_num = jsonObject.getString("fix_road_num"); // å›ºå®šå…¬è·¯æ•°
+		String driver_addr = jsonObject.getString("driver_addr"); // å¸æœºåœ°å€
 		UFDate date = null;
 		if (StringUtils.isNotBlank(iexpiredate)) {
 			iexpiredate = iexpiredate.replace("-", "/");
-			//ÉèÖÃÈÕÆÚ¸ñÊ½
+			//è®¾ç½®æ—¥æœŸæ ¼å¼
 			SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy/MM/dd");
 			try {
-				date = new UFDate(timeFormat.parse(iexpiredate));// ¼İÊ»Ö¤ÓĞĞ§ÆÚ
+				date = new UFDate(timeFormat.parse(iexpiredate));// é©¾é©¶è¯æœ‰æ•ˆæœŸ
 			} catch (java.text.ParseException e) {
-				ExceptionUtils.wrappBusinessException("ÈÕÆÚ¸ñÊ½×ª»»Ê§°Ü£¡"+e.getMessage());
+				ExceptionUtils.wrappBusinessException("æ—¥æœŸæ ¼å¼è½¬æ¢å¤±è´¥ï¼"+e.getMessage());
 			}
 		}
-		//ĞÂ½¨aggVO
+		//æ–°å»ºaggVO
 		AggDriverFiles aggvo = new AggDriverFiles();
-		//ĞÂÔöË¾»úÖ÷±í£¬²¢¸³Öµ
+		//æ–°å¢å¸æœºä¸»è¡¨ï¼Œå¹¶èµ‹å€¼
 		DriverFiles dfvo = new DriverFiles();
-		dfvo.setAttributeValue("dname", dname);// ĞÕÃû
-		dfvo.setAttributeValue("vdef0", userid);// ÈËÔ±Ö÷¼ü
-		dfvo.setAttributeValue("dphone", dphone);// µç»°
-		dfvo.setAttributeValue("dage", dage);// ¼İÁä
-		dfvo.setAttributeValue("dexpiredate", date);// ¼İÊ»Ö¤ÓĞĞ§ÆÚ
-		dfvo.setAttributeValue("dvtype", dvtype);// ×¼¼İ³µĞÍ
-		dfvo.setAttributeValue("dstate", dstate);// ×´Ì¬
-		dfvo.setAttributeValue("starlevel", starlevel);// ĞÇ¼¶
-		dfvo.setAttributeValue("dphoto", image);// Í¼Æ¬
-		dfvo.setAttributeValue("pk_group", pk_group);//¼¯ÍÅ
-		dfvo.setAttributeValue("pk_org", pk_org);//×éÖ¯
+		dfvo.setAttributeValue("dname", dname);// å§“å
+		dfvo.setAttributeValue("vdef0", userid);// äººå‘˜ä¸»é”®
+		dfvo.setAttributeValue("dphone", dphone);// ç”µè¯
+		dfvo.setAttributeValue("dage", dage);// é©¾é¾„
+		dfvo.setAttributeValue("dexpiredate", date);// é©¾é©¶è¯æœ‰æ•ˆæœŸ
+		dfvo.setAttributeValue("dvtype", dvtype);// å‡†é©¾è½¦å‹
+		dfvo.setAttributeValue("dstate", dstate);// çŠ¶æ€
+		dfvo.setAttributeValue("starlevel", starlevel);// æ˜Ÿçº§
+		dfvo.setAttributeValue("dphoto", image);// å›¾ç‰‡
+		dfvo.setAttributeValue("pk_group", pk_group);//é›†å›¢
+		dfvo.setAttributeValue("pk_org", pk_org);//ç»„ç»‡
 		dfvo.setAttributeValue("cuserId", cuserid);
-		dfvo.setAttributeValue("fix_road_num", fix_road_num);// ¹Ì¶¨¹«Â·Êı
-		dfvo.setAttributeValue("driver_addr", driver_addr);// Ë¾»úµØÖ·
+		dfvo.setAttributeValue("fix_road_num", fix_road_num);// å›ºå®šå…¬è·¯æ•°
+		dfvo.setAttributeValue("driver_addr", driver_addr);// å¸æœºåœ°å€
 		aggvo.setParent(dfvo);
-		// ÉèÖÃGroupId
+		// è®¾ç½®GroupId
 		InvocationInfoProxy.getInstance().setGroupId(
 				dfvo.getAttributeValue("pk_group").toString());
-		//ÉèÖÃ´´½¨ÈË
+		//è®¾ç½®åˆ›å»ºäºº
 		InvocationInfoProxy.getInstance().setUserId(
 				dfvo.getAttributeValue("cuserId").toString());
-		//ĞÂ½¨AggVoÊı×é²¢¸³Öµ
+		//æ–°å»ºAggVoæ•°ç»„å¹¶èµ‹å€¼
 		AggDriverFiles[] aggvos = { aggvo };
-		//Ë¾»úµÄ±ê×¼½Ó¿Ú
+		//å¸æœºçš„æ ‡å‡†æ¥å£
 		IDriverFilesMaintain iDriverFilesMaintain = (IDriverFilesMaintain) NCLocator
 				.getInstance().lookup(IDriverFilesMaintain.class);
 		
 		try {
 			AggDriverFiles[] aggdfVO = iDriverFilesMaintain.insert(aggvos, null);
 		} catch (BusinessException e) {
-			ExceptionUtils.wrappBusinessException("³µÁ¾µµ°¸Ìí¼ÓÊ§°Ü£¡"+e.getMessage());
+			ExceptionUtils.wrappBusinessException("è½¦è¾†æ¡£æ¡ˆæ·»åŠ å¤±è´¥ï¼"+e.getMessage());
 		}
 		result.put("result", "true");
 		return result;	
 	}
 
 	/**
-	 * Ë¾»úµµ°¸²éÔƒ
+	 * å¸æœºæ¡£æ¡ˆæŸ¥è©¢
 	 * @param JSONObject jsonObject
 	 * @return JSONObject
 	 * @throws DAOException 
@@ -279,54 +279,54 @@ public class DriverFilesServlet extends HttpServlet {
 	 * @throws JSONException 
 	 */
 	private JSONObject queryDrivers(JSONObject json) throws DAOException, UnsupportedEncodingException, JSONException {
-		boolean ISDRIVER = false;	//ÊÇ·ñÊÇË¾»ú±êÊ¶·û
-		JSONObject userjsonObject = json.getJSONObject("userjson"); // µÇÂ¼ÈË
-		String postname = userjsonObject.getString("postname"); //µ±Ç°µÇÂ¼ÈË¸ÚÎ»
-		String cuserid = userjsonObject.getString("cuserid"); //µ±Ç°µÇÂ¼ÈËÖ÷¼ü
-		JSONArray jsonArr = new JSONArray(); //ÓÃÓÚ´æ´¢µ¥¾İĞÅÏ¢¼¯ºÏ
+		boolean ISDRIVER = false;	//æ˜¯å¦æ˜¯å¸æœºæ ‡è¯†ç¬¦
+		JSONObject userjsonObject = json.getJSONObject("userjson"); // ç™»å½•äºº
+		String postname = userjsonObject.getString("postname"); //å½“å‰ç™»å½•äººå²—ä½
+		String cuserid = userjsonObject.getString("cuserid"); //å½“å‰ç™»å½•äººä¸»é”®
+		JSONArray jsonArr = new JSONArray(); //ç”¨äºå­˜å‚¨å•æ®ä¿¡æ¯é›†åˆ
 		JSONObject result = new JSONObject();
-		Integer maxcount = json.getInt("maxcount");//×î´óÊıÁ¿
-		Integer mincount = json.getInt("mincount");//×îĞ¡ÊıÁ¿
-		if("Ë¾»ú".equals(postname)){
+		Integer maxcount = json.getInt("maxcount");//æœ€å¤§æ•°é‡
+		Integer mincount = json.getInt("mincount");//æœ€å°æ•°é‡
+		if("å¸æœº".equals(postname)){
 			ISDRIVER = true;
 		}
 		
 		List<Map<String, Object>> mapArrJSON = new ArrayList<Map<String, Object>>();
-		//²éÑ¯ËùÓĞdr=0µÄË¾»úµµ°¸£¨·ÖÒ³²éÑ¯£©
+		//æŸ¥è¯¢æ‰€æœ‰dr=0çš„å¸æœºæ¡£æ¡ˆï¼ˆåˆ†é¡µæŸ¥è¯¢ï¼‰
 		String sql ="SELECT *from (SELECT ROWNUM AS rowno1, t.*from "
 				+ "(select * from cl_driver where dr = 0 "
 				+((ISDRIVER) ? "and vdef1='"+cuserid+"'" : "")
 				+ "order by ts desc)"
 				+ " t where ROWNUM < ="+maxcount+") c WHERE c.rowno1 > "+mincount;
-		//Ö´ĞĞsql²¢¸³Öµ¸ølist¼¯ºÏ
+		//æ‰§è¡Œsqlå¹¶èµ‹å€¼ç»™listé›†åˆ
 		List<Map<String,String>> list= (List<Map<String, String>>) dao.executeQuery(sql, new  MapListProcessor());
-		//¶Ô¼¯ºÏ½øĞĞ½øĞĞ±éÀú
+		//å¯¹é›†åˆè¿›è¡Œè¿›è¡Œéå†
 		for (Map<String, String> map : list) {
 			JSONObject jsonObj = new JSONObject();			
-			jsonObj.put("pk_driver", map.get("pk_driver"));//Ë¾»úÖ÷æI
-			jsonObj.put("dname", map.get("dname"));//ĞÕÃû
-			jsonObj.put("dphone", map.get("dphone"));//µç»°
-			jsonObj.put("dage", map.get("dage"));//¼İÁä
-			jsonObj.put("dexpiredate",map.get("dexpiredate").toString().substring(0, 10));// ¼İÊ»Ö¤ÓĞĞ§ÆÚ£¨ÄêÔÂÈÕ£©
-			jsonObj.put("dvtype", map.get("dvtype"));// ×¼¼İ³µĞÍ
+			jsonObj.put("pk_driver", map.get("pk_driver"));//å¸æœºä¸»éµ
+			jsonObj.put("dname", map.get("dname"));//å§“å
+			jsonObj.put("dphone", map.get("dphone"));//ç”µè¯
+			jsonObj.put("dage", map.get("dage"));//é©¾é¾„
+			jsonObj.put("dexpiredate",map.get("dexpiredate").toString().substring(0, 10));// é©¾é©¶è¯æœ‰æ•ˆæœŸï¼ˆå¹´æœˆæ—¥ï¼‰
+			jsonObj.put("dvtype", map.get("dvtype"));// å‡†é©¾è½¦å‹
 			String dstate = map.get("dstate");
-			jsonObj.put("dstate", dstate);// ×´Ì¬
-			jsonObj.put("starlevel", map.get("starlevel"));// ĞÇ¼¶
+			jsonObj.put("dstate", dstate);// çŠ¶æ€
+			jsonObj.put("starlevel", map.get("starlevel"));// æ˜Ÿçº§
 			String dstateName = "";
 			if("1".equals(dstate)){
-				dstateName = "Öµ°à";
+				dstateName = "å€¼ç­";
 			}else if("2".equals(dstate)){
-				dstateName = "ĞİÏ¢";
+				dstateName = "ä¼‘æ¯";
 			}else if("3".equals(dstate)){
-				dstateName = "ÔÚ¸Ú";
+				dstateName = "åœ¨å²—";
 			}
-			jsonObj.put("dstateName", dstateName);// ĞÇ¼¶
+			jsonObj.put("dstateName", dstateName);// æ˜Ÿçº§
 			Object img = map.get("dphoto");
 			byte[] byte_img = (byte[]) img;
 			String imgDatas = new String(byte_img,"UTF-8");
-			jsonObj.put("dphoto", imgDatas);// Í¼Æ¬
-			jsonObj.put("fix_road_num", map.get("fix_road_num")==null?"":map.get("fix_road_num"));//¹Ì¶¨¹«Â·Êı
-			jsonObj.put("driver_addr", map.get("driver_addr")==null?"":map.get("driver_addr"));//Ë¾»úµØÖ·
+			jsonObj.put("dphoto", imgDatas);// å›¾ç‰‡
+			jsonObj.put("fix_road_num", map.get("fix_road_num")==null?"":map.get("fix_road_num"));//å›ºå®šå…¬è·¯æ•°
+			jsonObj.put("driver_addr", map.get("driver_addr")==null?"":map.get("driver_addr"));//å¸æœºåœ°å€
 			jsonArr.put(jsonObj);
 		}
 		result.put("values", jsonArr);
@@ -335,76 +335,76 @@ public class DriverFilesServlet extends HttpServlet {
 	}
 
 	/**
-	 * Ë¾»úµµ°¸ÏêÇé²éÑ¯
+	 * å¸æœºæ¡£æ¡ˆè¯¦æƒ…æŸ¥è¯¢
 	 * @param JSONObject jsonObject
 	 * @return JSONObject
 	 * @throws UnsupportedEncodingException 
 	 * @throws JSONException 
 	 */
 	private JSONObject queryDetail(JSONObject json) throws UnsupportedEncodingException, JSONException {
-		JSONArray jsonArr = new JSONArray(); //ÓÃÓÚ´æ´¢µ¥¾İĞÅÏ¢¼¯ºÏ
+		JSONArray jsonArr = new JSONArray(); //ç”¨äºå­˜å‚¨å•æ®ä¿¡æ¯é›†åˆ
 		JSONObject result = new JSONObject();
-		String pk_driver = json.getString("pk_driver"); // Ö÷¼ü
+		String pk_driver = json.getString("pk_driver"); // ä¸»é”®
 		String sql = "select h.*,o.name orgname from cl_driver h left join org_hrorg o on h.pk_org=o.pk_hrorg and o.dr=0 where h.dr = '0' and h.pk_driver = '"
 				+ pk_driver + "'";
 		Map<String,String> map = new HashMap<String,String>();
 		try {
 			map = (Map<String,String>) dao.executeQuery(sql, new MapProcessor());
 		} catch (DAOException e) {
-			ExceptionUtils.wrappBusinessException("Ë¾»úÏêÇé²éÑ¯Ê§°Ü£¡"+e.getMessage());
+			ExceptionUtils.wrappBusinessException("å¸æœºè¯¦æƒ…æŸ¥è¯¢å¤±è´¥ï¼"+e.getMessage());
 		}
 		JSONObject jsonObj = new JSONObject();	
-		jsonObj.put("dphone", map.get("dphone"));//µç»°
-		jsonObj.put("dage", map.get("dage"));//¼İÁä
-		jsonObj.put("dexpiredate", map.get("dexpiredate").toString().substring(0, 10));// ¼İÊ»Ö¤ÓĞĞ§ÆÚ
-		jsonObj.put("dvtype", map.get("dvtype"));// ×¼¼İ³µĞÍ
-		jsonObj.put("dstate", map.get("dstate"));// ×´Ì¬
-		//Ë¾»ú´æÎªjson¶ÔÏó
+		jsonObj.put("dphone", map.get("dphone"));//ç”µè¯
+		jsonObj.put("dage", map.get("dage"));//é©¾é¾„
+		jsonObj.put("dexpiredate", map.get("dexpiredate").toString().substring(0, 10));// é©¾é©¶è¯æœ‰æ•ˆæœŸ
+		jsonObj.put("dvtype", map.get("dvtype"));// å‡†é©¾è½¦å‹
+		jsonObj.put("dstate", map.get("dstate"));// çŠ¶æ€
+		//å¸æœºå­˜ä¸ºjsonå¯¹è±¡
 		JSONObject jsonobj_driver = new JSONObject();
 		jsonobj_driver.put("cuserid", map.get("vdef1"));
 		jsonobj_driver.put("user_name", map.get("dname"));	
-		jsonObj.put("pk_driver", jsonobj_driver.toString());//³µÁ¾ºÅµÄ¶ÔÏó
+		jsonObj.put("pk_driver", jsonobj_driver.toString());//è½¦è¾†å·çš„å¯¹è±¡
 		
-		jsonObj.put("starlevel", map.get("starlevel"));// ĞÇ¼¶
+		jsonObj.put("starlevel", map.get("starlevel"));// æ˜Ÿçº§
 		Object img = map.get("dphoto");
 		byte[] byte_img = (byte[]) img;
 		String imgDatas = new String(byte_img,"UTF-8");
-		jsonObj.put("dphoto", imgDatas);// Í¼Æ¬
-		jsonObj.put("fix_road_num", map.get("fix_road_num")==null?"":map.get("fix_road_num"));//¹Ì¶¨¹«Â·Êı
-		jsonObj.put("driver_addr", map.get("driver_addr")==null?"":map.get("driver_addr"));//Ë¾»úµØÖ·
-		jsonObj.put("pk_org", map.get("pk_org")==null?"":map.get("pk_org"));//×éÖ¯
-		jsonObj.put("orgname", map.get("orgname")==null?"":map.get("orgname"));//×éÖ¯Ãû
+		jsonObj.put("dphoto", imgDatas);// å›¾ç‰‡
+		jsonObj.put("fix_road_num", map.get("fix_road_num")==null?"":map.get("fix_road_num"));//å›ºå®šå…¬è·¯æ•°
+		jsonObj.put("driver_addr", map.get("driver_addr")==null?"":map.get("driver_addr"));//å¸æœºåœ°å€
+		jsonObj.put("pk_org", map.get("pk_org")==null?"":map.get("pk_org"));//ç»„ç»‡
+		jsonObj.put("orgname", map.get("orgname")==null?"":map.get("orgname"));//ç»„ç»‡å
 		result.put("values", jsonObj);
 		result.put("result", "true");
 		return result;
 	}
 
 	/**
-	 * Ë¾»úµµ°¸„h³ı
+	 * å¸æœºæ¡£æ¡ˆåˆªé™¤
 	 * @param JSONObject jsonObject
 	 * @return JSONObject
 	 * @throws JSONException 
 	 */
 	private JSONObject deleDriver(JSONObject json) throws JSONException {
 		JSONObject result = new JSONObject();
-		//È¡³ö´«ÈëµÄË¾»úÖ÷¼ü
-		String pk_driver = json.getString("pk_driver");//Ö÷æI
-		//½«¸ÃÌõÊı¾İµÄdr¸ÄÕı1£¨ÊµÏÖÉ¾³ı£©
+		//å–å‡ºä¼ å…¥çš„å¸æœºä¸»é”®
+		String pk_driver = json.getString("pk_driver");//ä¸»éµ
+		//å°†è¯¥æ¡æ•°æ®çš„dræ”¹æ­£1ï¼ˆå®ç°åˆ é™¤ï¼‰
 		String sql = "update cl_driver set dr = 1 where pk_driver ='"
 				+ pk_driver + "'";
 		try {
-			//Ö´ĞĞÉ¾³ı·½·¨
+			//æ‰§è¡Œåˆ é™¤æ–¹æ³•
 			dao.executeUpdate(sql);
-			//½«É¾³ı³É¹¦µÄĞÅÏ¢·ÅÈërtnMap
+			//å°†åˆ é™¤æˆåŠŸçš„ä¿¡æ¯æ”¾å…¥rtnMap
 			result.put("result", "true");
 		} catch (DAOException e) {
-			ExceptionUtils.wrappBusinessException("É¾³ıË¾»úµµ°¸ĞÅÏ¢Ê§°Ü£¡"+e.getMessage());
+			ExceptionUtils.wrappBusinessException("åˆ é™¤å¸æœºæ¡£æ¡ˆä¿¡æ¯å¤±è´¥ï¼"+e.getMessage());
 		}
 		return result;
 	}
 
 	/**
-	 * Ë¾»úµµ°¸ĞŞ¸ÄºóµÄ±£´æ
+	 * å¸æœºæ¡£æ¡ˆä¿®æ”¹åçš„ä¿å­˜
 	 * @param JSONObject jsonObject
 	 * @return JSONObject
 	 * @throws DAOException 
@@ -412,48 +412,48 @@ public class DriverFilesServlet extends HttpServlet {
 	 */
 	private JSONObject saveDriver(JSONObject json) throws DAOException, JSONException {
 		JSONObject result = new JSONObject();
-		String pk_driver = json.getString("pk_driver");//Ö÷æI
-		String dname = json.getString("driver"); // ĞÕÃû
-		String cuserid = json.getString("cuserid"); // ÈËÔ±Ö÷¼ü´æÎª×Ô¶¨ÒåÏî1
-		String dphone = json.getString("tel"); // µç»°
-		String dage = json.getString("driving_age"); // ¼İÁä
-		String iexpiredate = json.getString("iexpiredate");// ¼İÊ»Ö¤ÓĞĞ§ÆÚ
+		String pk_driver = json.getString("pk_driver");//ä¸»éµ
+		String dname = json.getString("driver"); // å§“å
+		String cuserid = json.getString("cuserid"); // äººå‘˜ä¸»é”®å­˜ä¸ºè‡ªå®šä¹‰é¡¹1
+		String dphone = json.getString("tel"); // ç”µè¯
+		String dage = json.getString("driving_age"); // é©¾é¾„
+		String iexpiredate = json.getString("iexpiredate");// é©¾é©¶è¯æœ‰æ•ˆæœŸ
 		UFDate date = null;
 		if (StringUtils.isNotBlank(iexpiredate)) {
 			iexpiredate = iexpiredate.replace("-", "/");
 			SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy/MM/dd");
 			try {
-				date = new UFDate(timeFormat.parse(iexpiredate));// ¼İÊ»Ö¤ÓĞĞ§ÆÚ
+				date = new UFDate(timeFormat.parse(iexpiredate));// é©¾é©¶è¯æœ‰æ•ˆæœŸ
 			} catch (java.text.ParseException e1) {
-				ExceptionUtils.wrappBusinessException("ÈÕÆÚ¸ñÊ½×ª»»Ê§°Ü£¡");
+				ExceptionUtils.wrappBusinessException("æ—¥æœŸæ ¼å¼è½¬æ¢å¤±è´¥ï¼");
 			}
 		}
-		String dvtype = json.getString("dtype");// ×¼¼İ³µĞÍ
-		String dstate = json.getString("statue"); // ×´Ì¬
-		String starlevel = json.getString("star"); // ĞÇ¼¶
-		String image =(String) json.getString("image"); // Í¼Æ¬
-		String fix_road_num = json.getString("fix_road_num"); // ¹Ì¶¨¹«Â·Êı
-		String driver_addr = json.getString("driver_addr"); // Ë¾»úµØÖ·
-		String pk_org = json.getString("pk_org"); // ×éÖ¯
-		//¾ÉµÄvo
+		String dvtype = json.getString("dtype");// å‡†é©¾è½¦å‹
+		String dstate = json.getString("statue"); // çŠ¶æ€
+		String starlevel = json.getString("star"); // æ˜Ÿçº§
+		String image =(String) json.getString("image"); // å›¾ç‰‡
+		String fix_road_num = json.getString("fix_road_num"); // å›ºå®šå…¬è·¯æ•°
+		String driver_addr = json.getString("driver_addr"); // å¸æœºåœ°å€
+		String pk_org = json.getString("pk_org"); // ç»„ç»‡
+		//æ—§çš„vo
 		String sql_list = " select * from cl_driver where dr = 0 and pk_driver='"+pk_driver+"'";
 		List<DriverFiles> voList = (ArrayList<DriverFiles>) dao.executeQuery(sql_list, new BeanListProcessor(DriverFiles.class));
 
 		
 		DriverFiles newvo=voList.get(0);
-		//ĞÂµÄvo
-		newvo.setAttributeValue("dname", dname);// ĞÕÃû
-		newvo.setAttributeValue("dphone", dphone);// µç»°
-		newvo.setAttributeValue("dage", dage);// ¼İÁä
-		newvo.setAttributeValue("dexpiredate", date);// ¼İÊ»Ö¤ÓĞĞ§ÆÚ
-		newvo.setAttributeValue("dvtype", dvtype);// ×¼¼İ³µĞÍ
-		newvo.setAttributeValue("dstate", dstate);// ×´Ì¬
-		newvo.setAttributeValue("starlevel", starlevel);// ĞÇ¼¶
-		newvo.setAttributeValue("dphoto", image);// Í¼Æ¬
+		//æ–°çš„vo
+		newvo.setAttributeValue("dname", dname);// å§“å
+		newvo.setAttributeValue("dphone", dphone);// ç”µè¯
+		newvo.setAttributeValue("dage", dage);// é©¾é¾„
+		newvo.setAttributeValue("dexpiredate", date);// é©¾é©¶è¯æœ‰æ•ˆæœŸ
+		newvo.setAttributeValue("dvtype", dvtype);// å‡†é©¾è½¦å‹
+		newvo.setAttributeValue("dstate", dstate);// çŠ¶æ€
+		newvo.setAttributeValue("starlevel", starlevel);// æ˜Ÿçº§
+		newvo.setAttributeValue("dphoto", image);// å›¾ç‰‡
 		newvo.setAttributeValue("vdef0", cuserid);
-		newvo.setAttributeValue("fix_road_num", fix_road_num);// ¹Ì¶¨¹«Â·Êı
-		newvo.setAttributeValue("driver_addr", driver_addr);// Ë¾»úµØÖ·
-		newvo.setAttributeValue("pk_org", pk_org);// ×éÖ¯
+		newvo.setAttributeValue("fix_road_num", fix_road_num);// å›ºå®šå…¬è·¯æ•°
+		newvo.setAttributeValue("driver_addr", driver_addr);// å¸æœºåœ°å€
+		newvo.setAttributeValue("pk_org", pk_org);// ç»„ç»‡
 		newvo.setTs(new UFDateTime());
 		VOUpdate vo=new VOUpdate();
 		ISuperVO[] vos={newvo};

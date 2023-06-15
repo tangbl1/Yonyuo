@@ -42,7 +42,7 @@ public class N_VORD_SAVEBASE extends AbstractPfScriptAction<AggVorderHVO>{
 	}
 	
 	/**
-	* ÉèÖÃvoµÄstatusÎªNEW£¬±ÜÃâÎ´ÉèÖÃvostatusÊ±µ¼ÖÂ±£´æ²»ÉÏ¡£
+	* è®¾ç½®voçš„statusä¸ºNEWï¼Œé¿å…æœªè®¾ç½®vostatusæ—¶å¯¼è‡´ä¿å­˜ä¸ä¸Šã€‚
 	*/
 	private void setVoStatus(AggVorderHVO[] vos){
 		if(vos==null||vos.length==0){

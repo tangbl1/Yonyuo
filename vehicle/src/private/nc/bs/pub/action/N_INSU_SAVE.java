@@ -18,7 +18,7 @@ public class N_INSU_SAVE extends AbstractPfAction<AggInsuranceHVO> {
 			Object userObj) {
 		CompareAroundProcesser<AggInsuranceHVO> processor = new CompareAroundProcesser<AggInsuranceHVO>(
 				InsuranceFilesPluginPoint.SEND_APPROVE);
-		// TODO ÔÚ´Ë´¦Ìí¼ÓÉóºËÇ°ºó¹æÔò
+		// TODO åœ¨æ­¤å¤„æ·»åŠ å®¡æ ¸å‰åè§„åˆ™
 		IRule<AggInsuranceHVO> rule = new CommitStatusCheckRule();
 		processor.addBeforeRule(rule);
 		return processor;

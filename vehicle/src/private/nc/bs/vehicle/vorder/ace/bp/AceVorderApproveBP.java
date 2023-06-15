@@ -13,12 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * ±ê×¼µ¥¾İÉóºËµÄBP
+ * æ ‡å‡†å•æ®å®¡æ ¸çš„BP
  */
 public class AceVorderApproveBP {
 
 	/**
-	 * ÉóºË¶¯×÷
+	 * å®¡æ ¸åŠ¨ä½œ
 	 * 
 	 * @param vos
 	 * @param script
@@ -29,22 +29,21 @@ public class AceVorderApproveBP {
 		Integer state = null;
 		for (AggVorderHVO clientBill : clientBills) {
 			state = (Integer) clientBill.getParentVO().getAttributeValue("approvestatus");
-			//ÅĞ¶ÏÉóÅú×´Ì¬£¬Èç¹ûÉóÅúÍ¨¹ı£¬ĞŞ¸Äµ¥¾İ×´Ì¬Îª¡°²¿ÃÅÉóÅúÍê³É¡±
-			//µ¥¾İ×´Ì¬ÅĞ¶Ï£º³µ¹ÜÉóÅúÍ¨¹ıÖ®ºó£¬²¿ÃÅ¾­ÀíÉóÅú²»¸Ä±äµ¥¾İ×´Ì¬
+			//åˆ¤æ–­å®¡æ‰¹çŠ¶æ€ï¼Œå¦‚æœå®¡æ‰¹é€šè¿‡ï¼Œä¿®æ”¹å•æ®çŠ¶æ€ä¸ºâ€œéƒ¨é—¨å®¡æ‰¹å®Œæˆâ€
+			//å•æ®çŠ¶æ€åˆ¤æ–­ï¼šè½¦ç®¡å®¡æ‰¹é€šè¿‡ä¹‹åï¼Œéƒ¨é—¨ç»ç†å®¡æ‰¹ä¸æ”¹å˜å•æ®çŠ¶æ€
 			if("2".equals(clientBill.getParentVO().getAttributeValue("billstate"))){
 				if(state == 1){
 					clientBill.getParentVO().setAttributeValue("billstate", 3);
-					String date=clientBill. getChildrenVO()[0].getAttributeValue("departtime").toString().substring(0, 10);//ÓÃ³µÊ±¼ä
-					String pk_applier=clientBill.getChildrenVO()[0].getAttributeValue("applier").toString();//Ë¾»ú
+					String date=clientBill. getChildrenVO()[0].getAttributeValue("departtime").toString().substring(0, 10);//ç”¨è½¦æ—¶é—´
+					String pk_applier=clientBill.getChildrenVO()[0].getAttributeValue("applier").toString();//å¸æœº
 					String applier = "";
-					String sql = " select user_name from sm_user where cuserid='"+pk_applier+"'";//³µ¹Ü±àÂë£¨¶¡†´£©
+					String sql = " select user_name from sm_user where cuserid='"+pk_applier+"'";//è½¦ç®¡ç¼–ç ï¼ˆä¸å–†ï¼‰
 					try {
 						applier=(String) new BaseDAO().executeQuery(sql, new ColumnProcessor());
 					} catch (DAOException e) {
-						ExceptionUtils.wrappBusinessException("²éÑ¯³µ¹Üµç»°ºÅÒì³£");
+						ExceptionUtils.wrappBusinessException("æŸ¥è¯¢è½¦ç®¡ç”µè¯å·å¼‚å¸¸");
 					}
 					String txet=date+applier;
-					;
 					sendYonyouMessage(txet, (String) clientBill.getParentVO().getAttributeValue("pk_driver"));
 				}else{
 					clientBill.getParentVO().setAttributeValue("billstate", 9);
@@ -57,32 +56,32 @@ public class AceVorderApproveBP {
 		return returnVos;
 	}
 	/**
-	 * ·¢ËÍÓÑ¿Õ¼äÏûÏ¢
+	 * å‘é€å‹ç©ºé—´æ¶ˆæ¯
 	 * @return
 	 */
 	private boolean sendYonyouMessage(String txet, String pk_driver){
 		boolean messageResult = false;
-		// »ñÈ¡access_token
+		// è·å–access_token
 		String accessToken = YonyouMessageUtil.getAccessToken();
-		//²éÑ¯³µ¹ÜµÄµç»°
+		//æŸ¥è¯¢è½¦ç®¡çš„ç”µè¯
 		String field = "";
 		String sql = "select bd_psndoc.mobile from bd_psndoc,org_orgs,cl_driver where org_orgs.pk_org = cl_driver.pk_org "
 				+ "and bd_psndoc.code = decode(org_orgs.code,'1001','200503001','1002','201103001','') "
-				+ "and cl_driver.pk_driver='" + pk_driver + "'";//³µ¹Ü±àÂë£¨¶¡†´/ÕÅ¾ÅÅô£©
+				+ "and cl_driver.pk_driver='" + pk_driver + "'";//è½¦ç®¡ç¼–ç ï¼ˆä¸å–†/å¼ ä¹é¹ï¼‰
 		try {
 			field=(String) new BaseDAO().executeQuery(sql, new ColumnProcessor());
 		} catch (DAOException e) {
-			ExceptionUtils.wrappBusinessException("²éÑ¯³µ¹Üµç»°ºÅÒì³£");
+			ExceptionUtils.wrappBusinessException("æŸ¥è¯¢è½¦ç®¡ç”µè¯å·å¼‚å¸¸");
 		}
 		
 		String fieldtype = "1";
 		//field="17609814307";
-		// »ñÈ¡MemberId£¨1£ºÊÖ»ú 2£ºÓÊÏä£©
-		String memberId = YonyouMessageUtil.getMemberId(accessToken, field, fieldtype);
+		// è·å–user_idï¼ˆ1ï¼šæ‰‹æœº 2ï¼šé‚®ç®±ï¼‰
+		String user_id = YonyouMessageUtil.getMemberId(accessToken, field, fieldtype);
 		List<String> tos = new ArrayList<String>();
-		tos.add(memberId);
-		String message =txet+ "ÓĞĞÂµÄÓÃ³µÉêÇëµ¥²¿ÃÅÉóÅúÒÑÍê³É£¬Çë×¢Òâ²é¿´´¦Àí¡£";
-		messageResult = YonyouMessageUtil.sendMessage(accessToken, YonyouMessageUtil.messagePojo(tos ,"³µÁ¾ÉêÇëµ¥ÉóÅúÌáĞÑ", message));
+		tos.add(user_id);
+		String message =txet+ "æœ‰æ–°çš„ç”¨è½¦ç”³è¯·å•éƒ¨é—¨å®¡æ‰¹å·²å®Œæˆï¼Œè¯·æ³¨æ„æŸ¥çœ‹å¤„ç†ã€‚";
+		messageResult = YonyouMessageUtil.sendMessage(accessToken, YonyouMessageUtil.messagePojo(tos ,"è½¦è¾†ç”³è¯·å•å®¡æ‰¹æé†’", message));
 		return messageResult;
 	}
 

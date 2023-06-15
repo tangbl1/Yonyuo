@@ -9,7 +9,7 @@ import nc.impl.pubapp.pattern.rule.IRule;
 
 
 /**
- * ±ê×¼µ¥¾İÉ¾³ıBP
+ * æ ‡å‡†å•æ®åˆ é™¤BP
  */
 public class AceInspectionFilesDeleteBP {
 
@@ -17,27 +17,27 @@ public class AceInspectionFilesDeleteBP {
 
 		DeleteBPTemplate<AggInspectionFileHVO> bp = new DeleteBPTemplate<AggInspectionFileHVO>(
 				InspectionFilesPluginPoint.DELETE);
-		// Ôö¼ÓÖ´ĞĞÇ°¹æÔò
+		// å¢åŠ æ‰§è¡Œå‰è§„åˆ™
 		this.addBeforeRule(bp.getAroundProcesser());
-		// Ôö¼ÓÖ´ĞĞºóÒµÎñ¹æÔò
+		// å¢åŠ æ‰§è¡Œåä¸šåŠ¡è§„åˆ™
 		this.addAfterRule(bp.getAroundProcesser());
 		bp.delete(bills);
 	}
 
 	private void addBeforeRule(AroundProcesser<AggInspectionFileHVO> processer) {
-		// TODO Ç°¹æÔò
+		// TODO å‰è§„åˆ™
 		IRule<AggInspectionFileHVO> rule = null;
 		rule = new nc.bs.pubapp.pub.rule.BillDeleteStatusCheckRule();
 		processer.addBeforeRule(rule);
 	}
 
 	/**
-	 * É¾³ıºóÒµÎñ¹æÔò
+	 * åˆ é™¤åä¸šåŠ¡è§„åˆ™
 	 * 
 	 * @param processer
 	 */
 	private void addAfterRule(AroundProcesser<AggInspectionFileHVO> processer) {
-		// TODO ºó¹æÔò
+		// TODO åè§„åˆ™
 
 	}
 }

@@ -50,51 +50,51 @@ public class VorderUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	BaseDAO dao = new BaseDAO();
 	HYPubBO hypubBo = new HYPubBO();
-	private static Map<String,String> state=new HashMap<String,String>();	//×´Ì¬Ó³Éä£¬ÓÃÓÚ»ñÈ¡×´Ì¬±àÂë¶ÔÓ¦µÄ×´Ì¬Ãû³Æ
+	private static Map<String,String> state=new HashMap<String,String>();	//çŠ¶æ€æ˜ å°„ï¼Œç”¨äºè·å–çŠ¶æ€ç¼–ç å¯¹åº”çš„çŠ¶æ€åç§°
 	static {
-		//µ¥¾İ×´Ì¬×öÓ³Éä£¬ÒÑÍê³É¡¢ÉêÇëÖĞ¡¢²¿ÃÅÉóÅúÍê³É¡¢×¼±¸³ö·¢¡¢³ö·¢¡¢µ½´ï¡¢·µ³Ì¡¢ĞİÏ¢¡¢Öµ°à¡£
-		state.put("1", "ÒÑÍê³É");
-		state.put("2", "ÉêÇëÖĞ");
-		state.put("3", "²¿ÃÅÉóÅúÍê³É");
-		state.put("4", "×¼±¸³ö·¢");
-		state.put("5", "³ö·¢");
-		state.put("6", "µ½´ï");
-		state.put("7", "·µ³Ì");
-		state.put("8", "ĞİÏ¢");
-		state.put("9", "²µ»Ø");
+		//å•æ®çŠ¶æ€åšæ˜ å°„ï¼Œå·²å®Œæˆã€ç”³è¯·ä¸­ã€éƒ¨é—¨å®¡æ‰¹å®Œæˆã€å‡†å¤‡å‡ºå‘ã€å‡ºå‘ã€åˆ°è¾¾ã€è¿”ç¨‹ã€ä¼‘æ¯ã€å€¼ç­ã€‚
+		state.put("1", "å·²å®Œæˆ");
+		state.put("2", "ç”³è¯·ä¸­");
+		state.put("3", "éƒ¨é—¨å®¡æ‰¹å®Œæˆ");
+		state.put("4", "å‡†å¤‡å‡ºå‘");
+		state.put("5", "å‡ºå‘");
+		state.put("6", "åˆ°è¾¾");
+		state.put("7", "è¿”ç¨‹");
+		state.put("8", "ä¼‘æ¯");
+		state.put("9", "é©³å›");
 	}
 
 	/**
-	 * ÓÃ»§ÉêÇëµ¥Ò³Ãæservlet
-	 * ÓÃÓÚ´¦ÀíÓÃ»§Ò³ÃæÇëÇó
-	 * @author ÖÜ¾²
+	 * ç”¨æˆ·ç”³è¯·å•é¡µé¢servlet
+	 * ç”¨äºå¤„ç†ç”¨æˆ·é¡µé¢è¯·æ±‚
+	 * @author å‘¨é™
 	 * @date 2019-11-20
 	 * @param 
-	 * 	req Ç°Ì¨Ò³ÃæÇëÇó
-	 * 	resp ·µ»ØĞÅÏ¢
+	 * 	req å‰å°é¡µé¢è¯·æ±‚
+	 * 	resp è¿”å›ä¿¡æ¯
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		JSONObject result = new JSONObject();	//·µ»ØÇ°Ì¨½á¹û
-		String errMsg = "";		//´íÎóĞÅÏ¢
-		String datasource = "";//Êı¾İÔ´
+		JSONObject result = new JSONObject();	//è¿”å›å‰å°ç»“æœ
+		String errMsg = "";		//é”™è¯¯ä¿¡æ¯
+		String datasource = "";//æ•°æ®æº
 		try {
 			datasource = new GetDatasourceName().doreadxml();
 		} catch (JDOMException e) {
-			throw new RuntimeException("ÅäÖÃÎÄ¼ş»ñÈ¡Êı¾İÔ´Ãû³ÆÊ§°Ü£¡");
+			throw new RuntimeException("é…ç½®æ–‡ä»¶è·å–æ•°æ®æºåç§°å¤±è´¥ï¼");
 		}
-		// ±ØĞë·ÅÔÚÊ×ĞĞ
-		InvocationInfoProxy.getInstance().setUserDataSource(datasource);	//Ö¸¶¨±¾´Î²Ù×÷Êı¾İµÄÊı¾İÔ´
-		req.setCharacterEncoding("utf-8");		//ÉèÖÃÇëÇóµÄ±àÂëÎªUTF-8
-		String method = req.getParameter("method");	//»ñÈ¡Ç°Ì¨´«µİmethod±êÊ¶£¬ÓÃÓÚÇø·Ö´¦Àí·½·¨
-		String json = req.getParameter("json");	//»ñÈ¡Ç°Ì¨´«µİ¹ıÀ´µÄ²ÎÊıJSON¶ÔÏó
+		// å¿…é¡»æ”¾åœ¨é¦–è¡Œ
+		InvocationInfoProxy.getInstance().setUserDataSource(datasource);	//æŒ‡å®šæœ¬æ¬¡æ“ä½œæ•°æ®çš„æ•°æ®æº
+		req.setCharacterEncoding("utf-8");		//è®¾ç½®è¯·æ±‚çš„ç¼–ç ä¸ºUTF-8
+		String method = req.getParameter("method");	//è·å–å‰å°ä¼ é€’methodæ ‡è¯†ï¼Œç”¨äºåŒºåˆ†å¤„ç†æ–¹æ³•
+		String json = req.getParameter("json");	//è·å–å‰å°ä¼ é€’è¿‡æ¥çš„å‚æ•°JSONå¯¹è±¡
 		
 		if(StringUtils.isBlank(method))
-			errMsg = "methodÎª¿Õ£¬²ÎÊı´«µİÒì³£!";
+			errMsg = "methodä¸ºç©ºï¼Œå‚æ•°ä¼ é€’å¼‚å¸¸!";
 		if(StringUtils.isBlank(json))
-			errMsg = "jsonÎª¿Õ£¬²ÎÊı´«µİÒì³£!";
+			errMsg = "jsonä¸ºç©ºï¼Œå‚æ•°ä¼ é€’å¼‚å¸¸!";
 		JSONObject jsonObject = new JSONObject();
 		try {
 			jsonObject = new JSONObject(json); //String->JSONObject
@@ -102,51 +102,51 @@ public class VorderUserServlet extends HttpServlet {
 			ExceptionUtils.wrappException(e1);
 		}	
 		
-		// ½øĞĞNCĞéÄâµÇÂ¼
-		String username = "hwapp";		//ÓÃ»§Ãû
-		String password = "asdqwe123";	//ÃÜÂë
+		// è¿›è¡ŒNCè™šæ‹Ÿç™»å½•
+		String username = "hwapp";		//ç”¨æˆ·å
+		String password = "asdqwe123";	//å¯†ç 
 		IFwLogin loginService = (IFwLogin) NCLocator.getInstance().lookup(IFwLogin.class);
 		byte[] token = loginService.login(username, password, null);
 		NetStreamContext.setToken(token);
 		
-		//Í¨¹ıÓÃ»§±àÂë²éÑ¯¶ÔÓ¦cuserid,pk_group
+		//é€šè¿‡ç”¨æˆ·ç¼–ç æŸ¥è¯¢å¯¹åº”cuserid,pk_group
 		String sqluserid = "select cuserid,pk_group from sm_user where user_code='" + username + "'";
 		Map<String,String> map = null;
 		try {
 			map = (Map<String,String>) dao.executeQuery(sqluserid, new MapProcessor());
 			if(map==null || map.size() <= 0)
-				errMsg = "²éÑ¯hwappÓÃ»§Ê§°Ü£¬ÇëÁªÏµ¹ÜÀíÔ±£¡";
+				errMsg = "æŸ¥è¯¢hwappç”¨æˆ·å¤±è´¥ï¼Œè¯·è”ç³»ç®¡ç†å‘˜ï¼";
 		} catch (Exception e) {
-			errMsg = "cuserid,pk_group²éÑ¯Ê§°Ü£¡";
+			errMsg = "cuserid,pk_groupæŸ¥è¯¢å¤±è´¥ï¼";
 			ExceptionUtils.wrappBusinessException(errMsg);
 		}
 		
 		String userid = map.get("cuserid");
 		String pk_group = map.get("pk_group");
 		InvocationInfoProxy.getInstance().setUserCode(username);
-		InvocationInfoProxy.getInstance().setGroupId(pk_group);// ÈËÔ±»ù±¾ĞÅÏ¢±í
+		InvocationInfoProxy.getInstance().setGroupId(pk_group);// äººå‘˜åŸºæœ¬ä¿¡æ¯è¡¨
 		InvocationInfoProxy.getInstance().setUserId(userid);
 		try {
 			if (method.equals("add")) {
-				result = addVorder(jsonObject);//Ìí¼Ó¶©µ¥
+				result = addVorder(jsonObject);//æ·»åŠ è®¢å•
 			} else if (method.equals("query")) {
-				result =queryVorder(jsonObject);//²éÑ¯¶©µ¥
+				result =queryVorder(jsonObject);//æŸ¥è¯¢è®¢å•
 			} else if (method.equals("delete")) {
-				result = deleVorder(jsonObject);//É¾³ı¶©µ¥
+				result = deleVorder(jsonObject);//åˆ é™¤è®¢å•
 			} else if (method.equals("update")) {
-				result = updateVorder(jsonObject);//ĞŞ¸ÄÊ±±£´æ
+				result = updateVorder(jsonObject);//ä¿®æ”¹æ—¶ä¿å­˜
 			}else if (method.equals("query_vehicle")) {
-				result = querVehicle(jsonObject);//²éÑ¯³µÁ¾ĞÅÏ¢
+				result = querVehicle(jsonObject);//æŸ¥è¯¢è½¦è¾†ä¿¡æ¯
 			}else if (method.equals("remark")) {
-				result = remarkVorder(jsonObject);//ÆÀÂÛ¶©µ¥
+				result = remarkVorder(jsonObject);//è¯„è®ºè®¢å•
 			}else if (method.equals("iscarpool")) {
-				result = isCarPool(jsonObject);//ÊÇ·ñÆ´µ¥
+				result = isCarPool(jsonObject);//æ˜¯å¦æ‹¼å•
 			}else if (method.equals("carpool")) {
-				result = carPool(jsonObject);//Æ´µ¥
+				result = carPool(jsonObject);//æ‹¼å•
 			}else if (method.equals("query_remark")) {
-				result = queryRemark(jsonObject);//ÅĞ¶Ï¶©µ¥ÊÇ·ñÒÑ¾­±»ÆÀ¼Û
+				result = queryRemark(jsonObject);//åˆ¤æ–­è®¢å•æ˜¯å¦å·²ç»è¢«è¯„ä»·
 			}else if (method.equals("filterdriver")) {
-				result = filterDriver(jsonObject);//¹ıÂËË¾»ú
+				result = filterDriver(jsonObject);//è¿‡æ»¤å¸æœº
 			}
 		}  catch (Exception e) {
 			ExceptionUtils.wrappException(e);
@@ -158,7 +158,7 @@ public class VorderUserServlet extends HttpServlet {
 
 	}
 	/**
-	 * ÅĞ¶Ï¸Ã¶©µ¥ÊÇ·ñÒÑ¾­ÆÀ¼Û
+	 * åˆ¤æ–­è¯¥è®¢å•æ˜¯å¦å·²ç»è¯„ä»·
 	 * @param jsonObject
 	 * @return
 	 * @throws DAOException 
@@ -167,16 +167,16 @@ public class VorderUserServlet extends HttpServlet {
 	private JSONObject queryRemark(JSONObject jsonObject) throws DAOException, JSONException {
 		JSONObject result = new JSONObject();
 		Integer num = 0;
-		String pk_vorder_b = jsonObject.getString("pk_vorder_b"); // µ¥¾İÖ÷¼ü
-		String sql = "select review,starlevel from cl_vorder_b where pk_vorder_b = '"+pk_vorder_b+"'";//²éÑ¯ÆÀ¼ÛºÍĞÇ¼¶
+		String pk_vorder_b = jsonObject.getString("pk_vorder_b"); // å•æ®ä¸»é”®
+		String sql = "select review,starlevel from cl_vorder_b where pk_vorder_b = '"+pk_vorder_b+"'";//æŸ¥è¯¢è¯„ä»·å’Œæ˜Ÿçº§
 		Map<String,Integer> map = (Map<String, Integer>) dao.executeQuery(sql, new MapProcessor());
-		if(map.get("starlevel")!=null){//Èç¹ûÒÑ¾­±»ÆÀ¼Û£¬numÉèÖÃÎª1
+		if(map.get("starlevel")!=null){//å¦‚æœå·²ç»è¢«è¯„ä»·ï¼Œnumè®¾ç½®ä¸º1
 			num = 1;
 		}
 		
-		result.put("num",num );//ÊıÁ¿
-		result.put("starlevel",map.get("starlevel"));//ĞÇ¼¶
-		result.put("review",map.get("review")!=null?map.get("review"):"" );//ÆÀ¼Û
+		result.put("num",num );//æ•°é‡
+		result.put("starlevel",map.get("starlevel"));//æ˜Ÿçº§
+		result.put("review",map.get("review")!=null?map.get("review"):"" );//è¯„ä»·
 		result.put("result", "true");
 		return result;
 	}
@@ -184,7 +184,7 @@ public class VorderUserServlet extends HttpServlet {
 	
 	
 	/**
-	 * ÅĞ¶ÏÊÇ·ñÆ´³µ
+	 * åˆ¤æ–­æ˜¯å¦æ‹¼è½¦
 	 * @param jsonObject
 	 * @return
 	 * @throws JSONException 
@@ -193,15 +193,15 @@ public class VorderUserServlet extends HttpServlet {
 	 */
 	private JSONObject isCarPool(JSONObject jsonObject) throws JSONException, DAOException, ParseException {
 		JSONObject result = new JSONObject();
-		String pk_driver = jsonObject.getString("pk_driver"); // ³µÁ¾Ö÷¼ü
-		Date now = new Date(); //ÏµÍ³µ±Ç°Ê±¼ä
-		boolean isupdate=false;//ÊÇ·ñÎª¸üĞÂ×´Ì¬
+		String pk_driver = jsonObject.getString("pk_driver"); // è½¦è¾†ä¸»é”®
+		Date now = new Date(); //ç³»ç»Ÿå½“å‰æ—¶é—´
+		boolean isupdate=false;//æ˜¯å¦ä¸ºæ›´æ–°çŠ¶æ€
 		String pk_vorder ="";
-		if(StringUtils.isNotBlank(jsonObject.getString("pk_vorder"))){//Ö÷¼ü²»Îª¿Õ
-			isupdate=true;//Îª±à¼­Ì¬µÄĞŞ¸Ä£¬²éÑ¯Ê±ĞèÒª¹ıÂËµôµ±Ç°Ò»Ìõ
-			pk_vorder= jsonObject.getString("pk_vorder"); //µ±Ç°µ¥¾İÖ÷¼ü
+		if(StringUtils.isNotBlank(jsonObject.getString("pk_vorder"))){//ä¸»é”®ä¸ä¸ºç©º
+			isupdate=true;//ä¸ºç¼–è¾‘æ€çš„ä¿®æ”¹ï¼ŒæŸ¥è¯¢æ—¶éœ€è¦è¿‡æ»¤æ‰å½“å‰ä¸€æ¡
+			pk_vorder= jsonObject.getString("pk_vorder"); //å½“å‰å•æ®ä¸»é”®
 		}
-		//²éÑ¯¸Ã³µÁ¾µÄ¶©µ¥£¨±íÌåĞÅÏ¢ÎªµÚÒ»ÉêÇëÈËµÄ£©
+		//æŸ¥è¯¢è¯¥è½¦è¾†çš„è®¢å•ï¼ˆè¡¨ä½“ä¿¡æ¯ä¸ºç¬¬ä¸€ç”³è¯·äººçš„ï¼‰
 		String sql="select cl_vorder.*,cl_vorder_b.*,sm_user.user_name username "
 				+" from cl_vorder "
 				+" inner join cl_vorder_b"
@@ -215,110 +215,110 @@ public class VorderUserServlet extends HttpServlet {
 				+ ((isupdate) ? " and cl_vorder_b.pk_vorder!='"+pk_vorder+"'" : "")
 				+ " order by cl_vorder_b.departtime ";
 		List<Map<String,String>> list=(List<Map<String, String>>) dao.executeQuery(sql, new  MapListProcessor());
-		String selectDeparttime = jsonObject.getString("departtime"); //³ö·¢Ê±¼ä
-		String selectReturntime = jsonObject.getString("returntime"); //·µ»ØÊ±¼ä
+		String selectDeparttime = jsonObject.getString("departtime"); //å‡ºå‘æ—¶é—´
+		String selectReturntime = jsonObject.getString("returntime"); //è¿”å›æ—¶é—´
 		JSONObject jsonVO = new JSONObject();
-		String message="";//·µ»ØÇ°Ì¨µÄÌáÊ¾ĞÅÏ¢
-		Boolean isvord=true;//ÊÇ·ñÄÜÕı³£ÓÃ³µ
-		Boolean iscarpool=false;//ÊÇ·ñÄÜÆ´³µ
-		//³ö·¢Ê±¼äºÍ·µ»ØÊ±¼ä¶¼²»Îª¿Õ
+		String message="";//è¿”å›å‰å°çš„æç¤ºä¿¡æ¯
+		Boolean isvord=true;//æ˜¯å¦èƒ½æ­£å¸¸ç”¨è½¦
+		Boolean iscarpool=false;//æ˜¯å¦èƒ½æ‹¼è½¦
+		//å‡ºå‘æ—¶é—´å’Œè¿”å›æ—¶é—´éƒ½ä¸ä¸ºç©º
 		if(StringUtils.isNotBlank(selectDeparttime)&&StringUtils.isNotBlank(selectReturntime)){
-			//±È½ÏÓÃ»§Ñ¡ÔñµÄÊ±¼äºÍÓÃ³µÊ±¼ä,ÔÚ30·ÖÖÓÄÚ¿ÉÒÔÆ´³µ£¬³¬¹ıÊ±¼äÌáÊ¾¸ÃÊ±¼ä¶Î±»Õ¼ÓÃ
+			//æ¯”è¾ƒç”¨æˆ·é€‰æ‹©çš„æ—¶é—´å’Œç”¨è½¦æ—¶é—´,åœ¨30åˆ†é’Ÿå†…å¯ä»¥æ‹¼è½¦ï¼Œè¶…è¿‡æ—¶é—´æç¤ºè¯¥æ—¶é—´æ®µè¢«å ç”¨
 			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			long time = 10*60*1000;//10·ÖÖÓ
-			//ÓÃ»§Ñ¡ÔñµÄ³ö·¢Ê±¼ä
+			long time = 10*60*1000;//10åˆ†é’Ÿ
+			//ç”¨æˆ·é€‰æ‹©çš„å‡ºå‘æ—¶é—´
 			Date selectDepartdate = sf.parse(selectDeparttime+":00");
-			//ÓÃ»§Ñ¡ÔñµÄ·µ»ØÊ±¼ä
+			//ç”¨æˆ·é€‰æ‹©çš„è¿”å›æ—¶é—´
 			Date selectReturndate = sf.parse(selectReturntime+":00");
 			if(list.size()>0){
 				for(int i = 0; i < list.size(); i++){
 					Map<String, String> map = list.get(i);
-					//³ö·¢Ê±¼ä
+					//å‡ºå‘æ—¶é—´
 					Date departtime = sf.parse((String)map.get("departtime"));
-					//·µ»ØÊ±¼ä
+					//è¿”å›æ—¶é—´
 					Date returntime = sf.parse((String)map.get("returntime"));
-					//²éÑ¯¸ÃÊ±¼ä¶ÎÔÚÉêÇëÖĞºÍ²¿ÃÅÉóÅúÍê³ÉµÄ¶©µ¥£¬ÈËÊıĞ¡ÓÚ4µÄ¿ÉÒÔÑ¡Ôñ,ÊÇ·ñ¿ÉÆ´³µ£¬ÖµÎª¡®·ñ¡¯µÄ Ò²²»ÄÜÆ´³µ
+					//æŸ¥è¯¢è¯¥æ—¶é—´æ®µåœ¨ç”³è¯·ä¸­å’Œéƒ¨é—¨å®¡æ‰¹å®Œæˆçš„è®¢å•ï¼Œäººæ•°å°äº4çš„å¯ä»¥é€‰æ‹©,æ˜¯å¦å¯æ‹¼è½¦ï¼Œå€¼ä¸ºâ€˜å¦â€™çš„ ä¹Ÿä¸èƒ½æ‹¼è½¦
 					String sql_vehicle="select sum(selectpnum) selectpnum from cl_vorder"
 							+ " inner join cl_vorder_b on cl_vorder_b.pk_vorder= cl_vorder.pk_vorder and cl_vorder_b.dr=0"
 							+ " where cl_vorder.dr=0 and departtime='"+map.get("departtime")+"' and returntime='"+map.get("returntime")+"'"
 							+ " and cl_vorder.billstate in ('2','3','4') and iscarpool='Y' and pk_driver='"+pk_driver+"'"
 							+ " group by pk_vehicle, iscarpool,cl_vorder_b.origin, cl_vorder_b.finaldest, cl_vorder_b.departtime";
 					Object selectpnum =  dao.executeQuery(sql_vehicle, new ColumnProcessor());
-					//Boolean billiscarpool=true;//¸ÃÊ±¼ä¶Îµ¥¾İÄÜ²»ÄÜÆ´³µ
+					//Boolean billiscarpool=true;//è¯¥æ—¶é—´æ®µå•æ®èƒ½ä¸èƒ½æ‹¼è½¦
 					int selectpnums=0;
 					if(selectpnum!=null){		
-						selectpnums=Integer.parseInt(selectpnum.toString());//ÓÃ³µÈËÊı}
+						selectpnums=Integer.parseInt(selectpnum.toString());//ç”¨è½¦äººæ•°}
 					}
-				    //ÓÃ»§µÄ³ö·¢Ê±¼ä>³ö·¢Ê±¼ä-30 ²¢ÇÒ ÓÃ»§µÄ·µ»ØÊ±¼ä<·µ»ØÊ±¼ä+30£¨¿ÉÆ´³µ£©
+				    //ç”¨æˆ·çš„å‡ºå‘æ—¶é—´>å‡ºå‘æ—¶é—´-30 å¹¶ä¸” ç”¨æˆ·çš„è¿”å›æ—¶é—´<è¿”å›æ—¶é—´+30ï¼ˆå¯æ‹¼è½¦ï¼‰
 					if(selectDepartdate.after(new Date(departtime.getTime()- time))&&selectReturndate.before(new Date(returntime.getTime()+ time))
-							&&selectpnums<4&&0<selectpnums&&departtime.after(new Date(now.getTime()+ time))){//Èç¹ûÔÚÊ±¼ä·¶Î§Ö®ÄÚ¿ÉÒÔÆ´³µ
+							&&selectpnums<4&&0<selectpnums&&departtime.after(new Date(now.getTime()+ time))){//å¦‚æœåœ¨æ—¶é—´èŒƒå›´ä¹‹å†…å¯ä»¥æ‹¼è½¦
 						isvord=false;
-						iscarpool=true;//¿ÉÒÔÆ´³µ
-						//¿ÉÒÔÆ´³µµÄ»°´ø³öÆ´³µĞÅÏ¢
+						iscarpool=true;//å¯ä»¥æ‹¼è½¦
+						//å¯ä»¥æ‹¼è½¦çš„è¯å¸¦å‡ºæ‹¼è½¦ä¿¡æ¯
 						jsonVO.put("pk_vorder", map.get("pk_vorder"));
 						jsonVO.put("pk_vorder_b", map.get("pk_vorder_b"));
-						jsonVO.put("read", true);//Ö»¶Á
-						int allPNum=4;//³µÉÏÒ»¹²4¸ö×ùÎ»
-						jsonVO.put("remainPNum", allPNum-selectpnums);//Ê£ÓàÈËÊı
+						jsonVO.put("read", true);//åªè¯»
+						int allPNum=4;//è½¦ä¸Šä¸€å…±4ä¸ªåº§ä½
+						jsonVO.put("remainPNum", allPNum-selectpnums);//å‰©ä½™äººæ•°
 						String selectedOrigins[]={map.get("origin").toString()};
 						
-						jsonVO.put("username", map.get("username"));//ĞÕÃû//ÈËÔ±
-						jsonVO.put("selectedOrigins", selectedOrigins);//³ö·¢µØ
+						jsonVO.put("username", map.get("username"));//å§“å//äººå‘˜
+						jsonVO.put("selectedOrigins", selectedOrigins);//å‡ºå‘åœ°
 						String selectedDestAreas[]={map.get("destarea").toString()};
-						jsonVO.put("selectedDestAreas", selectedDestAreas);//Ä¿±êÇøÓò
-						jsonVO.put("finaldest", map.get("finaldest"));//×îÖÕÄ¿µÄµØ
-						jsonVO.put("pk_driver", pk_driver);//Ë¾»úÖ÷¼ü
-						jsonVO.put("driver", map.get("driver"));//Ë¾»ú
-						jsonVO.put("dPhone", map.get("dphone"));//Ë¾»úµç»°
-						jsonVO.put("vehicleno", map.get("vehicleno")==null?"":map.get("vehicleno"));//³µÅÆºÅ
-						jsonVO.put("pk_vehicle", map.get("pk_vehicle")==null?"":map.get("pk_vehicle"));//³µÁ¿Ö÷¼ü
-						jsonVO.put("turndownreason", map.get("turndownreason")==null?"":map.get("turndownreason"));//²µ»ØÔ­Òò
+						jsonVO.put("selectedDestAreas", selectedDestAreas);//ç›®æ ‡åŒºåŸŸ
+						jsonVO.put("finaldest", map.get("finaldest"));//æœ€ç»ˆç›®çš„åœ°
+						jsonVO.put("pk_driver", pk_driver);//å¸æœºä¸»é”®
+						jsonVO.put("driver", map.get("driver"));//å¸æœº
+						jsonVO.put("dPhone", map.get("dphone"));//å¸æœºç”µè¯
+						jsonVO.put("vehicleno", map.get("vehicleno")==null?"":map.get("vehicleno"));//è½¦ç‰Œå·
+						jsonVO.put("pk_vehicle", map.get("pk_vehicle")==null?"":map.get("pk_vehicle"));//è½¦é‡ä¸»é”®
+						jsonVO.put("turndownreason", map.get("turndownreason")==null?"":map.get("turndownreason"));//é©³å›åŸå› 
 						String billdeparttime = (String) map.get("departtime");
 						if (billdeparttime != null && !billdeparttime.equals("")) {
 							billdeparttime = billdeparttime.substring(0, 16);
 						}		
-						jsonVO.put("departtime", billdeparttime);//³ö·¢Ê±¼ä
+						jsonVO.put("departtime", billdeparttime);//å‡ºå‘æ—¶é—´
 						
 						String billreturntime = (String) map.get("returntime");
 						if (billreturntime != null && !billreturntime.equals("")) {
 							billreturntime = billreturntime.substring(0, 16);
 						}		
-						jsonVO.put("returntime", billreturntime);//·µ»ØÊ±¼ä
-						jsonVO.put("iscarpool", "Y".equals(map.get("iscarpool"))?true:false);//ÊÇ·ñÆ´³µ
-						jsonVO.put("dest2Div", "display: none;");//Ä¿µÄµØ2²»ÏÔÊ¾
-						jsonVO.put("dest3Div", "display: none;");//Ä¿µÄµØ3²»ÏÔÊ¾
+						jsonVO.put("returntime", billreturntime);//è¿”å›æ—¶é—´
+						jsonVO.put("iscarpool", "Y".equals(map.get("iscarpool"))?true:false);//æ˜¯å¦æ‹¼è½¦
+						jsonVO.put("dest2Div", "display: none;");//ç›®çš„åœ°2ä¸æ˜¾ç¤º
+						jsonVO.put("dest3Div", "display: none;");//ç›®çš„åœ°3ä¸æ˜¾ç¤º
 						break;
-					}else if(selectDepartdate.after(new Date(returntime.getTime() + time))){//ÓÃ»§³ö·¢Ê±¼ä>·µ»ØÊ±¼ä+30£¬¿ÉÒÔÕı³£ÓÃ³µ
-						isvord=true;//Õı³£ÓÃ³µ
-						iscarpool=false;//²»ÄÜÆ´³µ
-					}else if(selectReturndate.before(new Date(departtime.getTime() - time))){//ÓÃ»§·µ»ØÊ±¼ä<ÓÃ³µÊ±¼ä-30£¬¿ÉÒÔÕı³£ÓÃ³µ
-						isvord=true;//Õı³£ÓÃ³µ
-						iscarpool=false;//²»ÄÜÆ´³µ
-					}else{//·ñÔòÌáÊ¾¸ÃÊ±¼ä¶Î±»Õ¼ÓÃ
-						iscarpool=false;//²»ÄÜÆ´³µ
-						isvord=false;//²»ÄÜÕı³£ÓÃ³µ
+					}else if(selectDepartdate.after(new Date(returntime.getTime() + time))){//ç”¨æˆ·å‡ºå‘æ—¶é—´>è¿”å›æ—¶é—´+30ï¼Œå¯ä»¥æ­£å¸¸ç”¨è½¦
+						isvord=true;//æ­£å¸¸ç”¨è½¦
+						iscarpool=false;//ä¸èƒ½æ‹¼è½¦
+					}else if(selectReturndate.before(new Date(departtime.getTime() - time))){//ç”¨æˆ·è¿”å›æ—¶é—´<ç”¨è½¦æ—¶é—´-30ï¼Œå¯ä»¥æ­£å¸¸ç”¨è½¦
+						isvord=true;//æ­£å¸¸ç”¨è½¦
+						iscarpool=false;//ä¸èƒ½æ‹¼è½¦
+					}else{//å¦åˆ™æç¤ºè¯¥æ—¶é—´æ®µè¢«å ç”¨
+						iscarpool=false;//ä¸èƒ½æ‹¼è½¦
+						isvord=false;//ä¸èƒ½æ­£å¸¸ç”¨è½¦
 						String departday = (String) map.get("departtime").substring(0, 16);
 						String returnday = (String) map.get("returntime").substring(0, 16);
-						message=message+"¸ÃË¾»úÔÚ"+ "\n"+departday+"~"+returnday+ "\n"+"±»Õ¼ÓÃ£¬ÇëÖØĞÂÑ¡ÔñÓÃ³µÊ±¼ä";
+						message=message+"è¯¥å¸æœºåœ¨"+ "\n"+departday+"~"+returnday+ "\n"+"è¢«å ç”¨ï¼Œè¯·é‡æ–°é€‰æ‹©ç”¨è½¦æ—¶é—´";
 						break;
 					}
 				}
-				jsonVO.put("message", message);//ÌáÊ¾ĞÅÏ¢
+				jsonVO.put("message", message);//æç¤ºä¿¡æ¯
 				jsonVO.put("isvord", isvord);
 				jsonVO.put("iscarpool", iscarpool);
-			}else{//¸ÃË¾»úÃ»ÓĞ¶©µ¥
+			}else{//è¯¥å¸æœºæ²¡æœ‰è®¢å•
 				jsonVO.put("isvord", true);
 				jsonVO.put("iscarpool", false);
 			}
 		}else{
-			//²éÑ¯Ê±¼ä¸øÉêÇëÈËÌáÊ¾¿ÉÒÔÑ¡ÔñµÄÊ±¼ä
-			//Èç¹û¸ÃË¾»úÓĞÎ´Íê³ÉµÄÉêÇëµ¥£¬¸ø³öÈçÏÂÌáÊ¾ĞÅÏ¢
+			//æŸ¥è¯¢æ—¶é—´ç»™ç”³è¯·äººæç¤ºå¯ä»¥é€‰æ‹©çš„æ—¶é—´
+			//å¦‚æœè¯¥å¸æœºæœ‰æœªå®Œæˆçš„ç”³è¯·å•ï¼Œç»™å‡ºå¦‚ä¸‹æç¤ºä¿¡æ¯
 			String departday = "";
 			if(list.size()>0){
-				message="¸ÃË¾»úÔÚ"+ "\n";
+				message="è¯¥å¸æœºåœ¨"+ "\n";
 				for(int i = 0; i < list.size(); i++){
 					Map<String, String> map = list.get(i);
-					//Ê±¼ä½ØÈ¡ÄêÔÂÈÕÊ±·Ö
+					//æ—¶é—´æˆªå–å¹´æœˆæ—¥æ—¶åˆ†
 					if(departday.equals((String)map.get("departtime").substring(0, 16))) continue;
 					departday = (String) map.get("departtime").substring(0, 16);
 					String returnday = (String) map.get("returntime").substring(0, 16);
@@ -328,11 +328,11 @@ public class VorderUserServlet extends HttpServlet {
 						message=message+departday+"~"+returnday+","+ "\n";
 					}
 				}
-				message=message+"±»Õ¼ÓÃ£¬ÇëºÏÀíÑ¡ÔñÓÃ³µÊ±¼ä";
+				message=message+"è¢«å ç”¨ï¼Œè¯·åˆç†é€‰æ‹©ç”¨è½¦æ—¶é—´";
 			}
-			jsonVO.put("message", message);//ÌáÊ¾ĞÅÏ¢
-			jsonVO.put("iscarpool", false);//ÊÇ·ñÆ´³µÎª·ñ
-			jsonVO.put("isvord", true);//Õı³£ÓÃ³µ
+			jsonVO.put("message", message);//æç¤ºä¿¡æ¯
+			jsonVO.put("iscarpool", false);//æ˜¯å¦æ‹¼è½¦ä¸ºå¦
+			jsonVO.put("isvord", true);//æ­£å¸¸ç”¨è½¦
 		}
 		result.put("values", jsonVO);
 		result.put("result", "true");
@@ -344,7 +344,7 @@ public class VorderUserServlet extends HttpServlet {
 		
 	}
 	/**
-	 * ¹ıÂËË¾»ú
+	 * è¿‡æ»¤å¸æœº
 	 * @param json
 	 * @return
 	 * @throws JSONException 
@@ -353,37 +353,37 @@ public class VorderUserServlet extends HttpServlet {
 	 */
 	private JSONObject filterDriver(JSONObject json) throws JSONException, DAOException, ParseException {
 		JSONObject result = new JSONObject();
-		JSONArray jsonArr = new JSONArray(); //ÓÃÓÚ´æ´¢Ë¾»ú¼¯ºÏ
-		JSONArray jsonArr_pool = new JSONArray(); //ÓÃÓÚ´æ´¢Æ´³µµÄË¾»ú¼¯ºÏ
-		JSONArray jsonArr_vord = new JSONArray(); //ÓÃÓÚ´æ´¢Õı³£ÓÃ³µµÄË¾»ú¼¯ºÏ
-		String cuserid = json.getString("cuserid"); //µ±Ç°µÇÂ¼ÈËÖ÷¼ü
-		String origin = json.getString("origin"); // ³ö·¢µØ
-		String destarea = json.getString("destarea");// Ä¿±êÇøÓò
-		String selectDeparttime = json.getString("departtime"); //³ö·¢Ê±¼ä
-		String selectReturntime = json.getString("returntime"); //·µ»ØÊ±¼ä
-		boolean isupdate=false;//ÊÇ·ñÎª¸üĞÂ×´Ì¬
+		JSONArray jsonArr = new JSONArray(); //ç”¨äºå­˜å‚¨å¸æœºé›†åˆ
+		JSONArray jsonArr_pool = new JSONArray(); //ç”¨äºå­˜å‚¨æ‹¼è½¦çš„å¸æœºé›†åˆ
+		JSONArray jsonArr_vord = new JSONArray(); //ç”¨äºå­˜å‚¨æ­£å¸¸ç”¨è½¦çš„å¸æœºé›†åˆ
+		String cuserid = json.getString("cuserid"); //å½“å‰ç™»å½•äººä¸»é”®
+		String origin = json.getString("origin"); // å‡ºå‘åœ°
+		String destarea = json.getString("destarea");// ç›®æ ‡åŒºåŸŸ
+		String selectDeparttime = json.getString("departtime"); //å‡ºå‘æ—¶é—´
+		String selectReturntime = json.getString("returntime"); //è¿”å›æ—¶é—´
+		boolean isupdate=false;//æ˜¯å¦ä¸ºæ›´æ–°çŠ¶æ€
 		String pk_vorder ="";
-		if(StringUtils.isNotBlank(json.getString("pk_vorder"))){//Ö÷¼ü²»Îª¿Õ
-			isupdate=true;//Îª±à¼­Ì¬µÄĞŞ¸Ä£¬²éÑ¯Ê±ĞèÒª¹ıÂËµôµ±Ç°Ò»Ìõ
-			pk_vorder= json.getString("pk_vorder"); //µ±Ç°µ¥¾İÖ÷¼ü
+		if(StringUtils.isNotBlank(json.getString("pk_vorder"))){//ä¸»é”®ä¸ä¸ºç©º
+			isupdate=true;//ä¸ºç¼–è¾‘æ€çš„ä¿®æ”¹ï¼ŒæŸ¥è¯¢æ—¶éœ€è¦è¿‡æ»¤æ‰å½“å‰ä¸€æ¡
+			pk_vorder= json.getString("pk_vorder"); //å½“å‰å•æ®ä¸»é”®
 		}
-		Date now = new Date(); //ÏµÍ³µ±Ç°Ê±
-		//²éÑ¯ËùÓĞµÄË¾»ú,²»°üÀ¨Íâ³öºÍĞİÏ¢µÄ
+		Date now = new Date(); //ç³»ç»Ÿå½“å‰æ—¶
+		//æŸ¥è¯¢æ‰€æœ‰çš„å¸æœº,ä¸åŒ…æ‹¬å¤–å‡ºå’Œä¼‘æ¯çš„
 		String sql_alldrivers="select cl_driver.pk_driver,cl_driver.dname,cl_driver.dphone,cl_vehicle.pk_vehicle,cl_vehicle.vehicleno "
 				+ " from cl_driver "
 				+ " left join cl_vehicle on cl_vehicle.pk_driver=cl_driver.pk_driver and cl_vehicle.dr=0"
 				+ " where cl_driver.dr=0 and dstate not in (2,4) order by length(dname),dname";
 		List<Map<String,String>> list_alldrivers= (List<Map<String, String>>) dao.executeQuery(sql_alldrivers, new  MapListProcessor());
-		for(Map<String,String> driverMap:list_alldrivers){//±éÀúË¾»úµÄÖ÷¼ü
-			Boolean isvord=true;//ÊÇ·ñÄÜÕı³£ÓÃ³µ
-			Boolean iscarpool=false;//ÊÇ·ñÄÜÆ´³µ
-			Boolean isContinueCuserid=false;//ÊÇ·ñÎªµ±Ç°ÓÃ»§
-			String pk_driver=driverMap.get("pk_driver");//Ë¾»úÖ÷¼ü
-			String dname=driverMap.get("dname");//Ë¾»úĞÕÃû
-			String dphone=driverMap.get("dphone");//Ë¾»úµç»°
-			String pk_vehicle=driverMap.get("pk_vehicle")==null?"":driverMap.get("pk_vehicle");//³µÁ¾Ö÷¼ü
-			String vehicleno=driverMap.get("vehicleno")==null?"":driverMap.get("vehicleno");//³µÅÆºÅ
-			//²éÑ¯·ûºÏ¸ÃË¾»úµÄ¶©µ¥£¨±íÌåĞÅÏ¢ÎªµÚÒ»ÉêÇëÈËµÄ£©×´Ì¬²»Îª²µ»ØºÍÒÑÍê³É
+		for(Map<String,String> driverMap:list_alldrivers){//éå†å¸æœºçš„ä¸»é”®
+			Boolean isvord=true;//æ˜¯å¦èƒ½æ­£å¸¸ç”¨è½¦
+			Boolean iscarpool=false;//æ˜¯å¦èƒ½æ‹¼è½¦
+			Boolean isContinueCuserid=false;//æ˜¯å¦ä¸ºå½“å‰ç”¨æˆ·
+			String pk_driver=driverMap.get("pk_driver");//å¸æœºä¸»é”®
+			String dname=driverMap.get("dname");//å¸æœºå§“å
+			String dphone=driverMap.get("dphone");//å¸æœºç”µè¯
+			String pk_vehicle=driverMap.get("pk_vehicle")==null?"":driverMap.get("pk_vehicle");//è½¦è¾†ä¸»é”®
+			String vehicleno=driverMap.get("vehicleno")==null?"":driverMap.get("vehicleno");//è½¦ç‰Œå·
+			//æŸ¥è¯¢ç¬¦åˆè¯¥å¸æœºçš„è®¢å•ï¼ˆè¡¨ä½“ä¿¡æ¯ä¸ºç¬¬ä¸€ç”³è¯·äººçš„ï¼‰çŠ¶æ€ä¸ä¸ºé©³å›å’Œå·²å®Œæˆ
 			String sql="select * "
 					+" from cl_vorder "
 					+" inner join cl_vorder_b"
@@ -392,30 +392,30 @@ public class VorderUserServlet extends HttpServlet {
 					//+" and isfisrtapplier='Y'"
 					+ " and cl_vorder.dr=0 "
 					+" and billstate !=9 and billstate !=1"
-					//²éÑ¯Ç°ºóËÄÌìµÄ¶©µ¥
+					//æŸ¥è¯¢å‰åå››å¤©çš„è®¢å•
 					+" and trunc(to_date(substr(departtime,0,10),'yyyy-mm-dd')) BETWEEN  trunc(sysdate)-4 and trunc(sysdate)+4"
 					+ ((isupdate) ? " and cl_vorder_b.pk_vorder!='"+pk_vorder+"'" : "")
 					+ " order by cl_vorder_b.departtime ";
 			List<Map<String,String>> list_vords=(List<Map<String, String>>) dao.executeQuery(sql, new  MapListProcessor());
-			//³ö·¢Ê±¼äºÍ·µ»ØÊ±¼ä¶¼²»Îª¿Õ
-			//±È½ÏÓÃ»§Ñ¡ÔñµÄÊ±¼äºÍÓÃ³µÊ±¼ä,ÔÚ30·ÖÖÓÄÚ¿ÉÒÔÆ´³µ£¬³¬¹ıÊ±¼äÌáÊ¾¸ÃÊ±¼ä¶Î±»Õ¼ÓÃ
+			//å‡ºå‘æ—¶é—´å’Œè¿”å›æ—¶é—´éƒ½ä¸ä¸ºç©º
+			//æ¯”è¾ƒç”¨æˆ·é€‰æ‹©çš„æ—¶é—´å’Œç”¨è½¦æ—¶é—´,åœ¨30åˆ†é’Ÿå†…å¯ä»¥æ‹¼è½¦ï¼Œè¶…è¿‡æ—¶é—´æç¤ºè¯¥æ—¶é—´æ®µè¢«å ç”¨
 			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			long time = 10*60*1000;//10·ÖÖÓ
-			//ÓÃ»§Ñ¡ÔñµÄ³ö·¢Ê±¼ä
+			long time = 10*60*1000;//10åˆ†é’Ÿ
+			//ç”¨æˆ·é€‰æ‹©çš„å‡ºå‘æ—¶é—´
 			Date selectDepartdate = sf.parse(selectDeparttime+":00");
-			//ÓÃ»§Ñ¡ÔñµÄ·µ»ØÊ±¼ä
+			//ç”¨æˆ·é€‰æ‹©çš„è¿”å›æ—¶é—´
 			Date selectReturndate = sf.parse(selectReturntime+":00");
 			if(list_vords.size()>0){
 				for(int i = 0; i < list_vords.size(); i++){
 					Map<String, String> map = list_vords.get(i);
-					//ÉêÇëÈË
+					//ç”³è¯·äºº
 					String cuserid_vord =(String) map.get("applier");
 					
-					//³ö·¢Ê±¼ä
+					//å‡ºå‘æ—¶é—´
 					Date departtime = sf.parse((String)map.get("departtime"));
-					//·µ»ØÊ±¼ä
+					//è¿”å›æ—¶é—´
 					Date returntime = sf.parse((String)map.get("returntime"));
-					//²éÑ¯¸ÃÊ±¼ä¶ÎÔÚÉêÇëÖĞºÍ²¿ÃÅÉóÅúÍê³ÉµÄ¶©µ¥£¬ÈËÊıĞ¡ÓÚ4µÄ¿ÉÒÔÑ¡Ôñ,ÊÇ·ñ¿ÉÆ´³µ£¬ÖµÎª¡®·ñ¡¯µÄ Ò²²»ÄÜÆ´³µ,²»ÄÜºÍ×Ô¼ºÆ´³µ
+					//æŸ¥è¯¢è¯¥æ—¶é—´æ®µåœ¨ç”³è¯·ä¸­å’Œéƒ¨é—¨å®¡æ‰¹å®Œæˆçš„è®¢å•ï¼Œäººæ•°å°äº4çš„å¯ä»¥é€‰æ‹©,æ˜¯å¦å¯æ‹¼è½¦ï¼Œå€¼ä¸ºâ€˜å¦â€™çš„ ä¹Ÿä¸èƒ½æ‹¼è½¦,ä¸èƒ½å’Œè‡ªå·±æ‹¼è½¦
 					String sql_vehicle="select sum(selectpnum) selectpnum from cl_vorder"
 							+ " inner join cl_vorder_b on cl_vorder_b.pk_vorder= cl_vorder.pk_vorder and cl_vorder_b.dr=0"
 							+ " where cl_vorder.dr=0 and departtime='"+map.get("departtime")+"' and returntime='"+map.get("returntime")+"'"
@@ -425,47 +425,47 @@ public class VorderUserServlet extends HttpServlet {
 					
 					
 					Object selectpnum =  dao.executeQuery(sql_vehicle, new ColumnProcessor());
-					//Boolean billiscarpool=true;//¸ÃÊ±¼ä¶Îµ¥¾İÄÜ²»ÄÜÆ´³µ
+					//Boolean billiscarpool=true;//è¯¥æ—¶é—´æ®µå•æ®èƒ½ä¸èƒ½æ‹¼è½¦
 					int selectpnums=0;
 					if(selectpnum!=null){		
-						selectpnums=Integer.parseInt(selectpnum.toString());//ÓÃ³µÈËÊı}
+						selectpnums=Integer.parseInt(selectpnum.toString());//ç”¨è½¦äººæ•°}
 					}
-				    //ÓÃ»§µÄ³ö·¢Ê±¼ä>³ö·¢Ê±¼ä-30 ²¢ÇÒ ÓÃ»§µÄ·µ»ØÊ±¼ä<·µ»ØÊ±¼ä+30£¨¿ÉÆ´³µ£©,³ö·¢µØºÍÄ¿µÄµØÏàÍ¬//¿ÉÒÔÆ´³µµÄ
-					//³ö·¢Ç°°ë¸öĞ¡Ê±²»ÄÜÆ´³µ    ÓÃ»§µÄ³ö·¢Ê±¼ä>µ±Ç°ÏµÍ³Ê±¼ä+30
+				    //ç”¨æˆ·çš„å‡ºå‘æ—¶é—´>å‡ºå‘æ—¶é—´-30 å¹¶ä¸” ç”¨æˆ·çš„è¿”å›æ—¶é—´<è¿”å›æ—¶é—´+30ï¼ˆå¯æ‹¼è½¦ï¼‰,å‡ºå‘åœ°å’Œç›®çš„åœ°ç›¸åŒ//å¯ä»¥æ‹¼è½¦çš„
+					//å‡ºå‘å‰åŠä¸ªå°æ—¶ä¸èƒ½æ‹¼è½¦    ç”¨æˆ·çš„å‡ºå‘æ—¶é—´>å½“å‰ç³»ç»Ÿæ—¶é—´+30
 					if(selectDepartdate.after(new Date(departtime.getTime()- time))&&selectReturndate.before(new Date(returntime.getTime()+ time))
 						&&origin.equals(map.get("origin"))&&destarea.equals(map.get("destarea"))&&selectpnums<4&&0<selectpnums&&departtime.after(new Date(now.getTime()+ time))){
 						if(cuserid_vord.equals(cuserid)){
-							isContinueCuserid=true;//ÊÇ·ñÎªµ±Ç°µÇÂ¼ÈË
+							isContinueCuserid=true;//æ˜¯å¦ä¸ºå½“å‰ç™»å½•äºº
 						}
 						isvord=false;
-						iscarpool=true;//¿ÉÒÔÆ´³µ
+						iscarpool=true;//å¯ä»¥æ‹¼è½¦
 						break;
-					}else if(selectDepartdate.after(new Date(returntime.getTime() + time))){//ÓÃ»§³ö·¢Ê±¼ä>·µ»ØÊ±¼ä+30£¬¿ÉÒÔÕı³£ÓÃ³µ
-						isvord=true;//Õı³£ÓÃ³µ
-						iscarpool=false;//²»ÄÜÆ´³µ
-					}else if(selectReturndate.before(new Date(departtime.getTime() - time))){//ÓÃ»§·µ»ØÊ±¼ä<ÓÃ³µÊ±¼ä-30£¬¿ÉÒÔÕı³£ÓÃ³µ
-						isvord=true;//Õı³£ÓÃ³µ
-						iscarpool=false;//²»ÄÜÆ´³µ
-					}else{//·ñÔòÌáÊ¾¸ÃÊ±¼ä¶Î±»Õ¼ÓÃ
-						iscarpool=false;//²»ÄÜÆ´³µ
-						isvord=false;//²»ÄÜÕı³£ÓÃ³µ
+					}else if(selectDepartdate.after(new Date(returntime.getTime() + time))){//ç”¨æˆ·å‡ºå‘æ—¶é—´>è¿”å›æ—¶é—´+30ï¼Œå¯ä»¥æ­£å¸¸ç”¨è½¦
+						isvord=true;//æ­£å¸¸ç”¨è½¦
+						iscarpool=false;//ä¸èƒ½æ‹¼è½¦
+					}else if(selectReturndate.before(new Date(departtime.getTime() - time))){//ç”¨æˆ·è¿”å›æ—¶é—´<ç”¨è½¦æ—¶é—´-30ï¼Œå¯ä»¥æ­£å¸¸ç”¨è½¦
+						isvord=true;//æ­£å¸¸ç”¨è½¦
+						iscarpool=false;//ä¸èƒ½æ‹¼è½¦
+					}else{//å¦åˆ™æç¤ºè¯¥æ—¶é—´æ®µè¢«å ç”¨
+						iscarpool=false;//ä¸èƒ½æ‹¼è½¦
+						isvord=false;//ä¸èƒ½æ­£å¸¸ç”¨è½¦
 						break;
 					}	
 				}
-			}else{//¿ÉÒÔÕı³£ÓÃ³µ
-				iscarpool=false;//²»ÄÜÆ´³µ
-				isvord=true;//²»ÄÜÕı³£ÓÃ³µ
+			}else{//å¯ä»¥æ­£å¸¸ç”¨è½¦
+				iscarpool=false;//ä¸èƒ½æ‹¼è½¦
+				isvord=true;//ä¸èƒ½æ­£å¸¸ç”¨è½¦
 			}
-			if(!isvord&&iscarpool&&!isContinueCuserid){//¿ÉÒÔÆ´³µ
-				//¿ÉÒÔÆ´³µµÄ»°´ø³öÔÚË¾»ú×Ö¶ÎºóÃæ¼ÓÉÏ¿ÉÆ´µÄ±êÖ¾
+			if(!isvord&&iscarpool&&!isContinueCuserid){//å¯ä»¥æ‹¼è½¦
+				//å¯ä»¥æ‹¼è½¦çš„è¯å¸¦å‡ºåœ¨å¸æœºå­—æ®µåé¢åŠ ä¸Šå¯æ‹¼çš„æ ‡å¿—
 				JSONObject jsonVO = new JSONObject();
 				jsonVO.put("pk_driver", pk_driver);
-				jsonVO.put("driver", dname+"(¿ÉÆ´)");
+				jsonVO.put("driver", dname+"(å¯æ‹¼)");
 				jsonVO.put("dphone", dphone);
 				jsonVO.put("pk_vehicle", pk_vehicle);
 				jsonVO.put("vehicleno", vehicleno);
 				jsonArr_pool.put(jsonVO);
-			}else if(isvord&&!iscarpool){//¿ÉÒÔÕı³£ÓÃ³µ
+			}else if(isvord&&!iscarpool){//å¯ä»¥æ­£å¸¸ç”¨è½¦
 				JSONObject jsonVO = new JSONObject();
 				jsonVO.put("pk_driver", pk_driver);
 				jsonVO.put("driver", dname);
@@ -485,7 +485,7 @@ public class VorderUserServlet extends HttpServlet {
 		return result;	
 	}
 	/**
-	 * Æ´³µ
+	 * æ‹¼è½¦
 	 * @param json
 	 * @return
 	 * @throws BusinessException 
@@ -494,30 +494,30 @@ public class VorderUserServlet extends HttpServlet {
 	 */
 	private JSONObject carPool(JSONObject json) throws Exception {
 
-		String datasource = "";//Êı¾İÔ´
+		String datasource = "";//æ•°æ®æº
 		try {
 			datasource = new GetDatasourceName().doreadxml();
 		} catch (JDOMException e) {
-			throw new RuntimeException("ÅäÖÃÎÄ¼ş»ñÈ¡Êı¾İÔ´Ãû³ÆÊ§°Ü£¡");
+			throw new RuntimeException("é…ç½®æ–‡ä»¶è·å–æ•°æ®æºåç§°å¤±è´¥ï¼");
 		}
 		
 		JSONObject result = new JSONObject();
-		JSONObject userjsonObject = json.getJSONObject("userjson"); // µÇÂ¼ÈË
+		JSONObject userjsonObject = json.getJSONObject("userjson"); // ç™»å½•äºº
 		String cuserid=userjsonObject.getString("cuserid");
 		String pk_org=userjsonObject.getString("pk_org");
 		String pk_group=userjsonObject.getString("pk_group");
-		String pk_vorder = json.getString("pk_vorder"); // Ö÷¼ü
-		String pk_vorder_b = json.getString("pk_vorder_b"); // ×Ó±íÖ÷¼ü
-		String dest1 =json.getString("dest1"); // Ä¿µÄµØ1
-		String dest2 =json.getString("dest2"); // Ä¿µÄµØ2
-		String dest3 =json.getString("dest3"); // Ä¿µÄµØ3
-		String reason =json.getString("reason"); // ÊÂÓÉ
-		int selectedPNum =Integer.parseInt(json.getString("selectedPNum")); // ÈËÊı
-		String phone =json.getString("phone"); // ÓÃ»§µç»°
-		String pk_driver =json.getString("pk_driver"); // Ë¾»úÖ÷¼ü
-		//¸üĞÂÇ°Ğ£ÑéË¾»ú  kkk
-		String departtime =json.getString("departtime"); // ³ö·¢Ê±¼ä
-		String returntime =json.getString("returntime"); // ·µ»ØÊ±¼ä
+		String pk_vorder = json.getString("pk_vorder"); // ä¸»é”®
+		String pk_vorder_b = json.getString("pk_vorder_b"); // å­è¡¨ä¸»é”®
+		String dest1 =json.getString("dest1"); // ç›®çš„åœ°1
+		String dest2 =json.getString("dest2"); // ç›®çš„åœ°2
+		String dest3 =json.getString("dest3"); // ç›®çš„åœ°3
+		String reason =json.getString("reason"); // äº‹ç”±
+		int selectedPNum =Integer.parseInt(json.getString("selectedPNum")); // äººæ•°
+		String phone =json.getString("phone"); // ç”¨æˆ·ç”µè¯
+		String pk_driver =json.getString("pk_driver"); // å¸æœºä¸»é”®
+		//æ›´æ–°å‰æ ¡éªŒå¸æœº  kkk
+		String departtime =json.getString("departtime"); // å‡ºå‘æ—¶é—´
+		String returntime =json.getString("returntime"); // è¿”å›æ—¶é—´
 		JSONObject check_driver = new JSONObject();
 		check_driver.put("pk_driver", pk_driver);
 		check_driver.put("departtime", departtime);
@@ -531,29 +531,29 @@ public class VorderUserServlet extends HttpServlet {
 			return result;
 		}
 		
-		//¾ÉµÄvo
+		//æ—§çš„vo
 		VorderHVO hvo = (VorderHVO) hypubBo.queryByPrimaryKey(VorderHVO.class, pk_vorder);
 		VorderBVO bvo = (VorderBVO) hypubBo.queryByPrimaryKey(VorderBVO.class, pk_vorder_b);
-		//ÉèÖÃpk£¬µ¥¾İºÅ£¬µ¥¾İ×´Ì¬Îª¿Õ
+		//è®¾ç½®pkï¼Œå•æ®å·ï¼Œå•æ®çŠ¶æ€ä¸ºç©º
 		hvo.setAttributeValue("pk_vorder", null);
 		hvo.setAttributeValue("ts", null);
 		hvo.setAttributeValue("billno", null);
 		UFDate vbilldate = new UFDate();
 		hvo.setAttributeValue("vbilldate",vbilldate);
 		hvo.setAttributeValue("approvestatus", -1);
-		hvo.setAttributeValue("billstate", "2");//´´½¨µ¥¾İÊ±µ¥¾İ×´Ì¬ÎªÉêÇëÖĞ
+		hvo.setAttributeValue("billstate", "2");//åˆ›å»ºå•æ®æ—¶å•æ®çŠ¶æ€ä¸ºç”³è¯·ä¸­
 		hvo.setAttributeValue("pk_group", pk_group);
 		hvo.setAttributeValue("pk_org", pk_org);
 		bvo.setAttributeValue("pk_vorder_b", null);
-		bvo.setAttributeValue("dest1", dest1);//Ä¿µÄµØ1
-		bvo.setAttributeValue("dest2", dest2);//Ä¿µÄµØ2
-		bvo.setAttributeValue("dest3", dest3);//Ä¿µÄµØ3
-		bvo.setAttributeValue("remark", reason);//ÊÂÓÉ
-		bvo.setAttributeValue("selectpnum",selectedPNum);//×ø³µÈËÊı
-		bvo.setAttributeValue("phone", phone);//µç»°
+		bvo.setAttributeValue("dest1", dest1);//ç›®çš„åœ°1
+		bvo.setAttributeValue("dest2", dest2);//ç›®çš„åœ°2
+		bvo.setAttributeValue("dest3", dest3);//ç›®çš„åœ°3
+		bvo.setAttributeValue("remark", reason);//äº‹ç”±
+		bvo.setAttributeValue("selectpnum",selectedPNum);//åè½¦äººæ•°
+		bvo.setAttributeValue("phone", phone);//ç”µè¯
 		bvo.setAttributeValue("ts", null);
-		bvo.setAttributeValue("applier", cuserid);//ÉêÇëÈË
-		// ÉèÖÃGroupId
+		bvo.setAttributeValue("applier", cuserid);//ç”³è¯·äºº
+		// è®¾ç½®GroupId
 		InvocationInfoProxy.getInstance().setUserId(cuserid);
 		
 		AggVorderHVO aggvo = new AggVorderHVO();
@@ -561,21 +561,21 @@ public class VorderUserServlet extends HttpServlet {
 		aggvo.setChildrenVO(bvos);
 		aggvo.setParent(hvo);
 		AggVorderHVO[] aggvos = { aggvo };
-		//µ¥¾İÌí¼Ó£¬Ìá½»
+		//å•æ®æ·»åŠ ï¼Œæäº¤
 		IPFBusiAction ipfBusiAction = (IPFBusiAction) NCLocator.getInstance().lookup(IPFBusiAction.class);
-		aggvos = (AggVorderHVO[]) ipfBusiAction.processAction("SAVEBASE","VORD" , null,aggvo , null, null);//±£´æ
-		ipfBusiAction.processAction("SAVE","VORD" , null,aggvos[0], null, null);//Ìá½»
-		pk_vorder=(String) aggvos[0].getParentVO().getAttributeValue("pk_vorder");//µÃµ½¸ÕÉú³ÉµÄµ¥¾İÖ÷±íÖ÷¼ü
-		pk_vorder_b=(String) aggvos[0].getChildrenVO()[0].getAttributeValue("pk_vorder_b");//µÃµ½¸ÕÉú³ÉµÄµ¥¾İ×Ó±íÖ÷¼ü
-		PKLock.getInstance().releaseLock(pk_vorder, cuserid, datasource);//¸ù¾İÖ÷¼ü½âËøÖ÷±í
-		PKLock.getInstance().releaseLock(pk_vorder_b, cuserid, datasource);//¸ù¾İÖ÷¼ü½âËø×Ó±í
+		aggvos = (AggVorderHVO[]) ipfBusiAction.processAction("SAVEBASE","VORD" , null,aggvo , null, null);//ä¿å­˜
+		ipfBusiAction.processAction("SAVE","VORD" , null,aggvos[0], null, null);//æäº¤
+		pk_vorder=(String) aggvos[0].getParentVO().getAttributeValue("pk_vorder");//å¾—åˆ°åˆšç”Ÿæˆçš„å•æ®ä¸»è¡¨ä¸»é”®
+		pk_vorder_b=(String) aggvos[0].getChildrenVO()[0].getAttributeValue("pk_vorder_b");//å¾—åˆ°åˆšç”Ÿæˆçš„å•æ®å­è¡¨ä¸»é”®
+		PKLock.getInstance().releaseLock(pk_vorder, cuserid, datasource);//æ ¹æ®ä¸»é”®è§£é”ä¸»è¡¨
+		PKLock.getInstance().releaseLock(pk_vorder_b, cuserid, datasource);//æ ¹æ®ä¸»é”®è§£é”å­è¡¨
 		result.put("result", "true");
 		return result;	
 	}
 
 
 	/**
-	 * ÆÀ¼Û¶©µ¥
+	 * è¯„ä»·è®¢å•
 	 * @param json
 	 * @return 
 	 * @throws DAOException 
@@ -583,31 +583,31 @@ public class VorderUserServlet extends HttpServlet {
 	 */
 	private JSONObject remarkVorder(JSONObject json) throws DAOException, JSONException {
 		JSONObject result = new JSONObject();
-		String pk_vorder = json.getString("pk_vorder"); // µ¥¾İÖ÷¼ü
-		String pk_vorder_b = json.getString("pk_vorder_b"); // µ¥¾İ×Ó±íÖ÷¼ü
-		String starlevel = json.getString("starlevel"); // ĞÇ¼¶
-		String review = json.getString("review"); // ÆÀÂÛ
-		//¸üĞÂ±íÍ·µÄÆÀ¼ÛºÍĞÇ¼¶
+		String pk_vorder = json.getString("pk_vorder"); // å•æ®ä¸»é”®
+		String pk_vorder_b = json.getString("pk_vorder_b"); // å•æ®å­è¡¨ä¸»é”®
+		String starlevel = json.getString("starlevel"); // æ˜Ÿçº§
+		String review = json.getString("review"); // è¯„è®º
+		//æ›´æ–°è¡¨å¤´çš„è¯„ä»·å’Œæ˜Ÿçº§
 		String sql="update cl_vorder_b set starlevel='"+starlevel
 				+"',review='"+review+"'"
 				+" where pk_vorder_b='"+pk_vorder_b+"'";
 		dao.executeUpdate(sql);
-		//wuchy1-2019-10-16 µÃµ½Ë¾»úµÄĞÇ¼¶
-		UFDate date=new UFDate();//»ñÈ¡µ±Ç°ÈÕÆÚ
+		//wuchy1-2019-10-16 å¾—åˆ°å¸æœºçš„æ˜Ÿçº§
+		UFDate date=new UFDate();//è·å–å½“å‰æ—¥æœŸ
 		String starsql = "select count(starlevel) as \"count\", sum(starlevel) as \"sum\" from cl_vorder_b "
 				+ " inner join cl_vorder on cl_vorder.pk_vorder=cl_vorder_b.pk_vorder and cl_vorder.dr=0"
 				+ " where cl_vorder_b.dr = 0 and pk_driver ="
 				+ " (select pk_driver from cl_vorder where pk_vorder = '"+pk_vorder+"')"
-				+ " and substr(cl_vorder_b.departtime,0,7)='"+date.toString().substring(0, 7)+"'";//²éÑ¯Ò»¸ö×ÔÈ»ÔÂµÄ
+				+ " and substr(cl_vorder_b.departtime,0,7)='"+date.toString().substring(0, 7)+"'";//æŸ¥è¯¢ä¸€ä¸ªè‡ªç„¶æœˆçš„
 		Map<String,Integer> map = (Map<String, Integer>) dao.executeQuery(starsql, new MapProcessor());
 		UFDouble star = null;
 		if(map.size()!=0){
 			double count = map.get("count");
 			double sum = map.get("sum");
-			star = new UFDouble(sum/count);//ĞÇ¼¶ÎªµÃµ½ĞÇĞÇµÄ×ÜÊı£¬³ıÒÔÆÀ¼Û´ÎÊı
+			star = new UFDouble(sum/count);//æ˜Ÿçº§ä¸ºå¾—åˆ°æ˜Ÿæ˜Ÿçš„æ€»æ•°ï¼Œé™¤ä»¥è¯„ä»·æ¬¡æ•°
 		}
 		
-		//¸üĞÂË¾»úµÄĞÇ¼¶
+		//æ›´æ–°å¸æœºçš„æ˜Ÿçº§
 		String driversql = "update cl_driver set starlevel = "+star+" where dr = 0 "
 				+ "and pk_driver = (select pk_driver from cl_vorder where pk_vorder = '"+pk_vorder+"')";
 		dao.executeUpdate(driversql);
@@ -620,7 +620,7 @@ public class VorderUserServlet extends HttpServlet {
 
 
 	/**
-	 * ²éÑ¯³µÁ¾ĞÅÏ¢
+	 * æŸ¥è¯¢è½¦è¾†ä¿¡æ¯
 	 * @param jsonObject
 	 * @return 
 	 * @throws DAOException 
@@ -628,22 +628,22 @@ public class VorderUserServlet extends HttpServlet {
 	 */
 	@SuppressWarnings({ "unchecked" })
 	private JSONObject querVehicle(JSONObject jsonObject) throws DAOException, JSONException {
-		JSONArray jsonArr = new JSONArray(); //ÓÃÓÚ´æ´¢µ¥¾İĞÅÏ¢¼¯ºÏ
-		String cuserid = jsonObject.getString("cuserid"); //µ±Ç°µÇÂ¼ÈËÖ÷¼ü
-		//¹ıÂËµôĞİÏ¢ºÍÍâ³öµÄË¾»ú
+		JSONArray jsonArr = new JSONArray(); //ç”¨äºå­˜å‚¨å•æ®ä¿¡æ¯é›†åˆ
+		String cuserid = jsonObject.getString("cuserid"); //å½“å‰ç™»å½•äººä¸»é”®
+		//è¿‡æ»¤æ‰ä¼‘æ¯å’Œå¤–å‡ºçš„å¸æœº
 		String sql="select  a.pk_vehicle,a.pk_driver, a.vehicleno,a.driver,a.dphone"
 				+" from cl_vehicle  a where"
 				+"  (select dstate from cl_driver where  pk_driver=a.pk_driver and dr=0) not in (2,4)"
 				+"  and a.dr=0";
 		List<Map<String,Object>> list=(List<Map<String, Object>>) dao.executeQuery(sql, new  MapListProcessor());
-		//Ñ­»·»ñÈ¡µ¥¾İĞÅÏ¢,½øĞĞ¶ş´Î¹ıÂË²¢´æ´¢³Éjson¶ÔÏó
+		//å¾ªç¯è·å–å•æ®ä¿¡æ¯,è¿›è¡ŒäºŒæ¬¡è¿‡æ»¤å¹¶å­˜å‚¨æˆjsonå¯¹è±¡
 		for (Map<String, Object> map : list) {
 			JSONObject jsonObj = new JSONObject();
-			jsonObj.put("pk_driver", map.get("pk_driver"));	//	Ë¾»úÖ÷¼ü
-			jsonObj.put("pk_vehicle", map.get("pk_vehicle"));//³µÁ¾Ö÷¼ü
-			jsonObj.put("vehicleno", map.get("vehicleno"));//³µÅÆºÅ
-			jsonObj.put("driver", map.get("driver"));//Ë¾»úĞÕÃû
-			jsonObj.put("dphone", map.get("dphone"));//Ë¾»úµç»°
+			jsonObj.put("pk_driver", map.get("pk_driver"));	//	å¸æœºä¸»é”®
+			jsonObj.put("pk_vehicle", map.get("pk_vehicle"));//è½¦è¾†ä¸»é”®
+			jsonObj.put("vehicleno", map.get("vehicleno"));//è½¦ç‰Œå·
+			jsonObj.put("driver", map.get("driver"));//å¸æœºå§“å
+			jsonObj.put("dphone", map.get("dphone"));//å¸æœºç”µè¯
 			jsonArr.put(jsonObj);
 		}
 		JSONObject result = new JSONObject();
@@ -657,7 +657,7 @@ public class VorderUserServlet extends HttpServlet {
 
 
 	/**
-	 * ¸üĞÂ¶©µ¥
+	 * æ›´æ–°è®¢å•
 	 * @param json
 	 * @return
 	 * @throws DAOException 
@@ -667,12 +667,12 @@ public class VorderUserServlet extends HttpServlet {
 
 	private JSONObject updateVorder(JSONObject json) throws DAOException, JSONException, UifException {
 		JSONObject result = new JSONObject();
-		String pk_vorder = json.getString("pk_vorder"); // Ö÷¼ü
-		String pk_vorder_b = json.getString("pk_vorder_b");// ×Ó±íÖ÷¼ü
-		//¾ÉµÄvo
+		String pk_vorder = json.getString("pk_vorder"); // ä¸»é”®
+		String pk_vorder_b = json.getString("pk_vorder_b");// å­è¡¨ä¸»é”®
+		//æ—§çš„vo
 		VorderHVO	hvo = (VorderHVO) hypubBo.queryByPrimaryKey(VorderHVO.class, pk_vorder);
 		VorderBVO	bvo = (VorderBVO) hypubBo.queryByPrimaryKey(VorderBVO.class, pk_vorder_b);
-		String origin = json.getString("origin"); // ³ö·¢µØ
+		String origin = json.getString("origin"); // å‡ºå‘åœ°
 //		IConstEnum[] list = MDEnum.valueOfConstEnum(Enumerate1.class);
 //		for (IConstEnum iConstEnum:list){
 //			if(iConstEnum.getName().equals(origin)){
@@ -680,7 +680,7 @@ public class VorderUserServlet extends HttpServlet {
 //				break;
 //			}
 //		}
-		String destarea = json.getString("destarea");// Ä¿±êÇøÓò
+		String destarea = json.getString("destarea");// ç›®æ ‡åŒºåŸŸ
 //		 list = MDEnum.valueOfConstEnum(Enumerate2.class);
 //		for (IConstEnum iConstEnum:list){
 //			if(iConstEnum.getName().equals(destarea)){
@@ -689,21 +689,21 @@ public class VorderUserServlet extends HttpServlet {
 //			}
 //		}
 
-		String driver =json.getString("driver"); // Ë¾»ú
-		String pk_driver =json.getString("pk_driver"); // Ë¾»úÖ÷¼ü
-		String driverphone =json.getString("driverphone"); // Ë¾»úµç»°
-		String vehicleno =json.getString("vehicleno"); // ³µÅÆºÅ
-		String pk_vehicle =json.getString("pk_vehicle"); // ³µÅÆºÅ
-		String dest1 =json.getString("dest1"); // Ä¿µÄµØ1
-		String dest2 =json.getString("dest2"); // Ä¿µÄµØ2
-		String dest3 =json.getString("dest3"); // Ä¿µÄµØ3
-		String finaldest =json.getString("finaldest"); // ×îÖÕÄ¿µÄµØ
-		String reason =json.getString("reason"); // ÊÂÓÉ
-		int selectedPNum =Integer.parseInt(json.getString("selectedPNum")); // ÈËÊı
-		UFBoolean iscarpool =new UFBoolean(json.getString("mySwitch")); // ÊÇ·ñÆ´³µ
-		String phone =json.getString("phone"); // ÓÃ»§µç»°
-		String departtime =json.getString("departtime"); // ÓÃ³µÊ±¼ä
-		String returntime =json.getString("returntime"); // ·µ»ØÊ±¼ä
+		String driver =json.getString("driver"); // å¸æœº
+		String pk_driver =json.getString("pk_driver"); // å¸æœºä¸»é”®
+		String driverphone =json.getString("driverphone"); // å¸æœºç”µè¯
+		String vehicleno =json.getString("vehicleno"); // è½¦ç‰Œå·
+		String pk_vehicle =json.getString("pk_vehicle"); // è½¦ç‰Œå·
+		String dest1 =json.getString("dest1"); // ç›®çš„åœ°1
+		String dest2 =json.getString("dest2"); // ç›®çš„åœ°2
+		String dest3 =json.getString("dest3"); // ç›®çš„åœ°3
+		String finaldest =json.getString("finaldest"); // æœ€ç»ˆç›®çš„åœ°
+		String reason =json.getString("reason"); // äº‹ç”±
+		int selectedPNum =Integer.parseInt(json.getString("selectedPNum")); // äººæ•°
+		UFBoolean iscarpool =new UFBoolean(json.getString("mySwitch")); // æ˜¯å¦æ‹¼è½¦
+		String phone =json.getString("phone"); // ç”¨æˆ·ç”µè¯
+		String departtime =json.getString("departtime"); // ç”¨è½¦æ—¶é—´
+		String returntime =json.getString("returntime"); // è¿”å›æ—¶é—´
 		if(departtime!=null&&!departtime.equals("")){
 		departtime=departtime.replaceAll("-", "/");
 		departtime=departtime+":00";
@@ -714,9 +714,9 @@ public class VorderUserServlet extends HttpServlet {
 			}
 		AggVorderHVO aggvo = new AggVorderHVO();
 		hvo.setAttributeValue("iscarpool", iscarpool);
-		int allPNum=4;//³µÉÏÒ»¹²4¸ö×ùÎ»
-		hvo.setAttributeValue("remainpnum", allPNum-selectedPNum);//Ê£Óà×ùÎ»
-		hvo.setAttributeValue("billstate", "2");//´´½¨µ¥¾İÊ±µ¥¾İ×´Ì¬ÎªÉêÇëÖĞ
+		int allPNum=4;//è½¦ä¸Šä¸€å…±4ä¸ªåº§ä½
+		hvo.setAttributeValue("remainpnum", allPNum-selectedPNum);//å‰©ä½™åº§ä½
+		hvo.setAttributeValue("billstate", "2");//åˆ›å»ºå•æ®æ—¶å•æ®çŠ¶æ€ä¸ºç”³è¯·ä¸­
 		hvo.setAttributeValue("driver", driver);
 		hvo.setAttributeValue("pk_driver", pk_driver);
 		hvo.setAttributeValue("dphone", driverphone);
@@ -742,9 +742,9 @@ public class VorderUserServlet extends HttpServlet {
 		VOUpdate vo=new VOUpdate();
 		
 		ISuperVO[] vos={bvo};
-		vo.update(vos);//¸üĞÂ±íÌå
+		vo.update(vos);//æ›´æ–°è¡¨ä½“
 		ISuperVO[] hvos={hvo};
-		vo.update(hvos);//¸üĞÂ±íÍ·
+		vo.update(hvos);//æ›´æ–°è¡¨å¤´
 		result.put("result", "true");
 		return result;
 	}
@@ -758,17 +758,17 @@ public class VorderUserServlet extends HttpServlet {
 
 	private JSONObject deleVorder(JSONObject json) throws DAOException, JSONException {
 		JSONObject result = new JSONObject();
-		String pk_vorder = json.getString("pk_vorder");// µ¥¾İÖ÷¼ü
-		String pk_vorder_b = json.getString("pk_vorder_b");// ×Ó±íÖ÷¼ü
-		//É¾³ı±íÍ·Êı¾İ£¬ÉèÖÃdr=0
+		String pk_vorder = json.getString("pk_vorder");// å•æ®ä¸»é”®
+		String pk_vorder_b = json.getString("pk_vorder_b");// å­è¡¨ä¸»é”®
+		//åˆ é™¤è¡¨å¤´æ•°æ®ï¼Œè®¾ç½®dr=0
 		String sql_h = "update cl_vorder set dr = 1 where pk_vorder ='"
 				+ pk_vorder + "'";
-		//É¾³ı±íÌåÊı¾İ£¬ÉèÖÃdr=0
+		//åˆ é™¤è¡¨ä½“æ•°æ®ï¼Œè®¾ç½®dr=0
 		String sql_b = "update cl_vorder_b set dr = 1 where pk_vorder_b ='"
 				+ pk_vorder_b + "'";
 		dao.executeUpdate(sql_h);
 		dao.executeUpdate(sql_b);
-		//É¾³ıÉóÅúÁ÷Êı¾İ£¬ÉèÖÃdr=0
+		//åˆ é™¤å®¡æ‰¹æµæ•°æ®ï¼Œè®¾ç½®dr=0
 		String sql_workflownote = "delete  pub_workflownote where pk_billtype='VORD' and  billid ='"
 				+ pk_vorder + "'";
 		dao.executeUpdate(sql_workflownote);
@@ -784,87 +784,87 @@ public class VorderUserServlet extends HttpServlet {
 
 
 	/**
-	 * ÓÃ»§¶Ë²éĞÂÓÃ³µÁĞ±í
+	 * ç”¨æˆ·ç«¯æŸ¥æ–°ç”¨è½¦åˆ—è¡¨
 	 * @param json
 	 * @return
 	 * @throws Exception 
 	 */
 	private JSONObject queryVorder(JSONObject json) throws Exception{
-		JSONArray jsonArr = new JSONArray(); //ÓÃÓÚ´æ´¢µ¥¾İĞÅÏ¢¼¯ºÏ
-		String cuserid = json.getString("cuserid"); //µ±Ç°µÇÂ¼ÈËÖ÷¼ü
-		int maxcount = json.getInt("maxcount"); // ×î´óÊıÁ¿
-		int mincount = json.getInt("mincount"); // ×îĞ¡ÊıÁ¿
+		JSONArray jsonArr = new JSONArray(); //ç”¨äºå­˜å‚¨å•æ®ä¿¡æ¯é›†åˆ
+		String cuserid = json.getString("cuserid"); //å½“å‰ç™»å½•äººä¸»é”®
+		int maxcount = json.getInt("maxcount"); // æœ€å¤§æ•°é‡
+		int mincount = json.getInt("mincount"); // æœ€å°æ•°é‡
 		String sql="SELECT * FROM (SELECT ROWNUM AS rowno1, t.* from (select cl_vorder.billstate,cl_vorder.driver,cl_vorder.pk_driver,cl_vorder.dphone,"
 				+ "cl_vorder.billno,cl_vorder.pk_vehicle,cl_vorder.vehicleno,cl_vorder.begintime,cl_vorder.endtime,cl_vorder.iscarpool,"
 				+ "cl_vorder_b.*,sm_user.user_name,d.vphoto dphoto"
 				+" from cl_vorder "
 				+" inner join cl_vorder_b"
 				+" on cl_vorder.pk_vorder=cl_vorder_b.pk_vorder and cl_vorder_b.dr=0"
-				+" left join cl_vehicle d on d.pk_vehicle=cl_vorder.pk_vehicle and d.dr = 0"//¹ØÁª³µÁ¾
-				+" left join sm_user on sm_user.cuserid  =cl_vorder_b.applier and sm_user.dr=0"//¹ØÁªÈËÔ±
+				+" left join cl_vehicle d on d.pk_vehicle=cl_vorder.pk_vehicle and d.dr = 0"//å…³è”è½¦è¾†
+				+" left join sm_user on sm_user.cuserid  =cl_vorder_b.applier and sm_user.dr=0"//å…³è”äººå‘˜
 				+" where applier='"+cuserid+"' and cl_vorder.dr=0 order by cl_vorder.ts desc "
 						+ ") t where ROWNUM <= "+maxcount+") table_alias WHERE table_alias.rowno1 >"+mincount;
 		List<Map<String,Object>> list=(List<Map<String, Object>>) dao.executeQuery(sql, new  MapListProcessor());
-		//±éÀú½á¹û¼¯
+		//éå†ç»“æœé›†
 		for (Map<String, Object> map : list) {
 			JSONObject jsonObj = new JSONObject();
 			jsonObj.put("pk_vorder", map.get("pk_vorder"));
 			jsonObj.put("pk_vorder_b", map.get("pk_vorder_b"));
 			jsonObj.put("billno", map.get("billno"));
-			jsonObj.put("read", true);//Ö»¶Á
-			jsonObj.put("applyer", map.get("user_name"));//ÉêÇëÈËĞÕÃû
+			jsonObj.put("read", true);//åªè¯»
+			jsonObj.put("applyer", map.get("user_name"));//ç”³è¯·äººå§“å
 			String selectedOrigins[]={map.get("origin").toString()};
-			jsonObj.put("selectedOrigins", selectedOrigins);//³ö·¢µØ
+			jsonObj.put("selectedOrigins", selectedOrigins);//å‡ºå‘åœ°
 			String selectedDestAreas[]={map.get("destarea").toString()};
-			jsonObj.put("selectedDestAreas", selectedDestAreas);//Ä¿±êÇøÓò
-			jsonObj.put("departtime",gettime((String)map.get("departtime")));//ÓÃ³µÊ±¼ä
-			jsonObj.put("returntime",gettime((String)map.get("returntime")));//·µ»ØÊ±¼ä
-			jsonObj.put("beginTime",map.get("begintime")==null?"":gettime((String)map.get("begintime")));//¿ªÊ¼Ê±¼ä
-			jsonObj.put("endTime",map.get("begintime")==null?"":gettime((String)map.get("endtime")));//½áÊøÊ±¼ä
-			jsonObj.put("status",state.get(map.get("billstate")));//×´Ì¬
-			jsonObj.put("dest1", map.get("dest1")==null?"":(String)map.get("dest1"));//Ä¿µÄµØ1
-			//Èç¹ûÄ¿µÄµØÓĞÖµ¾ÍÏÔÊ¾£¬²¢ÇÒ¿ªÊ¼¼ÓºÅ²»ÏÔÊ¾
+			jsonObj.put("selectedDestAreas", selectedDestAreas);//ç›®æ ‡åŒºåŸŸ
+			jsonObj.put("departtime",gettime((String)map.get("departtime")));//ç”¨è½¦æ—¶é—´
+			jsonObj.put("returntime",gettime((String)map.get("returntime")));//è¿”å›æ—¶é—´
+			jsonObj.put("beginTime",map.get("begintime")==null?"":gettime((String)map.get("begintime")));//å¼€å§‹æ—¶é—´
+			jsonObj.put("endTime",map.get("begintime")==null?"":gettime((String)map.get("endtime")));//ç»“æŸæ—¶é—´
+			jsonObj.put("status",state.get(map.get("billstate")));//çŠ¶æ€
+			jsonObj.put("dest1", map.get("dest1")==null?"":(String)map.get("dest1"));//ç›®çš„åœ°1
+			//å¦‚æœç›®çš„åœ°æœ‰å€¼å°±æ˜¾ç¤ºï¼Œå¹¶ä¸”å¼€å§‹åŠ å·ä¸æ˜¾ç¤º
 			if(map.get("dest2")!=null&&""!=map.get("dest2")){
-				jsonObj.put("dest2Div", "display: block;");//Ä¿µÄµØ2
+				jsonObj.put("dest2Div", "display: block;");//ç›®çš„åœ°2
 			}else{
-				jsonObj.put("dest2Div", "display: none;");//Ä¿µÄµØ2²»ÏÔÊ¾
+				jsonObj.put("dest2Div", "display: none;");//ç›®çš„åœ°2ä¸æ˜¾ç¤º
 			}
 			if(map.get("dest3")!=null&&""!=map.get("dest3")){
-				jsonObj.put("dest3Div", "display: block;");//Ä¿µÄµØ3
+				jsonObj.put("dest3Div", "display: block;");//ç›®çš„åœ°3
 			}else{
-				jsonObj.put("dest3Div", "display: none;");//Ä¿µÄµØ3²»ÏÔÊ¾
+				jsonObj.put("dest3Div", "display: none;");//ç›®çš„åœ°3ä¸æ˜¾ç¤º
 			}
-			jsonObj.put("dest2", map.get("dest2")==null?"":map.get("dest2"));//Ä¿µÄµØ2
-			jsonObj.put("dest3", map.get("dest3")==null?"":map.get("dest3"));//Ä¿µÄµØ3
-			int PNum =Integer.parseInt(map.get("selectpnum").toString()); // ÈËÊı
+			jsonObj.put("dest2", map.get("dest2")==null?"":map.get("dest2"));//ç›®çš„åœ°2
+			jsonObj.put("dest3", map.get("dest3")==null?"":map.get("dest3"));//ç›®çš„åœ°3
+			int PNum =Integer.parseInt(map.get("selectpnum").toString()); // äººæ•°
 			int  selectpnum[]={PNum};
-			jsonObj.put("selectedPNum", selectpnum);//ÈËÊı
-			jsonObj.put("adddiv1", "display: none;align:right;");//¼ÓºÅ²»ÏÔÊ¾
-			jsonObj.put("adddiv2", "display: none;align:right;");//¼ÓºÅ²»ÏÔÊ¾
-			jsonObj.put("finaldest", map.get("finaldest"));//×îÖÕÄ¿µÄµØ
-			jsonObj.put("reason", map.get("remark"));//ÊÂÓÉ
-			jsonObj.put("iscarpool", "Y".equals(map.get("iscarpool"))?true:false);//ÊÇ·ñÆ´³µ
-			jsonObj.put("phone", map.get("phone"));//µç»°
+			jsonObj.put("selectedPNum", selectpnum);//äººæ•°
+			jsonObj.put("adddiv1", "display: none;align:right;");//åŠ å·ä¸æ˜¾ç¤º
+			jsonObj.put("adddiv2", "display: none;align:right;");//åŠ å·ä¸æ˜¾ç¤º
+			jsonObj.put("finaldest", map.get("finaldest"));//æœ€ç»ˆç›®çš„åœ°
+			jsonObj.put("reason", map.get("remark"));//äº‹ç”±
+			jsonObj.put("iscarpool", "Y".equals(map.get("iscarpool"))?true:false);//æ˜¯å¦æ‹¼è½¦
+			jsonObj.put("phone", map.get("phone"));//ç”µè¯
 			if(map.get("dphoto")!=null){
-				// ÕÕÆ¬ add by dingft start
+				// ç…§ç‰‡ add by dingft start
 				byte[] byte_img = (byte[]) map.get("dphoto");
 				String imgDatas = new String(byte_img,"UTF-8");
-				jsonObj.put("dphoto", imgDatas);// Í¼Æ¬
-				// ÕÕÆ¬ add by dingft end
+				jsonObj.put("dphoto", imgDatas);// å›¾ç‰‡
+				// ç…§ç‰‡ add by dingft end
 			}else{
-				jsonObj.put("dphoto", "");// Í¼Æ¬
+				jsonObj.put("dphoto", "");// å›¾ç‰‡
 				
 			}
-			//³µÁ¿ĞÅÏ¢´æÎªjson¶ÔÏó
+			//è½¦é‡ä¿¡æ¯å­˜ä¸ºjsonå¯¹è±¡
 			JSONObject jsonobj_vehicle = new JSONObject();
 			jsonobj_vehicle.put("vehicleno", map.get("vehicleno")==null?"":map.get("vehicleno"));
 			jsonobj_vehicle.put("pk_vehicle", map.get("pk_vehicle")==null?"":map.get("pk_vehicle"));
 			jsonobj_vehicle.put("driver", map.get("driver"));
 			jsonobj_vehicle.put("dphone", map.get("dphone"));
 			jsonobj_vehicle.put("pk_driver", map.get("pk_driver"));
-			jsonObj.put("selectedDrivers", jsonobj_vehicle.toString());//³µÁ¾ºÅµÄ¶ÔÏó
+			jsonObj.put("selectedDrivers", jsonobj_vehicle.toString());//è½¦è¾†å·çš„å¯¹è±¡
 			
-			jsonObj.put("turndownreason", map.get("turndownreason"));//²µ»ØÔ­Òò
+			jsonObj.put("turndownreason", map.get("turndownreason"));//é©³å›åŸå› 
 			jsonArr.put(jsonObj);
 			
 		}
@@ -884,38 +884,38 @@ public class VorderUserServlet extends HttpServlet {
 
 	private JSONObject addVorder(JSONObject json) throws BusinessException, JSONException {
 
-		String datasource = "";//Êı¾İÔ´
+		String datasource = "";//æ•°æ®æº
 		try {
 			datasource = new GetDatasourceName().doreadxml();
 		} catch (JDOMException|IOException e ) {
-			throw new RuntimeException("ÅäÖÃÎÄ¼ş»ñÈ¡Êı¾İÔ´Ãû³ÆÊ§°Ü£¡");
+			throw new RuntimeException("é…ç½®æ–‡ä»¶è·å–æ•°æ®æºåç§°å¤±è´¥ï¼");
 		}
 
 		JSONObject result = new JSONObject();
-		//µÃµ½Ç°Ì¨´©¹ıÀ´µÄ×Ö¶Î
-		JSONObject userjsonObject = json.getJSONObject("userjson"); // µÇÂ¼ÈË
-		String	cuserid=userjsonObject.getString("cuserid");//µ±Ç°µÇÂ¼ÈËÖ÷¼ü
-		String pk_org=userjsonObject.getString("pk_org");//×éÖ¯
-		String 	pk_group=userjsonObject.getString("pk_group");//¼¯ÍÅ
-		String 	pk_dept=userjsonObject.getString("pk_dept");//²¿ÃÅ
-		String origin = json.getString("origin"); // ³ö·¢µØ
-		String destarea = json.getString("destarea");// Ä¿±êÇøÓò
-		String dest1 =json.getString("dest1"); // Ä¿µÄµØ1
-		String dest2 =json.getString("dest2"); // Ä¿µÄµØ2
-		String dest3 =json.getString("dest3"); // Ä¿µÄµØ3
-		String finaldest =json.getString("finaldest"); // ×îÖÕÄ¿µÄµØ
-		String reason =json.getString("reason"); // ÊÂÓÉ
-		int selectedPNum =Integer.parseInt(json.getString("selectedPNum")); // ÈËÊı
-		UFBoolean iscarpool =new UFBoolean(json.getString("mySwitch")); // ÊÇ·ñÆ´³µ
-		String phone =json.getString("phone"); // ÓÃ»§µç»°
-		String driver =json.getString("driver"); // Ë¾»ú
-		String pk_driver =json.getString("pk_driver"); // Ë¾»úÖ÷¼ü
-		String driverphone =json.getString("driverphone"); // Ë¾»úµç»°
-		String vehicleno =json.getString("vehicleno"); // ³µÅÆºÅ
-		String pk_vehicle =json.getString("pk_vehicle"); // ³µÅÆºÅ
-		String departtime =json.getString("departtime"); // ÓÃ³µÊ±¼ä
-		String returntime =json.getString("returntime"); // ·µ»ØÊ±¼ä
-		String turndownreason =json.getString("turndownreason"); // ²µ»ØÔ­Òò
+		//å¾—åˆ°å‰å°ç©¿è¿‡æ¥çš„å­—æ®µ
+		JSONObject userjsonObject = json.getJSONObject("userjson"); // ç™»å½•äºº
+		String	cuserid=userjsonObject.getString("cuserid");//å½“å‰ç™»å½•äººä¸»é”®
+		String pk_org=userjsonObject.getString("pk_org");//ç»„ç»‡
+		String 	pk_group=userjsonObject.getString("pk_group");//é›†å›¢
+		String 	pk_dept=userjsonObject.getString("pk_dept");//éƒ¨é—¨
+		String origin = json.getString("origin"); // å‡ºå‘åœ°
+		String destarea = json.getString("destarea");// ç›®æ ‡åŒºåŸŸ
+		String dest1 =json.getString("dest1"); // ç›®çš„åœ°1
+		String dest2 =json.getString("dest2"); // ç›®çš„åœ°2
+		String dest3 =json.getString("dest3"); // ç›®çš„åœ°3
+		String finaldest =json.getString("finaldest"); // æœ€ç»ˆç›®çš„åœ°
+		String reason =json.getString("reason"); // äº‹ç”±
+		int selectedPNum =Integer.parseInt(json.getString("selectedPNum")); // äººæ•°
+		UFBoolean iscarpool =new UFBoolean(json.getString("mySwitch")); // æ˜¯å¦æ‹¼è½¦
+		String phone =json.getString("phone"); // ç”¨æˆ·ç”µè¯
+		String driver =json.getString("driver"); // å¸æœº
+		String pk_driver =json.getString("pk_driver"); // å¸æœºä¸»é”®
+		String driverphone =json.getString("driverphone"); // å¸æœºç”µè¯
+		String vehicleno =json.getString("vehicleno"); // è½¦ç‰Œå·
+		String pk_vehicle =json.getString("pk_vehicle"); // è½¦ç‰Œå·
+		String departtime =json.getString("departtime"); // ç”¨è½¦æ—¶é—´
+		String returntime =json.getString("returntime"); // è¿”å›æ—¶é—´
+		String turndownreason =json.getString("turndownreason"); // é©³å›åŸå› 
 		if(departtime!=null&&!departtime.equals("")){
 		departtime=departtime.replaceAll("-", "/");
 		departtime=departtime+":00";
@@ -932,9 +932,9 @@ public class VorderUserServlet extends HttpServlet {
 		hvo.setAttributeValue("dphone", driverphone);
 		hvo.setAttributeValue("vehicleno", vehicleno);
 		hvo.setAttributeValue("pk_vehicle", pk_vehicle);
-		int allPNum=4;//³µÉÏÒ»¹²4¸ö×ùÎ»
-		hvo.setAttributeValue("remainpnum", allPNum-selectedPNum);//Ê£Óà×ùÎ»
-		hvo.setAttributeValue("billstate", "2");//´´½¨µ¥¾İÊ±µ¥¾İ×´Ì¬ÎªÉêÇëÖĞ
+		int allPNum=4;//è½¦ä¸Šä¸€å…±4ä¸ªåº§ä½
+		hvo.setAttributeValue("remainpnum", allPNum-selectedPNum);//å‰©ä½™åº§ä½
+		hvo.setAttributeValue("billstate", "2");//åˆ›å»ºå•æ®æ—¶å•æ®çŠ¶æ€ä¸ºç”³è¯·ä¸­
 		hvo.setAttributeValue("pk_group", pk_group);
 		hvo.setAttributeValue("pk_org", pk_org);
 		hvo.setAttributeValue("cuserId", cuserid);
@@ -944,7 +944,7 @@ public class VorderUserServlet extends HttpServlet {
 		
 		aggvo.setParent(hvo);
 		VorderBVO bvo=new VorderBVO();
-		//´´½¨¶©µ¥Ê±Ä¬ÈÏÊÇµÚÒ»ÉêÇëÈË
+		//åˆ›å»ºè®¢å•æ—¶é»˜è®¤æ˜¯ç¬¬ä¸€ç”³è¯·äºº
 		hvo.setAttributeValue("approvestatus", -1);
 		bvo.setAttributeValue("isfisrtapplier", 'Y');
 		bvo.setAttributeValue("applier", cuserid);
@@ -965,26 +965,26 @@ public class VorderUserServlet extends HttpServlet {
 		VorderBVO[] bvos={bvo};
 		aggvo.setChildrenVO(bvos);
 
-		// ÉèÖÃGroupId
+		// è®¾ç½®GroupId
 	//	InvocationInfoProxy.getInstance().setGroupId(hvo.getAttributeValue("pk_group").toString());
 		InvocationInfoProxy.getInstance().setUserId(hvo.getAttributeValue("cuserId").toString());
 
 		AggVorderHVO[] aggvos = { aggvo };
-        //ĞÂÔöµ¥¾İ²¢Ìá½»
+        //æ–°å¢å•æ®å¹¶æäº¤
 		IPFBusiAction ipfBusiAction = (IPFBusiAction) NCLocator.getInstance().lookup(IPFBusiAction.class);
-		aggvos = (AggVorderHVO[]) ipfBusiAction.processAction("SAVEBASE","VORD" , null,aggvo , null, null);//ĞÂÔöÒ»ÌõÉêÇëµ¥
-		ipfBusiAction.processAction("SAVE","VORD" , null,aggvos[0], null, null);//Ìá½»
-		String pk_vorder=(String) aggvos[0].getParentVO().getAttributeValue("pk_vorder");//µÃµ½¸ÕÉú³ÉµÄµ¥¾İÖ÷±íÖ÷¼ü
-		String pk_vorder_b=(String) aggvos[0].getChildrenVO()[0].getAttributeValue("pk_vorder_b");//µÃµ½¸ÕÉú³ÉµÄµ¥¾İ×Ó±íÖ÷¼ü
-		PKLock.getInstance().releaseLock(pk_vorder, cuserid, datasource);//¸ù¾İÖ÷¼ü½âËø¶ÔÓ¦Ö÷±í
-		PKLock.getInstance().releaseLock(pk_vorder_b, cuserid, datasource);//¸ù¾İÖ÷¼ü½âËø¶ÔÓ¦×Ó±í
+		aggvos = (AggVorderHVO[]) ipfBusiAction.processAction("SAVEBASE","VORD" , null,aggvo , null, null);//æ–°å¢ä¸€æ¡ç”³è¯·å•
+		ipfBusiAction.processAction("SAVE","VORD" , null,aggvos[0], null, null);//æäº¤
+		String pk_vorder=(String) aggvos[0].getParentVO().getAttributeValue("pk_vorder");//å¾—åˆ°åˆšç”Ÿæˆçš„å•æ®ä¸»è¡¨ä¸»é”®
+		String pk_vorder_b=(String) aggvos[0].getChildrenVO()[0].getAttributeValue("pk_vorder_b");//å¾—åˆ°åˆšç”Ÿæˆçš„å•æ®å­è¡¨ä¸»é”®
+		PKLock.getInstance().releaseLock(pk_vorder, cuserid, datasource);//æ ¹æ®ä¸»é”®è§£é”å¯¹åº”ä¸»è¡¨
+		PKLock.getInstance().releaseLock(pk_vorder_b, cuserid, datasource);//æ ¹æ®ä¸»é”®è§£é”å¯¹åº”å­è¡¨
 		
 		result.put("result", "true");
 		return result;
 	}
 
 	/**
-	 * »ñÈ¡Ê±¼ä£¨½ØÈ¡µ½Ê±·Ö£¬²»ĞèÒªÃë£©
+	 * è·å–æ—¶é—´ï¼ˆæˆªå–åˆ°æ—¶åˆ†ï¼Œä¸éœ€è¦ç§’ï¼‰
 	 * @param time
 	 * @return
 	 */

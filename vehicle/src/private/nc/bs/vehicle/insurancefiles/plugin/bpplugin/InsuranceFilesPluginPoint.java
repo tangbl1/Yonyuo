@@ -3,50 +3,50 @@ package nc.bs.vehicle.insurancefiles.plugin.bpplugin;
 import nc.impl.pubapp.pattern.rule.plugin.IPluginPoint;
 
 /**
- * 标准单据的扩展插入点
+ * 鏍囧噯鍗曟嵁鐨勬墿灞曟彃鍏ョ偣
  * 
  */
 public enum InsuranceFilesPluginPoint implements IPluginPoint {
 	/**
-	 * 审批
+	 * 瀹℃壒
 	 */
 	APPROVE,
 	/**
-	 * 送审
+	 * 閫佸
 	 */
 	SEND_APPROVE,
 
 	/**
-	 * 取消审核
+	 * 鍙栨秷瀹℃牳
 	 */
 	UNAPPROVE,
 
 	/**
-	 * 收回
+	 * 鏀跺洖
 	 */
 	UNSEND_APPROVE,
 	/**
-	 * 删除
+	 * 鍒犻櫎
 	 */
 	DELETE,
 	/**
-	 * 新增
+	 * 鏂板
 	 */
 	INSERT,
 	/**
-	 * 更新
+	 * 鏇存柊
 	 */
 	UPDATE,
 	/**
-	 * 脚本删除
+	 * 鑴氭湰鍒犻櫎
 	 */
 	SCRIPT_DELETE,
 	/**
-	 * 脚本新增
+	 * 鑴氭湰鏂板
 	 */
 	SCRIPT_INSERT,
 	/**
-	 * 脚本更新
+	 * 鑴氭湰鏇存柊
 	 */
 	SCRIPT_UPDATE;
 

@@ -7,7 +7,7 @@ import nc.impl.pubapp.pattern.rule.IRule;
 import nc.vo.vehicle.insurance.AggInsuranceHVO;
 
 /**
- * ±ê×¼µ¥¾İĞÂÔöBP
+ * æ ‡å‡†å•æ®æ–°å¢BP
  */
 public class AceInsuranceFilesInsertBP {
 
@@ -22,12 +22,12 @@ public class AceInsuranceFilesInsertBP {
 	}
 
 	/**
-	 * ĞÂÔöºó¹æÔò
+	 * æ–°å¢åè§„åˆ™
 	 * 
 	 * @param processor
 	 */
 	private void addAfterRule(AroundProcesser<AggInsuranceHVO> processor) {
-		// TODO ĞÂÔöºó¹æÔò
+		// TODO æ–°å¢åè§„åˆ™
 		IRule<AggInsuranceHVO> rule = null;
 		rule = new nc.bs.pubapp.pub.rule.BillCodeCheckRule();
 		((nc.bs.pubapp.pub.rule.BillCodeCheckRule) rule).setCbilltype("INSU");
@@ -40,12 +40,12 @@ public class AceInsuranceFilesInsertBP {
 	}
 
 	/**
-	 * ĞÂÔöÇ°¹æÔò
+	 * æ–°å¢å‰è§„åˆ™
 	 * 
 	 * @param processor
 	 */
 	private void addBeforeRule(AroundProcesser<AggInsuranceHVO> processer) {
-		// TODO ĞÂÔöÇ°¹æÔò
+		// TODO æ–°å¢å‰è§„åˆ™
 		IRule<AggInsuranceHVO> rule = null;
 		rule = new nc.bs.pubapp.pub.rule.FillInsertDataRule();
 		processer.addBeforeRule(rule);

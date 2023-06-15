@@ -19,7 +19,7 @@ public class N_VEHI_UNAPPROVE extends AbstractPfAction<AggVehicleMessageVO> {
 			Object userObj) {
 		CompareAroundProcesser<AggVehicleMessageVO> processor = new CompareAroundProcesser<AggVehicleMessageVO>(
 				VehiclePluginPoint.UNAPPROVE);
-		// TODO ÔÚ´Ë´¦Ìí¼ÓÇ°ºó¹æÔò
+		// TODO åœ¨æ­¤å¤„æ·»åŠ å‰åè§„åˆ™
 		processor.addBeforeRule(new UnapproveStatusCheckRule());
 
 		return processor;

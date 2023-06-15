@@ -6,13 +6,13 @@ import nc.vo.pub.VOStatus;
 import nc.vo.pub.pf.BillStatusEnum;
 
 /**
- * 标准单据收回的BP
+ * 鏍囧噯鍗曟嵁鏀跺洖鐨凚P
  */
 public class AceDriverFilesUnSendApproveBP {
 
 	public AggDriverFiles[] unSend(AggDriverFiles[] clientBills,
 			AggDriverFiles[] originBills) {
-		// 把VO持久化到数据库中
+		// 鎶奦O鎸佷箙鍖栧埌鏁版嵁搴撲腑
 		this.setHeadVOStatus(clientBills);
 		BillUpdate<AggDriverFiles> update = new BillUpdate<AggDriverFiles>();
 		AggDriverFiles[] returnVos = update.update(clientBills, originBills);

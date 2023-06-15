@@ -10,9 +10,9 @@ import nc.vo.pub.BusinessException;
 import nc.vo.pub.SuperVO;
 
 /**
-* ¶ÔÓ¦µ¥¾İÀàĞÍÖĞµÄÉóÅúÁ÷¼ì²éÀà¡£
-* ¼ì²é¹ı³ÌÅĞ¶ÏÈç¹û²»ÊÇÖÕÖ¹Á÷³ÌÔò»áreturn·µ»Ø¡£
-* Èç¹û´ÓÁ÷³ÌÊµÀı¹ÜÀí½ÚµãÖÕÖ¹Á÷³ÌÊµÀı£¬»òÕßÊÕ»Øµ¥¾İÊ±»á¸üĞÂµ¥¾İ×´Ì¬¡£
+* å¯¹åº”å•æ®ç±»å‹ä¸­çš„å®¡æ‰¹æµæ£€æŸ¥ç±»ã€‚
+* æ£€æŸ¥è¿‡ç¨‹åˆ¤æ–­å¦‚æœä¸æ˜¯ç»ˆæ­¢æµç¨‹åˆ™ä¼šreturnè¿”å›ã€‚
+* å¦‚æœä»æµç¨‹å®ä¾‹ç®¡ç†èŠ‚ç‚¹ç»ˆæ­¢æµç¨‹å®ä¾‹ï¼Œæˆ–è€…æ”¶å›å•æ®æ—¶ä¼šæ›´æ–°å•æ®çŠ¶æ€ã€‚
 */
 public class PfVorderHVOCheck implements ICheckStatusCallback {
 
@@ -26,19 +26,19 @@ public class PfVorderHVOCheck implements ICheckStatusCallback {
         NCObject ncObj = NCObject.newInstance(cscc.getBillVo());
         IFlowBizItf itf = ncObj.getBizInterface(IFlowBizItf.class);
         String[] fields = new String[1];
-        // ´ÓÉÏÏÂÎÄ»ñÈ¡ÉóÅú×´Ì¬
+        // ä»ä¸Šä¸‹æ–‡è·å–å®¡æ‰¹çŠ¶æ€
         itf.setApproveStatus(cscc.getCheckStatus());
-        // ÉóÅú×´Ì¬µÄ×Ö¶Î
+        // å®¡æ‰¹çŠ¶æ€çš„å­—æ®µ
         fields[0] = itf.getColumnName(IFlowBizItf.ATTRIBUTE_APPROVESTATUS);
         
-        // ±£´æĞŞ¸ÄºóÊı¾İ
+        // ä¿å­˜ä¿®æ”¹åæ•°æ®
         SuperVO vo = (SuperVO) ((AggregatedValueObject) cscc.getBillVo()).getParentVO();
         if(vo==null){
         	return;
         }
-        // ¸üĞÂvo
+        // æ›´æ–°vo
         getBaseDAO().updateVO(vo, fields);
-        // ¸üĞÂparentVO
+        // æ›´æ–°parentVO
         vo = (SuperVO) getBaseDAO().retrieveByPK(vo.getClass(), vo.getPrimaryKey());
         ((AggregatedValueObject) cscc.getBillVo()).setParentVO(vo);
     }

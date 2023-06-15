@@ -20,18 +20,18 @@ import nccloud.framework.web.ui.model.PageInfo;
 import nc.itf.vehicle.vorder.vorderhvo.IVorderHVOService;
 import nc.vo.vehicle.vorder.VorderHVO;
 /**
- * ÁĞ±í²éÑ¯
+ * åˆ—è¡¨æŸ¥è¯¢
  */
 public class ListVorderHVOAction extends BaseAction{
 
 	@Override
 	public Object doAction(IRequest request, RequstParamWapper paramWapper) throws Throwable{
-		//jsonÊı¾İ×ª»»
+		//jsonæ•°æ®è½¬æ¢
 		RequestDTO param = VOTransform.toVO(paramWapper.requestString,RequestDTO.class);
 		
 		PageInfo pageInfo = param.getPageInfo();
 		
-		//²éÑ¯·½°¸
+		//æŸ¥è¯¢æ–¹æ¡ˆ
 		INCCloudQueryService nccloudService = ServiceLocator.find(INCCloudQueryService.class);
 		QueryTreeFormatVO queryVo = param.getQueryTreeFormatVO();
 		String searchSql = "";
@@ -45,18 +45,18 @@ public class ListVorderHVOAction extends BaseAction{
 		}
 
 		IVorderHVOService service = ServiceLocator.find(IVorderHVOService.class);
-		//²éÑ¯µ±Ç°·½°¸ÏÂËùÓĞµÄÊı¾İpk
+		//æŸ¥è¯¢å½“å‰æ–¹æ¡ˆä¸‹æ‰€æœ‰çš„æ•°æ®pk
 		String[] allpks = service.listVorderHVOPkByCond(searchSql);
 		if(ArrayUtils.isEmpty(allpks)){
 			return null;
 		}
-		//pkÅÅĞò
+		//pkæ’åº
 		//Arrays.sort(allpks);
 		param.setAllpks(allpks);
-		//¸ù¾İ·ÖÒ³ÄÃµ½µ±Ç°·ÖÒ³µÄpk
+		//æ ¹æ®åˆ†é¡µæ‹¿åˆ°å½“å‰åˆ†é¡µçš„pk
 		String[] curPagePks = pageInfo == null ? allpks : paramWapper.pageResult(pageInfo, allpks);
 		VorderHVO[] vos =  service.listVorderHVOByPk(curPagePks);
-		//¹¹Ôì·µ»Ø½á¹û
+		//æ„é€ è¿”å›ç»“æœ
 		return buildResult(param,false,null,vos);
 	}
 	

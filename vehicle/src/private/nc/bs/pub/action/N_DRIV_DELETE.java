@@ -17,7 +17,7 @@ public class N_DRIV_DELETE extends AbstractPfAction<AggDriverFiles> {
 			Object userObj) {
 		CompareAroundProcesser<AggDriverFiles> processor = new CompareAroundProcesser<AggDriverFiles>(
 				DriverFilesPluginPoint.SCRIPT_DELETE);
-		// TODO ÔÚ´Ë´¦Ìí¼ÓÇ°ºó¹æÔò
+		// TODO åœ¨æ­¤å¤„æ·»åŠ å‰åè§„åˆ™
 		return processor;
 	}
 

@@ -27,7 +27,7 @@ public class N_INSP_SAVEBASE extends AbstractPfAction<AggInspectionFileHVO> {
 			processor = new CompareAroundProcesser<AggInspectionFileHVO>(
 					InspectionFilesPluginPoint.SCRIPT_INSERT);
 		}
-		// TODO ÔÚ´Ë´¦Ìí¼ÓÇ°ºó¹æÔò
+		// TODO åœ¨æ­¤å¤„æ·»åŠ å‰åè§„åˆ™
 		IRule<AggInspectionFileHVO> rule = null;
 
 		return processor;

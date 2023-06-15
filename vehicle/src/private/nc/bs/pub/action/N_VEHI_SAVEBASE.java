@@ -27,7 +27,7 @@ public class N_VEHI_SAVEBASE extends AbstractPfAction<AggVehicleMessageVO> {
 			processor = new CompareAroundProcesser<AggVehicleMessageVO>(
 					VehiclePluginPoint.SCRIPT_INSERT);
 		}
-		// TODO ÔÚ´Ë´¦Ìí¼ÓÇ°ºó¹æÔò
+		// TODO åœ¨æ­¤å¤„æ·»åŠ å‰åè§„åˆ™
 		IRule<AggVehicleMessageVO> rule = null;
 
 		return processor;

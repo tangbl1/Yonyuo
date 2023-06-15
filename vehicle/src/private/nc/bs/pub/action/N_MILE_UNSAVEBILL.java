@@ -18,7 +18,7 @@ public class N_MILE_UNSAVEBILL extends AbstractPfAction<AggDriverMileageHVO> {
 			Object userObj) {
 		CompareAroundProcesser<AggDriverMileageHVO> processor = new CompareAroundProcesser<AggDriverMileageHVO>(
 				DriverMileagePluginPoint.UNSEND_APPROVE);
-		// TODO ÔÚ´Ë´¦Ìí¼ÓÇ°ºó¹æÔò
+		// TODO åœ¨æ­¤å¤„æ·»åŠ å‰åè§„åˆ™
 		processor.addBeforeRule(new UncommitStatusCheckRule());
 
 		return processor;

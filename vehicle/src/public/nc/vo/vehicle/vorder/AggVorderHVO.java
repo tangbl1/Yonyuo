@@ -7,9 +7,9 @@ import nc.vo.vehicle.vorder.VorderHVO;
 
 /**
  * 
- * µ¥×Ó±í/µ¥±íÍ·/µ¥±íÌå¾ÛºÏVO
+ * å•å­è¡¨/å•è¡¨å¤´/å•è¡¨ä½“èšåˆVO
  *
- * ´´½¨ÈÕÆÚ:
+ * åˆ›å»ºæ—¥æœŸ:
  * @author 
  * @version NCPrj ??
  */

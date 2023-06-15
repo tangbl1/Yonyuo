@@ -19,7 +19,7 @@ public class N_OINF_UNAPPROVE extends AbstractPfAction<AggOtherInfoVO> {
 			Object userObj) {
 		CompareAroundProcesser<AggOtherInfoVO> processor = new CompareAroundProcesser<AggOtherInfoVO>(
 				OtherInfoPluginPoint.UNAPPROVE);
-		// TODO ÔÚ´Ë´¦Ìí¼ÓÇ°ºó¹æÔò
+		// TODO åœ¨æ­¤å¤„æ·»åŠ å‰åè§„åˆ™
 		processor.addBeforeRule(new UnapproveStatusCheckRule());
 
 		return processor;

@@ -45,7 +45,7 @@ public class N_VORD_UNSAVE extends AbstractPfScriptAction<AggVorderHVO>{
 	protected void before(PfParameterVO paraVO)  throws BusinessException{
 		AggVorderHVO vo = (AggVorderHVO)this.getVo();
 		if(StringUtils.isEmpty(vo.getPrimaryKey())){
-			throw new BusinessException("当前单据未执行保存动作脚本，如果配置了业务流程定义，请检查动作驱动配置！");
+			throw new BusinessException("褰撳墠鍗曟嵁鏈墽琛屼繚瀛樺姩浣滆剼鏈紝濡傛灉閰嶇疆浜嗕笟鍔℃祦绋嬪畾涔夛紝璇锋鏌ュ姩浣滈┍鍔ㄩ厤缃紒");
 		}
 	}
 }

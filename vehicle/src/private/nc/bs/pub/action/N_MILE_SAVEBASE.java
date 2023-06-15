@@ -27,7 +27,7 @@ public class N_MILE_SAVEBASE extends AbstractPfAction<AggDriverMileageHVO> {
 			processor = new CompareAroundProcesser<AggDriverMileageHVO>(
 					DriverMileagePluginPoint.SCRIPT_INSERT);
 		}
-		// TODO ÔÚ´Ë´¦Ìí¼ÓÇ°ºó¹æÔò
+		// TODO åœ¨æ­¤å¤„æ·»åŠ å‰åè§„åˆ™
 		IRule<AggDriverMileageHVO> rule = null;
 
 		return processor;

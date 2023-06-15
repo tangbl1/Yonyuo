@@ -18,7 +18,7 @@ public class N_VEHI_SAVE extends AbstractPfAction<AggVehicleMessageVO> {
 			Object userObj) {
 		CompareAroundProcesser<AggVehicleMessageVO> processor = new CompareAroundProcesser<AggVehicleMessageVO>(
 				VehiclePluginPoint.SEND_APPROVE);
-		// TODO ÔÚ´Ë´¦Ìí¼ÓÉóºËÇ°ºó¹æÔò
+		// TODO åœ¨æ­¤å¤„æ·»åŠ å®¡æ ¸å‰åè§„åˆ™
 		IRule<AggVehicleMessageVO> rule = new CommitStatusCheckRule();
 		processor.addBeforeRule(rule);
 		return processor;

@@ -17,7 +17,7 @@ public class N_OINF_DELETE extends AbstractPfAction<AggOtherInfoVO> {
 			Object userObj) {
 		CompareAroundProcesser<AggOtherInfoVO> processor = new CompareAroundProcesser<AggOtherInfoVO>(
 				OtherInfoPluginPoint.SCRIPT_DELETE);
-		// TODO ÔÚ´Ë´¦Ìí¼ÓÇ°ºó¹æÔò
+		// TODO åœ¨æ­¤å¤„æ·»åŠ å‰åè§„åˆ™
 		return processor;
 	}
 

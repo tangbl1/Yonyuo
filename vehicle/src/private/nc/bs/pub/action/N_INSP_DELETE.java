@@ -17,7 +17,7 @@ public class N_INSP_DELETE extends AbstractPfAction<AggInspectionFileHVO> {
 			Object userObj) {
 		CompareAroundProcesser<AggInspectionFileHVO> processor = new CompareAroundProcesser<AggInspectionFileHVO>(
 				InspectionFilesPluginPoint.SCRIPT_DELETE);
-		// TODO ÔÚ´Ë´¦Ìí¼ÓÇ°ºó¹æÔò
+		// TODO åœ¨æ­¤å¤„æ·»åŠ å‰åè§„åˆ™
 		return processor;
 	}
 

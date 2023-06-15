@@ -27,7 +27,7 @@ public class N_OINF_SAVEBASE extends AbstractPfAction<AggOtherInfoVO> {
 			processor = new CompareAroundProcesser<AggOtherInfoVO>(
 					OtherInfoPluginPoint.SCRIPT_INSERT);
 		}
-		// TODO ÔÚ´Ë´¦Ìí¼ÓÇ°ºó¹æÔò
+		// TODO åœ¨æ­¤å¤„æ·»åŠ å‰åè§„åˆ™
 		IRule<AggOtherInfoVO> rule = null;
 
 		return processor;

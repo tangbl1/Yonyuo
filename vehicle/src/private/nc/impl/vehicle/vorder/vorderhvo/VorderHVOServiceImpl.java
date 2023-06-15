@@ -140,7 +140,7 @@ public class  VorderHVOServiceImpl extends ServiceSupport implements IVorderHVOS
 		getMainVO(vo).setStatus(VOStatus.NEW);
 		initDefaultData((VorderHVO)getMainVO(vo));
 
-		//ÏÂÃæÕâ¶ÎÒªÅĞ¶ÏÊÇ·ñÊÇÊ÷±í½çÃæ²å¼ş
+		//ä¸‹é¢è¿™æ®µè¦åˆ¤æ–­æ˜¯å¦æ˜¯æ ‘è¡¨ç•Œé¢æ’ä»¶
 		Map<String,String> data = userJson!=null && userJson.get("data") != null?(Map<String,String>)userJson.get("data"):null;
 		if(data!=null && data.size()>0){
 			String parentKey = data.get("parentKey");
@@ -148,10 +148,10 @@ public class  VorderHVOServiceImpl extends ServiceSupport implements IVorderHVOS
 			getMainVO(vo).setAttributeValue(parentKey,parentPk);
 		}
 
-		//±àÂë¹æÔòÉú³ÉvoµÄ±àÂë
+		//ç¼–ç è§„åˆ™ç”Ÿæˆvoçš„ç¼–ç 
 		BillCodeContext billCodeContext = getBillCodeContext("vehiclevorder");
 		if(billCodeContext == null){
-			throw new BusinessException("µ±Ç°±àÂë¹æÔò²»´æÔÚ£¬Çëµ½¡¾±àÂë¹æÔò¶¨Òå-È«¾Ö¡¿½Úµã¼ì²éÊÇ·ñ´æÔÚ"+"vehiclevorder");
+			throw new BusinessException("å½“å‰ç¼–ç è§„åˆ™ä¸å­˜åœ¨ï¼Œè¯·åˆ°ã€ç¼–ç è§„åˆ™å®šä¹‰-å…¨å±€ã€‘èŠ‚ç‚¹æ£€æŸ¥æ˜¯å¦å­˜åœ¨"+"vehiclevorder");
 		}
 		if(billCodeContext.isPrecode()){
 			String pk_group = InvocationInfoProxy.getInstance().getGroupId();
@@ -166,7 +166,7 @@ public class  VorderHVOServiceImpl extends ServiceSupport implements IVorderHVOS
 		AggVorderHVO result = null;
 
 		VorderHVO mainvo = new VorderHVO();
-		//ÉèÖÃÄ¬ÈÏÖµ
+		//è®¾ç½®é»˜è®¤å€¼
 		initDefaultData(mainvo);
 		AggVorderHVO aggvo = new AggVorderHVO();
 		aggvo.setParent(mainvo);
@@ -193,10 +193,10 @@ public class  VorderHVOServiceImpl extends ServiceSupport implements IVorderHVOS
 		getMainVO(vo).setAttributeValue("billno",null);
 		getMainVO(vo).setAttributeValue("billno",null);
 		getMainVO(vo).setAttributeValue("name",null);
-		//±àÂë¹æÔòÉú³ÉvoµÄ±àÂë
+		//ç¼–ç è§„åˆ™ç”Ÿæˆvoçš„ç¼–ç 
 		BillCodeContext billCodeContext = getBillCodeContext("vehiclevorder");
 		if(billCodeContext == null){
-			throw new BusinessException("µ±Ç°±àÂë¹æÔò²»´æÔÚ£¬Çëµ½¡¾±àÂë¹æÔò¶¨Òå-È«¾Ö¡¿½Úµã¼ì²éÊÇ·ñ´æÔÚ"+"vehiclevorder");
+			throw new BusinessException("å½“å‰ç¼–ç è§„åˆ™ä¸å­˜åœ¨ï¼Œè¯·åˆ°ã€ç¼–ç è§„åˆ™å®šä¹‰-å…¨å±€ã€‘èŠ‚ç‚¹æ£€æŸ¥æ˜¯å¦å­˜åœ¨"+"vehiclevorder");
 		}
 		if(billCodeContext.isPrecode()){
 			String pk_group = InvocationInfoProxy.getInstance().getGroupId();
@@ -208,7 +208,7 @@ public class  VorderHVOServiceImpl extends ServiceSupport implements IVorderHVOS
 		getMainVO(vo).setAttributeValue("approver", null);
 		getMainVO(vo).setAttributeValue("approvenote", null);
 		getMainVO(vo).setAttributeValue("approvedate", null);
-		//ÉèÖÃÉó¼ÆĞÅÏ¢Îª¿Õ
+		//è®¾ç½®å®¡è®¡ä¿¡æ¯ä¸ºç©º
 		getMainVO(vo).setAttributeValue("creator",null);
 		getMainVO(vo).setAttributeValue("creationtime",null);
 		getMainVO(vo).setAttributeValue("modifier",null);
@@ -233,13 +233,13 @@ public class  VorderHVOServiceImpl extends ServiceSupport implements IVorderHVOS
 		String pk = getVOPrimaryKey(vo);
 		setDefaultVal(vo);
 		if(StringUtils.isEmpty(pk)){
-			return dao.insert(vo); //²åÈë
+			return dao.insert(vo); //æ’å…¥
 		}else{
-			return dao.update(vo); //¸üĞÂ
+			return dao.update(vo); //æ›´æ–°
 		}
 	}
 	/**
-	 * ±£´æÇ°´¦Àí±àÂë¹æÔò
+	 * ä¿å­˜å‰å¤„ç†ç¼–ç è§„åˆ™
 	 * @param vos
 	 */
 	private void setBillCode(AggVorderHVO... vos) throws BusinessException {
@@ -263,7 +263,7 @@ public class  VorderHVOServiceImpl extends ServiceSupport implements IVorderHVOS
 		}
 	}
 	/**
-	 * ±£´æÇ°ÉèÖÃÉó¼ÆĞÅÏ¢
+	 * ä¿å­˜å‰è®¾ç½®å®¡è®¡ä¿¡æ¯
 	 * @param vos
 	 */
 	private void setAuditInfo(AggVorderHVO... vos) throws BusinessException {
@@ -272,15 +272,15 @@ public class  VorderHVOServiceImpl extends ServiceSupport implements IVorderHVOS
 			for(AggVorderHVO vo : vos) {
 				String pk = getVOPrimaryKey(vo);
 				if(StringUtils.isEmpty(pk)){
-					//ÉèÖÃ´´½¨ÈË´´½¨Ê±¼ä
+					//è®¾ç½®åˆ›å»ºäººåˆ›å»ºæ—¶é—´
 					getMainVO(vo).setAttributeValue("creator",InvocationInfoProxy.getInstance().getUserId());
 					getMainVO(vo).setAttributeValue("creationtime",now);
 					getMainVO(vo).setAttributeValue("maketime",now);
-					getMainVO(vo).setAttributeValue("billmaker", InvocationInfoProxy.getInstance().getUserId()); // ÖÆµ¥ÈË
+					getMainVO(vo).setAttributeValue("billmaker", InvocationInfoProxy.getInstance().getUserId()); // åˆ¶å•äºº
 					getMainVO(vo).setAttributeValue("modifier",null);
 					getMainVO(vo).setAttributeValue("modifiedtime",null);
 				}else{
-					//ÉèÖÃĞŞ¸ÄÈËĞŞ¸ÄÊ±¼ä
+					//è®¾ç½®ä¿®æ”¹äººä¿®æ”¹æ—¶é—´
 					getMainVO(vo).setAttributeValue("modifier",InvocationInfoProxy.getInstance().getUserId());
 					getMainVO(vo).setAttributeValue("modifiedtime",now);
 					getMainVO(vo).setAttributeValue("lastmaketime",now);
@@ -289,36 +289,36 @@ public class  VorderHVOServiceImpl extends ServiceSupport implements IVorderHVOS
 		}
 	}
 	/**
-	 * ±£´æÇ°´¦ÀíÒ»Ğ©Ä¬ÈÏÖµ
+	 * ä¿å­˜å‰å¤„ç†ä¸€äº›é»˜è®¤å€¼
 	 * @param vos
 	 */
 	private void setDefaultVal(AggVorderHVO... vos) throws BusinessException {
 		setBillCode(vos);
 		setAuditInfo(vos);
-		//ÆäËûÄ¬ÈÏÖµ´¦Àí
+		//å…¶ä»–é»˜è®¤å€¼å¤„ç†
 	}
 
-	// ¸øµ¥±í£¨ĞĞ±à¼­±í£©µ¥¶ÀÊÊÅä
+	// ç»™å•è¡¨ï¼ˆè¡Œç¼–è¾‘è¡¨ï¼‰å•ç‹¬é€‚é…
 	@Override
 	public AggVorderHVO[] saveAggVorderHVO(AggVorderHVO[] vos) throws BusinessException {
 		if (ArrayUtils.isEmpty(vos)) {
 			return new AggVorderHVO[0];
 		}
-		setDefaultVal(vos); // ÉèÖÃÄ¬ÈÏÖµ
+		setDefaultVal(vos); // è®¾ç½®é»˜è®¤å€¼
 		List<String> pks = Arrays.stream(vos).filter(v -> getMainVO(v).getStatus() == VOStatus.DELETED)
-				.map(v -> getMainVO(v).getPrimaryKey()).collect(Collectors.toList()); // É¾³ıµ¥¾İÖ÷¼ü
+				.map(v -> getMainVO(v).getPrimaryKey()).collect(Collectors.toList()); // åˆ é™¤å•æ®ä¸»é”®
 		if (pks == null || pks.size() == 0) {
 			return dao.save(vos, true);
 		}
 		AggVorderHVO[] deleteVOs = dao.listByPk(AggVorderHVO.class, pks.toArray(new String[0]));
 		for (int i = 0; i < deleteVOs.length; i++) {
 			SuperVO mainVO = getMainVO(deleteVOs[i]);
-			// É¾³ıµ¥¾İÊ±Ğ£Ñéµ¥¾İ×´Ì¬
+			// åˆ é™¤å•æ®æ—¶æ ¡éªŒå•æ®çŠ¶æ€
 			Integer approveStatus = (Integer) mainVO.getAttributeValue("approvestatus");
 			if (approveStatus != null && !approveStatus.equals(-1)) {
-				throw new BusinessException("µÚ" + (i + 1) + "ÕÅµ¥¾İ´¦ÀíÊ§°Ü£ºµ¥¾İ×´Ì¬²»ÕıÈ·£¬²»ÄÜÉ¾³ı£¡");
+				throw new BusinessException("ç¬¬" + (i + 1) + "å¼ å•æ®å¤„ç†å¤±è´¥ï¼šå•æ®çŠ¶æ€ä¸æ­£ç¡®ï¼Œä¸èƒ½åˆ é™¤ï¼");
 			}
-			// É¾³ıµ¥¾İÊ±»ØÍËµ¥¾İºÅ
+			// åˆ é™¤å•æ®æ—¶å›é€€å•æ®å·
 			String billno = (String)mainVO.getAttributeValue("billno");
 			if (StringUtils.isNotEmpty(billno)) {
 				String pk_group = InvocationInfoProxy.getInstance().getGroupId();
@@ -345,11 +345,11 @@ public class  VorderHVOServiceImpl extends ServiceSupport implements IVorderHVOS
 		return vos;
 	}
 	
-	//Ğ£Ñé  °üÀ¨tsĞ£Ñé  ÒÑÌá½»Ğ£Ñé
+	//æ ¡éªŒ  åŒ…æ‹¬tsæ ¡éªŒ  å·²æäº¤æ ¡éªŒ
 	private void validate(AggVorderHVO[] vos,Map<String,String> tsMap) throws BusinessException{
 
 		Boolean isPass = true;
-		String error = "";    //´íÎóĞÅÏ¢
+		String error = "";    //é”™è¯¯ä¿¡æ¯
 		if(ArrayUtils.isEmpty(vos)){
 			isPass = false;
 		}
@@ -363,11 +363,11 @@ public class  VorderHVOServiceImpl extends ServiceSupport implements IVorderHVOS
 			}
 			Integer approvestatus = (Integer) mainvo.getAttributeValue("approvestatus");
 			if(approvestatus == null || approvestatus != BillStatusEnum.FREE.toIntValue()){
-				error += "µÚ"+(i+1)+"ÕÅµ¥¾İ´¦ÀíÊ§°Ü£ºÉóÅú×´Ì¬²»ÕıÈ·£¬²»ÄÜÉ¾³ı£¡\n";
+				error += "ç¬¬"+(i+1)+"å¼ å•æ®å¤„ç†å¤±è´¥ï¼šå®¡æ‰¹çŠ¶æ€ä¸æ­£ç¡®ï¼Œä¸èƒ½åˆ é™¤ï¼\n";
 			}
 		}
 		if(!isPass) {
-			throw new BusinessException("Äú²Ù×÷µÄÊı¾İÒÑ±»ËûÈËĞŞ¸Ä»òÉ¾³ı£¬ÇëË¢ĞÂºóÖØÊÔ£¡");
+			throw new BusinessException("æ‚¨æ“ä½œçš„æ•°æ®å·²è¢«ä»–äººä¿®æ”¹æˆ–åˆ é™¤ï¼Œè¯·åˆ·æ–°åé‡è¯•ï¼");
 		}
 		if(!"".equals(error)){
 			throw new BusinessException(error);
@@ -396,8 +396,8 @@ public class  VorderHVOServiceImpl extends ServiceSupport implements IVorderHVOS
 	}
 
 	/**
-	 * Ìá½»Ç°Ğ£Ñé:
-	 * ¼ì²éµ¥¾İ×´Ì¬
+	 * æäº¤å‰æ ¡éªŒ:
+	 * æ£€æŸ¥å•æ®çŠ¶æ€
 	 * @throws BusinessException
 	 * */
 	private void validateCommitAggVorderHVO(AggVorderHVO... vos) throws BusinessException {
@@ -416,13 +416,13 @@ public class  VorderHVOServiceImpl extends ServiceSupport implements IVorderHVOS
 		}
 		String errors = "";
 		for(AggVorderHVO vo  : list) {
-			errors+="µ¥¾İºÅ£º["+vo.getParentVO().getAttributeValue("billno")+"]Ìá½»Ê§°Ü£¬Ê§°ÜÔ­Òò£ºµ¥¾İ×´Ì¬²»ÕıÈ·£¬Çë¼ì²é¡£\n";
+			errors+="å•æ®å·ï¼š["+vo.getParentVO().getAttributeValue("billno")+"]æäº¤å¤±è´¥ï¼Œå¤±è´¥åŸå› ï¼šå•æ®çŠ¶æ€ä¸æ­£ç¡®ï¼Œè¯·æ£€æŸ¥ã€‚\n";
 		}
 		throw new BusinessException(errors);
 	}
 	/**
-	 * ÊÕ»ØÇ°Ğ£Ñé:
-	 * ¼ì²éµ¥¾İ×´Ì¬
+	 * æ”¶å›å‰æ ¡éªŒ:
+	 * æ£€æŸ¥å•æ®çŠ¶æ€
 	 * @throws BusinessException
 	 * */
 	private void validateUnCommitAggVorderHVO(AggVorderHVO... vos) throws BusinessException {
@@ -441,7 +441,7 @@ public class  VorderHVOServiceImpl extends ServiceSupport implements IVorderHVOS
 		}
 		String errors = "";
 		for(AggVorderHVO vo  : list) {
-			errors+="µ¥¾İºÅ£º["+vo.getParentVO().getAttributeValue("billno")+"]ÊÕ»ØÊ§°Ü£¬Ê§°ÜÔ­Òò£ºµ¥¾İ×´Ì¬²»ÕıÈ·£¬Çë¼ì²é¡£\n";
+			errors+="å•æ®å·ï¼š["+vo.getParentVO().getAttributeValue("billno")+"]æ”¶å›å¤±è´¥ï¼Œå¤±è´¥åŸå› ï¼šå•æ®çŠ¶æ€ä¸æ­£ç¡®ï¼Œè¯·æ£€æŸ¥ã€‚\n";
 		}
 		throw new BusinessException(errors);
 	}
@@ -449,10 +449,10 @@ public class  VorderHVOServiceImpl extends ServiceSupport implements IVorderHVOS
 	public Object commitAggVorderHVO(String actionName,Map<String,String> tsMap,Object assign) throws BusinessException{
 		AggVorderHVO[] vos = dao.listByPk(AggVorderHVO.class,getAllPks(tsMap),false);
 		validateTs(tsMap,vos);
-		//Ìá½»Ç°Ğ£Ñé¼°ÒµÎñÂß¼­
+		//æäº¤å‰æ ¡éªŒåŠä¸šåŠ¡é€»è¾‘
 		validateCommitAggVorderHVO(vos);
 		Map<String,Object> res = this.execFlows(actionName,"VORD",assign,vos);
-		//Ìá½»ºóÒµÎñÂß¼­
+		//æäº¤åä¸šåŠ¡é€»è¾‘
 		return res;
 	}
 
@@ -460,10 +460,10 @@ public class  VorderHVOServiceImpl extends ServiceSupport implements IVorderHVOS
 	public Object batchCommitAggVorderHVO(String actionName,Map<String,String> tsMap) throws BusinessException{
 		AggVorderHVO[] vos = dao.listByPk(AggVorderHVO.class,getAllPks(tsMap),false);
 		validateTs(tsMap,vos);
-		//ÅúÁ¿Ìá½»Ç°Ğ£Ñé¼°ÒµÎñÂß¼­
+		//æ‰¹é‡æäº¤å‰æ ¡éªŒåŠä¸šåŠ¡é€»è¾‘
 		validateCommitAggVorderHVO(vos);
 		Map<String,Object> res = this.execFlows(actionName,"VORD",vos);
-		//ÅúÁ¿Ìá½»ºóÒµÎñÂß¼­
+		//æ‰¹é‡æäº¤åä¸šåŠ¡é€»è¾‘
 		return res;
 	}
 
@@ -471,10 +471,10 @@ public class  VorderHVOServiceImpl extends ServiceSupport implements IVorderHVOS
 	public Object uncommitAggVorderHVO(String actionName,Map<String,String> tsMap) throws BusinessException{
 		AggVorderHVO[] vos = dao.listByPk(AggVorderHVO.class,getAllPks(tsMap),false);
 		validateTs(tsMap,vos);
-		//ÊÕ»ØÇ°Ğ£Ñé¼°ÒµÎñÂß¼­
+		//æ”¶å›å‰æ ¡éªŒåŠä¸šåŠ¡é€»è¾‘
 		validateUnCommitAggVorderHVO(vos);
 		Map<String,Object> res = this.execFlows(actionName,"VORD",vos);
-		//ÊÕ»ØºóÒµÎñÂß¼­
+		//æ”¶å›åä¸šåŠ¡é€»è¾‘
 		return res;
 	}
 
@@ -482,10 +482,10 @@ public class  VorderHVOServiceImpl extends ServiceSupport implements IVorderHVOS
 	public Object batchUncommitAggVorderHVO(String actionName,Map<String,String> tsMap) throws BusinessException{
 		AggVorderHVO[] vos = dao.listByPk(AggVorderHVO.class,getAllPks(tsMap),false);
 		validateTs(tsMap,vos);
-		//ÅúÁ¿ÊÕ»ØÇ°Ğ£Ñé¼°ÒµÎñÂß¼­
+		//æ‰¹é‡æ”¶å›å‰æ ¡éªŒåŠä¸šåŠ¡é€»è¾‘
 		validateUnCommitAggVorderHVO(vos);
 		Map<String,Object> res = this.execFlows(actionName,"VORD",vos);
-		//ÅúÁ¿ÊÕ»ØºóÒµÎñÂß¼­
+		//æ‰¹é‡æ”¶å›åä¸šåŠ¡é€»è¾‘
 		return res;
 	}
 
@@ -504,7 +504,7 @@ public class  VorderHVOServiceImpl extends ServiceSupport implements IVorderHVOS
 		if(ArrayUtils.isEmpty(vos)) {
 			return null;
 		}
-		//Í¬²½µ¥¾İ×´Ì¬ºÍÉóÅú×´Ì¬(Ö»ÓĞÌá½»Ê±ºòĞèÒªÊÖ¶¯ÉèÖÃÉóÅú×´Ì¬¡£ÆäÓàÉóÅúÍêºóÉóÅú×´Ì¬¶¼ÒÑ¸üĞÂ)
+		//åŒæ­¥å•æ®çŠ¶æ€å’Œå®¡æ‰¹çŠ¶æ€(åªæœ‰æäº¤æ—¶å€™éœ€è¦æ‰‹åŠ¨è®¾ç½®å®¡æ‰¹çŠ¶æ€ã€‚å…¶ä½™å®¡æ‰¹å®Œåå®¡æ‰¹çŠ¶æ€éƒ½å·²æ›´æ–°)
 		Arrays.stream(vos).forEach(v->{
 				v.getParent().setAttributeValue("approvestatus",BillStatusEnum.COMMIT.toIntValue());
 		});
@@ -529,18 +529,18 @@ public class  VorderHVOServiceImpl extends ServiceSupport implements IVorderHVOS
 			Integer state = null;
 			for (AggVorderHVO aggvo : vos){
 				state = (Integer) aggvo.getParentVO().getAttributeValue("approvestatus");
-				//ÅĞ¶ÏÉóÅú×´Ì¬£¬Èç¹ûÉóÅúÍ¨¹ı£¬ĞŞ¸Äµ¥¾İ×´Ì¬Îª¡°²¿ÃÅÉóÅúÍê³É¡±
-				//µ¥¾İ×´Ì¬ÅĞ¶Ï£º³µ¹ÜÉóÅúÍ¨¹ıÖ®ºó£¬²¿ÃÅ¾­ÀíÉóÅú²»¸Ä±äµ¥¾İ×´Ì¬
+				//åˆ¤æ–­å®¡æ‰¹çŠ¶æ€ï¼Œå¦‚æœå®¡æ‰¹é€šè¿‡ï¼Œä¿®æ”¹å•æ®çŠ¶æ€ä¸ºâ€œéƒ¨é—¨å®¡æ‰¹å®Œæˆâ€
+				//å•æ®çŠ¶æ€åˆ¤æ–­ï¼šè½¦ç®¡å®¡æ‰¹é€šè¿‡ä¹‹åï¼Œéƒ¨é—¨ç»ç†å®¡æ‰¹ä¸æ”¹å˜å•æ®çŠ¶æ€
 				if("2".equals(aggvo.getParentVO().getAttributeValue("billstate"))){
 					if(state == 1){
 						aggvo.getParentVO().setAttributeValue("billstate",3);
-						String date = aggvo.getChildrenVO()[0].getAttributeValue("departtime").toString().substring(0,10);//ÓÃ³µÊ±¼ä
-						String pk_applier = aggvo.getChildrenVO()[0].getAttributeValue("applier").toString();//Ë¾»ú
+						String date = aggvo.getChildrenVO()[0].getAttributeValue("departtime").toString().substring(0,10);//ç”¨è½¦æ—¶é—´
+						String pk_applier = aggvo.getChildrenVO()[0].getAttributeValue("applier").toString();//å¸æœº
 						String applier = "";
-						String sql = " select user_name from sm_user where cuserid='"+pk_applier+"'";//³µ¹Ü±àÂë£¨¶¡†´£©
+						String sql = " select user_name from sm_user where cuserid='"+pk_applier+"'";//è½¦ç®¡ç¼–ç ï¼ˆä¸å–†ï¼‰
 						applier = (String) new BaseDAO().executeQuery(sql, new ColumnProcessor());
 						if(applier == null){
-							ExceptionUtils.wrapBusinessException("²éÑ¯³µ¹Üµç»°ºÅÒì³£");
+							ExceptionUtils.wrapBusinessException("æŸ¥è¯¢è½¦ç®¡ç”µè¯å·å¼‚å¸¸");
 						}
 						String txet=date+applier;
 						sendYonyouMessage(txet);
@@ -559,31 +559,30 @@ public class  VorderHVOServiceImpl extends ServiceSupport implements IVorderHVOS
 
 	}
 	/**
-	 * ·¢ËÍÓÑ¿Õ¼äÏûÏ¢
+	 * å‘é€å‹ç©ºé—´æ¶ˆæ¯
 	 * @return
 	 */
 	private boolean sendYonyouMessage(String txet){
 		boolean messageResult = false;
-		// »ñÈ¡access_token
+		// è·å–access_token
 		String accessToken = YonyouMessageUtil.getAccessToken();
-		String field = "13500767615";//²âÊÔÏûÏ¢·¢ËÍµ½Ñ¦½£
-//		//²éÑ¯³µ¹ÜµÄµç»°
-//		String field = "";
-//		String sql = " select mobile from bd_psndoc where code='200503001'";//³µ¹Ü±àÂë£¨¶¡†´£©
-//		try {
-//			field=(String) new BaseDAO().executeQuery(sql, new ColumnProcessor());
-//		} catch (DAOException e) {
-//			ExceptionUtils.wrapBusinessException("²éÑ¯³µ¹Üµç»°ºÅÒì³£");
-//		}
+		//æŸ¥è¯¢è½¦ç®¡çš„ç”µè¯
+		String field = "";
+		String sql = " select mobile from bd_psndoc where code='200503001'";//è½¦ç®¡ç¼–ç ï¼ˆä¸å–†ï¼‰
+		try {
+			field=(String) new BaseDAO().executeQuery(sql, new ColumnProcessor());
+		} catch (DAOException e) {
+			ExceptionUtils.wrapBusinessException("æŸ¥è¯¢è½¦ç®¡ç”µè¯å·å¼‚å¸¸");
+		}
 
 		String fieldtype = "1";
 		//field="17609814307";
-		// »ñÈ¡MemberId£¨1£ºÊÖ»ú 2£ºÓÊÏä£©
+		// è·å–MemberIdï¼ˆ1ï¼šæ‰‹æœº 2ï¼šé‚®ç®±ï¼‰
 		String memberId = YonyouMessageUtil.getMemberId(accessToken, field, fieldtype);
 		List<String> tos = new ArrayList<String>();
 		tos.add(memberId);
-		String message =txet+ "ÓĞĞÂµÄÓÃ³µÉêÇëµ¥²¿ÃÅÉóÅúÒÑÍê³É£¬Çë×¢Òâ²é¿´´¦Àí¡£";
-		messageResult = YonyouMessageUtil.sendMessage(accessToken, YonyouMessageUtil.messagePojo(tos ,"³µÁ¾ÉêÇëµ¥ÉóÅúÌáĞÑ", message));
+		String message =txet+ "æœ‰æ–°çš„ç”¨è½¦ç”³è¯·å•éƒ¨é—¨å®¡æ‰¹å·²å®Œæˆï¼Œè¯·æ³¨æ„æŸ¥çœ‹å¤„ç†ã€‚";
+		messageResult = YonyouMessageUtil.sendMessage(accessToken, YonyouMessageUtil.messagePojo(tos ,"è½¦è¾†ç”³è¯·å•å®¡æ‰¹æé†’", message));
 		return messageResult;
 	}
 
