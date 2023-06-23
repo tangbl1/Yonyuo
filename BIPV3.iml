@@ -13,6 +13,12 @@
       <sourceFolder url="file://$MODULE_DIR$/credit/src/client" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/credit/src/private" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/credit/src/public" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/uapbd/src/client" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/uapbd/src/private" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/uapbd/src/public" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/so/src/client" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/so/src/private" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/so/src/public" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -35,5 +41,7 @@
     <orderEntry type="library" name="NCCloud_Library" level="project" />
     <orderEntry type="library" name="resources" level="project" />
     <orderEntry type="library" name="org.apache.httpcomponents.httpclient_4.2.1" level="project" />
+    <orderEntry type="library" name="axis" level="project" />
+    <orderEntry type="library" name="mw" level="project" />
   </component>
 </module>

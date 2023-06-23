@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="gb2312"?>
+<module name="uapbd">
+	<public>
+		<component priority="0" singleton="true" remote="true" tx="CMT" supportAlias="true">
+			<interface>nc.itf.uapbd.pricemanage.pricemanage.IPriceManageService</interface>
+			<implementation>nc.impl.uapbd.pricemanage.pricemanage.PriceManageServiceImpl</implementation>
+		</component>
+	</public>
+</module>

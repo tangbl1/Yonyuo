@@ -134,15 +134,18 @@ public class YonyouMessageUtil {
 		 */
 		String user_id = "";
 		Map<String, String> params = new HashMap<>();
+
+		params.put("access_token",accessToken);
 		// 手机号
 		params.put("field", field);
 		// 查询类型：1-手机，2-邮箱
 		params.put("type",type);
 
 		try {
-			GenericResponse<UserIdResponse> response = RequestTool.doGet(GETMEUSERID_URL, params, new TypeReference<GenericResponse<UserIdResponse>>() {});
+			GenericResponse<Object> response = RequestTool.doGet(GETMEUSERID_URL, params, new TypeReference<GenericResponse<Object>>() {});
 			if (response != null && Integer.valueOf(response.getCode()) == 200) {
-				user_id = response.getData().getUser_id();
+				ArrayList<HashMap<String,String>>  arrayList = (ArrayList<HashMap<String, String>>) response.getData();
+				user_id = arrayList.get(0).get("user_id");
 			}
 		} catch (IOException e) {
 			throw new RuntimeException("获得友空间用户user_id失败！");

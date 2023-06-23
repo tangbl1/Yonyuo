@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SqlServerConfig>
+
+	<WebService>http://39.152.48.75:18090/hw_weight/services/WeightHandle?wsdl</WebService>
+	<FROMSQL>select 序号, 流水号,车号,过磅类型,发货单位,收货单位,货名,规格,convert(varchar(20),毛重) 毛重, convert(varchar(20),皮重) 皮重, convert(varchar(20),净重) 净重,convert(varchar(20),扣重) 扣重, convert(varchar(20),实重) 实重, convert(varchar(20),单价) 单价,convert(varchar(20),金额) 金额, convert(varchar(20),折方系数) 折方系数, convert(varchar(20),方量) 方量,convert(varchar(20),过磅费) 过磅费, 毛重司磅员,皮重司磅员,毛重磅号,皮重磅号,毛重时间 毛重时间,皮重时间 皮重时间,一次过磅时间 一次过磅时间,二次过磅时间 二次过磅时间,更新人,更新时间 更新时间,备注,打印次数,上传否,备用1,备用2,备用13 是否更新,备用14 发货时间 from 称重信息</FROMSQL>
+	<StartDate>2023-05-05</StartDate>
+	<EndDate>2023-05-07</EndDate>
+
+<!--
+<WebService>地磅接口地址</WebService>
+<FROMSQL>表名、视图名</FROMSQL>
+<StartDate>开始日期</StartDate>
+<EndDate>结束日期</EndDate>
+
+*****请勿修改标签*****
+*****开始时间和结束时间，格式必须为yyyy-MM-dd*****
+*****开始日期、结束日期可以为空，其他参数无默认值，缺一不可*****
+
+-->
+
+</SqlServerConfig>
