@@ -1,4 +1,4 @@
-ÕıÊ½»·¾³²âÊÔµØÖ·£º
-http://49.4.14.203:8181/clgl/baseinfo/driver/driver.html?userjson={"postname":"ĞĞÕşÖ÷¹Ü","deptname":"×ÛºÏ¹ÜÀí²¿","pk_dept":"1001L910000000000A52","cuserid":"1001A310000000000U61","pk_org":"0001A2100000000027QM","pk_group":"0001A3100000000004NA"}
+æ­£å¼ç¯å¢ƒæµ‹è¯•åœ°å€ï¼š
+http://49.4.14.203:8181/clgl/baseinfo/driver/driver.html?userjson={"postname":"è¡Œæ”¿ä¸»ç®¡","deptname":"ç»¼åˆç®¡ç†éƒ¨","pk_dept":"1001L910000000000A52","cuserid":"1001A310000000000U61","pk_org":"0001A2100000000027QM","pk_group":"0001A3100000000004NA"}
 
-²âÊÔ8981»·¾³µØÖ·£ºhttp://49.4.14.119:8981/clgl/baseinfo/driver/driver.html?userjson={"postname":"ĞĞÕşÖ÷¹Ü","deptname":"×ÛºÏ¹ÜÀí²¿","pk_dept":"1001L910000000000A52","cuserid":"1001A310000000000U61","pk_org":"0001A2100000000027QM","pk_group":"0001A3100000000004NA"}
+æµ‹è¯•8981ç¯å¢ƒåœ°å€ï¼šhttp://49.4.14.119:8981/clgl/baseinfo/driver/driver.html?userjson={"postname":"è¡Œæ”¿ä¸»ç®¡","deptname":"ç»¼åˆç®¡ç†éƒ¨","pk_dept":"1001L910000000000A52","cuserid":"1001A310000000000U61","pk_org":"0001A2100000000027QM","pk_group":"0001A3100000000004NA"}

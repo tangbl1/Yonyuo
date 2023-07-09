@@ -1,21 +1,21 @@
 package nc.itf.sync.vo;
 
 public class SyncOrgVO {
-	//×éÖ¯±àÂë
+	//ç»„ç»‡ç¼–ç 
 	private String OrgCode;
-	//×éÖ¯Ãû³Æ
+	//ç»„ç»‡åç§°
 	private String OrgName;
-	//ÉÏ¼¶×éÖ¯±àºÅ
+	//ä¸Šçº§ç»„ç»‡ç¼–å·
 	private String ParentCode;
-	//×éÖ¯¼ò³Æ
+	//ç»„ç»‡ç®€ç§°
 	private String OrgAbbr;
-	//¸¸×éÖ¯IDÁĞ±í
+	//çˆ¶ç»„ç»‡IDåˆ—è¡¨
 	private String OrgPIDS;	
-	//ÅÅĞò
+	//æ’åº
 	private String IORDER;	
-	//×´Ì¬£¨1ÆôÓÃ£¬0²»ÆôÓÃ£©
+	//çŠ¶æ€ï¼ˆ1å¯ç”¨ï¼Œ0ä¸å¯ç”¨ï¼‰
 	private String StatusFlag;	
-	//×îºóĞŞ¸ÄÊ±¼ä
+	//æœ€åä¿®æ”¹æ—¶é—´
 	private String TS;
 	
 	public String getOrgCode() {

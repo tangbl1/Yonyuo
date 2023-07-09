@@ -79,12 +79,12 @@ public class Wb01VO extends SuperVO{
 	}
 
 	public String getPrimaryKey() {
-		// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+		// TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
 		return "lsh";
 	}
 
 	public String getTableName() {
-		// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+		// TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
 		return "weighbridge01";
 	}
 	public int getXh() {

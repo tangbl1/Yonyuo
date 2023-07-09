@@ -21,22 +21,22 @@ import nc.vo.pub.BusinessException;
  */
 public interface ISyncBaseInfo {
     /**
-     * 1Í¬²½²¿ÃÅµµ°¸
+     * 1åŒæ­¥éƒ¨é—¨æ¡£æ¡ˆ
      *
      * @param ts
-     *           Ê±¼ä´Á£¨ÔöÁ¿Í¬²½±êÊ¶£¬·Ç±ØÌî£¬Îª¿ÕÈ¡ËùÓĞÊı¾İ£©
-     * @return json´®
+     *           æ—¶é—´æˆ³ï¼ˆå¢é‡åŒæ­¥æ ‡è¯†ï¼Œéå¿…å¡«ï¼Œä¸ºç©ºå–æ‰€æœ‰æ•°æ®ï¼‰
+     * @return jsonä¸²
      * @throws BusinessException
-     *            ²éÑ¯³ö´íÔòÅ×³öÒì³£
+     *            æŸ¥è¯¢å‡ºé”™åˆ™æŠ›å‡ºå¼‚å¸¸
      */
     public String syncOrgs(String sign , String ts) throws Exception;
     /**
-     * µÇÂ¼ÊÚÈ¨
+     * ç™»å½•æˆæƒ
      *
-     * @param appKey_	String ×¢²áÓ¦ÓÃÊ±·ÖÅäµ½µÄAPPKEY
-     * @return String Êı×ÖÇ©Ãû£¬ÒÔ±£Ö¤ÇëÇóµÄ°²È«ĞÔ
+     * @param appKey_	String æ³¨å†Œåº”ç”¨æ—¶åˆ†é…åˆ°çš„APPKEY
+     * @return String æ•°å­—ç­¾åï¼Œä»¥ä¿è¯è¯·æ±‚çš„å®‰å…¨æ€§
      * @throws BusinessException
-     *            ²åÈë³ö´íÔòÅ×³öÒì³£
+     *            æ’å…¥å‡ºé”™åˆ™æŠ›å‡ºå¼‚å¸¸
      */
     public String loginSign(String appkey) throws Exception;
 

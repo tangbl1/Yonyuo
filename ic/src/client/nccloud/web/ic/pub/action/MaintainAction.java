@@ -46,7 +46,7 @@ import nccloud.web.scmpub.pub.utils.scale.GridTotalValueScaleProcessor;
 
 /**
  * @author lihaos
- * @date 2018-4-27 ÏÂÎç4:10:36
+ * @date 2018-4-27 ä¸‹åˆ4:10:36
  * @version ncc1.0
  */
 public class MaintainAction extends DataPermissionAction implements
@@ -67,7 +67,7 @@ public class MaintainAction extends DataPermissionAction implements
 		ICBatchDelInfoDTO[] infos = infoo.getDelinfos();
 
 		if (infos[0].getActionname().equals(IPFActionName.SAVE)) {
-			// ³ö¿âÉêÇë-Ìá½»Ö¸ÅÉ
+			// å‡ºåº“ç”³è¯·-æäº¤æŒ‡æ´¾
 			CommitAssignUtils.before(request);
 		}
 
@@ -83,7 +83,7 @@ public class MaintainAction extends DataPermissionAction implements
 		for (ICBatchDelInfoDTO info : infos) {
 			ids.add(info.getId());
 			tss.put(info.getId(), info.getTs());
-			//´¦Àí±íÌåts
+			//å¤„ç†è¡¨ä½“ts
 			ICBodyInfo[] bodyInfos = info.getBodys();
 			if (bodyInfos != null && bodyInfos.length > 0) {
 				for (ICBodyInfo bodyInfo : bodyInfos) {
@@ -91,20 +91,20 @@ public class MaintainAction extends DataPermissionAction implements
 				}
 			}
 		}
-		// ²éÑ¯Êı¾İ
+		// æŸ¥è¯¢æ•°æ®
 		IICBillVOQueryService service = ServiceLocator
 				.find(IICBillVOQueryService.class);
 		ICBillVO[] aggvoqry = (ICBillVO[]) service.query(
 				ICBillType.getICBillType(getBilltype()),
 				ids.toArray(new String[ids.size()]));
-		// °ÑÇ°Ì¨´«¹ıÀ´µÄts¸üĞÂµ½²éÑ¯³öÀ´µÄÊı¾İÖĞ
+		// æŠŠå‰å°ä¼ è¿‡æ¥çš„tsæ›´æ–°åˆ°æŸ¥è¯¢å‡ºæ¥çš„æ•°æ®ä¸­
 		if (aggvoqry.length < 1) {
 			ExceptionUtils
 					.wrapBusinessException(nc.vo.ml.NCLangRes4VoTransl
 							.getNCLangRes().getStrByID("4008027_0",
 									"04008027-0192")/*
 													 * @res
-													 * "Äã²Ù×÷µÄÊı¾İÒÑ¾­±»ËûÈËĞŞ¸Ä£¬ÇëË¢ĞÂ½çÃæ"
+													 * "ä½ æ“ä½œçš„æ•°æ®å·²ç»è¢«ä»–äººä¿®æ”¹ï¼Œè¯·åˆ·æ–°ç•Œé¢"
 													 */);
 		}
 		for (ICBillVO icBillVO : aggvoqry) {
@@ -119,19 +119,19 @@ public class MaintainAction extends DataPermissionAction implements
 		if (null != infos[0].getOprcode() && !infos[0].getOprcode().equals("commit")
 				&& !infos[0].getOprcode().equals("uncommit")) {
 			actioncode = infos[0].getOprcode();
-			// Ğ£ÑéÈ¨ÏŞ
+			// æ ¡éªŒæƒé™
 			this.checkPermission(aggvoqry, actioncode);
 		}
-		//²Ù×÷Ç°Ğ£Ñé£¬×ÓÀàÈ¥ÖØĞ´
+		//æ“ä½œå‰æ ¡éªŒï¼Œå­ç±»å»é‡å†™
 		this.checkBillVOs(aggvoqry);
 		
-		// vosÇ©×ÖÇ°ÆäËü´¦Àí£¬×ÓÀàÈ¥ÖØĞ´
+		// vosç­¾å­—å‰å…¶å®ƒå¤„ç†ï¼Œå­ç±»å»é‡å†™
 		this.dealOtherOperation(aggvoqry);
-		// ¶¯×÷½Å±¾Ö´ĞĞ
+		// åŠ¨ä½œè„šæœ¬æ‰§è¡Œ
 		context.setBillType(this.getBilltype());
 		context.setActionName(infos[0].getActionname());
 		context.setBillVos(aggvoqry);
-		// ÉèÖÃÔ­Ê¼¿¨Æ¬£¬ÓÃÓÚºÏ²¢
+		// è®¾ç½®åŸå§‹å¡ç‰‡ï¼Œç”¨äºåˆå¹¶
 		if (isCard) {
 			BillCard origincard = operator.toCard(aggvoqry[0], false,false);
 			operator.setOriginBillcard(origincard);
@@ -143,7 +143,7 @@ public class MaintainAction extends DataPermissionAction implements
 					IBatchRunScriptService.class).runBacth(context,
 					this.getVOClass());
 
-			// Ìá½»Ö¸ÅÉ(Ìá½»Ê±´¦Àí)
+			// æäº¤æŒ‡æ´¾(æäº¤æ—¶å¤„ç†)
 			if (infos[0].getActionname().equals(IPFActionName.SAVE)) {
 				Object data = obj.getData();
 				if (data != null && data instanceof Map) {
@@ -161,7 +161,7 @@ public class MaintainAction extends DataPermissionAction implements
 	}
 
 	/**
-	 * ´¦Àí·µ»ØµÄdto£¬½«ÆäÖĞµÄ³É¹¦vo×ª»¯ÎªÇ°¶Ë¿ÉÒÔÊ¶±ğµÄbillcard»òÕßgrid£¬²¢´¦Àí¾«¶È
+	 * å¤„ç†è¿”å›çš„dtoï¼Œå°†å…¶ä¸­çš„æˆåŠŸvoè½¬åŒ–ä¸ºå‰ç«¯å¯ä»¥è¯†åˆ«çš„billcardæˆ–è€…gridï¼Œå¹¶å¤„ç†ç²¾åº¦
 	 * 
 	 * @param dto
 	 * @param isCard
@@ -183,7 +183,7 @@ public class MaintainAction extends DataPermissionAction implements
 	}
 
 	/**
-	 * ¿¨Æ¬³É¹¦Êı¾İµÄ´¦Àí£¬¸ù¾İ¾ÛºÏvo£¬·µ»Øbillcard»òÕßÀ©Õ¹info£¬²¢´¦Àí¾«¶È
+	 * å¡ç‰‡æˆåŠŸæ•°æ®çš„å¤„ç†ï¼Œæ ¹æ®èšåˆvoï¼Œè¿”å›billcardæˆ–è€…æ‰©å±•infoï¼Œå¹¶å¤„ç†ç²¾åº¦
 	 * 
 	 * @param bill
 	 * @return
@@ -196,7 +196,7 @@ public class MaintainAction extends DataPermissionAction implements
 	}
 
 	/**
-	 * ÁĞ±í²Ù×÷³É¹¦Êı¾İµÄ´¦Àí£¬¸ù¾İ¾ÛºÏvoÊı×é(µ¥¸ö»ò¶à¸ö),·µ»ØÁĞ±íÒªÏÔÊ¾µÄgrid£¬²¢´¦Àí¾«¶È
+	 * åˆ—è¡¨æ“ä½œæˆåŠŸæ•°æ®çš„å¤„ç†ï¼Œæ ¹æ®èšåˆvoæ•°ç»„(å•ä¸ªæˆ–å¤šä¸ª),è¿”å›åˆ—è¡¨è¦æ˜¾ç¤ºçš„gridï¼Œå¹¶å¤„ç†ç²¾åº¦
 	 * 
 	 * @param bills
 	 * @return
@@ -211,11 +211,11 @@ public class MaintainAction extends DataPermissionAction implements
 	private Object processGeneralBill(ICBillVO bill, String pagecode, ICBillCardOperator operator) {
 		BillVOWithExtendInfo extendinfo = ServiceLocator.find(
 				IICBillVOQueryService.class).queryBillExtByVO(bill);
-		// ²éÑ¯ºó´¦Àí£¬½âÎö²éÑ¯»ØµÄÊı¾İ
+		// æŸ¥è¯¢åå¤„ç†ï¼Œè§£ææŸ¥è¯¢å›çš„æ•°æ®
 		BillCard retcard = this.afterProcess(pagecode,operator,
 				extendinfo.getBillvo());
 
-		// ´¦Àíicbillstatus
+		// å¤„ç†icbillstatus
 		operator.processICBillstatusForWeb(retcard);
 
 		BillCardFormulaHandler handler = new BillCardFormulaHandler(retcard);
@@ -233,13 +233,13 @@ public class MaintainAction extends DataPermissionAction implements
 	}
 
 	/**
-	 * ²éÑ¯ºó´¦Àí ²éÑ¯»áµÄÊı¾İÖ»ÓĞÖ÷¼üĞÅÏ¢£¬ºó´¦Àí¿ÉÒÔ½«Ïà¹ØµÄĞÅÏ¢È«²¿²éÑ¯³ö£¬È»ºó½«Êı¾İÖĞÃ¿¸ö×Ö¶Î×é×°³ÉÓĞdisplayºÍvalueÊôĞÔµÄ¸ñÊ½
+	 * æŸ¥è¯¢åå¤„ç† æŸ¥è¯¢ä¼šçš„æ•°æ®åªæœ‰ä¸»é”®ä¿¡æ¯ï¼Œåå¤„ç†å¯ä»¥å°†ç›¸å…³çš„ä¿¡æ¯å…¨éƒ¨æŸ¥è¯¢å‡ºï¼Œç„¶åå°†æ•°æ®ä¸­æ¯ä¸ªå­—æ®µç»„è£…æˆæœ‰displayå’Œvalueå±æ€§çš„æ ¼å¼
 	 * 
 	 * @param pageid
-	 *            Ä£°åID
+	 *            æ¨¡æ¿ID
 	 * @param vo
-	 *            ²éÑ¯µÄÎ´×é×°µÄĞÅÏ¢£¬Õâ²¿·ÖĞÅÏ¢ÖĞ¸ö×Ö¶Î¶¼»¹Ö»ÊÇÖ÷¼ü
-	 * @return ·µ»Ø×é×°ºóµÄÊı¾İ
+	 *            æŸ¥è¯¢çš„æœªç»„è£…çš„ä¿¡æ¯ï¼Œè¿™éƒ¨åˆ†ä¿¡æ¯ä¸­ä¸ªå­—æ®µéƒ½è¿˜åªæ˜¯ä¸»é”®
+	 * @return è¿”å›ç»„è£…åçš„æ•°æ®
 	 * 
 	 */
 	public BillCard afterProcess(String pageid, ICBillCardOperator operator, ICBillVO vo) {
@@ -256,7 +256,7 @@ public class MaintainAction extends DataPermissionAction implements
 	}
 
 	/**
-	 * »ñÈ¡¾«¶È´¦ÀíÀà£¬×ÓÀà¿É¸´Ğ´
+	 * è·å–ç²¾åº¦å¤„ç†ç±»ï¼Œå­ç±»å¯å¤å†™
 	 * 
 	 * @param precision
 	 * @return
@@ -266,7 +266,7 @@ public class MaintainAction extends DataPermissionAction implements
 	}
 
 	/**
-	 * ÁĞ±ígrid·µ»ØÇ°´¦Àí(¾«¶È)
+	 * åˆ—è¡¨gridè¿”å›å‰å¤„ç†(ç²¾åº¦)
 	 * 
 	 * @param grid
 	 */
@@ -280,27 +280,27 @@ public class MaintainAction extends DataPermissionAction implements
 		scale.processPrecision();
 	}
 
-	// ×ÓÀàÈ¥ÖØĞ´
+	// å­ç±»å»é‡å†™
 	protected ICBillVO[] getAggVOS(ICBatchDelInfoDTO[] infos) {
 		return null;
 	}
 	
-	// ²Ù×÷Ç°Ğ£Ñé£¬×ÓÀàÈ¥ÖØĞ´
+	// æ“ä½œå‰æ ¡éªŒï¼Œå­ç±»å»é‡å†™
 	protected void checkBillVOs(ICBillVO[] billVOs) {
 		return;
 	}
 
-	// vosÇ©×ÖÇ°ÆäËü´¦Àí£¬×ÓÀàÈ¥ÖØĞ´
+	// vosç­¾å­—å‰å…¶å®ƒå¤„ç†ï¼Œå­ç±»å»é‡å†™
 	protected void dealOtherOperation(ICBillVO[] billVOs) {
 		return;
 	}
 
-	// ×ÓÀàÈ¥ÖØĞ´
+	// å­ç±»å»é‡å†™
 	protected String getBilltype() {
 		return null;
 	}
 
-	// ×ÓÀàÈ¥ÖØĞ´
+	// å­ç±»å»é‡å†™
 	protected Class<?> getVOClass() {
 		return null;
 	}

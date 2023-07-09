@@ -26,22 +26,22 @@ import java.util.Date;
 public class SyncBaseInfoImpl implements ISyncBaseInfo {
 
     BaseDAO dao = null;
-    public static final String DEF_APPKEY1 = "dbdx"; // Ìá¹©¸ø¶«±±´óÑ§µÄÊÚÈ¨ÓÃ»§
+    public static final String DEF_APPKEY1 = "dbdx"; // æä¾›ç»™ä¸œåŒ—å¤§å­¦çš„æˆæƒç”¨æˆ·
     @Override
     public String syncOrgs(String sign, String ts) throws Exception {
 
-        // ÊäÈë²ÎÊıĞ£Ñé
+        // è¾“å…¥å‚æ•°æ ¡éªŒ
         if (isSEmptyOrNull(sign)) {
-            throw new Exception("ÊÚÈ¨±àÂë²»ÄÜÎª¿Õ!");
+            throw new Exception("æˆæƒç¼–ç ä¸èƒ½ä¸ºç©º!");
         }
 
-        // µ÷ÓÃ·½ÊÚÈ¨Ğ£Ñé
+        // è°ƒç”¨æ–¹æˆæƒæ ¡éªŒ
         if (!sign.equals(loginSign(DEF_APPKEY1))) {
-            throw new Exception("ÊÚÈ¨Ê§°Ü!");
+            throw new Exception("æˆæƒå¤±è´¥!");
         }
 
         String sql = "select OrgCode,OrgName,OrgAbbr,OrgPIDS,ParentCode,IORDER,StatusFlag,TS from v_nc_org ";
-        // ¸ù¾İÔöÁ¿±êÊ¶¹ıÂË
+        // æ ¹æ®å¢é‡æ ‡è¯†è¿‡æ»¤
         if (!isSEmptyOrNull(ts)) {
             sql = sql + " where ts > = '" + ts + "'";
         }
@@ -58,7 +58,7 @@ public class SyncBaseInfoImpl implements ISyncBaseInfo {
     @Override
     public String loginSign(String appkey) throws Exception {
 
-        // TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+        // TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
         if (isSEmptyOrNull(appkey)) {
             return "The appkey cannot be empty";
         }
@@ -76,7 +76,7 @@ public class SyncBaseInfoImpl implements ISyncBaseInfo {
 
     }
     /**
-     * UAPÊı¾İ¿â·ÃÎÊÀà
+     * UAPæ•°æ®åº“è®¿é—®ç±»
      *
      * @return`
      */

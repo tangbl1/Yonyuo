@@ -14,13 +14,13 @@ import nc.vo.pub.BusinessException;
 
 public interface ISyncBaseInfocc {
     /**
-     * ÏÖ´æÁ¿²éÑ¯
+     * ç°å­˜é‡æŸ¥è¯¢
      *
      * @param clocationcode,materialcode
-     *            »õÎ»±àÂë,ÎïÁÏ±àÂë
-     * @return json´®
+     *            è´§ä½ç¼–ç ,ç‰©æ–™ç¼–ç 
+     * @return jsonä¸²
      * @throws BusinessException
-     *            ²éÑ¯³ö´íÔòÅ×³öÒì³£
+     *            æŸ¥è¯¢å‡ºé”™åˆ™æŠ›å‡ºå¼‚å¸¸
      */
     public String getOnHandNum(String clocationcode ,String materialcode,String storcode) throws Exception;
 }

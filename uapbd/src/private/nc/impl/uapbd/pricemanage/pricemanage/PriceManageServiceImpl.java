@@ -115,7 +115,7 @@ public class  PriceManageServiceImpl extends ServiceSupport implements IPriceMan
 		getMainVO(vo).setStatus(VOStatus.NEW);
 		initDefaultData((PriceManage)getMainVO(vo));
 
-		//ÏÂÃæÕâ¶ÎÒªÅĞ¶ÏÊÇ·ñÊÇÊ÷±í½çÃæ²å¼ş
+		//ä¸‹é¢è¿™æ®µè¦åˆ¤æ–­æ˜¯å¦æ˜¯æ ‘è¡¨ç•Œé¢æ’ä»¶
 		Map<String,String> data = userJson!=null && userJson.get("data") != null?(Map<String,String>)userJson.get("data"):null;
 		if(data!=null && data.size()>0){
 			String parentKey = data.get("parentKey");
@@ -131,7 +131,7 @@ public class  PriceManageServiceImpl extends ServiceSupport implements IPriceMan
 		AggPriceManage result = null;
 
 		PriceManage mainvo = new PriceManage();
-		//ÉèÖÃÄ¬ÈÏÖµ
+		//è®¾ç½®é»˜è®¤å€¼
 		initDefaultData(mainvo);
 		AggPriceManage aggvo = new AggPriceManage();
 		aggvo.setParent(mainvo);
@@ -185,13 +185,13 @@ public class  PriceManageServiceImpl extends ServiceSupport implements IPriceMan
 		String pk = getVOPrimaryKey(vo);
 		setDefaultVal(vo);
 		if(StringUtils.isEmpty(pk)){
-			return dao.insert(vo); //²åÈë
+			return dao.insert(vo); //æ’å…¥
 		}else{
-			return dao.update(vo); //¸üĞÂ
+			return dao.update(vo); //æ›´æ–°
 		}
 	}
 	/**
-	 * ±£´æÇ°ÉèÖÃÉó¼ÆĞÅÏ¢
+	 * ä¿å­˜å‰è®¾ç½®å®¡è®¡ä¿¡æ¯
 	 * @param vos
 	 */
 	private void setAuditInfo(AggPriceManage... vos) throws BusinessException {
@@ -200,14 +200,14 @@ public class  PriceManageServiceImpl extends ServiceSupport implements IPriceMan
 			for(AggPriceManage vo : vos) {
 				String pk = getVOPrimaryKey(vo);
 				if(StringUtils.isEmpty(pk)){
-					//ÉèÖÃ´´½¨ÈË´´½¨Ê±¼ä
+					//è®¾ç½®åˆ›å»ºäººåˆ›å»ºæ—¶é—´
 					getMainVO(vo).setAttributeValue("creator",InvocationInfoProxy.getInstance().getUserId());
 					getMainVO(vo).setAttributeValue("creationtime",now);
 					getMainVO(vo).setAttributeValue("maketime",now);
 					getMainVO(vo).setAttributeValue("modifier",null);
 					getMainVO(vo).setAttributeValue("modifiedtime",null);
 				}else{
-					//ÉèÖÃĞŞ¸ÄÈËĞŞ¸ÄÊ±¼ä
+					//è®¾ç½®ä¿®æ”¹äººä¿®æ”¹æ—¶é—´
 					getMainVO(vo).setAttributeValue("modifier",InvocationInfoProxy.getInstance().getUserId());
 					getMainVO(vo).setAttributeValue("modifiedtime",now);
 					getMainVO(vo).setAttributeValue("modifiedtime",now);
@@ -216,21 +216,21 @@ public class  PriceManageServiceImpl extends ServiceSupport implements IPriceMan
 		}
 	}
 	/**
-	 * ±£´æÇ°´¦ÀíÒ»Ğ©Ä¬ÈÏÖµ
+	 * ä¿å­˜å‰å¤„ç†ä¸€äº›é»˜è®¤å€¼
 	 * @param vos
 	 */
 	private void setDefaultVal(AggPriceManage... vos) throws BusinessException {
 		setAuditInfo(vos);
-		//ÆäËûÄ¬ÈÏÖµ´¦Àí
+		//å…¶ä»–é»˜è®¤å€¼å¤„ç†
 	}
 
-	// ¸øµ¥±í£¨ĞĞ±à¼­±í£©µ¥¶ÀÊÊÅä
+	// ç»™å•è¡¨ï¼ˆè¡Œç¼–è¾‘è¡¨ï¼‰å•ç‹¬é€‚é…
 	@Override
 	public AggPriceManage[] saveAggPriceManage(AggPriceManage[] vos) throws BusinessException {
 		if (ArrayUtils.isEmpty(vos)) {
 			return new AggPriceManage[0];
 		}
-		setDefaultVal(vos); // ÉèÖÃÄ¬ÈÏÖµ
+		setDefaultVal(vos); // è®¾ç½®é»˜è®¤å€¼
 		return dao.save(vos,true);
 	}
 
@@ -242,11 +242,11 @@ public class  PriceManageServiceImpl extends ServiceSupport implements IPriceMan
 		return vos;
 	}
 	
-	//Ğ£Ñé  °üÀ¨tsĞ£Ñé  ÒÑÌá½»Ğ£Ñé
+	//æ ¡éªŒ  åŒ…æ‹¬tsæ ¡éªŒ  å·²æäº¤æ ¡éªŒ
 	private void validate(AggPriceManage[] vos,Map<String,String> tsMap) throws BusinessException{
 
 		Boolean isPass = true;
-		String error = "";    //´íÎóĞÅÏ¢
+		String error = "";    //é”™è¯¯ä¿¡æ¯
 		if(ArrayUtils.isEmpty(vos)){
 			isPass = false;
 		}
@@ -260,7 +260,7 @@ public class  PriceManageServiceImpl extends ServiceSupport implements IPriceMan
 			}
 		}
 		if(!isPass) {
-			throw new BusinessException("Äú²Ù×÷µÄÊı¾İÒÑ±»ËûÈËĞŞ¸Ä»òÉ¾³ı£¬ÇëË¢ĞÂºóÖØÊÔ£¡");
+			throw new BusinessException("æ‚¨æ“ä½œçš„æ•°æ®å·²è¢«ä»–äººä¿®æ”¹æˆ–åˆ é™¤ï¼Œè¯·åˆ·æ–°åé‡è¯•ï¼");
 		}
 		if(!"".equals(error)){
 			throw new BusinessException(error);

@@ -43,59 +43,59 @@ public class ToSaleOrderWorkPlugin2 implements IBackgroundWorkPlugin{
 			throws BusinessException {
 		
 		UFDate daytime = new UFDate();
-		log_msg = daytime.toDate() + "¿ªÊ¼Éú³ÉÏúÊÛ¶©µ¥¡£¡£¡£¡£¡£¡£";
+		log_msg = daytime.toDate() + "å¼€å§‹ç”Ÿæˆé”€å”®è®¢å•ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚";
 		UFDouble price = UFDouble.ZERO_DBL;
 		try {
 			 String sql = "select cuserid from sm_user where user_code = 'XS001'";
-			 String billmaker = (String) dao.executeQuery(sql, new ColumnProcessor());//Ä¬ÈÏÖÆµ¥ÈËXS001
-			//¸üĞÂµÄÊı¾İ 
+			 String billmaker = (String) dao.executeQuery(sql, new ColumnProcessor());//é»˜è®¤åˆ¶å•äººXS001
+			//æ›´æ–°çš„æ•°æ® 
 			ArrayList<Wb01VO>  updatesalelist = getUpdateWeighbridgeInfo();
 			for(Wb01VO wbvo:updatesalelist){
-				//¸ù¾İÁ÷Ë®ºÅºÍĞòºÅ²éÑ¯¶ÔÓ¦µÄÏúÊÛ¶©µ¥
+				//æ ¹æ®æµæ°´å·å’Œåºå·æŸ¥è¯¢å¯¹åº”çš„é”€å”®è®¢å•
 				 List oldsaleordervolist = (List)MDPersistenceService.lookupPersistenceQueryService() 
 						.queryBillOfVOByCond(SaleOrderVO.class, " vdef1 = '"+wbvo.getXh()+"' "
 						+" and vdef2 = '"+wbvo.getLsh()+"' "	+ "and dr = 0 ", false);
 				SaleOrderVO  oldsaleordervo=(SaleOrderVO) oldsaleordervolist.get(0);
 				SaleOrderHVO hvo = oldsaleordervo.getParentVO();
-				// ¿Í»§
+				// å®¢æˆ·
 				String ccustomerid = matchCustomer(wbvo);
 				hvo.setCcustomerid(ccustomerid);
 				SaleOrderBVO bvo=oldsaleordervo.getChildrenVO()[0];
 				bvo.setVbdef2(wbvo.getCh());
-				// µØ°õÀàĞÍ
+				// åœ°ç£…ç±»å‹
 				bvo.setVbdef3(wbvo.getWbtype());
-				// ·¢»õµ¥Î»
+				// å‘è´§å•ä½
 				if ( wbvo.getSh_org() != null )
 					bvo.setVbdef5(wbvo.getSh_org().toString());
-				// Ã«ÖØ
+				// æ¯›é‡
 				if ( wbvo.getMz() != null )
 					bvo.setVbdef6(wbvo.getMz().div(new UFDouble("1000"),2).toString());
-				// Æ¤ÖØ
+				// çš®é‡
 				if ( wbvo.getPz() != null )
 					bvo.setVbdef7(wbvo.getPz().div(new UFDouble("1000"),2).toString());
-				// ¾»ÖØ
+				// å‡€é‡
 				if ( wbvo.getJz() != null )
 					bvo.setVbdef8(wbvo.getJz().div(new UFDouble("1000"),2).toString());
-				// ¿ÛÖØ
+				// æ‰£é‡
 				if ( wbvo.getKz() != null )
 					bvo.setVbdef9(wbvo.getKz().div(new UFDouble("1000"),2).toString());
-				// ÊµÖØ
+				// å®é‡
 				if ( wbvo.getSz() != null )
 					bvo.setVbdef10(wbvo.getSz().div(new UFDouble("1000"),2).toString());
-				// Ã«ÖØË¾°õÔ±			
+				// æ¯›é‡å¸ç£…å‘˜			
 				bvo.setVbdef11(wbvo.getMz_psn());
-				// Ã«ÖØÊ±¼ä
+				// æ¯›é‡æ—¶é—´
 				if ( wbvo.getMz_datetime() != null )
 					bvo.setVbdef12(wbvo.getMz_datetime().toString());
-				// Æ¤ÖØË¾°õÔ±
+				// çš®é‡å¸ç£…å‘˜
 				bvo.setVbdef13(wbvo.getPz_psn());
-				// Æ¤ÖØÊ±¼ä
+				// çš®é‡æ—¶é—´
 				if ( wbvo.getPz_datetime() != null )
 					bvo.setVbdef14(wbvo.getPz_datetime().toString());
-				// ¸üĞÂÊ±¼ä
+				// æ›´æ–°æ—¶é—´
 				if ( wbvo.getUpdatetime() != null ) 
 					bvo.setVbdef17(wbvo.getPz_datetime().toString());
-				// ·¢»õÊ±¼ä
+				// å‘è´§æ—¶é—´
 				if ( wbvo.getDelivery_time() != null ) 
 					bvo.setVbdef18(wbvo.getDelivery_time().toString());
 				dao.updateVO(hvo);
@@ -104,46 +104,46 @@ public class ToSaleOrderWorkPlugin2 implements IBackgroundWorkPlugin{
 			
 			
 			ArrayList<Wb01VO> wbvolist = getWeighbridgeInfo();
-			log_msg +="³ÆÖØĞÅÏ¢ÖĞ»ñÈ¡" + wbvolist.size() + "ÌõÊı¾İ,";
+			log_msg +="ç§°é‡ä¿¡æ¯ä¸­è·å–" + wbvolist.size() + "æ¡æ•°æ®,";
 			SaleOrderVO[] sos = new SaleOrderVO[wbvolist.size()];
 			int k=0;
-			log_msg +="¿ªÊ¼Æ´×°ÏúÊÛ¶©µ¥vo,";
-			//²åÈëµÄÊı¾İ
+			log_msg +="å¼€å§‹æ‹¼è£…é”€å”®è®¢å•vo,";
+			//æ’å…¥çš„æ•°æ®
 			for(Wb01VO wbvo:wbvolist){
 				//SaleOrderBVO[] bvos = new SaleOrderBVO[bvoslist.size()];
-				/**********************************±íÍ·************************************************/
+				/**********************************è¡¨å¤´************************************************/
 				SaleOrderVO svo = new SaleOrderVO();
 				SaleOrderHVO hvo = new SaleOrderHVO();
-				// »ñÈ¡µ¥¾İºÅ
+				// è·å–å•æ®å·
 				//IBillcodeManage iBillcodeManage = (IBillcodeManage) NCLocator.getInstance().lookup(IBillcodeManage.class.getName());
 				//billcode = iBillcodeManage.getBillCode_RequiresNew("30","0001A3100000000004NA", "0001A2100000000027QM",hvo);
-				// ĞòºÅ
+				// åºå·
 				hvo.setVdef1(wbvo.getXh()+"");
-				// Á÷Ë®ºÅ
+				// æµæ°´å·
 				hvo.setVdef2(wbvo.getLsh());
-				// ¼¯ÍÅ
+				// é›†å›¢
 				hvo.setPk_group("0001A3100000000004NA");	
-				sql ="select pk_org, pk_vid from org_orgs_v where code ='2001'";//¶«ÑóÏúÊÛµ¥Ôª
+				sql ="select pk_org, pk_vid from org_orgs_v where code ='2001'";//ä¸œæ´‹é”€å”®å•å…ƒ
 				OrgVersionVO orgversionvo = (OrgVersionVO) dao.executeQuery(sql, new BeanProcessor(OrgVersionVO.class));
-				// ÏúÊÛ×éÖ¯ 
-				hvo.setPk_org(orgversionvo.getPk_org()); //¶«ÑóÏúÊÛµ¥Ôª
-				// ÏúÊÛ×éÖ¯°æ±¾
-				hvo.setPk_org_v(orgversionvo.getPk_vid()); //¶«ÑóÏúÊÛµ¥Ôª
+				// é”€å”®ç»„ç»‡ 
+				hvo.setPk_org(orgversionvo.getPk_org()); //ä¸œæ´‹é”€å”®å•å…ƒ
+				// é”€å”®ç»„ç»‡ç‰ˆæœ¬
+				hvo.setPk_org_v(orgversionvo.getPk_vid()); //ä¸œæ´‹é”€å”®å•å…ƒ
 				
 				sql = "select pk_billtypeid from bd_billtype where  pk_billtypecode  = '30-Cxx-01'";
 				String ctrantypeid = (String) dao.executeQuery(sql, new ColumnProcessor());
-				// ¶©µ¥ÀàĞÍ
+				// è®¢å•ç±»å‹
 				hvo.setCtrantypeid(ctrantypeid);
-				// ¶©µ¥ÀàĞÍ±àÂë
-				hvo.setVtrantypecode("30-Cxx-01");//¶«ÑóÆÕÍ¨ÏúÊÛ
-				// ÒµÎñÁ÷³Ì
-				sql = "select pk_busitype from bd_busitype where busicode  = 'XS001'";//ĞÂµÄÁ÷³Ì
+				// è®¢å•ç±»å‹ç¼–ç 
+				hvo.setVtrantypecode("30-Cxx-01");//ä¸œæ´‹æ™®é€šé”€å”®
+				// ä¸šåŠ¡æµç¨‹
+				sql = "select pk_busitype from bd_busitype where busicode  = 'XS001'";//æ–°çš„æµç¨‹
 				String pk_busitype = (String) dao.executeQuery(sql, new ColumnProcessor());
 				hvo.setCbiztypeid(pk_busitype);
-				// µ¥¾İ±àÂë
+				// å•æ®ç¼–ç 
 				//hvo.setVbillcode(billcode);
-				// µ¥¾İÈÕÆÚ
-				if ( wbvo.getPz_datetime() != null ){//ÉèÖÃÎªÆ¤ÖØÈÕÆÚ
+				// å•æ®æ—¥æœŸ
+				if ( wbvo.getPz_datetime() != null ){//è®¾ç½®ä¸ºçš®é‡æ—¥æœŸ
 					hvo.setDbilldate(wbvo.getPz_datetime().getDate());
 					hvo.setDmakedate(wbvo.getPz_datetime().getDate());
 				}else{
@@ -151,120 +151,120 @@ public class ToSaleOrderWorkPlugin2 implements IBackgroundWorkPlugin{
 					hvo.setDmakedate(daytime);
 				}
 					
-				// ¿Í»§
+				// å®¢æˆ·
 				String ccustomerid = matchCustomer(wbvo);
 				hvo.setCcustomerid(ccustomerid);
 				
-				// ²¿ÃÅ°æ±¾
+				// éƒ¨é—¨ç‰ˆæœ¬
 				 sql = "select pk_dept,pk_vid from org_dept_v where pk_org = (select pk_org from org_orgs where code = '2001' and isbusinessunit = 'Y')";
 				 DeptVersionVO deptvo = (DeptVersionVO) dao.executeQuery(sql, new BeanProcessor(DeptVersionVO.class));
 				hvo.setCdeptvid(deptvo.getPk_vid());
-				// ²¿ÃÅ
+				// éƒ¨é—¨
 				hvo.setCdeptid(deptvo.getPk_dept());
-				// µ¥¾İÀàĞÍ
+				// å•æ®ç±»å‹
 				hvo.setFstatusflag(1);
-				// Á÷³ÌÀàĞÍ
+				// æµç¨‹ç±»å‹
 				hvo.setFpfstatusflag(-1);
-				hvo.setBillmaker(billmaker);//Ä¬ÈÏÖÆµ¥ÈËXS001
+				hvo.setBillmaker(billmaker);//é»˜è®¤åˆ¶å•äººXS001
 
-				/**********************************±íÌå************************************************/			
-				// ¾»ÖØ ¸ÄÎªµ¥Î» ¶Ö ³ı1000
+				/**********************************è¡¨ä½“************************************************/			
+				// å‡€é‡ æ”¹ä¸ºå•ä½ å¨ é™¤1000
 				UFDouble jz = wbvo.getJz().div(1000);
 				SaleOrderBVO bvo = new SaleOrderBVO();
 				
-				//½áËã²ÆÎñ×éÖ¯×îĞÂ°æ±¾
+				//ç»“ç®—è´¢åŠ¡ç»„ç»‡æœ€æ–°ç‰ˆæœ¬
 				bvo.setCsettleorgid(orgversionvo.getPk_org());
-				//½áËã²ÆÎñ×éÖ¯ 
+				//ç»“ç®—è´¢åŠ¡ç»„ç»‡ 
 				bvo.setCsettleorgvid(orgversionvo.getPk_vid());
-				// ÎïÁÏ
+				// ç‰©æ–™
 				bvo.setCmaterialid("1001A31000000005142V");
-				// ÎïÁÏ±àÂë
+				// ç‰©æ–™ç¼–ç 
 				bvo.setCmaterialvid("1001A31000000005142V");
-				// Ë°Âë 
+				// ç¨ç  
 				bvo.setCtaxcodeid("1001A31000000007IRDU");
-				// ¿ÛË°Àà±ğ
+				// æ‰£ç¨ç±»åˆ«
 				bvo.setFtaxtypeflag(1);
 				bvo.setNtaxrate(new UFDouble(13));
-				//¹ú¼ÒºÍ¹ºÏúÀàĞÍ
+				//å›½å®¶å’Œè´­é”€ç±»å‹
 				bvo.setCrececountryid("0001Z010000000079UJJ");
 				bvo.setCtaxcountryid("0001Z010000000079UJJ");
 				bvo.setCsendcountryid("0001Z010000000079UJJ");
 				bvo.setFbuysellflag(1);
-				/*****************************±íÌå¸÷ÖÖÊıÁ¿ºÍ½ğ¶î********************************************/
-				// ÊıÁ¿
+				/*****************************è¡¨ä½“å„ç§æ•°é‡å’Œé‡‘é¢********************************************/
+				// æ•°é‡
 				bvo.setNastnum(new UFDouble(1));
-				// ÎŞË°µ¥¼Û Ä¬ÈÏÖµ1
+				// æ— ç¨å•ä»· é»˜è®¤å€¼1
 				bvo.setNqtorigprice(new UFDouble(1));
-				// ±¨¼Ûµ¥Î»ÊıÁ¿
+				// æŠ¥ä»·å•ä½æ•°é‡
 				bvo.setNqtunitnum(new UFDouble(1));		
-				// º¬Ë°µ¥¼Û Ä¬ÈÏÖµ1.13
+				// å«ç¨å•ä»· é»˜è®¤å€¼1.13
 				bvo.setNqtorigtaxprice(new UFDouble(1.13));
-				// ÎŞË°µ¥¼Û Ä¬ÈÏÖµ1
+				// æ— ç¨å•ä»· é»˜è®¤å€¼1
 				bvo.setNqtorigprice(new UFDouble(1));
-				// º¬Ë°¾»¼Û ÊıÁ¿*1.13
+				// å«ç¨å‡€ä»· æ•°é‡*1.13
 				bvo.setNqtorigtaxnetprc(new UFDouble(1.13));
-				// ÎŞË°¾»¼Û ÊıÁ¿*1
+				// æ— ç¨å‡€ä»· æ•°é‡*1
 				bvo.setNqtorignetprice(new UFDouble(1));
 				// 
 				bvo.setNorignetprice(new UFDouble(1));
-				// Ö÷±¾±ÒÎŞË°¾»¼Û
+				// ä¸»æœ¬å¸æ— ç¨å‡€ä»·
 				bvo.setNnetprice(new UFDouble(1));
-				// ±¾±ÒÎŞË°½ğ¶î
+				// æœ¬å¸æ— ç¨é‡‘é¢
 				bvo.setNmny(new UFDouble(1));
-				// ±¾±Ò¼ÛË°ºÏ¼Æ
+				// æœ¬å¸ä»·ç¨åˆè®¡
 				bvo.setNtaxmny(new UFDouble(1.13));	
-				//±¾Î»±Ò
+				//æœ¬ä½å¸
 				bvo.setCcurrencyid("1002Z0100000000001K1");
-				//ÕÛ±¾»ãÂÊ
+				//æŠ˜æœ¬æ±‡ç‡
 				bvo.setNexchangerate(new UFDouble(1));
 				
-				//·¢»õ¿â´æ×éÖ¯×îĞÂ°æ±¾ 
+				//å‘è´§åº“å­˜ç»„ç»‡æœ€æ–°ç‰ˆæœ¬ 
 				bvo.setCsendstockorgid(orgversionvo.getPk_org()); 
-				//·¢»õ¿â´æ×éÖ¯
+				//å‘è´§åº“å­˜ç»„ç»‡
 				bvo.setCsendstockorgvid(orgversionvo.getPk_vid()); 
-				//Ó¦ÊÕ×éÖ¯
+				//åº”æ”¶ç»„ç»‡
 				bvo.setCarorgid(orgversionvo.getPk_org());
 				bvo.setCarorgvid(orgversionvo.getPk_vid());
 				
-				/************************Ò»Ğ©×Ô¶¨ÒåÏîÄ¿ À´×ÔÓÚµØ°õĞÅÏ¢************************************/ 
-				// Åú´ÎºÅ
+				/************************ä¸€äº›è‡ªå®šä¹‰é¡¹ç›® æ¥è‡ªäºåœ°ç£…ä¿¡æ¯************************************/ 
+				// æ‰¹æ¬¡å·
 				//bvo.setVbdef1();
-				// ³µºÅ
+				// è½¦å·
 				bvo.setVbdef2(wbvo.getCh());
-				// µØ°õÀàĞÍ
+				// åœ°ç£…ç±»å‹
 				bvo.setVbdef3(wbvo.getWbtype());
-				// ·¢»õµ¥Î»
+				// å‘è´§å•ä½
 				if ( wbvo.getSh_org() != null )
 					bvo.setVbdef5(wbvo.getSh_org().toString());
-				// Ã«ÖØ
+				// æ¯›é‡
 				if ( wbvo.getMz() != null )
 					bvo.setVbdef6(wbvo.getMz().div(new UFDouble("1000"),2).toString());
-				// Æ¤ÖØ
+				// çš®é‡
 				if ( wbvo.getPz() != null )
 					bvo.setVbdef7(wbvo.getPz().div(new UFDouble("1000"),2).toString());
-				// ¾»ÖØ
+				// å‡€é‡
 				if ( wbvo.getJz() != null )
 					bvo.setVbdef8(wbvo.getJz().div(new UFDouble("1000"),2).toString());
-				// ¿ÛÖØ
+				// æ‰£é‡
 				if ( wbvo.getKz() != null )
 					bvo.setVbdef9(wbvo.getKz().div(new UFDouble("1000"),2).toString());
-				// ÊµÖØ
+				// å®é‡
 				if ( wbvo.getSz() != null )
 					bvo.setVbdef10(wbvo.getSz().div(new UFDouble("1000"),2).toString());
-				// Ã«ÖØË¾°õÔ±			
+				// æ¯›é‡å¸ç£…å‘˜			
 				bvo.setVbdef11(wbvo.getMz_psn());
-				// Ã«ÖØÊ±¼ä
+				// æ¯›é‡æ—¶é—´
 				if ( wbvo.getMz_datetime() != null )
 					bvo.setVbdef12(wbvo.getMz_datetime().toString());
-				// Æ¤ÖØË¾°õÔ±
+				// çš®é‡å¸ç£…å‘˜
 				bvo.setVbdef13(wbvo.getPz_psn());
-				// Æ¤ÖØÊ±¼ä
+				// çš®é‡æ—¶é—´
 				if ( wbvo.getPz_datetime() != null )
 					bvo.setVbdef14(wbvo.getPz_datetime().toString());
-				// ¸üĞÂÊ±¼ä
+				// æ›´æ–°æ—¶é—´
 				if ( wbvo.getUpdatetime() != null ) 
 					bvo.setVbdef17(wbvo.getPz_datetime().toString());
-				// ·¢»õÊ±¼ä
+				// å‘è´§æ—¶é—´
 				if ( wbvo.getDelivery_time() != null ) 
 					bvo.setVbdef18(wbvo.getDelivery_time().toString());
 				svo.setParent(hvo);
@@ -278,18 +278,18 @@ public class ToSaleOrderWorkPlugin2 implements IBackgroundWorkPlugin{
 				for(SaleOrderVO vo:vos){
 					SaleOrderHVO newhvo=vo.getParentVO();
 					newhvo.setDbilldate(newhvo.getDmakedate());
-					newhvo.setBillmaker(billmaker);//Ä¬ÈÏÖÆµ¥ÈËXS001
+					newhvo.setBillmaker(billmaker);//é»˜è®¤åˆ¶å•äººXS001
 					newhvo.setDr(0);
-					//¸üĞÂ±íÍ·µ¥¾İÈÕÆÚ
+					//æ›´æ–°è¡¨å¤´å•æ®æ—¥æœŸ
 					hvos.add(newhvo);
 				}
 				dao.updateVOList(hvos);
-				//²åÈëÖ®ºó¸üĞÂµ¥¾İ£¨¸üĞÂµ¥¾İÈÕÆÚºÍÖÆµ¥ÈË£©
+				//æ’å…¥ä¹‹åæ›´æ–°å•æ®ï¼ˆæ›´æ–°å•æ®æ—¥æœŸå’Œåˆ¶å•äººï¼‰
 				updateWeightInfo();
 			}
-			log_msg +="Ö´ĞĞsql£¬Éú³É" + sos.length + "ÌõÏúÊÛ¶©µ¥Íê³É.";
+			log_msg +="æ‰§è¡Œsqlï¼Œç”Ÿæˆ" + sos.length + "æ¡é”€å”®è®¢å•å®Œæˆ.";
 		} catch (Exception e) {
-			log_msg +="±¨´íĞÅÏ¢£º" + e.getMessage();
+			log_msg +="æŠ¥é”™ä¿¡æ¯ï¼š" + e.getMessage();
 			logVo.setMsg(log_msg); 
 			logVo.setOptype("saleorder");
 			try {
@@ -297,24 +297,24 @@ public class ToSaleOrderWorkPlugin2 implements IBackgroundWorkPlugin{
 				getBaseDao().insertVO(logVo);
 			      trans.commit();
 			} catch (IllegalStateException e1) {
-				// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+				// TODO è‡ªåŠ¨ç”Ÿæˆçš„ catch å—
 				e1.printStackTrace();
 			} catch (SecurityException e1) {
-				// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+				// TODO è‡ªåŠ¨ç”Ÿæˆçš„ catch å—
 				e1.printStackTrace();
 			} catch (RollbackException e1) {
-				// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+				// TODO è‡ªåŠ¨ç”Ÿæˆçš„ catch å—
 				e1.printStackTrace();
 			} catch (HeuristicRollbackException e1) {
-				// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+				// TODO è‡ªåŠ¨ç”Ÿæˆçš„ catch å—
 				e1.printStackTrace();
 			} catch (HeuristicMixedException | javax.transaction.NotSupportedException |
 					 javax.transaction.SystemException | javax.transaction.RollbackException e1) {
-				// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+				// TODO è‡ªåŠ¨ç”Ÿæˆçš„ catch å—
 				e1.printStackTrace();
 			}
 		} 
-		if ( !log_msg.contains("±¨´íĞÅÏ¢") ) {
+		if ( !log_msg.contains("æŠ¥é”™ä¿¡æ¯") ) {
 			logVo.setMsg(log_msg); 
 			logVo.setOptype("saleorder");
 			getBaseDao().insertVO(logVo);	
@@ -350,7 +350,7 @@ public class ToSaleOrderWorkPlugin2 implements IBackgroundWorkPlugin{
 	}
 	
 	/**
-	 * ÊÕ»õµ¥Î»Æ¥ÅäNC¿Í»§ ²âÊÔÄ¬ÈÏ ¸§Ë³ĞÂ¸ÖÌúÓĞÏŞÔğÈÎ¹«Ë¾
+	 * æ”¶è´§å•ä½åŒ¹é…NCå®¢æˆ· æµ‹è¯•é»˜è®¤ æŠšé¡ºæ–°é’¢é“æœ‰é™è´£ä»»å…¬å¸
 	 * @param bvoslist
 	 * @return
 	 */
@@ -364,7 +364,7 @@ public class ToSaleOrderWorkPlugin2 implements IBackgroundWorkPlugin{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if ( "¸§Ë³ÊĞÂ¡Ì©¹¤Ã³ÓĞÏŞ¹«Ë¾".equals(sh_org_name) ) { 
+		if ( "æŠšé¡ºå¸‚éš†æ³°å·¥è´¸æœ‰é™å…¬å¸".equals(sh_org_name) ) { 
 			return "1001A310000000002LE6";
 		}
 		return "1001A310000000002LBW";
@@ -381,7 +381,7 @@ public class ToSaleOrderWorkPlugin2 implements IBackgroundWorkPlugin{
 //            endBeforeDay="2021-07-27 23:59:59";
 			String sql = " select * from weighbridge01 where  def01 <> 'Y'"
 					+ " and updatetime >= '" + beginBeforeDay + "' and updatetime < '" + endBeforeDay + "'";
-			log_msg += "Ö´ĞĞsql²é³ö·ûºÏÉú³ÉÏúÊÛ¶©µ¥µÄµØ°õĞÅÏ¢£¬sql£º" + sql + ",";
+			log_msg += "æ‰§è¡ŒsqlæŸ¥å‡ºç¬¦åˆç”Ÿæˆé”€å”®è®¢å•çš„åœ°ç£…ä¿¡æ¯ï¼Œsqlï¼š" + sql + ",";
 			list = (ArrayList<Wb01VO>)getBaseDao().executeQuery(sql, new BeanListProcessor(Wb01VO.class));		
 			
 		} catch (Exception e) {
@@ -400,7 +400,7 @@ public class ToSaleOrderWorkPlugin2 implements IBackgroundWorkPlugin{
 //            endBeforeDay="2021-02-08 23:59:59";
 			String sql = " select * from weighbridge01 where def01 = 'Y' and isupdate='Y' "
 					+ "and updatetime >= '" + beginBeforeDay + "' and updatetime < '" + endBeforeDay + "'";
-			log_msg += "Ö´ĞĞsql²é³ö·ûºÏÉú³ÉÏúÊÛ¶©µ¥µÄµØ°õĞÅÏ¢£¬sql£º" + sql + ",";
+			log_msg += "æ‰§è¡ŒsqlæŸ¥å‡ºç¬¦åˆç”Ÿæˆé”€å”®è®¢å•çš„åœ°ç£…ä¿¡æ¯ï¼Œsqlï¼š" + sql + ",";
 			list = (ArrayList<Wb01VO>)getBaseDao().executeQuery(sql, new BeanListProcessor(Wb01VO.class));		
 		} catch (Exception e) {
 			e.printStackTrace();

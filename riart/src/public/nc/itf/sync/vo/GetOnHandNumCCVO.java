@@ -9,23 +9,23 @@ package nc.itf.sync.vo;
  * @Version:    1.0
  */
 public class GetOnHandNumCCVO{
-    //库存组织
+    //搴撳瓨缁勭粐
     private String OrgCode;
-    //仓库
+    //浠撳簱
     private String StorCode;
-    //物料编码
+    //鐗╂枡缂栫爜
     private String MaterialCode;
-    //物料名称
+    //鐗╂枡鍚嶇О
     private String MaterialName;
-    //货位编码
+    //璐т綅缂栫爜
     private String  ClocationCode;
-    //规格
+    //瑙勬牸
     private String MaterialModel;
-    //型号
+    //鍨嬪彿
     private String Specification ;
-    //单位编码
+    //鍗曚綅缂栫爜
     private String UnitCode;
-    //结存数量
+    //缁撳瓨鏁伴噺
     private String NOnhandNum;
 
     public String getOrgCode() {

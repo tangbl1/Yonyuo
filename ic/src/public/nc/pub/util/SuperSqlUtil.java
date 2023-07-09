@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * ¸ù¾İ¼¯ºÏ»òÊı×é»ñµÃ in ('')Óï¾ä£¬³¬¹ı300¸öÏµÍ³×Ô¶¯Ê¹ÓÃÁÙÊ±±í¡£
+ * æ ¹æ®é›†åˆæˆ–æ•°ç»„è·å¾— in ('')è¯­å¥ï¼Œè¶…è¿‡300ä¸ªç³»ç»Ÿè‡ªåŠ¨ä½¿ç”¨ä¸´æ—¶è¡¨ã€‚
  * 
  * @author zhaoweic
  * 
@@ -28,20 +28,20 @@ import java.util.Random;
  */
 public class SuperSqlUtil { 
 	
-	public static int inMinLimitCount = 300;// in(...)ÀïÃæÔªËØµÄ×îĞ¡·§Öµ£¬³¬¹ı¸Ã·§ÖµµÄÊ±ºò£¬¿ÉÄÜĞèÒªÊ¹ÓÃÁÙÊ±±í»òÆäËû·½Ê½
-	public static int inMaxLimitCount = 800;// in(...)ÀïÃæÔªËØµÄ×î´ó·§Öµ£¬³¬¹ı¸Ã·§ÖµµÄÊ±ºò£¬SQL½âÎö¿ÉÄÜ»á³ö´í£¬±ØĞëÊ¹ÓÃÁÙÊ±±íµÈÆäËû°ì·¨
+	public static int inMinLimitCount = 300;// in(...)é‡Œé¢å…ƒç´ çš„æœ€å°é˜€å€¼ï¼Œè¶…è¿‡è¯¥é˜€å€¼çš„æ—¶å€™ï¼Œå¯èƒ½éœ€è¦ä½¿ç”¨ä¸´æ—¶è¡¨æˆ–å…¶ä»–æ–¹å¼
+	public static int inMaxLimitCount = 800;// in(...)é‡Œé¢å…ƒç´ çš„æœ€å¤§é˜€å€¼ï¼Œè¶…è¿‡è¯¥é˜€å€¼çš„æ—¶å€™ï¼ŒSQLè§£æå¯èƒ½ä¼šå‡ºé”™ï¼Œå¿…é¡»ä½¿ç”¨ä¸´æ—¶è¡¨ç­‰å…¶ä»–åŠæ³•
 
 	/**
-	 * »ñµÃIn Óï¾ä
+	 * è·å¾—In è¯­å¥
 	 * 
 	 * @param fieldName
-	 *            ×Ö¶ÎÃû
+	 *            å­—æ®µå
 	 * @param pks
-	 *            Ö÷¼üÊı×é
+	 *            ä¸»é”®æ•°ç»„
 	 * @return String
-	 *            ·µ»Ø in ('')
+	 *            è¿”å› in ('')
 	 * @throws BusinessException
-	 *            ²éÑ¯³ö´íÔòÅ×³öÒì³£
+	 *            æŸ¥è¯¢å‡ºé”™åˆ™æŠ›å‡ºå¼‚å¸¸
 	 * @example   		
 	 * 		List<String> pklist = new ArrayList<String>();<br />
 	 *	 	pklist.add("1001A910000000000355");<br />
@@ -52,7 +52,7 @@ public class SuperSqlUtil {
 		String rsStr = null;
 
 		if (fieldName == null) {
-			throw new BusinessException(nc.vo.ml.NCLangRes4VoTransl.getNCLangRes().getStrByID("1017pub_0", "01017pub-0067")/* @res "×Ö¶ÎÃû²»ÔÊĞí´«¿ÕÖµ¡£" */);
+			throw new BusinessException(nc.vo.ml.NCLangRes4VoTransl.getNCLangRes().getStrByID("1017pub_0", "01017pub-0067")/* @res "å­—æ®µåä¸å…è®¸ä¼ ç©ºå€¼ã€‚" */);
 		}
 
 		if (pks == null || pks.isEmpty()) {
@@ -64,7 +64,7 @@ public class SuperSqlUtil {
 			} else {
 				if (length > inMinLimitCount) {
 					if (autoUseTempTable) {
-						boolean canCreateTable = false;// Ö»ÓĞÔÚ·şÎñÆ÷ÉÏÔËĞĞµÄÊ±ºò²Å¿ÉÒÔ´´½¨ÁÙÊ±±í
+						boolean canCreateTable = false;// åªæœ‰åœ¨æœåŠ¡å™¨ä¸Šè¿è¡Œçš„æ—¶å€™æ‰å¯ä»¥åˆ›å»ºä¸´æ—¶è¡¨
 						try {
 							canCreateTable = RuntimeEnv.getInstance().isRunningInServer();
 						} catch (Exception e) {
@@ -79,20 +79,20 @@ public class SuperSqlUtil {
 								String coltype = "varchar(60)";
 								tablename = createTempTable(tablename, colname, coltype);
 								if (tablename == null) {
-									// ÁÙÊ±±í´´½¨Ê§°Ü£¬ÖØĞÂ³¢ÊÔ´´½¨Ò»´Î
+									// ä¸´æ—¶è¡¨åˆ›å»ºå¤±è´¥ï¼Œé‡æ–°å°è¯•åˆ›å»ºä¸€æ¬¡
 									tablename = getTempTablename(fieldName);
 									tablename = createTempTable(tablename, colname, coltype);
 								}
 								if (tablename == null) {
-									throw new BusinessException(nc.vo.ml.NCLangRes4VoTransl.getNCLangRes().getStrByID("1017pub_0", "01017pub-0068")/* @res "´´½¨ÁÙÊ±±íÊ§°Ü" */);
+									throw new BusinessException(nc.vo.ml.NCLangRes4VoTransl.getNCLangRes().getStrByID("1017pub_0", "01017pub-0068")/* @res "åˆ›å»ºä¸´æ—¶è¡¨å¤±è´¥" */);
 								} else {
 									insertIntoTable(tablename, colname, pks);
 								}
 								rsStr = fieldName + " in (select " + colname + " from " + tablename + ") ";
 							} catch (Exception e) {
-								Logger.error("´´½¨ÁÙÊ±±íÊ§°Ü¡£³¢ÊÔÊ¹ÓÃOR·½Ê½¡£", e);
+								Logger.error("åˆ›å»ºä¸´æ—¶è¡¨å¤±è´¥ã€‚å°è¯•ä½¿ç”¨ORæ–¹å¼ã€‚", e);
 								if (length > inMaxLimitCount) {
-									// ³¬¹ıin(...)µÄ×î´ó·§Öµ£¬Ê¹ÓÃ( field in(...) or field in(...) or ...)µÄ·½Ê½À´ÊµÏÖ£¬Ğ§ÂÊ·Ç³£µÍ
+									// è¶…è¿‡in(...)çš„æœ€å¤§é˜€å€¼ï¼Œä½¿ç”¨( field in(...) or field in(...) or ...)çš„æ–¹å¼æ¥å®ç°ï¼Œæ•ˆç‡éå¸¸ä½
 									StringBuffer sb = new StringBuffer();
 									sb.append(" (");
 									for (int i = 0; i < length;) {
@@ -102,13 +102,13 @@ public class SuperSqlUtil {
 									}
 									rsStr = sb.substring(0, sb.length() - 3) + ") ";
 								} else {
-									// Ã»ÓĞ³¬¹ı×î´ó·§Öµ£¬¿ÉÒÔĞ´ÔÚÒ»¸öin(...)ÀïÃæ
+									// æ²¡æœ‰è¶…è¿‡æœ€å¤§é˜€å€¼ï¼Œå¯ä»¥å†™åœ¨ä¸€ä¸ªin(...)é‡Œé¢
 									rsStr = getInStr(fieldName, pks, 0, length - 1);
 								}
 							}
 						} else {
 							if (length > inMaxLimitCount) {
-								// ³¬¹ıin(...)µÄ×î´ó·§Öµ£¬Ê¹ÓÃ( field in(...) or field in(...) or ...)µÄ·½Ê½À´ÊµÏÖ£¬Ğ§ÂÊ·Ç³£µÍ
+								// è¶…è¿‡in(...)çš„æœ€å¤§é˜€å€¼ï¼Œä½¿ç”¨( field in(...) or field in(...) or ...)çš„æ–¹å¼æ¥å®ç°ï¼Œæ•ˆç‡éå¸¸ä½
 								StringBuffer sb = new StringBuffer();
 								sb.append(" (");
 								for (int i = 0; i < length;) {
@@ -118,13 +118,13 @@ public class SuperSqlUtil {
 								}
 								rsStr = sb.substring(0, sb.length() - 3) + ") ";
 							} else {
-								// Ã»ÓĞ³¬¹ı×î´ó·§Öµ£¬¿ÉÒÔĞ´ÔÚÒ»¸öin(...)ÀïÃæ
+								// æ²¡æœ‰è¶…è¿‡æœ€å¤§é˜€å€¼ï¼Œå¯ä»¥å†™åœ¨ä¸€ä¸ªin(...)é‡Œé¢
 								rsStr = getInStr(fieldName, pks, 0, length - 1);
 							}
 						}
 					} else {
 						if (length > inMaxLimitCount) {
-							// ³¬¹ıin(...)µÄ×î´ó·§Öµ£¬Ê¹ÓÃ( field in(...) or field in(...) or ...)µÄ·½Ê½À´ÊµÏÖ£¬Ğ§ÂÊ·Ç³£µÍ
+							// è¶…è¿‡in(...)çš„æœ€å¤§é˜€å€¼ï¼Œä½¿ç”¨( field in(...) or field in(...) or ...)çš„æ–¹å¼æ¥å®ç°ï¼Œæ•ˆç‡éå¸¸ä½
 							StringBuffer sb = new StringBuffer();
 							sb.append(" (");
 							for (int i = 0; i < length;) {
@@ -134,7 +134,7 @@ public class SuperSqlUtil {
 							}
 							rsStr = sb.substring(0, sb.length() - 3) + ") ";
 						} else {
-							// Ã»ÓĞ³¬¹ı×î´ó·§Öµ£¬¿ÉÒÔĞ´ÔÚÒ»¸öin(...)ÀïÃæ
+							// æ²¡æœ‰è¶…è¿‡æœ€å¤§é˜€å€¼ï¼Œå¯ä»¥å†™åœ¨ä¸€ä¸ªin(...)é‡Œé¢
 							rsStr = getInStr(fieldName, pks, 0, length - 1);
 						}
 					}
@@ -147,21 +147,21 @@ public class SuperSqlUtil {
 	}
 
 	/**
-	 * »ñµÃIn Óï¾ä
+	 * è·å¾—In è¯­å¥
 	 * 
 	 * @param fieldName
-	 *            ×Ö¶ÎÃû
+	 *            å­—æ®µå
 	 * @param pks
-	 *            Ö÷¼üÊı×é
+	 *            ä¸»é”®æ•°ç»„
 	 * @return String
-	 *            ·µ»Ø in ('')
+	 *            è¿”å› in ('')
 	 * @throws BusinessException
 	 */
 	public static String getInStr(String fieldName, String[] pks, boolean autoUseTempTable) throws BusinessException {
 		String rsStr = null;
 
 		if (fieldName == null) {
-			throw new BusinessException(nc.vo.ml.NCLangRes4VoTransl.getNCLangRes().getStrByID("1017pub_0", "01017pub-0067")/* @res "×Ö¶ÎÃû²»ÔÊĞí´«¿ÕÖµ¡£" */);
+			throw new BusinessException(nc.vo.ml.NCLangRes4VoTransl.getNCLangRes().getStrByID("1017pub_0", "01017pub-0067")/* @res "å­—æ®µåä¸å…è®¸ä¼ ç©ºå€¼ã€‚" */);
 		}
 
 		if (pks == null) {
@@ -173,7 +173,7 @@ public class SuperSqlUtil {
 			} else {
 				if (length > inMinLimitCount) {
 					if (autoUseTempTable) {
-						boolean canCreateTable = false;// Ö»ÓĞÔÚ·şÎñÆ÷ÉÏÔËĞĞµÄÊ±ºò²Å¿ÉÒÔ´´½¨ÁÙÊ±±í
+						boolean canCreateTable = false;// åªæœ‰åœ¨æœåŠ¡å™¨ä¸Šè¿è¡Œçš„æ—¶å€™æ‰å¯ä»¥åˆ›å»ºä¸´æ—¶è¡¨
 						try {
 							canCreateTable = RuntimeEnv.getInstance().isRunningInServer();
 						} catch (Exception e) {
@@ -188,20 +188,20 @@ public class SuperSqlUtil {
 								String coltype = "varchar(60)";
 								tablename = createTempTable(tablename, colname, coltype);
 								if (tablename == null) {
-									// ÁÙÊ±±í´´½¨Ê§°Ü£¬ÖØĞÂ³¢ÊÔ´´½¨Ò»´Î
+									// ä¸´æ—¶è¡¨åˆ›å»ºå¤±è´¥ï¼Œé‡æ–°å°è¯•åˆ›å»ºä¸€æ¬¡
 									tablename = getTempTablename(fieldName);
 									tablename = createTempTable(tablename, colname, coltype);
 								}
 								if (tablename == null) {
-									throw new BusinessException(nc.vo.ml.NCLangRes4VoTransl.getNCLangRes().getStrByID("1017pub_0", "01017pub-0068")/* @res "´´½¨ÁÙÊ±±íÊ§°Ü" */);
+									throw new BusinessException(nc.vo.ml.NCLangRes4VoTransl.getNCLangRes().getStrByID("1017pub_0", "01017pub-0068")/* @res "åˆ›å»ºä¸´æ—¶è¡¨å¤±è´¥" */);
 								} else {
 									insertIntoTable(tablename, colname, pks);
 								}
 								rsStr = fieldName + " in (select " + colname + " from " + tablename + ") ";
 							} catch (Exception e) {
-								Logger.error("´´½¨ÁÙÊ±±íÊ§°Ü¡£³¢ÊÔÊ¹ÓÃOR·½Ê½¡£", e);
+								Logger.error("åˆ›å»ºä¸´æ—¶è¡¨å¤±è´¥ã€‚å°è¯•ä½¿ç”¨ORæ–¹å¼ã€‚", e);
 								if (length > inMaxLimitCount) {
-									// ³¬¹ıin(...)µÄ×î´ó·§Öµ£¬Ê¹ÓÃ( field in(...) or field in(...) or ...)µÄ·½Ê½À´ÊµÏÖ£¬Ğ§ÂÊ·Ç³£µÍ
+									// è¶…è¿‡in(...)çš„æœ€å¤§é˜€å€¼ï¼Œä½¿ç”¨( field in(...) or field in(...) or ...)çš„æ–¹å¼æ¥å®ç°ï¼Œæ•ˆç‡éå¸¸ä½
 									StringBuffer sb = new StringBuffer();
 									sb.append(" (");
 									for (int i = 0; i < length;) {
@@ -211,13 +211,13 @@ public class SuperSqlUtil {
 									}
 									rsStr = sb.substring(0, sb.length() - 3) + ") ";
 								} else {
-									// Ã»ÓĞ³¬¹ı×î´ó·§Öµ£¬¿ÉÒÔĞ´ÔÚÒ»¸öin(...)ÀïÃæ
+									// æ²¡æœ‰è¶…è¿‡æœ€å¤§é˜€å€¼ï¼Œå¯ä»¥å†™åœ¨ä¸€ä¸ªin(...)é‡Œé¢
 									rsStr = getInStr(fieldName, pks, 0, length - 1);
 								}
 							}
 						} else {
 							if (length > inMaxLimitCount) {
-								// ³¬¹ıin(...)µÄ×î´ó·§Öµ£¬Ê¹ÓÃ( field in(...) or field in(...) or ...)µÄ·½Ê½À´ÊµÏÖ£¬Ğ§ÂÊ·Ç³£µÍ
+								// è¶…è¿‡in(...)çš„æœ€å¤§é˜€å€¼ï¼Œä½¿ç”¨( field in(...) or field in(...) or ...)çš„æ–¹å¼æ¥å®ç°ï¼Œæ•ˆç‡éå¸¸ä½
 								StringBuffer sb = new StringBuffer();
 								sb.append(" (");
 								for (int i = 0; i < length;) {
@@ -227,13 +227,13 @@ public class SuperSqlUtil {
 								}
 								rsStr = sb.substring(0, sb.length() - 3) + ") ";
 							} else {
-								// Ã»ÓĞ³¬¹ı×î´ó·§Öµ£¬¿ÉÒÔĞ´ÔÚÒ»¸öin(...)ÀïÃæ
+								// æ²¡æœ‰è¶…è¿‡æœ€å¤§é˜€å€¼ï¼Œå¯ä»¥å†™åœ¨ä¸€ä¸ªin(...)é‡Œé¢
 								rsStr = getInStr(fieldName, pks, 0, length - 1);
 							}
 						}
 					} else {
 						if (length > inMaxLimitCount) {
-							// ³¬¹ıin(...)µÄ×î´ó·§Öµ£¬Ê¹ÓÃ( field in(...) or field in(...) or ...)µÄ·½Ê½À´ÊµÏÖ£¬Ğ§ÂÊ·Ç³£µÍ
+							// è¶…è¿‡in(...)çš„æœ€å¤§é˜€å€¼ï¼Œä½¿ç”¨( field in(...) or field in(...) or ...)çš„æ–¹å¼æ¥å®ç°ï¼Œæ•ˆç‡éå¸¸ä½
 							StringBuffer sb = new StringBuffer();
 							sb.append(" (");
 							for (int i = 0; i < length;) {
@@ -243,7 +243,7 @@ public class SuperSqlUtil {
 							}
 							rsStr = sb.substring(0, sb.length() - 3) + ") ";
 						} else {
-							// Ã»ÓĞ³¬¹ı×î´ó·§Öµ£¬¿ÉÒÔĞ´ÔÚÒ»¸öin(...)ÀïÃæ
+							// æ²¡æœ‰è¶…è¿‡æœ€å¤§é˜€å€¼ï¼Œå¯ä»¥å†™åœ¨ä¸€ä¸ªin(...)é‡Œé¢
 							rsStr = getInStr(fieldName, pks, 0, length - 1);
 						}
 					}
@@ -303,7 +303,7 @@ public class SuperSqlUtil {
 
 	/**
 	 * 
-	 * ¹¹ÔìÁÙÊ±±íÃû, ·µ»Ø±íÃû³¤¶È<=18Î»
+	 * æ„é€ ä¸´æ—¶è¡¨å, è¿”å›è¡¨åé•¿åº¦<=18ä½
 	 * 
 	 * @param fieldName
 	 * @return
@@ -322,9 +322,9 @@ public class SuperSqlUtil {
 		tableName.append(tempStr);
 		tableName.append(new Random().nextInt(9));
 		long currtime = System.currentTimeMillis();
-		// È¡µ±Ç°Ê±¼ä½ØÈ¡ºó8Îª×÷Îªµ÷Õû¡£
-		// 10000000ºÁÃë=10000Ãë=2.7Ğ¡Ê±£¬¶øÎÒÃÇÈÏÎªÒ»¸öÏß³Ì´´½¨µÄÁÙÊ±±íÈç¹ûÃ»ÓĞÔÚ2.7Ğ¡Ê±ÄÚÊ§Ğ§Ó¦¸ÃÊÇ³ÌĞòµÄÎÊÌâ
-		// ÁíÍâ£¬¼´Ê¹¸ÃÏß³ÌÃ»ÓĞ½áÊø£¬ÔÙ´´½¨µÄÁÙÊ±±íÖØ¸´µÄ¸ÅÂÊ£¨Ê±¼äÕıºÃÏà²î10000000ms²¢ÇÒrandom³öµÄÊıÒ²ÍêÈ«Ò»Ñù£©Ò²ÊÇ¼«ÆäÉÙÊıÇé¿ö£¬ËùÒÔ²»¿¼ÂÇ
+		// å–å½“å‰æ—¶é—´æˆªå–å8ä¸ºä½œä¸ºè°ƒæ•´ã€‚
+		// 10000000æ¯«ç§’=10000ç§’=2.7å°æ—¶ï¼Œè€Œæˆ‘ä»¬è®¤ä¸ºä¸€ä¸ªçº¿ç¨‹åˆ›å»ºçš„ä¸´æ—¶è¡¨å¦‚æœæ²¡æœ‰åœ¨2.7å°æ—¶å†…å¤±æ•ˆåº”è¯¥æ˜¯ç¨‹åºçš„é—®é¢˜
+		// å¦å¤–ï¼Œå³ä½¿è¯¥çº¿ç¨‹æ²¡æœ‰ç»“æŸï¼Œå†åˆ›å»ºçš„ä¸´æ—¶è¡¨é‡å¤çš„æ¦‚ç‡ï¼ˆæ—¶é—´æ­£å¥½ç›¸å·®10000000mså¹¶ä¸”randomå‡ºçš„æ•°ä¹Ÿå®Œå…¨ä¸€æ ·ï¼‰ä¹Ÿæ˜¯æå…¶å°‘æ•°æƒ…å†µï¼Œæ‰€ä»¥ä¸è€ƒè™‘
 		String tempStr2 = String.valueOf(currtime);
 		if (tempStr2.length() > 8) {
 			tempStr2 = tempStr2.substring(tempStr2.length() - 8);
@@ -334,10 +334,10 @@ public class SuperSqlUtil {
 	}
 
 	/**
-	 * ´´½¨ÁÙÊ±±í
+	 * åˆ›å»ºä¸´æ—¶è¡¨
 	 * 
 	 * <p>
-	 * ĞŞ¸Ä¼ÇÂ¼£º
+	 * ä¿®æ”¹è®°å½•ï¼š
 	 * </p>
 	 * 
 	 * @param fieldName
@@ -380,10 +380,10 @@ public class SuperSqlUtil {
 	}
 
 	/**
-	 * °ÑÊı¾İ²åÈëÁÙÊ±±í
+	 * æŠŠæ•°æ®æ’å…¥ä¸´æ—¶è¡¨
 	 * 
 	 * <p>
-	 * ĞŞ¸Ä¼ÇÂ¼£º
+	 * ä¿®æ”¹è®°å½•ï¼š
 	 * </p>
 	 * 
 	 * @param tableName
@@ -428,10 +428,10 @@ public class SuperSqlUtil {
 	}
 
 	/**
-	 * °ÑÊı¾İ²åÈëÁÙÊ±±í
+	 * æŠŠæ•°æ®æ’å…¥ä¸´æ—¶è¡¨
 	 * 
 	 * <p>
-	 * ĞŞ¸Ä¼ÇÂ¼£º
+	 * ä¿®æ”¹è®°å½•ï¼š
 	 * </p>
 	 * 
 	 * @param tableName

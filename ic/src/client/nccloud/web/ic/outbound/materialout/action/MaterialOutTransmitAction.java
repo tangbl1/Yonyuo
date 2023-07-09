@@ -56,7 +56,7 @@ public class MaterialOutTransmitAction implements ICommonAction {
         MaterialOutVO[] vos = new MaterialOutVO[]{ operator.toBill(request)};
         operator.setOriginBillcard(card);
         MaterialOutVO aggvo = vos[0];
-        String type = "0";//0±íÊ¾ĞÂÔöµ¥¾İ  1±íÊ¾»Ø¹öµ¥¾İ
+        String type = "0";//0è¡¨ç¤ºæ–°å¢å•æ®  1è¡¨ç¤ºå›æ»šå•æ®
         if ("CancelTransmit".equals(actionid)) {
             type = "1";
         }
@@ -68,7 +68,7 @@ public class MaterialOutTransmitAction implements ICommonAction {
             MaterialOutHeadVO headVO = aggvo.getHead();
             MaterialOutBodyVO[] Bodys = aggvo.getBodys();
             String sn = headVO.getVbillcode();
-            String user_id = headVO.getCbizid();//ÁìÁÏÔ±
+            String user_id = headVO.getCbizid();//é¢†æ–™å‘˜
             try {
 
                 String sql = "select name from  bd_psndoc where pk_psndoc ='" + user_id + "'";
@@ -96,12 +96,12 @@ public class MaterialOutTransmitAction implements ICommonAction {
                     String clocationid = bodyVO.getClocationid();
                     sql = "select code from bd_rack where pk_rack  = '" + clocationid + "'";
                     String location = (String) query.executeQuery(sql, new ColumnProcessor());
-                    String description = materialVersionVO.getMaterialspec();//¹æ¸ñ
+                    String description = materialVersionVO.getMaterialspec();//è§„æ ¼
                     bodyMap.put("product_sn", product_sn);
                     bodyMap.put("product_name", product_name);
                     bodyMap.put("quantity", quantity);
                     bodyMap.put("location", location);
-                    bodyMap.put("warehouse", warehouse);//²Ö¿â±àÂë
+                    bodyMap.put("warehouse", warehouse);//ä»“åº“ç¼–ç 
                     bodyMap.put("description", description);
                     products[i] = bodyMap;
 
@@ -109,7 +109,7 @@ public class MaterialOutTransmitAction implements ICommonAction {
                 headMap.put("products", products);
 
             } catch ( BusinessException e) {
-                throw new RuntimeException(e+":²ÄÁÏ³ö¿âµ¥×Ö¶Î½âÎöÊ§°Ü! ");
+                throw new RuntimeException(e+":ææ–™å‡ºåº“å•å­—æ®µè§£æå¤±è´¥! ");
             }
 
                 JSONObject js = new JSONObject(headMap);
@@ -117,31 +117,31 @@ public class MaterialOutTransmitAction implements ICommonAction {
 
             try {
                 String token = sendOrder.getAccessToken(user_id);
-//    ÕıÊ½            JSONObject returnjson = sendOrder.Orders(token, js);
+//    æ­£å¼            JSONObject returnjson = sendOrder.Orders(token, js);
 //                int code = (int) returnjson.get("code");
 //                String message = (String) returnjson.get("message");
 //                String ncmessage;
 
-                //begin ²âÊÔ¹¦ÄÜ´úÂë
+                //begin æµ‹è¯•åŠŸèƒ½ä»£ç 
                 int code = 201;
                 String ncmessage ;
                 String message = "{state:0}";
-                //end ²âÊÔ¹¦ÄÜ´úÂë
+                //end æµ‹è¯•åŠŸèƒ½ä»£ç 
                 switch (code) {
                     case 510:
-                        ncmessage = "Ê§°Ü£¡´«Èë²ÎÊı²»ÕıÈ·";
+                        ncmessage = "å¤±è´¥ï¼ä¼ å…¥å‚æ•°ä¸æ­£ç¡®";
                         break;
                     case 511:
-                        ncmessage = "Ê§°Ü£¡ÕÒ²»µ½´«µİµÄÎïÁÏ";
+                        ncmessage = "å¤±è´¥ï¼æ‰¾ä¸åˆ°ä¼ é€’çš„ç‰©æ–™";
                         break;
                     case 519 | 512:
-                        ncmessage = "Ê§°Ü£¡ÁìÁÏ±¨´íÒì³£";
+                        ncmessage = "å¤±è´¥ï¼é¢†æ–™æŠ¥é”™å¼‚å¸¸";
                         break;
                     case 201:
-                        ncmessage = "³É¹¦£¡";
+                        ncmessage = "æˆåŠŸï¼";
                         break;
                     default:
-                        ncmessage = "Ê§°Ü£¡";
+                        ncmessage = "å¤±è´¥ï¼";
                         break;
                 }
                 if (code == 201 && "0".equals(JSONObject.parseObject(message).get("state").toString())) {
@@ -162,9 +162,9 @@ public class MaterialOutTransmitAction implements ICommonAction {
             } catch (BusinessException e) {
                 throw new RuntimeException(e);
             } catch (JDOMException e) {
-                throw new RuntimeException(e+" »ñÈ¡ÅäÖÃÎÄ¼şÊ§°Ü!");
+                throw new RuntimeException(e+" è·å–é…ç½®æ–‡ä»¶å¤±è´¥!");
             } catch (IOException e) {
-                throw new RuntimeException(e+": ½Ó¿Ú½âÎöÊ§°Ü!");
+                throw new RuntimeException(e+": æ¥å£è§£æå¤±è´¥!");
             }
 
         }

@@ -43,12 +43,12 @@ public class TrainServiceImpl1 implements ITrainService1 {
         String resStr = "";
         try {
             doc = builder.build(new StringReader(xml));
-            Element root = doc.getRootElement();// xmlÎª¸ù½Úµã
-            List<Element> datalist = root.getChildren("data");//´ÓxmlÖĞ»ñµÃ¶à¸ödata±êÇ©
+            Element root = doc.getRootElement();// xmlä¸ºæ ¹èŠ‚ç‚¹
+            List<Element> datalist = root.getChildren("data");//ä»xmlä¸­è·å¾—å¤šä¸ªdataæ ‡ç­¾
             if (datalist.size() == 0) {
                 resInt = "-1";
-                resStr = "½ÓÊÕÊı¾İ½âÎöÊ§°Ü£¬Çë¼ì²éÊı¾İ¸ñÊ½";
-                Logger.error("ÈËÔ±½ÌÓıÅàÑµ½Ó¿ÚÒì³£" + xml, null);
+                resStr = "æ¥æ”¶æ•°æ®è§£æå¤±è´¥ï¼Œè¯·æ£€æŸ¥æ•°æ®æ ¼å¼";
+                Logger.error("äººå‘˜æ•™è‚²åŸ¹è®­æ¥å£å¼‚å¸¸" + xml, null);
                 message = message.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?> ").append("<RES><errInt>").append(resInt)
                         .append("</errInt>").append("<errMsg>").append(resStr).append("</errMsg></RES>");
                 return message.toString();
@@ -62,8 +62,8 @@ public class TrainServiceImpl1 implements ITrainService1 {
                     String resourt = basedao.insertVO(trainVO);
                     if (resourt == null) {
                         resInt = "-1";
-                        resStr = "idÎª" + trainVO.getGlbdef14() + "µÄÊı¾İ²åÈëÊ§°Ü£¡";
-                        Logger.error("ÈËÔ±½ÌÓıÅàÑµ½Ó¿ÚÒì³£" + xml, null);
+                        resStr = "idä¸º" + trainVO.getGlbdef14() + "çš„æ•°æ®æ’å…¥å¤±è´¥ï¼";
+                        Logger.error("äººå‘˜æ•™è‚²åŸ¹è®­æ¥å£å¼‚å¸¸" + xml, null);
                         message = message.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?> ").append("<RES><errInt>").append(resInt)
                                 .append("</errInt>").append("<errMsg>").append(resStr).append("</errMsg></RES>");
                         return message.toString();
@@ -73,16 +73,16 @@ public class TrainServiceImpl1 implements ITrainService1 {
                     int i = basedao.updateVO(trainVO);
                     if (i != 1) {
                         resInt = "-1";
-                        resStr = "idÎª" + trainVO.getGlbdef14() + "µÄÊı¾İ¸üĞÂÊ§°Ü£¡";
-                        Logger.error("ÈËÔ±½ÌÓıÅàÑµ½Ó¿ÚÒì³£" + xml, null);
+                        resStr = "idä¸º" + trainVO.getGlbdef14() + "çš„æ•°æ®æ›´æ–°å¤±è´¥ï¼";
+                        Logger.error("äººå‘˜æ•™è‚²åŸ¹è®­æ¥å£å¼‚å¸¸" + xml, null);
                         message = message.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?> ").append("<RES><errInt>").append(resInt)
                                 .append("</errInt>").append("<errMsg>").append(resStr).append("</errMsg></RES>");
                         return message.toString();
                     }
                 } else {
                     resInt = "-1";
-                    resStr = "idÎª" + trainVO.getGlbdef14() + "µÄÊı¾İ×´Ì¬ÎªY,ÎŞĞèÖØ¸´²åÈë»ò¸üĞÂ£¡";
-                    Logger.error("ÈËÔ±½ÌÓıÅàÑµ½Ó¿ÚÒì³£" + xml, null);
+                    resStr = "idä¸º" + trainVO.getGlbdef14() + "çš„æ•°æ®çŠ¶æ€ä¸ºY,æ— éœ€é‡å¤æ’å…¥æˆ–æ›´æ–°ï¼";
+                    Logger.error("äººå‘˜æ•™è‚²åŸ¹è®­æ¥å£å¼‚å¸¸" + xml, null);
                     message = message.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?> ").append("<RES><errInt>").append(resInt)
                             .append("</errInt>").append("<errMsg>").append(resStr).append("</errMsg></RES>");
                     return message.toString();
@@ -96,7 +96,7 @@ public class TrainServiceImpl1 implements ITrainService1 {
             e.printStackTrace();
             resInt = "-1";
             resStr = e.getMessage().toString();
-            Logger.error("ÈËÔ±½ÌÓıÅàÑµ½Ó¿ÚÒì³£"+e.getMessage(), e);
+            Logger.error("äººå‘˜æ•™è‚²åŸ¹è®­æ¥å£å¼‚å¸¸"+e.getMessage(), e);
             message = message.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?> ").append("<RES><errInt>").append(resInt)
                     .append("</errInt>").append("<errMsg>").append(resStr).append("</errMsg></RES>");
         }
@@ -118,80 +118,80 @@ public class TrainServiceImpl1 implements ITrainService1 {
                 + "where p.dr='0' and p.dr='0' and p.code='"+xmlvalheadlist.get("psncode")+"'";
         Map<String,String> psnInfo = (Map<String, String>) queryBS.executeQuery(psnSql,new MapProcessor());
         if(psnInfo==null){
-            throw new BusinessException("ÈËÔ±±àÂë²»ÕıÈ·");
+            throw new BusinessException("äººå‘˜ç¼–ç ä¸æ­£ç¡®");
         }
 //		String courseSql = "SELECT t.enablestate,t.creationtime,t.modifiedtime,t.creator,s.pk_org as creator_org,t.pk_org as course_org" +
 //				" FROM trm_course t left join sm_user s on t.creator = s.cuserid where t.coursename = '"+xmlvalheadlist.get("courseName")+"'";
 //		 Map<String,String> courseInfo = (Map<String, String>) queryBS.executeQuery(courseSql,new MapProcessor());
 
         TrainVO1 trainVO = new TrainVO1();
-        trainVO.setGlbdef14(xmlvalheadlist.get("id"));//Ö÷¼ü
+        trainVO.setGlbdef14(xmlvalheadlist.get("id"));//ä¸»é”®
         trainVO.setAttributeValue("glbdef14", xmlvalheadlist.get("id"));
         trainVO.setPk_org(psnInfo.get("pk_org"));
         trainVO.setPk_group(psnInfo.get("pk_group"));
         trainVO.setPk_psndoc(psnInfo.get("pk_psndoc"));
         trainVO.setPk_psnjob(psnInfo.get("pk_psnjob"));
         trainVO.setPk_psnorg(psnInfo.get("pk_psnorg"));
-        trainVO.setAct_name(xmlvalheadlist.get("act_name"));//ÅàÑµ»î¶¯Ãû³Æ
-        trainVO.setBegindate(new UFLiteralDate(xmlvalheadlist.get("begindate")));//ÅàÑµ¿ªÊ¼ÈÕÆÚ
-        trainVO.setEnddate(new UFLiteralDate(xmlvalheadlist.get("enddate")));//ÅàÑµ½áÊøÈÕÆÚ
-        trainVO.setTra_type(getDefdoc(queryBS,xmlvalheadlist.get("tra_type"),"HR021_0xx"));//ÅàÑµÀàĞÍ
-        trainVO.setTra_mode(getDefdoc(queryBS,xmlvalheadlist.get("tra_mode"),"HR020_0xx"));//ÅàÑµ·½Ê½
-        trainVO.setTraim(xmlvalheadlist.get("traim"));//ÅàÑµÄ¿±ê
-        trainVO.setTra_content(xmlvalheadlist.get("tra_content"));//ÅàÑµÄÚÈİ
-        trainVO.setTrm_location(xmlvalheadlist.get("trm_location"));//ÅàÑµµØµã
-        trainVO.setTra_time(new UFDouble(xmlvalheadlist.get("tra_time")));//ÅàÑµÑ§Ê±
-        trainVO.setTra_cost(new UFDouble(xmlvalheadlist.get("tra_cost")));//ÅàÑµ·ÑÓÃ
-        trainVO.setIsallduty(new UFBoolean(xmlvalheadlist.get("isallduty")));//È«ÇÚ
-        trainVO.setAbsence_count(Integer.parseInt(xmlvalheadlist.get("absence_count")));//È±ÇÚ´ÎÊı
-        trainVO.setAss_result(new UFDouble(xmlvalheadlist.get("ass_result")));//¿¼ºË³É¼¨
-        trainVO.setAss_option(xmlvalheadlist.get("ass_option"));//¿¼ºËÆÀ¼Û
-        trainVO.setMemo(xmlvalheadlist.get("memo"));//±¸×¢
-        trainVO.setGlbdef1(xmlvalheadlist.get("lecturer"));//½²Ê¦
+        trainVO.setAct_name(xmlvalheadlist.get("act_name"));//åŸ¹è®­æ´»åŠ¨åç§°
+        trainVO.setBegindate(new UFLiteralDate(xmlvalheadlist.get("begindate")));//åŸ¹è®­å¼€å§‹æ—¥æœŸ
+        trainVO.setEnddate(new UFLiteralDate(xmlvalheadlist.get("enddate")));//åŸ¹è®­ç»“æŸæ—¥æœŸ
+        trainVO.setTra_type(getDefdoc(queryBS,xmlvalheadlist.get("tra_type"),"HR021_0xx"));//åŸ¹è®­ç±»å‹
+        trainVO.setTra_mode(getDefdoc(queryBS,xmlvalheadlist.get("tra_mode"),"HR020_0xx"));//åŸ¹è®­æ–¹å¼
+        trainVO.setTraim(xmlvalheadlist.get("traim"));//åŸ¹è®­ç›®æ ‡
+        trainVO.setTra_content(xmlvalheadlist.get("tra_content"));//åŸ¹è®­å†…å®¹
+        trainVO.setTrm_location(xmlvalheadlist.get("trm_location"));//åŸ¹è®­åœ°ç‚¹
+        trainVO.setTra_time(new UFDouble(xmlvalheadlist.get("tra_time")));//åŸ¹è®­å­¦æ—¶
+        trainVO.setTra_cost(new UFDouble(xmlvalheadlist.get("tra_cost")));//åŸ¹è®­è´¹ç”¨
+        trainVO.setIsallduty(new UFBoolean(xmlvalheadlist.get("isallduty")));//å…¨å‹¤
+        trainVO.setAbsence_count(Integer.parseInt(xmlvalheadlist.get("absence_count")));//ç¼ºå‹¤æ¬¡æ•°
+        trainVO.setAss_result(new UFDouble(xmlvalheadlist.get("ass_result")));//è€ƒæ ¸æˆç»©
+        trainVO.setAss_option(xmlvalheadlist.get("ass_option"));//è€ƒæ ¸è¯„ä»·
+        trainVO.setMemo(xmlvalheadlist.get("memo"));//å¤‡æ³¨
+        trainVO.setGlbdef1(xmlvalheadlist.get("lecturer"));//è®²å¸ˆ
         trainVO.setAttributeValue("glbdef1", xmlvalheadlist.get("lecturer"));
-        trainVO.setGlbdef2(xmlvalheadlist.get("credit"));//Ñ§·Ö
+        trainVO.setGlbdef2(xmlvalheadlist.get("credit"));//å­¦åˆ†
         trainVO.setAttributeValue("glbdef2", xmlvalheadlist.get("credit"));
-        trainVO.setGlbdef3(xmlvalheadlist.get("courseName"));//¿Î³ÌÃû³Æ
-        trainVO.setAttributeValue("glbdef3", xmlvalheadlist.get("courseName"));//¿Î³ÌÃû³Æ
+        trainVO.setGlbdef3(xmlvalheadlist.get("courseName"));//è¯¾ç¨‹åç§°
+        trainVO.setAttributeValue("glbdef3", xmlvalheadlist.get("courseName"));//è¯¾ç¨‹åç§°
 
         trainVO.setCreationtime(new UFDateTime(new Date()));
 
-        trainVO.setCreator("");//²åÈëË­ÄØ  TODU
-        trainVO.setLastflag(new UFBoolean("Y"));//Èç¹ûÓĞÉÏÒ»´Î¼ÇÂ¼£¬½«Lastflag ¸üĞÂÎªN TODU
+        trainVO.setCreator("");//æ’å…¥è°å‘¢  TODU
+        trainVO.setLastflag(new UFBoolean("Y"));//å¦‚æœæœ‰ä¸Šä¸€æ¬¡è®°å½•ï¼Œå°†Lastflag æ›´æ–°ä¸ºN TODU
 
-        trainVO.setGlbdef4(new UFBoolean(xmlvalheadlist.get("status")));//Íê³É×´Ì¬
+        trainVO.setGlbdef4(new UFBoolean(xmlvalheadlist.get("status")));//å®ŒæˆçŠ¶æ€
         trainVO.setAttributeValue("glbdef4", xmlvalheadlist.get("status"));
-        trainVO.setGlbdef5(xmlvalheadlist.get("course_class"));//¿Î³Ì·ÖÀà
+        trainVO.setGlbdef5(xmlvalheadlist.get("course_class"));//è¯¾ç¨‹åˆ†ç±»
         trainVO.setAttributeValue("glbdef5", xmlvalheadlist.get("course_class"));
-        trainVO.setGlbdef6(xmlvalheadlist.get("course_mode"));//Ñ¡¿Î·½Ê½
+        trainVO.setGlbdef6(xmlvalheadlist.get("course_mode"));//é€‰è¯¾æ–¹å¼
         trainVO.setAttributeValue("glbdef6", xmlvalheadlist.get("course_mode"));
         String course_type = xmlvalheadlist.get("course_type");
-        if("ÔÚÏßÑ§Ï°".equals(course_type)){
-            course_type = "µç×ÓÑ§Ï°";
+        if("åœ¨çº¿å­¦ä¹ ".equals(course_type)){
+            course_type = "ç”µå­å­¦ä¹ ";
         }
-        if("¿ÎÌÃÅàÑµ".equals(course_type)){
-            course_type = "ÃæÊÚ";
+        if("è¯¾å ‚åŸ¹è®­".equals(course_type)){
+            course_type = "é¢æˆ";
         }
-        trainVO.setGlbdef7(course_type);//¿Î³ÌÀàĞÍ
+        trainVO.setGlbdef7(course_type);//è¯¾ç¨‹ç±»å‹
         trainVO.setAttributeValue("glbdef7", course_type);
 
 
-        trainVO.setGlbdef8(xmlvalheadlist.get("course_status"));//¿Î³Ì×´Ì¬
+        trainVO.setGlbdef8(xmlvalheadlist.get("course_status"));//è¯¾ç¨‹çŠ¶æ€
         trainVO.setAttributeValue("glbdef8", xmlvalheadlist.get("course_status"));
-        trainVO.setGlbdef9(xmlvalheadlist.get("creationtime"));//´´½¨ÈÕÆÚ
+        trainVO.setGlbdef9(xmlvalheadlist.get("creationtime"));//åˆ›å»ºæ—¥æœŸ
         trainVO.setAttributeValue("glbdef9", xmlvalheadlist.get("creationtime"));
 
 
-        trainVO.setGlbdef10(xmlvalheadlist.get("modifiedtime"));//ĞŞ¸ÄÈÕÆÚ
+        trainVO.setGlbdef10(xmlvalheadlist.get("modifiedtime"));//ä¿®æ”¹æ—¥æœŸ
         trainVO.setAttributeValue("glbdef10", xmlvalheadlist.get("modifiedtime"));
 
-        trainVO.setGlbdef11(xmlvalheadlist.get("creator"));//´´½¨Õß
+        trainVO.setGlbdef11(xmlvalheadlist.get("creator"));//åˆ›å»ºè€…
         trainVO.setAttributeValue("glbdef11", xmlvalheadlist.get("creator"));
-        trainVO.setGlbdef12(xmlvalheadlist.get("createorg"));//´´½¨ÕßËùÔÚ×éÖ¯
+        trainVO.setGlbdef12(xmlvalheadlist.get("createorg"));//åˆ›å»ºè€…æ‰€åœ¨ç»„ç»‡
         trainVO.setAttributeValue("glbdef12", xmlvalheadlist.get("createorg"));
-        trainVO.setGlbdef13(xmlvalheadlist.get("course_org"));//¿Î³Ì×éÖ¯
+        trainVO.setGlbdef13(xmlvalheadlist.get("course_org"));//è¯¾ç¨‹ç»„ç»‡
         trainVO.setAttributeValue("glbdef13", xmlvalheadlist.get("course_org"));
-        trainVO.setGlbdef15(xmlvalheadlist.get("lecturer_code"));//½²Ê¦±àÂë
+        trainVO.setGlbdef15(xmlvalheadlist.get("lecturer_code"));//è®²å¸ˆç¼–ç 
         trainVO.setAttributeValue("glbdef15", xmlvalheadlist.get("lecturer_code"));
 
 

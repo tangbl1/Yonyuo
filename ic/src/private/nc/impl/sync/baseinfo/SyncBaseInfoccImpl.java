@@ -21,7 +21,7 @@ public class SyncBaseInfoccImpl implements ISyncBaseInfocc {
 
     BaseDAO dao = null;
     /**
-     * UAPÊı¾İ¿â·ÃÎÊÀà
+     * UAPæ•°æ®åº“è®¿é—®ç±»
      *
      * @return`
      */
@@ -33,10 +33,10 @@ public class SyncBaseInfoccImpl implements ISyncBaseInfocc {
     }
     @Override
     public String getOnHandNum(String clocationcode, String materialcode,String storcode) throws Exception {
-        // ÊäÈë²ÎÊıĞ£Ñé
+        // è¾“å…¥å‚æ•°æ ¡éªŒ
 
         if (isSEmptyOrNull(storcode) || isSEmptyOrNull(clocationcode)) {
-            throw new Exception("»õÎ»ºÍ²Ö¿â²»ÄÜÎª¿Õ");
+            throw new Exception("è´§ä½å’Œä»“åº“ä¸èƒ½ä¸ºç©º");
         }
        
         String sql = null;

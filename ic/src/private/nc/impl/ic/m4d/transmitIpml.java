@@ -28,13 +28,13 @@ public class transmitIpml implements ItransmitServer {
         String sql = "update ic_material_h set vdef14 = '"+aggVO.getHead().getVdef14()+"' where cgeneralhid  ='"+aggVO.getParentVO().getCgeneralhid()+"' and dr = 0";
 
         new BaseDAO().executeUpdate(sql);
-        // ´ÓÊı¾İ¿âÖØĞÂ²éÑ¯£¬±ÜÃâÇ°Ì¨Êı¾İ´íÎó
+        // ä»æ•°æ®åº“é‡æ–°æŸ¥è¯¢ï¼Œé¿å…å‰å°æ•°æ®é”™è¯¯
         aggVO = this.Sort(aggVO, pk);
         return aggVO;
 
 
     }
-    //±íÌå°´ĞĞºÅÅÅĞò£¬±íÍ·¸üĞÂ×Ö¶Î
+    //è¡¨ä½“æŒ‰è¡Œå·æ’åºï¼Œè¡¨å¤´æ›´æ–°å­—æ®µ
     private MaterialOutVO Sort(MaterialOutVO aggVO,String pk) throws DAOException{
         String sql = "select * from ic_material_b where nvl(dr,0)=0 and cgeneralhid ='"+pk+"' ";
         ArrayList<MaterialOutBodyVO[]> bodylist = (ArrayList<MaterialOutBodyVO[]>) new BaseDAO().executeQuery(sql, new BeanListProcessor(MaterialOutBodyVO.class));

@@ -11,14 +11,14 @@ import nc.vo.uapbd.AggPriceManage;
 import nc.itf.uapbd.pricemanage.pricemanage.IPriceManageService;
 
 /**
- * 编辑Action
+ * 缂栬緫Action
  */
 public class EditPriceManageAction extends BaseAction{
 	@Override
 	public Object doAction(IRequest request, RequstParamWapper paramWapper) throws Throwable{
-		//json数据转换
+		//json鏁版嵁杞崲
 		RequestDTO param = VOTransform.toVO(paramWapper.requestString,RequestDTO.class);
-		//获取参数
+		//鑾峰彇鍙傛暟
 		String pk = param.getPk();
 		
 		IPriceManageService service = ServiceLocator.find(IPriceManageService.class);

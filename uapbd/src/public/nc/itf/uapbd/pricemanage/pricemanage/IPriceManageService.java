@@ -12,120 +12,120 @@ import nc.vo.uapbd.PriceManage;
 public interface  IPriceManageService{
 
 	/**
-	 * ¿Í»§¼Û¸ñ¹ÜÀíµÄAGGVO²éÑ¯²Ù×÷
-	 * ¸ù¾İÖ÷¼üÌõ¼ş²éÑ¯AggÊı×é
-	 * @param pkÖ÷¼ü
-	 * @return ½á¹ûÊı×é
+	 * å®¢æˆ·ä»·æ ¼ç®¡ç†çš„AGGVOæŸ¥è¯¢æ“ä½œ
+	 * æ ¹æ®ä¸»é”®æ¡ä»¶æŸ¥è¯¢Aggæ•°ç»„
+	 * @param pkä¸»é”®
+	 * @return ç»“æœæ•°ç»„
 	 */
 	public AggPriceManage[] listAggPriceManageByPk(String... pks) throws BusinessException;
 	
 	/**
-	 * ¿Í»§¼Û¸ñ¹ÜÀíµÄAGGVO²éÑ¯²Ù×÷
-	 * ¸ù¾İÖ÷¼üÌõ¼ş²éÑ¯AggÊı×é
-	 * @param pkÖ÷¼ü
-	 * @return ½á¹ûÊı×é
+	 * å®¢æˆ·ä»·æ ¼ç®¡ç†çš„AGGVOæŸ¥è¯¢æ“ä½œ
+	 * æ ¹æ®ä¸»é”®æ¡ä»¶æŸ¥è¯¢Aggæ•°ç»„
+	 * @param pkä¸»é”®
+	 * @return ç»“æœæ•°ç»„
 	 */
 	public AggPriceManage[] listAggPriceManageByPk(boolean blazyLoad,String... pks) throws BusinessException;
 	
 	/**
-	 * ¿Í»§¼Û¸ñ¹ÜÀíµÄAGGVO²éÑ¯²Ù×÷
-	 * ¸ù¾İÖ÷¼üÌõ¼ş²éÑ¯Agg¶ÔÏó
-	 * @param pk Ö÷¼ü
-	 * @return ½á¹û¶ÔÏó
+	 * å®¢æˆ·ä»·æ ¼ç®¡ç†çš„AGGVOæŸ¥è¯¢æ“ä½œ
+	 * æ ¹æ®ä¸»é”®æ¡ä»¶æŸ¥è¯¢Aggå¯¹è±¡
+	 * @param pk ä¸»é”®
+	 * @return ç»“æœå¯¹è±¡
 	 */
 	public  AggPriceManage findAggPriceManageByPk(String pk) throws BusinessException;
 	
 	/**
-	 * ¿Í»§¼Û¸ñ¹ÜÀíµÄAGGVO²éÑ¯²Ù×÷
-	 * ¸ù¾İÌõ¼ş×Ö·û´®²éÑ¯AggÊı×é
-	 * @param condition Ö÷¼ü
-	 * @return ½á¹ûÊı×é
+	 * å®¢æˆ·ä»·æ ¼ç®¡ç†çš„AGGVOæŸ¥è¯¢æ“ä½œ
+	 * æ ¹æ®æ¡ä»¶å­—ç¬¦ä¸²æŸ¥è¯¢Aggæ•°ç»„
+	 * @param condition ä¸»é”®
+	 * @return ç»“æœæ•°ç»„
 	 */
 	public  AggPriceManage[] listAggPriceManageByCondition(String condition) throws BusinessException;
 	
 	/**
-	 * ¿Í»§¼Û¸ñ¹ÜÀíµÄAGGVO²éÑ¯²Ù×÷
-	 * ¸ù¾İÌõ¼ş×Ö·û´®²éÑ¯AggÊı×é
-	 * @param condition Ìõ¼ş
-	 * @param orderPath ÅÅĞò¼¯ºÏ
-	 * @return ½á¹ûÊı×é
+	 * å®¢æˆ·ä»·æ ¼ç®¡ç†çš„AGGVOæŸ¥è¯¢æ“ä½œ
+	 * æ ¹æ®æ¡ä»¶å­—ç¬¦ä¸²æŸ¥è¯¢Aggæ•°ç»„
+	 * @param condition æ¡ä»¶
+	 * @param orderPath æ’åºé›†åˆ
+	 * @return ç»“æœæ•°ç»„
 	 */
 	public  AggPriceManage[] listAggPriceManageByCondition(String condition,String[] orderPath) throws BusinessException;
 	
 	/**
-	 * ¿Í»§¼Û¸ñ¹ÜÀíµÄÖ÷±íVO²éÑ¯²Ù×÷
-	 * ¸ù¾İÖ÷¼üÌõ¼ş²éÑ¯AggÊı×é
-	 * @param pkÖ÷¼ü
-	 * @return ½á¹ûÊı×é
+	 * å®¢æˆ·ä»·æ ¼ç®¡ç†çš„ä¸»è¡¨VOæŸ¥è¯¢æ“ä½œ
+	 * æ ¹æ®ä¸»é”®æ¡ä»¶æŸ¥è¯¢Aggæ•°ç»„
+	 * @param pkä¸»é”®
+	 * @return ç»“æœæ•°ç»„
 	 */
 	public PriceManage[] listPriceManageByPk(String...pks) throws BusinessException;
 	
 	/**
-	 * ¿Í»§¼Û¸ñ¹ÜÀíµÄÖ÷±íVO²éÑ¯²Ù×÷
-	 * ¸ù¾İÖ÷¼üÌõ¼ş²éÑ¯Agg¶ÔÏó
-	 * @param pk Ö÷¼ü
-	 * @return ½á¹û¶ÔÏó
+	 * å®¢æˆ·ä»·æ ¼ç®¡ç†çš„ä¸»è¡¨VOæŸ¥è¯¢æ“ä½œ
+	 * æ ¹æ®ä¸»é”®æ¡ä»¶æŸ¥è¯¢Aggå¯¹è±¡
+	 * @param pk ä¸»é”®
+	 * @return ç»“æœå¯¹è±¡
 	 */
 	public  PriceManage findPriceManageByPk(String pk) throws BusinessException;
 	
 	/**
-	 * ¿Í»§¼Û¸ñ¹ÜÀíµÄÖ÷±íVO²éÑ¯²Ù×÷
-	 * ¸ù¾İÌõ¼ş×Ö·û´®²éÑ¯AggÊı×é
-	 * @param condition Ö÷¼ü
-	 * @return ½á¹ûÊı×é
+	 * å®¢æˆ·ä»·æ ¼ç®¡ç†çš„ä¸»è¡¨VOæŸ¥è¯¢æ“ä½œ
+	 * æ ¹æ®æ¡ä»¶å­—ç¬¦ä¸²æŸ¥è¯¢Aggæ•°ç»„
+	 * @param condition ä¸»é”®
+	 * @return ç»“æœæ•°ç»„
 	 */
 	public  PriceManage[] listPriceManageByCondition(String condition) throws BusinessException;
 	/**
-	 * ¿Í»§¼Û¸ñ¹ÜÀíµÄÖ÷±íVO²éÑ¯²Ù×÷
-	 * ¸ù¾İÌõ¼ş×Ö·û´®²éÑ¯AggÊı×é
-	 * @param condition Ö÷¼ü
-	 * @return ½á¹ûÊı×é
+	 * å®¢æˆ·ä»·æ ¼ç®¡ç†çš„ä¸»è¡¨VOæŸ¥è¯¢æ“ä½œ
+	 * æ ¹æ®æ¡ä»¶å­—ç¬¦ä¸²æŸ¥è¯¢Aggæ•°ç»„
+	 * @param condition ä¸»é”®
+	 * @return ç»“æœæ•°ç»„
 	 */
 	public  PriceManage[] listPriceManageByCondition(String condition,String[] orderPath) throws BusinessException;
 
 	/**
-	 * ¿Í»§¼Û¸ñ¹ÜÀíµÄÖ÷±ípk²éÑ¯²Ù×÷
-	 * ¸ù¾İÌõ¼ş×Ö·û´®²éÑ¯pkÊı×éÊı×é
-	 * @param condition ²éÑ¯·½°¸+
-	 * @return ½á¹ûÊı×é
+	 * å®¢æˆ·ä»·æ ¼ç®¡ç†çš„ä¸»è¡¨pkæŸ¥è¯¢æ“ä½œ
+	 * æ ¹æ®æ¡ä»¶å­—ç¬¦ä¸²æŸ¥è¯¢pkæ•°ç»„æ•°ç»„
+	 * @param condition æŸ¥è¯¢æ–¹æ¡ˆ+
+	 * @return ç»“æœæ•°ç»„
 	 */
 	public String[] listPriceManagePkByCond(String condition) throws BusinessException;
 	
 	/**
-	 * ¿Í»§¼Û¸ñ¹ÜÀíµÄÖ÷±ípk²éÑ¯²Ù×÷
-	 * ¸ù¾İÌõ¼ş×Ö·û´®²éÑ¯pkÊı×éÊı×é
-	 * @param condition ²éÑ¯·½°¸+
-	 * @return ½á¹ûÊı×é
+	 * å®¢æˆ·ä»·æ ¼ç®¡ç†çš„ä¸»è¡¨pkæŸ¥è¯¢æ“ä½œ
+	 * æ ¹æ®æ¡ä»¶å­—ç¬¦ä¸²æŸ¥è¯¢pkæ•°ç»„æ•°ç»„
+	 * @param condition æŸ¥è¯¢æ–¹æ¡ˆ+
+	 * @return ç»“æœæ•°ç»„
 	 */
 	public String[] listPriceManagePkByCond(String condition,String[] orderPath) throws BusinessException;
 	/**
-	 * ¸øÖ÷ÊµÌåvoÉèÖÃÄ¬ÈÏÖµ
+	 * ç»™ä¸»å®ä½“voè®¾ç½®é»˜è®¤å€¼
 	 * @param vo
 	 */
 	public void initDefaultData(PriceManage vo);
 	
 	
 	/**
-	 * Ô¤ĞÂÔö²Ù×÷¿Í»§¼Û¸ñ¹ÜÀíÊı¾İ
-	 * @param userJson  ĞÂÔöÊ±ĞèÒªµÄÀ©Õ¹²ÎÊı¶ÔÏó
+	 * é¢„æ–°å¢æ“ä½œå®¢æˆ·ä»·æ ¼ç®¡ç†æ•°æ®
+	 * @param userJson  æ–°å¢æ—¶éœ€è¦çš„æ‰©å±•å‚æ•°å¯¹è±¡
 	 */
 	public AggPriceManage preAddAggPriceManage(Map<String,Object> userJson) throws BusinessException;
 	
 	public AggPriceManage preAddAggPriceManage(AggPriceManage vo,Map<String,Object> userJson) throws BusinessException;
 	 /**
-	 * Ô¤±à¼­²Ù×÷¿Í»§¼Û¸ñ¹ÜÀíÊı¾İ
-	 * @param userJson  ĞÂÔöÊ±ĞèÒªµÄÀ©Õ¹²ÎÊı¶ÔÏó
+	 * é¢„ç¼–è¾‘æ“ä½œå®¢æˆ·ä»·æ ¼ç®¡ç†æ•°æ®
+	 * @param userJson  æ–°å¢æ—¶éœ€è¦çš„æ‰©å±•å‚æ•°å¯¹è±¡
 	 */
 	public AggPriceManage preEditAggPriceManage(String pk) throws BusinessException;
 	
 	 /**
-	 * ¸´ÖÆ²Ù×÷¿Í»§¼Û¸ñ¹ÜÀíÊı¾İ
+	 * å¤åˆ¶æ“ä½œå®¢æˆ·ä»·æ ¼ç®¡ç†æ•°æ®
 	 * 
 	 */
 	public AggPriceManage copyAggPriceManage(String pk) throws BusinessException;
 	/**
-	 * ±£´æ²Ù×÷¿Í»§¼Û¸ñ¹ÜÀíÊı¾İ
-	 * @param vos ±£´æ¶ÔÏó
+	 * ä¿å­˜æ“ä½œå®¢æˆ·ä»·æ ¼ç®¡ç†æ•°æ®
+	 * @param vos ä¿å­˜å¯¹è±¡
 	 * @return @
 	 */
 	public AggPriceManage[] saveAggPriceManage(AggPriceManage vo) throws BusinessException;
@@ -134,33 +134,33 @@ public interface  IPriceManageService{
 	
 	
 	/**
-	 * É¾³ı²Ù×÷¿Í»§¼Û¸ñ¹ÜÀíÊı¾İ
-	 * @param vos É¾³ı¶ÔÏó
+	 * åˆ é™¤æ“ä½œå®¢æˆ·ä»·æ ¼ç®¡ç†æ•°æ®
+	 * @param vos åˆ é™¤å¯¹è±¡
 	 * @return @
 	 */
 	public AggPriceManage[] deleteAggPriceManages(Map<String,String> tsMap) throws BusinessException;
 	
 	/**
-	 * ¼ÓÔØÊ÷ÀàĞÍÊı¾İ¿Í»§¼Û¸ñ¹ÜÀí
-	 * @param vos ¶ÔÏó
+	 * åŠ è½½æ ‘ç±»å‹æ•°æ®å®¢æˆ·ä»·æ ¼ç®¡ç†
+	 * @param vos å¯¹è±¡
 	 * @return @
 	 */
 	public <T> T[] loadTreeData(Class<T> clazz,Map<String,Object> userJson) throws BusinessException;
 
 	/**
-	 * ¸ù¾İÖ÷±íÖ÷¼ü²éÑ¯×Ó±ípks
-	 * @param childClazz ×Ó±íclass
-	 * @param parentId Ö÷±íÖ÷¼ü
-	 * @return ×Ó±ípks
+	 * æ ¹æ®ä¸»è¡¨ä¸»é”®æŸ¥è¯¢å­è¡¨pks
+	 * @param childClazz å­è¡¨class
+	 * @param parentId ä¸»è¡¨ä¸»é”®
+	 * @return å­è¡¨pks
 	 * @throws BusinessException
 	 */
 	String[] queryChildPksByParentId(Class childClazz, String parentId) throws BusinessException;
 
 	/**
-	 * ¸ù¾İ×Ó±íÖ÷¼ü²éÑ¯×Ó±íÊı¾İ
-	 * @param childClazz ×Ó±íclass
-	 * @param pks ×Ó±í
-	 * @return ×Ó±ívos
+	 * æ ¹æ®å­è¡¨ä¸»é”®æŸ¥è¯¢å­è¡¨æ•°æ®
+	 * @param childClazz å­è¡¨class
+	 * @param pks å­è¡¨
+	 * @return å­è¡¨vos
 	 * @throws BusinessException
 	 */
 	SuperVO[] queryChildVOByPks(Class childClazz, String[] pks) throws BusinessException;

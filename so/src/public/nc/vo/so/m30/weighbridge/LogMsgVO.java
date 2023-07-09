@@ -43,12 +43,12 @@ public class LogMsgVO extends SuperVO{
 	}
 	
 	public String getPrimaryKey() {
-		// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+		// TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
 		return "pk";
 	}
 
 	public String getTableName() {
-		// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+		// TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
 		return "weight_log";
 	}
 	

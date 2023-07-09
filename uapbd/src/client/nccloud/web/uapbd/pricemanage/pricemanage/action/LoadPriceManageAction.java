@@ -10,7 +10,7 @@ import nccloud.framework.core.exception.BusinessException;
 import nc.vo.uapbd.AggPriceManage;
 import nc.itf.uapbd.pricemanage.pricemanage.IPriceManageService;
 /**
- * 卡片查询
+ * 鍗＄墖鏌ヨ
  */
 public class LoadPriceManageAction extends BaseAction{
 
@@ -20,7 +20,7 @@ public class LoadPriceManageAction extends BaseAction{
 		
 		String pk = param.getPk();
 		if(StringUtils.isEmpty(pk)){
-			throw new BusinessException("参数中缺少pk参数，请检查代码！");
+			throw new BusinessException("鍙傛暟涓己灏憄k鍙傛暟锛岃妫�鏌ヤ唬鐮侊紒");
 		}
 		IPriceManageService service = ServiceLocator.find(IPriceManageService.class);
 		

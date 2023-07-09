@@ -31,25 +31,25 @@ public class BillI4FinanceProcess {
             String sql = "SELECT p1.value FROM pub_sysinit p1 INNER JOIN pub_sysinittemp p2 ON p1.sysinit = p2.pk_sysinittemp " +
                     "WHERE p2.domainflag = '4008'  AND p2.showflag = 'Y' AND p1.pk_org = '" + pk_org + "' and p2.initcode = 'IC121'";
             String ison = (String) dao.executeQuery(sql, new ColumnProcessor());
-            //ÒµÎñµ¥Ôª¼¶²ÎÊı¿ØÖÆ
+            //ä¸šåŠ¡å•å…ƒçº§å‚æ•°æ§åˆ¶
             if ("Y".equals(ison)) {
                 sql = "  select pk_material  from bd_material where code in "
                         + "( select code from bd_defdoc where pid ="
-                        + "£¨SELECT pk_defdoc FROM bd_defdoc WHERE pk_defdoclist = "
+                        + "ï¼ˆSELECT pk_defdoc FROM bd_defdoc WHERE pk_defdoclist = "
                         + "( SELECT metaid  FROM pub_bcr_nbcr WHERE code = 'GYL003_01') and  enablestate = 2  and  pk_org = '"
-                        + pk_org + "' and name = 'ÎïÁÏÃ÷Ï¸'£©) and enablestate = 2 ";
+                        + pk_org + "' and name = 'ç‰©æ–™æ˜ç»†'ï¼‰) and enablestate = 2 ";
 
                 List<String> pk_material_list = (List<String>) dao
                         .executeQuery(sql, new ColumnListProcessor());
                 sql = "select b1.code from bd_defdoc b1 inner join  bd_defdoc b2 on b1.pid = b2.pk_defdoc "
                         + "inner join pub_bcr_nbcr  p1 on  b2.pk_defdoclist = p1.metaid "
                         + "where p1.code = 'GYL003_01' and b2.enablestate = 2 and b2.pk_org = '"
-                        + pk_org + "' and b2.name = 'ÎïÁÏ·ÖÀà' and b1.enablestate = 2";
+                        + pk_org + "' and b2.name = 'ç‰©æ–™åˆ†ç±»' and b1.enablestate = 2";
                 List<String> marbasclasscode_list = (List<String>) dao
                         .executeQuery(sql, new ColumnListProcessor());
-                List<String> pk_marbasclass_list = new ArrayList<String>();// ±¾¼¶ºÍÏÂ¼¶ÎïÁÏ·ÖÀà
+                List<String> pk_marbasclass_list = new ArrayList<String>();// æœ¬çº§å’Œä¸‹çº§ç‰©æ–™åˆ†ç±»
                 if (marbasclasscode_list.size() > 0) {
-                    // ²éÑ¯±¾¼¶ºÍÏÂ¼¶µÄÎïÁÏ·ÖÀà
+                    // æŸ¥è¯¢æœ¬çº§å’Œä¸‹çº§çš„ç‰©æ–™åˆ†ç±»
                     StringBuffer classTypeBuffer = new StringBuffer();
                     classTypeBuffer
                             .append("select pk_marbasclass from bd_marbasclass  start with ");
@@ -70,7 +70,7 @@ public class BillI4FinanceProcess {
                     for (int j = 0; j < bodys.length; j++) {
                         MaterialOutBodyVO bodyvo = bodys[j];
                         String pk_material = bodyvo.getCmaterialvid();
-                        // ÏÈÅĞ¶ÏÊÇ·ñÊôÓÚÒÔ¾É»»ĞÂµÄÎïÁÏ
+                        // å…ˆåˆ¤æ–­æ˜¯å¦å±äºä»¥æ—§æ¢æ–°çš„ç‰©æ–™
                         for (int p = 0; p < pk_material_list.size(); p++) {
                             if (pk_material_list.get(p).equals(pk_material)) {
                                 bodyvo.setCrowno(String.valueOf(rowno * 10));
@@ -78,7 +78,7 @@ public class BillI4FinanceProcess {
                                 rowno++;
                                 break;
                             }
-                            // ºóÅĞ¶ÏÎïÁÏÊÇ·ñÊôÓÚÒÔ¾É»»ĞÂµÄÎïÁÏ·ÖÀà
+                            // ååˆ¤æ–­ç‰©æ–™æ˜¯å¦å±äºä»¥æ—§æ¢æ–°çš„ç‰©æ–™åˆ†ç±»
                             if (p == pk_material_list.size() - 1) {
                                 if (pk_marbasclass_list.size() > 0) {
                                     sql = "select pk_marbasclass from bd_material where   pk_material  = '"
@@ -126,7 +126,7 @@ public class BillI4FinanceProcess {
                     return;
                 } else {
                     MaterialOutBodyVO[] final_bvos = bodylist
-                            .toArray(new MaterialOutBodyVO[bodylist.size()]);// ÒÔ¾É»»ĞÂ¶¨Òå¹ıÂËºóµÄ²ÄÁÏ²ÄÁÏ³ö¿â
+                            .toArray(new MaterialOutBodyVO[bodylist.size()]);// ä»¥æ—§æ¢æ–°å®šä¹‰è¿‡æ»¤åçš„ææ–™ææ–™å‡ºåº“
                     vo.setChildrenVO(final_bvos);
                     GeneralInVO[] agg_general = PfServiceScmUtil
                             .executeVOChange(ICBillType.MaterialOut.getCode(),
@@ -138,18 +138,18 @@ public class BillI4FinanceProcess {
                         GeneralInVO aggvo = agg_general[0];
                         String vnoteString = aggvo.getParentVO().getVnote();
                         if (vnoteString != null && vnoteString.length() != 0) {
-                            vnoteString = vnoteString + " ÓÉ²ÄÁÏ³ö¿â×Ô¶¯Éú³Éµ¥¾İ";
+                            vnoteString = vnoteString + " ç”±ææ–™å‡ºåº“è‡ªåŠ¨ç”Ÿæˆå•æ®";
                         } else {
-                            vnoteString = "ÓÉ²ÄÁÏ³ö¿â×Ô¶¯Éú³Éµ¥¾İ";
+                            vnoteString = "ç”±ææ–™å‡ºåº“è‡ªåŠ¨ç”Ÿæˆå•æ®";
                         }
                         aggvo.getParentVO().setVnote(vnoteString);
                         GeneralInVO[] icbills = (GeneralInVO[]) service
                                 .processAction(IPFActionName.WRITE, "4A", null,
-                                        aggvo, null, null);// Éú³É¿â´æÆäËûÈë¿â
+                                        aggvo, null, null);// ç”Ÿæˆåº“å­˜å…¶ä»–å…¥åº“
                         if (icbills.length > 0) {
                             GeneralInVO[] signbills = (GeneralInVO[]) service
                                     .processAction("SIGN", "4A", null,
-                                            icbills[0], null, null);// ¿â´æÆäËûÈë¿âÇ©×ÖÉú³ÉÆäËûÈë¿âµ¥
+                                            icbills[0], null, null);// åº“å­˜å…¶ä»–å…¥åº“ç­¾å­—ç”Ÿæˆå…¶ä»–å…¥åº“å•
                         }
                     }
                 }

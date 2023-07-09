@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Éú³É ÏúÊÛ¶©µ¥
+ * ç”Ÿæˆ é”€å”®è®¢å•
  * @author admin
  *
  */
@@ -47,7 +47,7 @@ public class ToM30WorkPlugin implements IBackgroundWorkPlugin {
 	
 	public PreAlertObject executeTask(BgWorkingContext arg0)
 			throws BusinessException {
-		// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+		// TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
 		Document doc = null;
 		boolean analy = false;
 		try {
@@ -56,7 +56,7 @@ public class ToM30WorkPlugin implements IBackgroundWorkPlugin {
 				doc = createDocument(list.get(i));
 				Document ren = sendXML(doc, "001");
 				HashMap res = analyReturn(ren);				
-				// ĞŞ¸Ä±êÖ¾
+				// ä¿®æ”¹æ ‡å¿—
 				updateTableStatus(list.get(i).getLsh(), res);			
 			}
 		} catch (Exception e) {
@@ -80,12 +80,12 @@ public class ToM30WorkPlugin implements IBackgroundWorkPlugin {
 	}
 
 	/**
-	 * ¸ù¾İÊı¾İÀ´Ô´£¬Æ´×°xml£¬ÓÃÓÚÍâ²¿Êı¾İ½»»»Æ½Ì¨
+	 * æ ¹æ®æ•°æ®æ¥æºï¼Œæ‹¼è£…xmlï¼Œç”¨äºå¤–éƒ¨æ•°æ®äº¤æ¢å¹³å°
 	 * @return
 	 */
 	private Document createDocument(Wb01VO vo) {	
 		
-		// »ñÈ¡µ±Ç°ÏµÍ³Ê±¼ä
+		// è·å–å½“å‰ç³»ç»Ÿæ—¶é—´
 		UFDateTime daytime = new UFDateTime(new java.util.Date()).getDateTimeBefore(1);		
 		String daytime1 = daytime.toString();
 		String begin = daytime.toString().substring(0, 10) + " 00:00:00";
@@ -94,35 +94,35 @@ public class ToM30WorkPlugin implements IBackgroundWorkPlugin {
 		
 		
 		
-		// Á÷Ë®ºÅ¶ÔÓ¦ µ¥¾İºÅ£¿
+		// æµæ°´å·å¯¹åº” å•æ®å·ï¼Ÿ
 		String lsh = vo.getLsh();
-		// ¿Í»§£¿
+		// å®¢æˆ·ï¼Ÿ
 		String customer = getCustomer(vo.getSh_org());
-		// ¾»ÖØ¶ÔÓ¦ ±íÍ·Ö÷ÊıÁ¿£¿ ±íÌåÖ÷ÊıÁ¿£¿±íÌåÊıÁ¿£¿
+		// å‡€é‡å¯¹åº” è¡¨å¤´ä¸»æ•°é‡ï¼Ÿ è¡¨ä½“ä¸»æ•°é‡ï¼Ÿè¡¨ä½“æ•°é‡ï¼Ÿ
 		UFDouble jz = vo.getJz().div(1000);
-		// µ¥¼Û Ã»ÓĞ¶ÔÓ¦£¿µ¥¼ÛÄ¬ÈÏ1
+		// å•ä»· æ²¡æœ‰å¯¹åº”ï¼Ÿå•ä»·é»˜è®¤1
 		UFDouble price = new UFDouble("1");
-		// ¼ÛË°ºÏ¼Æ
+		// ä»·ç¨åˆè®¡
 		UFDouble jshj = jz.multiply(price).multiply(1.13);
-		// ÖÆµ¥ÈË£¿
+		// åˆ¶å•äººï¼Ÿ
 		String zdr = "1001A2100000000005PV";
-		// ´´½¨ÈË£¿
+		// åˆ›å»ºäººï¼Ÿ
 		String cjr = "1001A2100000000005PV";
-		// º¬Ë°µ¥¼Û
+		// å«ç¨å•ä»·
 		UFDouble hsPrice = price.multiply(1.13);
-		// ÎŞË°ºÏ¼Æ
+		// æ— ç¨åˆè®¡
 		UFDouble wshj = jz.multiply(price);
-		// Ë°¶î
+		// ç¨é¢
 		UFDouble se = jz.multiply(price).multiply(0.13);
-		// ÏúÊÛ×éÖ¯
+		// é”€å”®ç»„ç»‡
 		String org = getOrg();
-		// ÏúÊÛ×éÖ¯°æ±¾
+		// é”€å”®ç»„ç»‡ç‰ˆæœ¬
 		String orgv = getOrgv();
-		// ³µºÅ
+		// è½¦å·
 		String ch = vo.getCh();
 		Document doc = XMLUtil.getDocumentBuilder().newDocument();
 		Element rootEle = doc.createElement("ufinterface");
-		// Ìí¼ÓufinterfaceĞÅÏ¢
+		// æ·»åŠ ufinterfaceä¿¡æ¯
 		rootEle.setAttribute("account", "design");
 		rootEle.setAttribute("billtype", "30");
 		rootEle.setAttribute("filename", "");
@@ -131,331 +131,331 @@ public class ToM30WorkPlugin implements IBackgroundWorkPlugin {
 		rootEle.setAttribute("replace", "Y");
 		rootEle.setAttribute("roottag", "");
 		rootEle.setAttribute("sender", "sn01");
-		// ĞÂ½¨<bill>½Úµã 
+		// æ–°å»º<bill>èŠ‚ç‚¹ 
 		doc.appendChild(rootEle);
 		Element bill = doc.createElement("bill");
-		// Ìí¼ÓbillĞÅÏ¢
+		// æ·»åŠ billä¿¡æ¯
 		bill.setAttribute("id", "");
 		rootEle.appendChild(bill);
-		/********************************************±íÍ·ĞÅÏ¢**************************************************/
+		/********************************************è¡¨å¤´ä¿¡æ¯**************************************************/
 		Element billhead = doc
 				.createElement("billhead");
 		bill.appendChild(billhead);
-		// <!--¼¯ÍÅ,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String-->
+		// <!--é›†å›¢,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String-->
 		Element pk_group = doc.createElement("pk_group");
 		pk_group.appendChild(doc.createTextNode("0001A3100000000004NA"));
 		billhead.appendChild(pk_group);
-		// <!--ÏúÊÛ×éÖ¯,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String-->
+		// <!--é”€å”®ç»„ç»‡,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String-->
 		Element pk_org = doc.createElement("pk_org");
 		pk_org.appendChild(doc.createTextNode(org));
 		billhead.appendChild(pk_org);
-		// <!--ÏúÊÛ×éÖ¯°æ±¾,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String-->
+		// <!--é”€å”®ç»„ç»‡ç‰ˆæœ¬,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String-->
 		Element pk_org_v = doc.createElement("pk_org_v");
 		pk_org_v.appendChild(doc.createTextNode(orgv));
 		billhead.appendChild(pk_org_v);
-		// <!--¶©µ¥ÀàĞÍ,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String-->
+		// <!--è®¢å•ç±»å‹,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String-->
 		Element ctrantypeid = doc.createElement("ctrantypeid");
 		ctrantypeid.appendChild(doc.createTextNode("0001A2100000000020XU"));
 		billhead.appendChild(ctrantypeid);
-		// <!--¶©µ¥ÀàĞÍ±àÂë,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String-->
+		// <!--è®¢å•ç±»å‹ç¼–ç ,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String-->
 		Element vtrantypecode = doc.createElement("vtrantypecode");
 		vtrantypecode.appendChild(doc.createTextNode("30-01"));
 		billhead.appendChild(vtrantypecode);
-		// <!--ÒµÎñÁ÷³Ì,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String-->
+		// <!--ä¸šåŠ¡æµç¨‹,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String-->
 		Element cbiztypeid = doc.createElement("cbiztypeid");
 		cbiztypeid.appendChild(doc.createTextNode("0001A210000000001E1W"));
 		billhead.appendChild(cbiztypeid);
-		// <!--µ¥¾İºÅ,×î´ó³¤¶ÈÎª40,ÀàĞÍÎª:String-->
+		// <!--å•æ®å·,æœ€å¤§é•¿åº¦ä¸º40,ç±»å‹ä¸º:String-->
 		Element vbillcode = doc.createElement("vbillcode");
 //		vbillcode.appendChild(doc.createTextNode("SO302019050900000011"));
 		vbillcode.appendChild(doc.createTextNode(lsh));
 		billhead.appendChild(vbillcode);
-		// <!--µ¥¾İÈÕÆÚ,×î´ó³¤¶ÈÎª19,ÀàĞÍÎª:UFDate-->
+		// <!--å•æ®æ—¥æœŸ,æœ€å¤§é•¿åº¦ä¸º19,ç±»å‹ä¸º:UFDate-->
 		Element dbilldate = doc.createElement("dbilldate");
 		dbilldate.appendChild(doc.createTextNode(daytime1));
 		billhead.appendChild(dbilldate);
-		// <!--¿Í»§,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String-->
+		// <!--å®¢æˆ·,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String-->
 		Element ccustomerid = doc.createElement("ccustomerid");
 		ccustomerid.appendChild(doc.createTextNode(customer));
 		billhead.appendChild(ccustomerid);
-		// <!--²¿ÃÅ,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String-->
+		// <!--éƒ¨é—¨,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String-->
 		Element cdeptvid = doc.createElement("cdeptvid");
 		cdeptvid.appendChild(doc.createTextNode("0001L910000000002937"));
 		billhead.appendChild(cdeptvid);
-		// <!--²¿ÃÅ,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String-->
+		// <!--éƒ¨é—¨,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String-->
 		Element cdeptid = doc.createElement("cdeptid");
 		cdeptid.appendChild(doc.createTextNode("1001L910000000000A34"));
 		billhead.appendChild(cdeptid);
-		// <!--Ô­±Ò,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String-->
+		// <!--åŸå¸,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String-->
 		Element corigcurrencyid = doc.createElement("corigcurrencyid");
 		corigcurrencyid.appendChild(doc.createTextNode("1002Z0100000000001K1"));
 		billhead.appendChild(corigcurrencyid);
-		// <!--¿ªÆ±¿Í»§,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String-->
+		// <!--å¼€ç¥¨å®¢æˆ·,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String-->
 		Element cinvoicecustid = doc.createElement("cinvoicecustid");
 		cinvoicecustid.appendChild(doc.createTextNode("1001A310000000002LKW"));
 		billhead.appendChild(cinvoicecustid);
-		// <!--×ÜÊıÁ¿,×î´ó³¤¶ÈÎª28,ÀàĞÍÎª:UFDouble-->
+		// <!--æ€»æ•°é‡,æœ€å¤§é•¿åº¦ä¸º28,ç±»å‹ä¸º:UFDouble-->
 		Element ntotalnum = doc.createElement("ntotalnum");
 		ntotalnum.appendChild(doc.createTextNode(jz.toString()));
 		billhead.appendChild(ntotalnum);
-		// <!--¼ÛË°ºÏ¼Æ,×î´ó³¤¶ÈÎª28,ÀàĞÍÎª:UFDouble-->
+		// <!--ä»·ç¨åˆè®¡,æœ€å¤§é•¿åº¦ä¸º28,ç±»å‹ä¸º:UFDouble-->
 		Element ntotalorigmny = doc.createElement("ntotalorigmny");
 		ntotalorigmny.appendChild(doc.createTextNode(jshj.toString()));
 		billhead.appendChild(ntotalorigmny);
-		// <!--µ¥¾İ×´Ì¬,×î´ó³¤¶ÈÎª0,ÀàĞÍÎª:Integer-->
+		// <!--å•æ®çŠ¶æ€,æœ€å¤§é•¿åº¦ä¸º0,ç±»å‹ä¸º:Integer-->
 		Element fstatusflag = doc.createElement("fstatusflag");
 		fstatusflag.appendChild(doc.createTextNode("1"));
 		billhead.appendChild(fstatusflag);
-		// <!--ÉóÅúÁ÷×´Ì¬,×î´ó³¤¶ÈÎª0,ÀàĞÍÎª:Integer-->
+		// <!--å®¡æ‰¹æµçŠ¶æ€,æœ€å¤§é•¿åº¦ä¸º0,ç±»å‹ä¸º:Integer-->
 		Element fpfstatusflag = doc.createElement("fpfstatusflag");
 		fpfstatusflag.appendChild(doc.createTextNode("-1"));
 		billhead.appendChild(fpfstatusflag);
-		// <!--ÖÆµ¥ÈË,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String-->
+		// <!--åˆ¶å•äºº,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String-->
 		Element billmaker = doc.createElement("billmaker");
 		billmaker.appendChild(doc.createTextNode(zdr));
 		billhead.appendChild(billmaker);
-		// <!--ÖÆµ¥ÈÕÆÚ,×î´ó³¤¶ÈÎª19,ÀàĞÍÎª:UFDate-->
+		// <!--åˆ¶å•æ—¥æœŸ,æœ€å¤§é•¿åº¦ä¸º19,ç±»å‹ä¸º:UFDate-->
 		Element dmakedate = doc.createElement("dmakedate");
 		dmakedate.appendChild(doc.createTextNode(daytime1));
 		billhead.appendChild(dmakedate);
-		// <!--´´½¨ÈË,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String-->
+		// <!--åˆ›å»ºäºº,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String-->
 		Element creator = doc.createElement("creator");
 		creator.appendChild(doc.createTextNode(cjr));
 		billhead.appendChild(creator);
-		// <!--´´½¨Ê±¼ä,×î´ó³¤¶ÈÎª19,ÀàĞÍÎª:UFDateTime-->
+		// <!--åˆ›å»ºæ—¶é—´,æœ€å¤§é•¿åº¦ä¸º19,ç±»å‹ä¸º:UFDateTime-->
 		Element creationtime = doc.createElement("creationtime");
 		creationtime.appendChild(doc.createTextNode(daytime1));
 		billhead.appendChild(creationtime);
-		// <!--³µºÅ-->
+		// <!--è½¦å·-->
 		Element vdef1 = doc.createElement("vdef1");
 		vdef1.appendChild(doc.createTextNode(ch));
 		billhead.appendChild(vdef1);
-		/********************************************±íÌåĞÅÏ¢**************************************************/
+		/********************************************è¡¨ä½“ä¿¡æ¯**************************************************/
 		Element so_saleorder_b = doc.createElement("so_saleorder_b");
 		billhead.appendChild(so_saleorder_b);
 		Element item = doc.createElement("item");
 		so_saleorder_b.appendChild(item);
-		// <!--¼¯ÍÅ,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String-->
+		// <!--é›†å›¢,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String-->
 		Element pk_group1 = doc.createElement("pk_group");
 		pk_group1.appendChild(doc.createTextNode("0001A3100000000004NA"));
 		item.appendChild(pk_group1);
-		// <!--ÏúÊÛ×éÖ¯,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String-->
+		// <!--é”€å”®ç»„ç»‡,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String-->
 		Element pk_org1 = doc.createElement("pk_org");
 		pk_org1.appendChild(doc.createTextNode("0001A2100000000027QM"));
 		item.appendChild(pk_org1);
-		// <!--µ¥¾İÈÕÆÚ,×î´ó³¤¶ÈÎª19,ÀàĞÍÎª:UFDate-->
+		// <!--å•æ®æ—¥æœŸ,æœ€å¤§é•¿åº¦ä¸º19,ç±»å‹ä¸º:UFDate-->
 		Element dbilldate1 = doc.createElement("dbilldate");
 		dbilldate1.appendChild(doc.createTextNode(daytime1));
 		item.appendChild(dbilldate1);
-		// <!--ĞĞºÅ,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String-->
+		// <!--è¡Œå·,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String-->
 		Element crowno = doc.createElement("crowno");
 		crowno.appendChild(doc.createTextNode("5"));
 		item.appendChild(crowno);
-		// <!--ÎïÁÏ±àÂë,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String-->
+		// <!--ç‰©æ–™ç¼–ç ,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String-->
 		Element cmaterialvid = doc.createElement("cmaterialvid");
 		cmaterialvid.appendChild(doc.createTextNode("1001A31000000005142V"));
 		item.appendChild(cmaterialvid);
-		// <!--ÎïÁÏ,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String-->
+		// <!--ç‰©æ–™,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String-->
 		Element cmaterialid = doc.createElement("cmaterialid");
 		cmaterialid.appendChild(doc.createTextNode("1001A31000000005142V"));
 		item.appendChild(cmaterialid);
-		// <!--Ö÷µ¥Î»,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String-->
+		// <!--ä¸»å•ä½,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String-->
 		Element cunitid = doc.createElement("cunitid");
 		cunitid.appendChild(doc.createTextNode("1001A310000000003ZLT"));
 		item.appendChild(cunitid);
-		// <!--µ¥Î»,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String-->
+		// <!--å•ä½,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String-->
 		Element castunitid = doc.createElement("castunitid");
 		castunitid.appendChild(doc.createTextNode("1001A310000000003ZLT"));
 		item.appendChild(castunitid);
-		// <!--Ö÷ÊıÁ¿,×î´ó³¤¶ÈÎª28,ÀàĞÍÎª:UFDouble-->
+		// <!--ä¸»æ•°é‡,æœ€å¤§é•¿åº¦ä¸º28,ç±»å‹ä¸º:UFDouble-->
 		Element nnum = doc.createElement("nnum");
 		nnum.appendChild(doc.createTextNode(jz.toString()));
 		item.appendChild(nnum);
-		// <!--ÊıÁ¿,×î´ó³¤¶ÈÎª28,ÀàĞÍÎª:UFDouble-->
+		// <!--æ•°é‡,æœ€å¤§é•¿åº¦ä¸º28,ç±»å‹ä¸º:UFDouble-->
 		Element nastnum = doc.createElement("nastnum");
 		nastnum.appendChild(doc.createTextNode(jz.toString()));
 		item.appendChild(nastnum);
-		// <!--±¨¼Ûµ¥Î»,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String-->
+		// <!--æŠ¥ä»·å•ä½,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String-->
 		Element cqtunitid = doc.createElement("cqtunitid");
 		cqtunitid.appendChild(doc.createTextNode("1001A310000000003ZLT"));
 		item.appendChild(cqtunitid);
-		// <!--±¨¼Ûµ¥Î»ÊıÁ¿,×î´ó³¤¶ÈÎª28,ÀàĞÍÎª:UFDouble-->
+		// <!--æŠ¥ä»·å•ä½æ•°é‡,æœ€å¤§é•¿åº¦ä¸º28,ç±»å‹ä¸º:UFDouble-->
 		Element nqtunitnum = doc.createElement("nqtunitnum");
 		nqtunitnum.appendChild(doc.createTextNode(jz.toString()));
 		item.appendChild(nqtunitnum);
-		// <!--Õûµ¥ÕÛ¿Û,×î´ó³¤¶ÈÎª28,ÀàĞÍÎª:UFDouble-->
+		// <!--æ•´å•æŠ˜æ‰£,æœ€å¤§é•¿åº¦ä¸º28,ç±»å‹ä¸º:UFDouble-->
 		Element ndiscountrate = doc.createElement("ndiscountrate");
 		ndiscountrate.appendChild(doc.createTextNode("100"));
 		item.appendChild(ndiscountrate);
-		// <!--µ¥Æ·ÕÛ¿Û,×î´ó³¤¶ÈÎª28,ÀàĞÍÎª:UFDouble-->
+		// <!--å•å“æŠ˜æ‰£,æœ€å¤§é•¿åº¦ä¸º28,ç±»å‹ä¸º:UFDouble-->
 		Element nitemdiscountrate = doc.createElement("nitemdiscountrate");
 		nitemdiscountrate.appendChild(doc.createTextNode("100"));
 		item.appendChild(nitemdiscountrate);
-		// <!--Ë°Âë,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String-->
+		// <!--ç¨ç ,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String-->
 		Element ctaxcodeid = doc.createElement("ctaxcodeid");
 		ctaxcodeid.appendChild(doc.createTextNode("1001A31000000007IRDU"));
 		item.appendChild(ctaxcodeid);
-		// <!--Ë°ÂÊ,×î´ó³¤¶ÈÎª28,ÀàĞÍÎª:UFDouble-->
+		// <!--ç¨ç‡,æœ€å¤§é•¿åº¦ä¸º28,ç±»å‹ä¸º:UFDouble-->
 		Element ntaxrate = doc.createElement("ntaxrate");
 		ntaxrate.appendChild(doc.createTextNode("13"));
 		item.appendChild(ntaxrate);
-		// <!--¿ÛË°Àà±ğ,×î´ó³¤¶ÈÎª0,ÀàĞÍÎª:Integer-->
+		// <!--æ‰£ç¨ç±»åˆ«,æœ€å¤§é•¿åº¦ä¸º0,ç±»å‹ä¸º:Integer-->
 		Element ftaxtypeflag = doc.createElement("ftaxtypeflag");
 		ftaxtypeflag.appendChild(doc.createTextNode("1"));
 		item.appendChild(ftaxtypeflag);
-		// <!--±¾Î»±Ò,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String-->
+		// <!--æœ¬ä½å¸,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String-->
 		Element ccurrencyid = doc.createElement("ccurrencyid");
 		ccurrencyid.appendChild(doc.createTextNode("1002Z0100000000001K1"));
 		item.appendChild(ccurrencyid);
-		// <!--ÕÛ±¾»ãÂÊ,×î´ó³¤¶ÈÎª28,ÀàĞÍÎª:UFDouble-->
+		// <!--æŠ˜æœ¬æ±‡ç‡,æœ€å¤§é•¿åº¦ä¸º28,ç±»å‹ä¸º:UFDouble-->
 		Element nexchangerate = doc.createElement("nexchangerate");
 		nexchangerate.appendChild(doc.createTextNode("1"));
 		item.appendChild(nexchangerate);
-		// <!--º¬Ë°µ¥¼Û,×î´ó³¤¶ÈÎª28,ÀàĞÍÎª:UFDouble-->
+		// <!--å«ç¨å•ä»·,æœ€å¤§é•¿åº¦ä¸º28,ç±»å‹ä¸º:UFDouble-->
 		Element nqtorigtaxprice = doc.createElement("nqtorigtaxprice");
 		nqtorigtaxprice.appendChild(doc.createTextNode(hsPrice.toString()));
 		item.appendChild(nqtorigtaxprice);
-		// <!--ÎŞË°µ¥¼Û,×î´ó³¤¶ÈÎª28,ÀàĞÍÎª:UFDouble-->
+		// <!--æ— ç¨å•ä»·,æœ€å¤§é•¿åº¦ä¸º28,ç±»å‹ä¸º:UFDouble-->
 		Element nqtorigprice = doc.createElement("nqtorigprice");
 		nqtorigprice.appendChild(doc.createTextNode(price.toString()));
 		item.appendChild(nqtorigprice);
-		// <!--º¬Ë°¾»¼Û,×î´ó³¤¶ÈÎª28,ÀàĞÍÎª:UFDouble-->
+		// <!--å«ç¨å‡€ä»·,æœ€å¤§é•¿åº¦ä¸º28,ç±»å‹ä¸º:UFDouble-->
 		Element nqtorigtaxnetprc = doc.createElement("nqtorigtaxnetprc");
 		nqtorigtaxnetprc.appendChild(doc.createTextNode(jshj.toString()));
 		item.appendChild(nqtorigtaxnetprc);
-		// <!--ÎŞË°¾»¼Û,×î´ó³¤¶ÈÎª28,ÀàĞÍÎª:UFDouble-->
+		// <!--æ— ç¨å‡€ä»·,æœ€å¤§é•¿åº¦ä¸º28,ç±»å‹ä¸º:UFDouble-->
 		Element nqtorignetprice = doc.createElement("nqtorignetprice");
 		nqtorignetprice.appendChild(doc.createTextNode(wshj.toString()));
 		item.appendChild(nqtorignetprice);
-		// <!--Ö÷º¬Ë°µ¥¼Û,×î´ó³¤¶ÈÎª28,ÀàĞÍÎª:UFDouble-->
+		// <!--ä¸»å«ç¨å•ä»·,æœ€å¤§é•¿åº¦ä¸º28,ç±»å‹ä¸º:UFDouble-->
 		Element norigtaxprice = doc.createElement("norigtaxprice");
 		norigtaxprice.appendChild(doc.createTextNode(hsPrice.toString()));
 		item.appendChild(norigtaxprice);
-		// <!--Ö÷ÎŞË°µ¥¼Û,×î´ó³¤¶ÈÎª28,ÀàĞÍÎª:UFDouble-->
+		// <!--ä¸»æ— ç¨å•ä»·,æœ€å¤§é•¿åº¦ä¸º28,ç±»å‹ä¸º:UFDouble-->
 		Element norigprice = doc.createElement("norigprice");
 		norigprice.appendChild(doc.createTextNode(price.toString()));
 		item.appendChild(norigprice);
-		// <!--Ö÷º¬Ë°¾»¼Û,×î´ó³¤¶ÈÎª28,ÀàĞÍÎª:UFDouble-->
+		// <!--ä¸»å«ç¨å‡€ä»·,æœ€å¤§é•¿åº¦ä¸º28,ç±»å‹ä¸º:UFDouble-->
 		Element norigtaxnetprice = doc.createElement("norigtaxnetprice");
 		norigtaxnetprice.appendChild(doc.createTextNode(jshj.toString()));
 		item.appendChild(norigtaxnetprice);
-		// <!--Ö÷ÎŞË°¾»¼Û,×î´ó³¤¶ÈÎª28,ÀàĞÍÎª:UFDouble-->
+		// <!--ä¸»æ— ç¨å‡€ä»·,æœ€å¤§é•¿åº¦ä¸º28,ç±»å‹ä¸º:UFDouble-->
 		Element norignetprice = doc.createElement("norignetprice");
 		norignetprice.appendChild(doc.createTextNode(wshj.toString()));
 		item.appendChild(norignetprice);
-		// <!--Ë°¶î,×î´ó³¤¶ÈÎª28,ÀàĞÍÎª:UFDouble-->
+		// <!--ç¨é¢,æœ€å¤§é•¿åº¦ä¸º28,ç±»å‹ä¸º:UFDouble-->
 		Element ntax = doc.createElement("ntax");
 		ntax.appendChild(doc.createTextNode(se.toString()));
 		item.appendChild(ntax);
-		// <!--¼ÆË°½ğ¶î,×î´ó³¤¶ÈÎª28,ÀàĞÍÎª:UFDouble-->
+		// <!--è®¡ç¨é‡‘é¢,æœ€å¤§é•¿åº¦ä¸º28,ç±»å‹ä¸º:UFDouble-->
 		Element ncaltaxmny = doc.createElement("ncaltaxmny");
 		ncaltaxmny.appendChild(doc.createTextNode(wshj.toString()));
 		item.appendChild(ncaltaxmny);
-		// <!--ÎŞË°½ğ¶î,×î´ó³¤¶ÈÎª28,ÀàĞÍÎª:UFDouble-->
+		// <!--æ— ç¨é‡‘é¢,æœ€å¤§é•¿åº¦ä¸º28,ç±»å‹ä¸º:UFDouble-->
 		Element norigmny = doc.createElement("norigmny");
 		norigmny.appendChild(doc.createTextNode(wshj.toString()));
 		item.appendChild(norigmny);
-		// <!--¼ÛË°ºÏ¼Æ,×î´ó³¤¶ÈÎª28,ÀàĞÍÎª:UFDouble-->
+		// <!--ä»·ç¨åˆè®¡,æœ€å¤§é•¿åº¦ä¸º28,ç±»å‹ä¸º:UFDouble-->
 		Element norigtaxmny = doc.createElement("norigtaxmny");
 		norigtaxmny.appendChild(doc.createTextNode(jshj.toString()));
 		item.appendChild(norigtaxmny);
-		// <!--±¾±Òº¬Ë°µ¥¼Û,×î´ó³¤¶ÈÎª28,ÀàĞÍÎª:UFDouble-->
+		// <!--æœ¬å¸å«ç¨å•ä»·,æœ€å¤§é•¿åº¦ä¸º28,ç±»å‹ä¸º:UFDouble-->
 		Element nqttaxprice = doc.createElement("nqttaxprice");
 		nqttaxprice.appendChild(doc.createTextNode(hsPrice.toString()));
 		item.appendChild(nqttaxprice);
-		// <!--±¾±ÒÎŞË°µ¥¼Û,×î´ó³¤¶ÈÎª28,ÀàĞÍÎª:UFDouble-->
+		// <!--æœ¬å¸æ— ç¨å•ä»·,æœ€å¤§é•¿åº¦ä¸º28,ç±»å‹ä¸º:UFDouble-->
 		Element nqtprice = doc.createElement("nqtprice");
 		nqtprice.appendChild(doc.createTextNode(price.toString()));
 		item.appendChild(nqtprice);
-		// <!--±¾±Òº¬Ë°¾»¼Û,×î´ó³¤¶ÈÎª28,ÀàĞÍÎª:UFDouble-->
+		// <!--æœ¬å¸å«ç¨å‡€ä»·,æœ€å¤§é•¿åº¦ä¸º28,ç±»å‹ä¸º:UFDouble-->
 		Element nqttaxnetprice = doc.createElement("nqttaxnetprice");
 		nqttaxnetprice.appendChild(doc.createTextNode(jshj.toString()));
 		item.appendChild(nqttaxnetprice);
-		// <!--±¾±ÒÎŞË°¾»¼Û,×î´ó³¤¶ÈÎª28,ÀàĞÍÎª:UFDouble-->
+		// <!--æœ¬å¸æ— ç¨å‡€ä»·,æœ€å¤§é•¿åº¦ä¸º28,ç±»å‹ä¸º:UFDouble-->
 		Element nqtnetprice = doc.createElement("nqtnetprice");
 		nqtnetprice.appendChild(doc.createTextNode(wshj.toString()));
 		item.appendChild(nqtnetprice);
-		// <!--Ö÷±¾±Òº¬Ë°µ¥¼Û,×î´ó³¤¶ÈÎª28,ÀàĞÍÎª:UFDouble-->
+		// <!--ä¸»æœ¬å¸å«ç¨å•ä»·,æœ€å¤§é•¿åº¦ä¸º28,ç±»å‹ä¸º:UFDouble-->
 		Element ntaxprice = doc.createElement("ntaxprice");
 		ntaxprice.appendChild(doc.createTextNode(hsPrice.toString()));
 		item.appendChild(ntaxprice);	
-		// <!--Ö÷±¾±ÒÎŞË°µ¥¼Û,×î´ó³¤¶ÈÎª28,ÀàĞÍÎª:UFDouble-->
+		// <!--ä¸»æœ¬å¸æ— ç¨å•ä»·,æœ€å¤§é•¿åº¦ä¸º28,ç±»å‹ä¸º:UFDouble-->
 		Element nprice = doc.createElement("nprice");
 		nprice.appendChild(doc.createTextNode(price.toString()));
 		item.appendChild(nprice);
-		// <!--Ö÷±¾±Òº¬Ë°¾»¼Û,×î´ó³¤¶ÈÎª28,ÀàĞÍÎª:UFDouble-->
+		// <!--ä¸»æœ¬å¸å«ç¨å‡€ä»·,æœ€å¤§é•¿åº¦ä¸º28,ç±»å‹ä¸º:UFDouble-->
 		Element ntaxnetprice = doc.createElement("ntaxnetprice");
 		ntaxnetprice.appendChild(doc.createTextNode(jshj.toString()));
 		item.appendChild(ntaxnetprice);		
-		// <!--Ö÷±¾±ÒÎŞË°¾»¼Û,×î´ó³¤¶ÈÎª28,ÀàĞÍÎª:UFDouble-->
+		// <!--ä¸»æœ¬å¸æ— ç¨å‡€ä»·,æœ€å¤§é•¿åº¦ä¸º28,ç±»å‹ä¸º:UFDouble-->
 		Element nnetprice = doc.createElement("nnetprice");
 		nnetprice.appendChild(doc.createTextNode(wshj.toString()));
 		item.appendChild(nnetprice);
-		// <!--±¾±ÒÎŞË°½ğ¶î,×î´ó³¤¶ÈÎª28,ÀàĞÍÎª:UFDouble-->
+		// <!--æœ¬å¸æ— ç¨é‡‘é¢,æœ€å¤§é•¿åº¦ä¸º28,ç±»å‹ä¸º:UFDouble-->
 		Element nmny = doc.createElement("nmny");
 		nmny.appendChild(doc.createTextNode(wshj.toString()));
 		item.appendChild(nmny);		
-		// <!--±¾±Ò¼ÛË°ºÏ¼Æ,×î´ó³¤¶ÈÎª28,ÀàĞÍÎª:UFDouble-->
+		// <!--æœ¬å¸ä»·ç¨åˆè®¡,æœ€å¤§é•¿åº¦ä¸º28,ç±»å‹ä¸º:UFDouble-->
 		Element ntaxmny = doc.createElement("ntaxmny");
 		ntaxmny.appendChild(doc.createTextNode(jshj.toString()));
 		item.appendChild(ntaxmny);
-		// <!--ÒªÇó·¢»õÈÕÆÚ,×î´ó³¤¶ÈÎª19,ÀàĞÍÎª:UFDate-->
+		// <!--è¦æ±‚å‘è´§æ—¥æœŸ,æœ€å¤§é•¿åº¦ä¸º19,ç±»å‹ä¸º:UFDate-->
 		Element dsenddate = doc.createElement("dsenddate");
 		dsenddate.appendChild(doc.createTextNode(end));
 		item.appendChild(dsenddate);
-		// <!--¼Æ»®µ½»õÈÕÆÚ,×î´ó³¤¶ÈÎª19,ÀàĞÍÎª:UFDate-->
+		// <!--è®¡åˆ’åˆ°è´§æ—¥æœŸ,æœ€å¤§é•¿åº¦ä¸º19,ç±»å‹ä¸º:UFDate-->
 		Element dreceivedate = doc.createElement("dreceivedate");
 		dreceivedate.appendChild(doc.createTextNode(end));
 		item.appendChild(dreceivedate);
-		// <!--ÊÕ»õ¿Í»§,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String-->
+		// <!--æ”¶è´§å®¢æˆ·,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String-->
 		Element creceivecustid = doc.createElement("creceivecustid");
 		creceivecustid.appendChild(doc.createTextNode("1001A310000000002LKW"));
 		item.appendChild(creceivecustid);
-		// <!--·¢»õ¿â´æ×éÖ¯,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String-->
+		// <!--å‘è´§åº“å­˜ç»„ç»‡,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String-->
 		Element csendstockorgvid = doc.createElement("csendstockorgvid");
 		csendstockorgvid.appendChild(doc.createTextNode("0001A2100000000027QL"));
 		item.appendChild(csendstockorgvid);
-		// <!--·¢»õ¿â´æ×éÖ¯×îĞÂ°æ±¾,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String-->
+		// <!--å‘è´§åº“å­˜ç»„ç»‡æœ€æ–°ç‰ˆæœ¬,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String-->
 		Element csendstockorgid = doc.createElement("csendstockorgid");
 		csendstockorgid.appendChild(doc.createTextNode("0001A2100000000027QM"));
 		item.appendChild(csendstockorgid);
-		// <!--½áËã²ÆÎñ×éÖ¯,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String-->
+		// <!--ç»“ç®—è´¢åŠ¡ç»„ç»‡,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String-->
 		Element csettleorgvid = doc.createElement("csettleorgvid");
 		csettleorgvid.appendChild(doc.createTextNode("0001A2100000000027QL"));
 		item.appendChild(csettleorgvid);
-		// <!--½áËã²ÆÎñ×éÖ¯,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String-->
+		// <!--ç»“ç®—è´¢åŠ¡ç»„ç»‡,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String-->
 		Element csettleorgid = doc.createElement("csettleorgid");
 		csettleorgid.appendChild(doc.createTextNode("0001A2100000000027QM"));
 		item.appendChild(csettleorgid);
-		// <!--ÊÕ»õ¹ú¼Ò/µØÇø,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String-->
+		// <!--æ”¶è´§å›½å®¶/åœ°åŒº,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String-->
 		Element crececountryid = doc.createElement("crececountryid");
 		crececountryid.appendChild(doc.createTextNode("0001Z010000000079UJJ"));
 		item.appendChild(crececountryid);
-		// <!--·¢»õ¹ú¼Ò/µØÇø,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String-->
+		// <!--å‘è´§å›½å®¶/åœ°åŒº,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String-->
 		Element csendcountryid = doc.createElement("csendcountryid");
 		csendcountryid.appendChild(doc.createTextNode("0001Z010000000079UJJ"));
 		item.appendChild(csendcountryid);
-		// <!--±¨Ë°¹ú¼Ò/µØÇø,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String-->
+		// <!--æŠ¥ç¨å›½å®¶/åœ°åŒº,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String-->
 		Element ctaxcountryid = doc.createElement("ctaxcountryid");
 		ctaxcountryid.appendChild(doc.createTextNode("0001Z010000000079UJJ"));
 		item.appendChild(ctaxcountryid);
-		// <!--¹ºÏúÀàĞÍ,×î´ó³¤¶ÈÎª0,ÀàĞÍÎª:Integer-->
+		// <!--è´­é”€ç±»å‹,æœ€å¤§é•¿åº¦ä¸º0,ç±»å‹ä¸º:Integer-->
 		Element fbuysellflag = doc.createElement("fbuysellflag");
 		fbuysellflag.appendChild(doc.createTextNode("1"));
 		item.appendChild(fbuysellflag);
-		// <!--Ó¦ÊÕ×éÖ¯,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String-->
+		// <!--åº”æ”¶ç»„ç»‡,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String-->
 		Element carorgvid = doc.createElement("carorgvid");
 		carorgvid.appendChild(doc.createTextNode("0001A2100000000027QL"));
 		item.appendChild(carorgvid);
-		// <!--Ó¦ÊÕ×éÖ¯×îĞÂ°æ±¾,×î´ó³¤¶ÈÎª20,ÀàĞÍÎª:String-->
+		// <!--åº”æ”¶ç»„ç»‡æœ€æ–°ç‰ˆæœ¬,æœ€å¤§é•¿åº¦ä¸º20,ç±»å‹ä¸º:String-->
 		Element carorgid = doc.createElement("carorgid");
 		carorgid.appendChild(doc.createTextNode("0001A2100000000027QM"));
 		item.appendChild(carorgid);
-		// <!--ĞĞ×´Ì¬,×î´ó³¤¶ÈÎª0,ÀàĞÍÎª:Integer-->
+		// <!--è¡ŒçŠ¶æ€,æœ€å¤§é•¿åº¦ä¸º0,ç±»å‹ä¸º:Integer-->
 		Element frowstatus = doc.createElement("frowstatus");
 		frowstatus.appendChild(doc.createTextNode("1"));
 		item.appendChild(frowstatus);
-		// ·µ»Øxml
+		// è¿”å›xml
 		try {
 			TransformerFactory tf = TransformerFactory.newInstance();
 
@@ -483,7 +483,7 @@ public class ToM30WorkPlugin implements IBackgroundWorkPlugin {
 	}
 	
 	/**
-	 * ¿Í»§¶ÔÕÕ¹ØÏµ ´ı¶¨ Ä£ÄâÊı¾İ£º1001A310000000002LKW
+	 * å®¢æˆ·å¯¹ç…§å…³ç³» å¾…å®š æ¨¡æ‹Ÿæ•°æ®ï¼š1001A310000000002LKW
 	 * @param sh_org
 	 * @return
 	 */
@@ -492,7 +492,7 @@ public class ToM30WorkPlugin implements IBackgroundWorkPlugin {
 	}
 	
 	/**
-	 * ÏúÊÛ×éÖ¯¶ÔÕÕ¹ØÏµ ´ı¶¨ Ä£ÄâÊı¾İ£º0001A2100000000027QM
+	 * é”€å”®ç»„ç»‡å¯¹ç…§å…³ç³» å¾…å®š æ¨¡æ‹Ÿæ•°æ®ï¼š0001A2100000000027QM
 	 * @return
 	 */
 	private String getOrg() {
@@ -500,7 +500,7 @@ public class ToM30WorkPlugin implements IBackgroundWorkPlugin {
 	}
 	
 	/**
-	 * ÏúÊÛ×éÖ¯°æ±¾¶ÔÕÕ¹ØÏµ ´ı¶¨ Ä£ÄâÊı¾İ£º0001A2100000000027QL
+	 * é”€å”®ç»„ç»‡ç‰ˆæœ¬å¯¹ç…§å…³ç³» å¾…å®š æ¨¡æ‹Ÿæ•°æ®ï¼š0001A2100000000027QL
 	 * @return
 	 */
 	private String getOrgv() {
@@ -508,7 +508,7 @@ public class ToM30WorkPlugin implements IBackgroundWorkPlugin {
 	}
 
 	/**
-	 * ·¢ËÍ»á¼ÆÆ½Ì¨
+	 * å‘é€ä¼šè®¡å¹³å°
 	 * 
 	 * @param doc
 	 * @param corpcode
@@ -520,16 +520,16 @@ public class ToM30WorkPlugin implements IBackgroundWorkPlugin {
 		HttpURLConnection connection = PostFile.getConnection(url, null, false);
 		Writer writer = new OutputStreamWriter(connection.getOutputStream(),
 				"GB2312");
-		XMLUtil.printDOMTree(writer, doc, 0, "GB2312"); // °´ÕÕXMLÎÄ¼ş¸ñÊ½Êä³ö
+		XMLUtil.printDOMTree(writer, doc, 0, "GB2312"); // æŒ‰ç…§XMLæ–‡ä»¶æ ¼å¼è¾“å‡º
 		writer.flush();
 		writer.close();
 		InputStream inputStream = connection.getInputStream();
-		Document resDoc = XMLUtil.getDocumentBuilder().parse(inputStream); // ½âÎöÎªDoc¶ÔÏó
+		Document resDoc = XMLUtil.getDocumentBuilder().parse(inputStream); // è§£æä¸ºDocå¯¹è±¡
 		return resDoc;
 	}
 
 	/**
-	 * »ñÈ¡Æ½Ì¨µØÖ·(¿ÉÅäÖÃ£©
+	 * è·å–å¹³å°åœ°å€(å¯é…ç½®ï¼‰
 	 * 
 	 * @param ce
 	 * @return
@@ -537,26 +537,26 @@ public class ToM30WorkPlugin implements IBackgroundWorkPlugin {
 	public String getConnectionUrl(String corpcode) throws BusinessException {
 		String url = null;
 		/**
-		 * ·ÀÖ¹ÍòÒ»³ö²î£¬Èç¹ûÃ»ÓĞ£¬ÔòÄ¬ÈÏÎª
+		 * é˜²æ­¢ä¸‡ä¸€å‡ºå·®ï¼Œå¦‚æœæ²¡æœ‰ï¼Œåˆ™é»˜è®¤ä¸º
 		 */
 		if (url == null) {
-			// ±¾µØ
+			// æœ¬åœ°
 			url ="http://127.0.0.1:80/service/XChangeServlet?account=develop&groupcode=00000";
 		}
 		return url;
 	}
 
 	/**
-	 * ½âÎö·µ»ØÖµ
+	 * è§£æè¿”å›å€¼
 	 * @throws Exception 
 	 * 
 	 */
 	public HashMap<String, String> analyReturn(Document doc) throws Exception {
 		HashMap<String, String> res = new HashMap<String, String>();
 		String ret = "N";
-		String errorInfo = "³É¹¦Éú³ÉÏúÊÛ¶©µ¥";
+		String errorInfo = "æˆåŠŸç”Ÿæˆé”€å”®è®¢å•";
 		if (doc != null) {
-			Element rootElt = doc.getDocumentElement(); // »ñÈ¡¸ù½Úµã
+			Element rootElt = doc.getDocumentElement(); // è·å–æ ¹èŠ‚ç‚¹
 			String success = rootElt.getAttribute("successful");
 			if (success != null && success.endsWith("Y")) {
 				ret = "Y";
@@ -570,16 +570,16 @@ public class ToM30WorkPlugin implements IBackgroundWorkPlugin {
 	}
 	
 	/**
-	 * ¸üĞÂÊı¾İÀ´Ô´±í×´Ì¬
-	 * @param analy ×´Ì¬
-	 * @param lsh Á÷Ë®ºÅ
+	 * æ›´æ–°æ•°æ®æ¥æºè¡¨çŠ¶æ€
+	 * @param analy çŠ¶æ€
+	 * @param lsh æµæ°´å·
 	 */
 	private void updateTableStatus(String lsh, HashMap<String, String> res) throws Exception {	
 		String sql = "";
 		String state = res.get("state");
 		String errorInfo = res.get("errorInfo");
 		if ( "Y".equals(state) ) {
-			sql = "update weighbridge01 set info_status = 'Y', relog = '" + errorInfo + ",ÏúÊÛ¶©µ¥ºÅ£º"+lsh+"' where lsh = '" + lsh + "'";
+			sql = "update weighbridge01 set info_status = 'Y', relog = '" + errorInfo + ",é”€å”®è®¢å•å·ï¼š"+lsh+"' where lsh = '" + lsh + "'";
 		} else {
 			sql = "update weighbridge01 set info_status = 'N', relog = '" + errorInfo + "' where lsh = '" + lsh + "'";
 		}
@@ -587,7 +587,7 @@ public class ToM30WorkPlugin implements IBackgroundWorkPlugin {
 	}
 	
 	/**
-	 * ½âÎö·µ»ØÖµ
+	 * è§£æè¿”å›å€¼
 	 * 
 	 */
 	public String getError(Document doc) {
@@ -600,13 +600,13 @@ public class ToM30WorkPlugin implements IBackgroundWorkPlugin {
 			System.out.println(childNodes.getLength());
 			for (int j = 0; j < childNodes.getLength(); j++) {
 				Node childNode = childNodes.item(j);
-				// Èç¹ûÕâ¸ö½ÚµãÊôÓÚElement ,ÔÙ½øĞĞÈ¡Öµ
+				// å¦‚æœè¿™ä¸ªèŠ‚ç‚¹å±äºElement ,å†è¿›è¡Œå–å€¼
 				if (childNode instanceof Element) {
 					if ("resultdescription".equals(childNode.getNodeName())) {
 						message = childNode.getFirstChild().getNodeValue();
 						if (message != null && message.length() > 900) {
 							message = message.substring(0, 800);
-							message = message + "´íÎóÃèÊö³¬³¤£¬³¬³ö²¿·ÖÒÑ½Ø¶Ï";
+							message = message + "é”™è¯¯æè¿°è¶…é•¿ï¼Œè¶…å‡ºéƒ¨åˆ†å·²æˆªæ–­";
 
 						}
 
@@ -619,31 +619,31 @@ public class ToM30WorkPlugin implements IBackgroundWorkPlugin {
 	}
 	
 	/**
-	 * ²âÊÔ xml ÎÄ¼ş
+	 * æµ‹è¯• xml æ–‡ä»¶
 	 * 
 	 * @throws Exception
 	 */
 	public void textXML(Document document) throws Exception {
 
-		// ¿ªÊ¼°ÑDocumentÓ³Éäµ½ÎÄ¼ş
+		// å¼€å§‹æŠŠDocumentæ˜ å°„åˆ°æ–‡ä»¶
 		TransformerFactory transFactory = TransformerFactory.newInstance();
 		Transformer transFormer = transFactory.newTransformer();
 		transFormer.setOutputProperty("encoding","gb2312"); 
-		// ÉèÖÃÊä³ö½á¹û
+		// è®¾ç½®è¾“å‡ºç»“æœ
 		DOMSource domSource = new DOMSource(document);
-		// Éú³ÉxmlÎÄ¼ş
-		File file = new File("D://yonyou201904//º±ÍõÏîÄ¿//testReturn//re.xml");
-		// ÅĞ¶ÏÊÇ·ñ´æÔÚ,Èç¹û²»´æÔÚ,Ôò´´½¨
+		// ç”Ÿæˆxmlæ–‡ä»¶
+		File file = new File("D://yonyou201904//ç½•ç‹é¡¹ç›®//testReturn//re.xml");
+		// åˆ¤æ–­æ˜¯å¦å­˜åœ¨,å¦‚æœä¸å­˜åœ¨,åˆ™åˆ›å»º
 		if (!file.exists()) {
 			file.createNewFile();
 		}
-		// ÎÄ¼şÊä³öÁ÷
+		// æ–‡ä»¶è¾“å‡ºæµ
 		FileOutputStream out = new FileOutputStream(file);
-		// ÉèÖÃÊäÈëÔ´
+		// è®¾ç½®è¾“å…¥æº
 		StreamResult xmlResult = new StreamResult(out);
-		// Êä³öxmlÎÄ¼ş
+		// è¾“å‡ºxmlæ–‡ä»¶
 		transFormer.transform(domSource, xmlResult);
-		// ²âÊÔÎÄ¼şÊä³öµÄÂ·¾¶
+		// æµ‹è¯•æ–‡ä»¶è¾“å‡ºçš„è·¯å¾„
 		System.out.println(file.getAbsolutePath());
 	}
 	

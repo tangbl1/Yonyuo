@@ -1,3 +1,0 @@
-insert into PUB_BCR_NBCR ( CODE,CODELENTH,PK_NBCR,CODESCOPE,CODESTYLE,METAID,NAME,ORGTYPE,DR,TS ) values  ( 'hanwangxfmx',40,'1001AA1LCP000000307J','global','both','57bb29bf-b39d-4df3-94ba-f418d4e52f4c','消费明细','BUSINESSUNIT00000000',null,null ) 
-/
-

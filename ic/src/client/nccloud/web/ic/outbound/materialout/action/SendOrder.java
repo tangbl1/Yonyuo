@@ -42,13 +42,13 @@ public class SendOrder {
     public String getAccessToken(String user_id) throws BusinessException, IOException, JDOMException {
 
         IUAPQueryBS query = ServiceLocator.find(IUAPQueryBS.class);
-        // »ñµÃxmlÎÄ¼şÖĞµÄitem½Úµã
+        // è·å¾—xmlæ–‡ä»¶ä¸­çš„itemèŠ‚ç‚¹
         Element root = doreadxml();
-        // ´ÓItem½ÚµãÖĞ»ñµÃappId½Úµã
+        // ä»ItemèŠ‚ç‚¹ä¸­è·å¾—appIdèŠ‚ç‚¹
         List<Element> childNodes = root.getChildren("tokenurl");
         String tokenurl = childNodes.get(0).getText();
         if (isSEmptyOrNull(tokenurl)) {
-            ExceptionUtils.wrappBusinessException("tokenurlÎª¿Õ,Çë¼ì²éÅäÖÃÎÄ¼ş!!");
+            ExceptionUtils.wrappBusinessException("tokenurlä¸ºç©º,è¯·æ£€æŸ¥é…ç½®æ–‡ä»¶!!");
         }
         String sql = "select mobile from  bd_psndoc  where pk_psndoc = '"+user_id+"'";
         String inputMobile;
@@ -56,20 +56,20 @@ public class SendOrder {
             inputMobile = (String) query.executeQuery(sql, new ColumnProcessor());
 
         } catch (BusinessException e) {
-            throw new RuntimeException("inputMobile»ñÈ¡Ê§°Ü£¡");
+            throw new RuntimeException("inputMobileè·å–å¤±è´¥ï¼");
         }
         if (inputMobile == null || inputMobile.length() < 11) {
             childNodes = root.getChildren("inputMobile");
             inputMobile = childNodes.get(0).getText();
             if (isSEmptyOrNull(inputMobile)) {
-                ExceptionUtils.wrappBusinessException("inputMobileÎª¿Õ,Çë¼ì²éÅäÖÃÎÄ¼ş!!");
+                ExceptionUtils.wrappBusinessException("inputMobileä¸ºç©º,è¯·æ£€æŸ¥é…ç½®æ–‡ä»¶!!");
             }
         }
 
         childNodes = root.getChildren("inputPassword");
         String inputPassword = childNodes.get(0).getText();
         if (isSEmptyOrNull(inputPassword)) {
-            ExceptionUtils.wrappBusinessException("inputPasswordÎª¿Õ,Çë¼ì²éÅäÖÃÎÄ¼ş!!");
+            ExceptionUtils.wrappBusinessException("inputPasswordä¸ºç©º,è¯·æ£€æŸ¥é…ç½®æ–‡ä»¶!!");
         }
 
 //        Request request = Request.Post("http://49.4.14.119/api/v1/at/auth/");
@@ -93,13 +93,13 @@ public class SendOrder {
     }
 
     public JSONObject Orders(String token, JSONObject body) throws IOException, JDOMException {
-        // »ñµÃxmlÎÄ¼şÖĞµÄitem½Úµã
+        // è·å¾—xmlæ–‡ä»¶ä¸­çš„itemèŠ‚ç‚¹
         Element root = doreadxml();
-        // ´ÓItem½ÚµãÖĞ»ñµÃappId½Úµã
+        // ä»ItemèŠ‚ç‚¹ä¸­è·å¾—appIdèŠ‚ç‚¹
         List<Element> childNodes = root.getChildren("orderurl");
         String orderurl = childNodes.get(0).getText();
         if (isSEmptyOrNull(orderurl)) {
-            ExceptionUtils.wrappBusinessException("orderurlÎª¿Õ,Çë¼ì²éÅäÖÃÎÄ¼ş!!");
+            ExceptionUtils.wrappBusinessException("orderurlä¸ºç©º,è¯·æ£€æŸ¥é…ç½®æ–‡ä»¶!!");
         }
         Request request = Request.Post(orderurl);
         request.bodyString(body.toString(), ContentType.APPLICATION_JSON);

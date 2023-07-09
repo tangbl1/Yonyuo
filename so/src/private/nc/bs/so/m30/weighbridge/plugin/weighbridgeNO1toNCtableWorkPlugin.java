@@ -28,7 +28,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.regex.Pattern;
 /**
- * µØ°õÏµÍ³1ºÅÃ¿Ìì¶¨Ê±½« ³ÆÖØĞÅÏ¢ ´«Èë NC£¬ÓÃÓÚÉú³É ÏúÊÛ¶©µ¥
+ * åœ°ç£…ç³»ç»Ÿ1å·æ¯å¤©å®šæ—¶å°† ç§°é‡ä¿¡æ¯ ä¼ å…¥ NCï¼Œç”¨äºç”Ÿæˆ é”€å”®è®¢å•
  * @author admin
  *
  */
@@ -42,13 +42,13 @@ public class weighbridgeNO1toNCtableWorkPlugin  implements IBackgroundWorkPlugin
 	
 	public void runTask() {		
 	   try{
-		    //¶ÁÈ¡ÅäÖÃĞÅÏ¢
+		    //è¯»å–é…ç½®ä¿¡æ¯
 		    Map<String,String> sqlServerConfigMap = loadSqlServerConfigFromXML();
 			if (sqlServerConfigMap.size() <= 0)
 			{
-				Logger.error(new String("»ñÈ¡ÅäÖÃÎÄ¼şÊ§°Ü£¡"));
+				Logger.error(new String("è·å–é…ç½®æ–‡ä»¶å¤±è´¥ï¼"));
 			}
-			//¶ÁÈ¡ÅäÖÃÎÄ¼şÖĞµÄ¿ªÊ¼½áÊøÈÕÆÚ£¬Èç¹ûÃ»ÓĞÉèÖÃ»òÉèÖÃ³¤¶È²»ÕıÈ·£¬ÔòÊ¹ÓÃÄ¬ÈÏµÄµ¼ÈëÖÜÆÚ
+			//è¯»å–é…ç½®æ–‡ä»¶ä¸­çš„å¼€å§‹ç»“æŸæ—¥æœŸï¼Œå¦‚æœæ²¡æœ‰è®¾ç½®æˆ–è®¾ç½®é•¿åº¦ä¸æ­£ç¡®ï¼Œåˆ™ä½¿ç”¨é»˜è®¤çš„å¯¼å…¥å‘¨æœŸ
 			String webService = sqlServerConfigMap.get("WebService");
 			String fromSQL = sqlServerConfigMap.get("FROMSQL");
 			String startDateInConfig = sqlServerConfigMap.get("startDate");
@@ -56,23 +56,23 @@ public class weighbridgeNO1toNCtableWorkPlugin  implements IBackgroundWorkPlugin
 			Pattern p = Pattern.compile("(([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8]))))|((([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00))-02-29)");
 			int datePatternCheckFlag = 0;
 			int startDatePatternCheckFlag = 0;
-			//ÑéÖ¤Ê±¼ä¸ñÊ½
+			//éªŒè¯æ—¶é—´æ ¼å¼
 			if(!p.matcher(startDateInConfig).matches()){
 				datePatternCheckFlag = 1;
 				startDatePatternCheckFlag = 1;
 				if(startDateInConfig.isEmpty()){
-					Logger.error("Î´ÉèÖÃ¿ªÊ¼Ê±¼ä£¡Ê¹ÓÃÄ¬ÈÏµ¼ÈëÖÜÆÚ£¡");
+					Logger.error("æœªè®¾ç½®å¼€å§‹æ—¶é—´ï¼ä½¿ç”¨é»˜è®¤å¯¼å…¥å‘¨æœŸï¼");
 				} else {
-					Logger.error("¿ªÊ¼Ê±¼ä²»ÕıÈ·£¡Ê¹ÓÃÄ¬ÈÏµ¼ÈëÖÜÆÚ");
+					Logger.error("å¼€å§‹æ—¶é—´ä¸æ­£ç¡®ï¼ä½¿ç”¨é»˜è®¤å¯¼å…¥å‘¨æœŸ");
 				}
 			}
 			if(!p.matcher(endDateInConfig).matches()){
 				datePatternCheckFlag = 1;
 				if(endDateInConfig.isEmpty()){
-					Logger.error("Î´ÉèÖÃ½áÊøÊ±¼ä£¡Ê¹ÓÃÄ¬ÈÏµ¼ÈëÖÜÆÚ£¡");
+					Logger.error("æœªè®¾ç½®ç»“æŸæ—¶é—´ï¼ä½¿ç”¨é»˜è®¤å¯¼å…¥å‘¨æœŸï¼");
 				} else {
 					startDatePatternCheckFlag = 1;
-					Logger.error("½áÊøÊ±¼ä²»ÕıÈ·£¡Ê¹ÓÃÄ¬ÈÏµ¼ÈëÖÜÆÚ£¡");
+					Logger.error("ç»“æŸæ—¶é—´ä¸æ­£ç¡®ï¼ä½¿ç”¨é»˜è®¤å¯¼å…¥å‘¨æœŸï¼");
 				}
 			}			
 			
@@ -98,25 +98,25 @@ public class weighbridgeNO1toNCtableWorkPlugin  implements IBackgroundWorkPlugin
 			   history.put(hm.get("lsh"), hm.get("ch"));
 		   }
 		   
-           //²éÑ¯Óï¾ä
+           //æŸ¥è¯¢è¯­å¥
 //           String query=
-//        		   " select ĞòºÅ, Á÷Ë®ºÅ,³µºÅ,¹ı°õÀàĞÍ,·¢»õµ¥Î», "
-//        		 + " ÊÕ»õµ¥Î»,»õÃû,¹æ¸ñ,convert(varchar(20),Ã«ÖØ) Ã«ÖØ, "
-//        		 + " convert(varchar(20),Æ¤ÖØ) Æ¤ÖØ, convert(varchar(20),¾»ÖØ) ¾»ÖØ, "
-//        		 + " convert(varchar(20),¿ÛÖØ) ¿ÛÖØ, convert(varchar(20),ÊµÖØ) ÊµÖØ, convert(varchar(20),µ¥¼Û) µ¥¼Û, "
-//        		 + " convert(varchar(20),½ğ¶î) ½ğ¶î, convert(varchar(20),ÕÛ·½ÏµÊı) ÕÛ·½ÏµÊı, convert(varchar(20),·½Á¿) ·½Á¿, "
-//        		 + " convert(varchar(20),¹ı°õ·Ñ) ¹ı°õ·Ñ, Ã«ÖØË¾°õÔ±,Æ¤ÖØË¾°õÔ±,Ã«ÖØ°õºÅ,Æ¤ÖØ°õºÅ,"
-//        		 + " Ã«ÖØÊ±¼ä Ã«ÖØÊ±¼ä,Æ¤ÖØÊ±¼ä Æ¤ÖØÊ±¼ä,Ò»´Î¹ı°õÊ±¼ä Ò»´Î¹ı°õÊ±¼ä,¶ş´Î¹ı°õÊ±¼ä ¶ş´Î¹ı°õÊ±¼ä,¸üĞÂÈË,¸üĞÂÊ±¼ä ¸üĞÂÊ±¼ä,±¸×¢,´òÓ¡´ÎÊı,ÉÏ´«·ñ,±¸ÓÃ1,±¸ÓÃ2 "
-//        		 + " ,±¸ÓÃ13 ÊÇ·ñ¸üĞÂ,±¸ÓÃ14 ·¢»õÊ±¼ä from ³ÆÖØĞÅÏ¢ "
-//        		 + " where ¸üĞÂÊ±¼ä >= '"+beginBeforeDay+"' "
-//        		 		+ "and ¸üĞÂÊ±¼ä <= '"+endBeforeDay+"' "
+//        		   " select åºå·, æµæ°´å·,è½¦å·,è¿‡ç£…ç±»å‹,å‘è´§å•ä½, "
+//        		 + " æ”¶è´§å•ä½,è´§å,è§„æ ¼,convert(varchar(20),æ¯›é‡) æ¯›é‡, "
+//        		 + " convert(varchar(20),çš®é‡) çš®é‡, convert(varchar(20),å‡€é‡) å‡€é‡, "
+//        		 + " convert(varchar(20),æ‰£é‡) æ‰£é‡, convert(varchar(20),å®é‡) å®é‡, convert(varchar(20),å•ä»·) å•ä»·, "
+//        		 + " convert(varchar(20),é‡‘é¢) é‡‘é¢, convert(varchar(20),æŠ˜æ–¹ç³»æ•°) æŠ˜æ–¹ç³»æ•°, convert(varchar(20),æ–¹é‡) æ–¹é‡, "
+//        		 + " convert(varchar(20),è¿‡ç£…è´¹) è¿‡ç£…è´¹, æ¯›é‡å¸ç£…å‘˜,çš®é‡å¸ç£…å‘˜,æ¯›é‡ç£…å·,çš®é‡ç£…å·,"
+//        		 + " æ¯›é‡æ—¶é—´ æ¯›é‡æ—¶é—´,çš®é‡æ—¶é—´ çš®é‡æ—¶é—´,ä¸€æ¬¡è¿‡ç£…æ—¶é—´ ä¸€æ¬¡è¿‡ç£…æ—¶é—´,äºŒæ¬¡è¿‡ç£…æ—¶é—´ äºŒæ¬¡è¿‡ç£…æ—¶é—´,æ›´æ–°äºº,æ›´æ–°æ—¶é—´ æ›´æ–°æ—¶é—´,å¤‡æ³¨,æ‰“å°æ¬¡æ•°,ä¸Šä¼ å¦,å¤‡ç”¨1,å¤‡ç”¨2 "
+//        		 + " ,å¤‡ç”¨13 æ˜¯å¦æ›´æ–°,å¤‡ç”¨14 å‘è´§æ—¶é—´ from ç§°é‡ä¿¡æ¯ "
+//        		 + " where æ›´æ–°æ—¶é—´ >= '"+beginBeforeDay+"' "
+//        		 		+ "and æ›´æ–°æ—¶é—´ <= '"+endBeforeDay+"' "
 //        		 						+ " and "
-//        		 						+ "  »õÃû in  ('Ìú¾«·Û','Ìú¾«·Û(º±Íõ)') ";
+//        		 						+ "  è´§å in  ('é“ç²¾ç²‰','é“ç²¾ç²‰(ç½•ç‹)') ";
            String query= fromSQL
-        		 + " where ¸üĞÂÊ±¼ä >= '"+beginBeforeDay+"' "
-        		 		+ "and ¸üĞÂÊ±¼ä <= '"+endBeforeDay+"' "
+        		 + " where æ›´æ–°æ—¶é—´ >= '"+beginBeforeDay+"' "
+        		 		+ "and æ›´æ–°æ—¶é—´ <= '"+endBeforeDay+"' "
         		 						+ " and "
-        		 						+ "  »õÃû in  ('Ìú¾«·Û','Ìú¾«·Û(º±Íõ)') ";           
+        		 						+ "  è´§å in  ('é“ç²¾ç²‰','é“ç²¾ç²‰(ç½•ç‹)') ";           
            
            JSONObject jsonobject = new JSONObject();
 		   jsonobject.put("doType", "query");
@@ -127,8 +127,8 @@ public class weighbridgeNO1toNCtableWorkPlugin  implements IBackgroundWorkPlugin
 		   call.setTargetEndpointAddress(new URL(webService));
 		   call.setOperationName("opeHandle");
 		   String result = (String)call.invoke(new Object[] {jsonobject.toString()});
-		   ArrayList<Wb01VO> res_insert = new ArrayList<Wb01VO>();//Òª²åÈëµÄÊı¾İ
-		   ArrayList<Wb01VO> res_update = new ArrayList<Wb01VO>();//Òª¸üĞÂµÄÊı¾İ
+		   ArrayList<Wb01VO> res_insert = new ArrayList<Wb01VO>();//è¦æ’å…¥çš„æ•°æ®
+		   ArrayList<Wb01VO> res_update = new ArrayList<Wb01VO>();//è¦æ›´æ–°çš„æ•°æ®
 		   Wb01VO vo = null;
 		   JSONObject jsonStr = JSONObject.fromObject(result);
 		   String status = jsonStr.getString("status");
@@ -137,16 +137,16 @@ public class weighbridgeNO1toNCtableWorkPlugin  implements IBackgroundWorkPlugin
 			   JSONArray ja = jsonStr.getJSONArray("result");
 			   for ( int i=0; i<ja.size(); i++ ) {
 				   jb = ja.getJSONObject(i);
-				   int xh=(int) jb.get("ĞòºÅ");
-				   String lsh=jb.get("Á÷Ë®ºÅ").toString();
-				   //¸üĞÂ±êÖ¾ÅĞ¶ÏÊÇ·ñ¸üĞÂ
-				   if(jb.get("ÊÇ·ñ¸üĞÂ")!=null&&"ÊÇ".equals(jb.get("ÊÇ·ñ¸üĞÂ").toString())&&history.containsKey(lsh) ){
-					 //¸üĞÂÊ±-ÏÈ¸ù¾İĞòºÅºÍÁ÷Ë®ºÅÕÒµ½¶ÔÓ¦µÄÊı¾İ
+				   int xh=(int) jb.get("åºå·");
+				   String lsh=jb.get("æµæ°´å·").toString();
+				   //æ›´æ–°æ ‡å¿—åˆ¤æ–­æ˜¯å¦æ›´æ–°
+				   if(jb.get("æ˜¯å¦æ›´æ–°")!=null&&"æ˜¯".equals(jb.get("æ˜¯å¦æ›´æ–°").toString())&&history.containsKey(lsh) ){
+					 //æ›´æ–°æ—¶-å…ˆæ ¹æ®åºå·å’Œæµæ°´å·æ‰¾åˆ°å¯¹åº”çš„æ•°æ®
 					   String sql="select * from weighbridge01 where xh='"+xh+"' "
 		        		  		+ " and xh='"+lsh+"' " ;
 		        		vo= (Wb01VO) dao.executeQuery(sql, new BeanProcessor(Wb01VO.class));
 		        		vo.setIsupdate("Y");
-				   }else{//²»ÊÇ¸üĞÂ--²åÈëµÄ
+				   }else{//ä¸æ˜¯æ›´æ–°--æ’å…¥çš„
 					   if ( history.containsKey(lsh) ) 
 		        		   continue;
 	        		   vo =  new Wb01VO();
@@ -154,50 +154,50 @@ public class weighbridgeNO1toNCtableWorkPlugin  implements IBackgroundWorkPlugin
 				   }
 				   vo.setAttributeValue("xh",xh);
 	        	   vo.setAttributeValue("lsh",lsh);
-	        	   vo.setAttributeValue("ch",jb.get("³µºÅ"));
-	        	   vo.setAttributeValue("wbtype",jb.get("¹ı°õÀàĞÍ"));
-	        	   vo.setAttributeValue("fh_org",jb.get("·¢»õµ¥Î»"));
-	        	   vo.setAttributeValue("sh_org",jb.get("ÊÕ»õµ¥Î»"));
-	        	   vo.setAttributeValue("hm",jb.get("»õÃû"));
-	        	   vo.setAttributeValue("gg",jb.get("¹æ¸ñ"));
-	        	   vo.setMz(new UFDouble(jb.get("Ã«ÖØ") == null? "0" : jb.get("Ã«ÖØ").toString()));
-	        	   vo.setPz(new UFDouble(jb.get("Æ¤ÖØ") == null? "0" : jb.get("Æ¤ÖØ").toString()));
-	        	   vo.setJz(new UFDouble(jb.get("¾»ÖØ") == null? "0" : jb.get("¾»ÖØ").toString()));
-	        	   vo.setKz(new UFDouble(jb.get("¿ÛÖØ") == null? "0" : jb.get("¿ÛÖØ").toString()));
-	        	   vo.setSz(new UFDouble(jb.get("ÊµÖØ") == null? "0" : jb.get("ÊµÖØ").toString()));
-	        	   vo.setDj(new UFDouble(jb.get("µ¥¼Û") == null? "0" : jb.get("µ¥¼Û").toString()));
-	        	   vo.setJe(new UFDouble(jb.get("½ğ¶î") == null? "0" : jb.get("½ğ¶î").toString()));
-	        	   vo.setZfxs(new UFDouble(jb.get("ÕÛ·½ÏµÊı") == null? "0" : jb.get("ÕÛ·½ÏµÊı").toString()));
-	        	   vo.setFl(new UFDouble(jb.get("·½Á¿") == null? "0" : jb.get("·½Á¿").toString()));
-	        	   vo.setGbf(new UFDouble(jb.get("¹ı°õ·Ñ") == null? "0" : jb.get("¹ı°õ·Ñ").toString()));
-	        	   vo.setAttributeValue("mz_psn",jb.get("Ã«ÖØË¾°õÔ±"));
-	        	   vo.setAttributeValue("pz_psn",jb.get("Æ¤ÖØË¾°õÔ±"));
-	        	   vo.setAttributeValue("mz_no",jb.get("Ã«ÖØ°õºÅ"));
-	        	   vo.setAttributeValue("pz_no",jb.get("Æ¤ÖØ°õºÅ"));
-	        	   if ( jb.get("Ã«ÖØÊ±¼ä") != null )
-	        		   vo.setAttributeValue("mz_datetime",new UFDateTime(jb.get("Ã«ÖØÊ±¼ä").toString().substring(0, 19)));
-	        	   if ( jb.get("Æ¤ÖØÊ±¼ä") != null )
-	        		   vo.setAttributeValue("pz_datetime",new UFDateTime(jb.get("Æ¤ÖØÊ±¼ä").toString().substring(0, 19)));
-	        	   if ( jb.get("Ò»´Î¹ı°õÊ±¼ä") != null )
-	        		   vo.setAttributeValue("first_datetime",new UFDateTime(jb.get("Ò»´Î¹ı°õÊ±¼ä").toString().substring(0, 19)));
-	        	   if ( jb.get("¶ş´Î¹ı°õÊ±¼ä") != null )
-	        		   vo.setAttributeValue("second_datetime",new UFDateTime(jb.get("¶ş´Î¹ı°õÊ±¼ä").toString().substring(0, 19)));
-	        	   vo.setAttributeValue("updater",jb.get("¸üĞÂÈË"));
-	        	   if ( jb.get("¸üĞÂÊ±¼ä") != null )
-	        		   vo.setAttributeValue("updatetime",new UFDateTime(jb.get("¸üĞÂÊ±¼ä").toString().substring(0, 19)));
-	        	   if ( jb.get("·¢»õÊ±¼ä") != null )
-	        		   vo.setAttributeValue("delivery_time",new UFDateTime(jb.get("·¢»õÊ±¼ä").toString().substring(0, 19)));
-	        	   vo.setAttributeValue("demo",jb.get("±¸×¢"));
-	        	   vo.setAttributeValue("prints",jb.get("´òÓ¡´ÎÊı"));
-	        	   if ( jb.get("ÉÏ´«·ñ") != null )
+	        	   vo.setAttributeValue("ch",jb.get("è½¦å·"));
+	        	   vo.setAttributeValue("wbtype",jb.get("è¿‡ç£…ç±»å‹"));
+	        	   vo.setAttributeValue("fh_org",jb.get("å‘è´§å•ä½"));
+	        	   vo.setAttributeValue("sh_org",jb.get("æ”¶è´§å•ä½"));
+	        	   vo.setAttributeValue("hm",jb.get("è´§å"));
+	        	   vo.setAttributeValue("gg",jb.get("è§„æ ¼"));
+	        	   vo.setMz(new UFDouble(jb.get("æ¯›é‡") == null? "0" : jb.get("æ¯›é‡").toString()));
+	        	   vo.setPz(new UFDouble(jb.get("çš®é‡") == null? "0" : jb.get("çš®é‡").toString()));
+	        	   vo.setJz(new UFDouble(jb.get("å‡€é‡") == null? "0" : jb.get("å‡€é‡").toString()));
+	        	   vo.setKz(new UFDouble(jb.get("æ‰£é‡") == null? "0" : jb.get("æ‰£é‡").toString()));
+	        	   vo.setSz(new UFDouble(jb.get("å®é‡") == null? "0" : jb.get("å®é‡").toString()));
+	        	   vo.setDj(new UFDouble(jb.get("å•ä»·") == null? "0" : jb.get("å•ä»·").toString()));
+	        	   vo.setJe(new UFDouble(jb.get("é‡‘é¢") == null? "0" : jb.get("é‡‘é¢").toString()));
+	        	   vo.setZfxs(new UFDouble(jb.get("æŠ˜æ–¹ç³»æ•°") == null? "0" : jb.get("æŠ˜æ–¹ç³»æ•°").toString()));
+	        	   vo.setFl(new UFDouble(jb.get("æ–¹é‡") == null? "0" : jb.get("æ–¹é‡").toString()));
+	        	   vo.setGbf(new UFDouble(jb.get("è¿‡ç£…è´¹") == null? "0" : jb.get("è¿‡ç£…è´¹").toString()));
+	        	   vo.setAttributeValue("mz_psn",jb.get("æ¯›é‡å¸ç£…å‘˜"));
+	        	   vo.setAttributeValue("pz_psn",jb.get("çš®é‡å¸ç£…å‘˜"));
+	        	   vo.setAttributeValue("mz_no",jb.get("æ¯›é‡ç£…å·"));
+	        	   vo.setAttributeValue("pz_no",jb.get("çš®é‡ç£…å·"));
+	        	   if ( jb.get("æ¯›é‡æ—¶é—´") != null )
+	        		   vo.setAttributeValue("mz_datetime",new UFDateTime(jb.get("æ¯›é‡æ—¶é—´").toString().substring(0, 19)));
+	        	   if ( jb.get("çš®é‡æ—¶é—´") != null )
+	        		   vo.setAttributeValue("pz_datetime",new UFDateTime(jb.get("çš®é‡æ—¶é—´").toString().substring(0, 19)));
+	        	   if ( jb.get("ä¸€æ¬¡è¿‡ç£…æ—¶é—´") != null )
+	        		   vo.setAttributeValue("first_datetime",new UFDateTime(jb.get("ä¸€æ¬¡è¿‡ç£…æ—¶é—´").toString().substring(0, 19)));
+	        	   if ( jb.get("äºŒæ¬¡è¿‡ç£…æ—¶é—´") != null )
+	        		   vo.setAttributeValue("second_datetime",new UFDateTime(jb.get("äºŒæ¬¡è¿‡ç£…æ—¶é—´").toString().substring(0, 19)));
+	        	   vo.setAttributeValue("updater",jb.get("æ›´æ–°äºº"));
+	        	   if ( jb.get("æ›´æ–°æ—¶é—´") != null )
+	        		   vo.setAttributeValue("updatetime",new UFDateTime(jb.get("æ›´æ–°æ—¶é—´").toString().substring(0, 19)));
+	        	   if ( jb.get("å‘è´§æ—¶é—´") != null )
+	        		   vo.setAttributeValue("delivery_time",new UFDateTime(jb.get("å‘è´§æ—¶é—´").toString().substring(0, 19)));
+	        	   vo.setAttributeValue("demo",jb.get("å¤‡æ³¨"));
+	        	   vo.setAttributeValue("prints",jb.get("æ‰“å°æ¬¡æ•°"));
+	        	   if ( jb.get("ä¸Šä¼ å¦") != null )
 	        	   {
-	        		  vo.setAttributeValue("isupload", "true".equals(jb.get("ÉÏ´«·ñ").toString())?"Y":"N");
+	        		  vo.setAttributeValue("isupload", "true".equals(jb.get("ä¸Šä¼ å¦").toString())?"Y":"N");
 	        	   }
 	        	   vo.setInfo_status("N");
 	        	   vo.setDef01("N");
-	        	   if(jb.get("ÊÇ·ñ¸üĞÂ")!=null&&"ÊÇ".equals(jb.get("ÊÇ·ñ¸üĞÂ").toString())&&history.containsKey(lsh) ){
+	        	   if(jb.get("æ˜¯å¦æ›´æ–°")!=null&&"æ˜¯".equals(jb.get("æ˜¯å¦æ›´æ–°").toString())&&history.containsKey(lsh) ){
 	        		   res_update.add(vo);  
-					}else{//²»ÊÇ¸üĞÂ--²åÈëµÄ
+					}else{//ä¸æ˜¯æ›´æ–°--æ’å…¥çš„
 						res_insert.add(vo);  
 					}
 	        	   
@@ -215,9 +215,9 @@ public class weighbridgeNO1toNCtableWorkPlugin  implements IBackgroundWorkPlugin
 	}
 	
 	private Map<String,String> loadSqlServerConfigFromXML() throws BusinessException	{
-		//Çå¿ÕÅäÖÃMap
+		//æ¸…ç©ºé…ç½®Map
 		Map<String,String> sqlServerConfigMap = new HashMap<String,String>();
-		//¶ÁÈ¡ÅäÖÃÎÄ¼ş
+		//è¯»å–é…ç½®æ–‡ä»¶
 		String nchome = RuntimeEnv.getInstance().getProperty("nc.server.location");
 		String path = (new StringBuilder(String.valueOf(nchome))).append("\\WeighBridgeToNCTaskConfig.xml").toString();
 		File file = new File(path);
@@ -237,11 +237,11 @@ public class weighbridgeNO1toNCtableWorkPlugin  implements IBackgroundWorkPlugin
 				sqlServerConfigMap.put("WebService", WebService);
 				webServiceFlag = 1;
 				if (WebService.isEmpty()) {
-					Logger.error(new String("ÅäÖÃÎÄ¼şÖĞWebServiceÖµ´íÎó£¡"));
+					Logger.error(new String("é…ç½®æ–‡ä»¶ä¸­WebServiceå€¼é”™è¯¯ï¼"));
 				}
 			}
 			if (webServiceFlag == 0) {
-				Logger.error(new String("ÅäÖÃÎÄ¼şÖĞWebService±êÇ©´íÎó£¡"));
+				Logger.error(new String("é…ç½®æ–‡ä»¶ä¸­WebServiceæ ‡ç­¾é”™è¯¯ï¼"));
 			}
 			
 			
@@ -252,11 +252,11 @@ public class weighbridgeNO1toNCtableWorkPlugin  implements IBackgroundWorkPlugin
 				sqlServerConfigMap.put("FROMSQL", FROMSQL);
 				fROMSQLFlag = 1;
 				if (FROMSQL.isEmpty()) {
-					Logger.error(new String("ÅäÖÃÎÄ¼şÖĞFROMSQLÖµ´íÎó£¡"));
+					Logger.error(new String("é…ç½®æ–‡ä»¶ä¸­FROMSQLå€¼é”™è¯¯ï¼"));
 				}
 			}
 			if (fROMSQLFlag == 0) {
-				Logger.error(new String("ÅäÖÃÎÄ¼şÖĞFROMSQL±êÇ©´íÎó£¡"));
+				Logger.error(new String("é…ç½®æ–‡ä»¶ä¸­FROMSQLæ ‡ç­¾é”™è¯¯ï¼"));
 			}
 			
 			for (Iterator ite = XMLUtil.getElementsByTagName(e, "StartDate"); ite.hasNext();){
@@ -276,7 +276,7 @@ public class weighbridgeNO1toNCtableWorkPlugin  implements IBackgroundWorkPlugin
 		catch (Exception e)
 		{
 			e.printStackTrace();
-			throw new BusinessException("¶ÁÈ¡ÅäÖÃÎÄ¼şÄÚĞÅÏ¢³öÏÖÒì³££º" + e.getMessage() + "  Çë¼ì²éÅäÖÃÎÄ¼şÄÚÈİ£¡");
+			throw new BusinessException("è¯»å–é…ç½®æ–‡ä»¶å†…ä¿¡æ¯å‡ºç°å¼‚å¸¸ï¼š" + e.getMessage() + "  è¯·æ£€æŸ¥é…ç½®æ–‡ä»¶å†…å®¹ï¼");
 		}
 		return sqlServerConfigMap;
 	}	

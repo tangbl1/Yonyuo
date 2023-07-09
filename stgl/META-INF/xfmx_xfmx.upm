@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="gb2312"?>
-<module name="stgl">
-	<public>
-		<component priority="0" singleton="true" remote="true" tx="CMT" supportAlias="true">
-			<interface>nc.itf.stgl.xfmx.xfmx.IXfmxService</interface>
-			<implementation>nc.impl.stgl.xfmx.xfmx.XfmxServiceImpl</implementation>
-		</component>
-	</public>
-</module>

@@ -10,7 +10,7 @@ import nccloud.framework.web.container.IRequest;
 import nccloud.base.exception.BusinessException;
 import nc.itf.uapbd.pricemanage.pricemanage.IPriceManageService;
 /**
- * 删除Action
+ * 鍒犻櫎Action
  */
 public class DeletePriceManageAction extends BaseAction{
 
@@ -20,7 +20,7 @@ public class DeletePriceManageAction extends BaseAction{
 		Map<String,String> tsMap = param.getTsMap();
 		
 		if(tsMap == null || tsMap.size() == 0){
-			throw new BusinessException("通过getTsMap()获取pk与ts组成的Map集合作为参数时未获取到，请传递tsMap");
+			throw new BusinessException("閫氳繃getTsMap()鑾峰彇pk涓巘s缁勬垚鐨凪ap闆嗗悎浣滀负鍙傛暟鏃舵湭鑾峰彇鍒帮紝璇蜂紶閫抰sMap");
 		}
 		
 		IPriceManageService service = ServiceLocator.find(IPriceManageService.class);

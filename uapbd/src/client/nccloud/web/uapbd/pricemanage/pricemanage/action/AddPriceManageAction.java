@@ -12,20 +12,20 @@ import nc.itf.uapbd.pricemanage.pricemanage.IPriceManageService;
 
 
 /**
- * 新增Action
+ * 鏂板Action
  */
 public class AddPriceManageAction extends BaseAction{
 
 	@Override
 	public Object doAction(IRequest request, RequstParamWapper paramWapper) throws Throwable{
-		//json数据转换
+		//json鏁版嵁杞崲
 		RequestDTO param = VOTransform.toVO(paramWapper.requestString,RequestDTO.class);
-		//获取参数
+		//鑾峰彇鍙傛暟
 		Map<String,Object> userJson = param.getUserJson();
 
 		AggPriceManage[] vos = this.getVOs(param, AggPriceManage.class);
 		
-		//获得实体VO
+		//鑾峰緱瀹炰綋VO
 		IPriceManageService service = ServiceLocator.find(IPriceManageService.class);
 		AggPriceManage vo = service.preAddAggPriceManage(vos[0],userJson);
 		return buildResult(param,true,null,vo);

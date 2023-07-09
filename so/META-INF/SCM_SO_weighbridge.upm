@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding='gb2312'?>
+<module name="dd">
+  <public>
+	
+	<component remote="true" singleton="true"  tx="CMT">
+	  <interface>nc.itf.so.IWeighBridgeToNcSalesOrderMaintain</interface>
+	  <implementation>nc.impl.so.WeighBridgeToNcSalesOrderImpl</implementation>
+	</component>
+
+	<component remote="true" singleton="true"  tx="CMT">
+    	  <interface>nc.itf.so.ISaleWeighQuality</interface>
+    	  <implementation>nc.impl.so.SaleWeighQualityImpl</implementation>
+    	</component>
+
+  </public> 
+</module> 

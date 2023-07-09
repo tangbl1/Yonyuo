@@ -9,7 +9,7 @@ public class PushSaveI4Bill implements IRule<MaterialOutVO>{
 
 	@Override
 	public void process(MaterialOutVO[] vos) {
-		// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+		// TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
 			
 			BillI4FinanceProcess billi4save = new BillI4FinanceProcess();
 			billi4save.saveI4Bill(vos);

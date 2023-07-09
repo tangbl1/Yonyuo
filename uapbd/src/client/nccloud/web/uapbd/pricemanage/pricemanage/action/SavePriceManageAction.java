@@ -15,7 +15,7 @@ import nc.itf.uapbd.pricemanage.pricemanage.IPriceManageService;
 import nc.vo.uapbd.AggPriceManage;
 
 /**
- * ±£´æaction£¨Ö÷×Ó¡¢µ¥±í¡¢µ¥form£©
+ * ä¿å­˜actionï¼ˆä¸»å­ã€å•è¡¨ã€å•formï¼‰
  */
 public class SavePriceManageAction extends BaseAction{
 

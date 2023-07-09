@@ -17,7 +17,7 @@ import nccloud.framework.web.ui.model.PageInfo;
 import nc.itf.uapbd.pricemanage.pricemanage.IPriceManageService;
 
 /**
- * 类说明：子表查询
+ * 绫昏鏄庯細瀛愯〃鏌ヨ
  *
  **/
 public class ListSlavePriceManageAction extends BaseAction {
@@ -25,31 +25,31 @@ public class ListSlavePriceManageAction extends BaseAction {
     @Override
     public Object doAction(IRequest request, RequstParamWapper paramWapper) throws Throwable {
 
-        // 参数接收
+        // 鍙傛暟鎺ユ敹
         RequestDTO param = VOTransform.toVO(paramWapper.requestString, RequestDTO.class);
         String pk = param.getPk();
         String pageCode = param.getPageCode();
         String formId = param.getFormId();
-        // 分页信息
+        // 鍒嗛〉淇℃伅
         PageInfo pageInfo = param.getPageInfo();
 
         VOTransform tf = new VOTransform(null, pageCode);
 
-        // 查询模板
+        // 鏌ヨ妯℃澘
         ITempletResource resource = Locator.find(ITempletResource.class);
         TempletQueryPara templetQueryPara = new TempletQueryPara();
         templetQueryPara.setPagecode(pageCode);
         PageTemplet pageTemplet = resource.query(templetQueryPara);
-        // 获取当前要查询的页签区域信息
+        // 鑾峰彇褰撳墠瑕佹煡璇㈢殑椤电鍖哄煙淇℃伅
         Area area = pageTemplet.getArea(formId);
-        // 获取页签对应的Class对象
+        // 鑾峰彇椤电瀵瑰簲鐨凜lass瀵硅薄
         Class childClazz = Class.forName(area.getClazz());
 
-        // 服务调用
+        // 鏈嶅姟璋冪敤
         IPriceManageService service = ServiceLocator.find(IPriceManageService.class);
         String[] allpks = service.queryChildPksByParentId(childClazz, pk);
 		
-        // 分页处理
+        // 鍒嗛〉澶勭悊
         SuperVO[] returnVOs;
         if(!ArrayUtils.isEmpty(allpks) && pageInfo != null) {
             String[] currentPagePks = paramWapper.pageResult(pageInfo, allpks);
@@ -59,7 +59,7 @@ public class ListSlavePriceManageAction extends BaseAction {
         }
         param.setAllpks(allpks);
 		
-        // 数据返回
+        // 鏁版嵁杩斿洖
         return buildResult(param, false, null, returnVOs);
     }
 }
