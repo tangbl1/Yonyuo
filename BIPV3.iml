@@ -10,9 +10,6 @@
       <sourceFolder url="file://$MODULE_DIR$/ic/src/private" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/ic/src/public" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/vehicle/src/test" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/credit/src/client" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/credit/src/private" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/credit/src/public" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/uapbd/src/client" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/uapbd/src/private" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/uapbd/src/public" isTestSource="false" />
@@ -20,6 +17,10 @@
       <sourceFolder url="file://$MODULE_DIR$/so/src/private" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/so/src/public" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/so/src/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/hrhi/src/client" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/hrhi/src/private" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/hrhi/src/public" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/hrhi/src/test" isTestSource="true" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -41,6 +41,7 @@ import java.util.Map;
  */
 public class MaterialOutTransmitAction implements ICommonAction {
 
+
     @Override
     public Object doAction(IRequest request) {
         BillCard retcard = null;

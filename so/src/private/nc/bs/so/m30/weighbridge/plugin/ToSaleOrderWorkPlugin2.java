@@ -60,6 +60,10 @@ public class ToSaleOrderWorkPlugin2 implements IBackgroundWorkPlugin{
 				// 客户
 				String ccustomerid = matchCustomer(wbvo);
 				hvo.setCcustomerid(ccustomerid);
+				hvo.setCcustomervid(ccustomerid);
+				hvo.setChreceivecustid(ccustomerid);
+				hvo.setChreceivecustvid(ccustomerid);
+
 				SaleOrderBVO bvo=oldsaleordervo.getChildrenVO()[0];
 				bvo.setVbdef2(wbvo.getCh());
 				// 地磅类型
@@ -154,6 +158,9 @@ public class ToSaleOrderWorkPlugin2 implements IBackgroundWorkPlugin{
 				// 客户
 				String ccustomerid = matchCustomer(wbvo);
 				hvo.setCcustomerid(ccustomerid);
+				hvo.setCcustomervid(ccustomerid);
+				hvo.setChreceivecustid(ccustomerid);
+				hvo.setChreceivecustvid(ccustomerid);
 				
 				// 部门版本
 				 sql = "select pk_dept,pk_vid from org_dept_v where pk_org = (select pk_org from org_orgs where code = '2001' and isbusinessunit = 'Y')";
@@ -166,6 +173,7 @@ public class ToSaleOrderWorkPlugin2 implements IBackgroundWorkPlugin{
 				// 流程类型
 				hvo.setFpfstatusflag(-1);
 				hvo.setBillmaker(billmaker);//默认制单人XS001
+				hvo.setCreator(billmaker);
 
 				/**********************************表体************************************************/			
 				// 净重 改为单位 吨 除1000

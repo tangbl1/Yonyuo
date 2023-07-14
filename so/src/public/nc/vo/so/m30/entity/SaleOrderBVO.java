@@ -304,12 +304,13 @@ public class SaleOrderBVO extends SuperVO {
     public UFDouble arrivalgrade_h2o;
     public UFDouble arrivalgrade_p;
     public UFDouble factorynnum;
-    public UFDouble checkjtime;
-    public UFDouble vehicleno;
+    public UFDateTime checkjtime;
+
+    public String vehicleno;
     public UFDouble firstreceiptnum;
     public UFDouble admissiondate;
     public UFDouble sedreceiptnum;
-    public UFDouble batchno;
+    public String batchno;
     public UFDouble unitprice;
 
     public UFDouble getFactorygrade_sio2() {
@@ -416,19 +417,19 @@ public class SaleOrderBVO extends SuperVO {
         this.factorynnum = factorynnum;
     }
 
-    public UFDouble getCheckjtime() {
+    public UFDateTime  getCheckjtime() {
         return checkjtime;
     }
 
-    public void setCheckjtime(UFDouble checkjtime) {
+    public void setCheckjtime(UFDateTime checkjtime) {
         this.checkjtime = checkjtime;
     }
 
-    public UFDouble getVehicleno() {
+    public String getVehicleno() {
         return vehicleno;
     }
 
-    public void setVehicleno(UFDouble vehicleno) {
+    public void setVehicleno(String vehicleno) {
         this.vehicleno = vehicleno;
     }
 
@@ -456,13 +457,14 @@ public class SaleOrderBVO extends SuperVO {
         this.sedreceiptnum = sedreceiptnum;
     }
 
-    public UFDouble getBatchno() {
+    public String getBatchno() {
         return batchno;
     }
 
-    public void setBatchno(UFDouble batchno) {
+    public void setBatchno(String batchno) {
         this.batchno = batchno;
     }
+
 
     public UFDouble getUnitprice() {
         return unitprice;

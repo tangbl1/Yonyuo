@@ -6,7 +6,7 @@ import nc.vo.pubapp.pattern.model.meta.entity.vo.VOMetaFactory;
 
 public class Addprice extends SuperVO {
 
-	//¹¹Ôì·½·¨
+	//æ„é€ æ–¹æ³•
 	public Addprice() {
 		super();
 	}
@@ -168,9 +168,9 @@ public class Addprice extends SuperVO {
 	}
     
 	/**
-	 * <p>·µ»Ø±íÃû³Æ.
+	 * <p>è¿”å›è¡¨åç§°.
 	 * <p>
-	 * ´´½¨ÈÕÆÚ:
+	 * åˆ›å»ºæ—¥æœŸ:
 	 * @return java.lang.String
 	 */
 	@Override
