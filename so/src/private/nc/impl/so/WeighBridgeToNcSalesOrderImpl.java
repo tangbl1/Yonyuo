@@ -4,7 +4,6 @@ import nc.bs.dao.BaseDAO;
 import nc.bs.dao.DAOException;
 import nc.bs.framework.common.NCLocator;
 import nc.bs.logging.Logger;
-import nc.bs.mw.naming.TransactionFactory;
 import nc.itf.so.IWeighBridgeToNcSalesOrderMaintain;
 import nc.jdbc.framework.processor.BeanListProcessor;
 import nc.jdbc.framework.processor.BeanProcessor;
@@ -30,6 +29,7 @@ import org.apache.axis.client.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
+import uap.mw.trans.TransactionFactory;
 import uap.mw.trans.UAPUserTransanction;
 
 import java.io.File;

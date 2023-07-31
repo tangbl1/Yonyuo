@@ -219,7 +219,8 @@ public class weighbridgeNO1toNCtableWorkPlugin  implements IBackgroundWorkPlugin
 		Map<String,String> sqlServerConfigMap = new HashMap<String,String>();
 		//读取配置文件
 		String nchome = RuntimeEnv.getInstance().getProperty("nc.server.location");
-		String path = (new StringBuilder(String.valueOf(nchome))).append("\\WeighBridgeToNCTaskConfig.xml").toString();
+//		String path = (new StringBuilder(String.valueOf(nchome))).append("\\WeighBridgeToNCTaskConfig.xml").toString();
+		String path = new StringBuilder(this.getClass().getResource("").getPath()).append("WeighBridgeToNCTaskConfig.xml").toString();
 		File file = new File(path);
 		String WebService = "";
 		String FROMSQL = "";

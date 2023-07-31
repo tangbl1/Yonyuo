@@ -1,9 +1,8 @@
 package nc.bs.so.m30.weighbridge.plugin;
 
 import nc.bs.dao.BaseDAO;
+import nc.bs.dao.DAOException;
 import nc.bs.framework.common.NCLocator;
-import nc.bs.mw.naming.TransactionFactory;
-import nc.bs.pub.SystemException;
 import nc.bs.pub.pa.PreAlertObject;
 import nc.bs.pub.taskcenter.BgWorkingContext;
 import nc.bs.pub.taskcenter.IBackgroundWorkPlugin;
@@ -23,25 +22,29 @@ import nc.vo.so.m30.weighbridge.LogMsgVO;
 import nc.vo.so.m30.weighbridge.Wb01VO;
 import nc.vo.vorg.DeptVersionVO;
 import nc.vo.vorg.OrgVersionVO;
+import uap.mw.trans.TransactionFactory;
 import uap.mw.trans.UAPUserTransanction;
 
-//import javax.transaction.*;
-import javax.persistence.RollbackException;
-import javax.resource.NotSupportedException;
 import javax.transaction.HeuristicMixedException;
 import javax.transaction.HeuristicRollbackException;
+import javax.transaction.NotSupportedException;
+import javax.transaction.SystemException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ToSaleOrderWorkPlugin2 implements IBackgroundWorkPlugin{
+public class ToSaleOrderWorkPlugin implements IBackgroundWorkPlugin{
 
 	String log_msg = "";
 	LogMsgVO logVo = new LogMsgVO();
 	private UAPUserTransanction trans = TransactionFactory.getUTransaction();
 	public PreAlertObject executeTask(BgWorkingContext arg0)
 			throws BusinessException {
-		
+		runTask();
+		return null;
+	}
+
+	public void runTask() {
 		UFDate daytime = new UFDate();
 		log_msg = daytime.toDate() + "开始生成销售订单。。。。。。";
 		UFDouble price = UFDouble.ZERO_DBL;
@@ -297,7 +300,7 @@ public class ToSaleOrderWorkPlugin2 implements IBackgroundWorkPlugin{
 			}
 			log_msg +="执行sql，生成" + sos.length + "条销售订单完成.";
 		} catch (Exception e) {
-			log_msg +="报错信息：" + e.getMessage();
+				log_msg +="报错信息：" + e.getMessage();
 			logVo.setMsg(log_msg); 
 			logVo.setOptype("saleorder");
 			try {
@@ -310,24 +313,25 @@ public class ToSaleOrderWorkPlugin2 implements IBackgroundWorkPlugin{
 			} catch (SecurityException e1) {
 				// TODO 自动生成的 catch 块
 				e1.printStackTrace();
-			} catch (RollbackException e1) {
+			}  catch (HeuristicRollbackException e1) {
 				// TODO 自动生成的 catch 块
 				e1.printStackTrace();
-			} catch (HeuristicRollbackException e1) {
-				// TODO 自动生成的 catch 块
-				e1.printStackTrace();
-			} catch (HeuristicMixedException | javax.transaction.NotSupportedException |
-					 javax.transaction.SystemException | javax.transaction.RollbackException e1) {
+			} catch (HeuristicMixedException | NotSupportedException | SystemException |
+					 javax.transaction.RollbackException | DAOException e1) {
 				// TODO 自动生成的 catch 块
 				e1.printStackTrace();
 			}
-		} 
+		}
+		logVo.setTs(new UFDateTime());
 		if ( !log_msg.contains("报错信息") ) {
 			logVo.setMsg(log_msg); 
 			logVo.setOptype("saleorder");
-			getBaseDao().insertVO(logVo);	
+			try {
+				getBaseDao().insertVO(logVo);
+			} catch (DAOException e) {
+				throw new RuntimeException(e);
+			}
 		}
-		return null;
 	}
 	
 
@@ -359,7 +363,7 @@ public class ToSaleOrderWorkPlugin2 implements IBackgroundWorkPlugin{
 	
 	/**
 	 * 收货单位匹配NC客户 测试默认 抚顺新钢铁有限责任公司
-	 * @param bvoslist
+	 * @param vo
 	 * @return
 	 */
 	private String matchCustomer(Wb01VO vo) {

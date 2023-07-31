@@ -20,8 +20,8 @@ public class serverTest {
         String webService = "http://39.152.48.75:18090/hw_weight/services/WeightHandle?wsdl";
         String fromSQL = "select 序号, 流水号,车号,过磅类型,发货单位,收货单位,货名,规格,convert(varchar(20),毛重) 毛重, convert(varchar(20),皮重) 皮重, convert(varchar(20),净重) 净重,convert(varchar(20),扣重) 扣重, convert(varchar(20),实重) 实重, convert(varchar(20),单价) 单价,convert(varchar(20),金额) 金额, convert(varchar(20),折方系数) 折方系数, convert(varchar(20),方量) 方量,convert(varchar(20),过磅费) 过磅费, 毛重司磅员,皮重司磅员,毛重磅号,皮重磅号,毛重时间 毛重时间,皮重时间 皮重时间,一次过磅时间 一次过磅时间,二次过磅时间 二次过磅时间,更新人,更新时间 更新时间,备注,打印次数,上传否,备用1,备用2,备用13 是否更新,备用14 发货时间 from 称重信息";
         UFDateTime daytime = new UFDateTime(new java.util.Date());
-        String beginBeforeDay = "2023-07-05 00:00:00";
-        String endBeforeDay =  "2023-07-30 23:59:59";
+        String beginBeforeDay = "2023-07-17 00:00:00";
+        String endBeforeDay =  "2023-07-17 23:59:59";
 //        String beginBeforeDay = "2023-07-01 00:00:00";
 //        String endBeforeDay = "2023-07-31 12:00:00";
         String query = fromSQL
