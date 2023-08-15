@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module name="ic">
 	<public>
-		<component >
+		<component name="SyncInfoToCcWS">
 			<interface>nc.itf.sync.baseinfo.ISyncBaseInfocc</interface>
 			<implementation>nc.impl.sync.baseinfo.SyncBaseInfoccImpl</implementation>
 			<extension class="nc.uap.ws.deploy.OxbWSExtensionProcessor">
@@ -13,6 +13,8 @@
 	<private>
 	</private>
 </module>
+
+
 
 
 

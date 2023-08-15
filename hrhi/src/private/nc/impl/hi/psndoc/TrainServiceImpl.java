@@ -107,9 +107,9 @@ public class TrainServiceImpl implements ITrainService {
 				,"status","course_class","course_mode","course_type","course_status","creationtime","modifiedtime","creator","createorg","course_org","lecturer_code"};
 		Map<String, String> xmlvalheadlist = this.getxmldocumnet(element, names);
 		String psnSql = " select p.pk_org,p.pk_group,p.pk_psndoc,h.pk_psnjob,O.PK_PSNORG  from bd_psndoc p "
-				+ "left join hi_psnjob h on p.pk_psndoc = h.pk_psndoc and h.ismainjob ='Y' and h.lastflag='Y'"
+				+ "left join hi_psnjob h on p.pk_psndoc = h.pk_psndoc and h.ismainjob ='Y' and h.lastflag='Y' and h. POSTSTAT ='Y' "
 				+ "LEFT JOIN hi_psnorg O ON O.PK_PSNDOC = P.PK_PSNDOC AND O.DR = 0 "
-				+ "where p.dr='0' and p.dr='0' and p.code='"+xmlvalheadlist.get("psncode")+"'";
+				+ "where p.dr='0' and p.dr='0' and p.code='"+xmlvalheadlist.get("psncode")+"' and o.lastflag = 'Y'";
 		Map<String,String> psnInfo = (Map<String, String>) queryBS.executeQuery(psnSql,new MapProcessor());
 		if(psnInfo==null){
 			throw new BusinessException("人员编码不正确");

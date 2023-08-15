@@ -1,6 +1,5 @@
 package nccloud.web.so.saleorder.util;
 
-import nc.bs.framework.common.NCLocator;
 import nc.itf.uap.IUAPQueryBS;
 import nc.jdbc.framework.processor.ColumnProcessor;
 import nc.jdbc.framework.processor.MapListProcessor;
@@ -109,7 +108,7 @@ public class SoCalcPriceUtil {
 	public UFDouble queryBasePrice(SoCalcPriceVO calcPriceVO)
 			 {
 		UFDouble basePrice = UFDouble.ZERO_DBL;
-		IUAPQueryBS queryBS = NCLocator.getInstance().lookup(IUAPQueryBS.class);
+		IUAPQueryBS queryBS = ServiceLocator.find(IUAPQueryBS.class);
 		//在客户价格管理中的基价维护==由客户和日期限制（发货日期）
 		String now =calcPriceVO.getDate();//发货日期
 		String queryBasePrice = 
