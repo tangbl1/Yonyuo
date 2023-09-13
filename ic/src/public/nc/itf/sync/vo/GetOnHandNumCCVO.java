@@ -1,4 +1,7 @@
 package nc.itf.sync.vo;
+
+import com.alibaba.fastjson.annotation.JSONField;
+
 /**
  * @ProjectName:    NC65_DD 
  * @Package:        nc.itf.sync.vo
@@ -26,6 +29,7 @@ public class GetOnHandNumCCVO {
     //单位编码
     private String UnitCode;
     //结存数量
+//    @JSONField(name = "NOnhandNum")//问题记录：json首字母小写自动转化， @JSONField可避免这个问题，目前没修正这个问题
     private String NOnhandNum;
 
     public String getOrgCode() {

@@ -8,6 +8,8 @@ import nc.bs.framework.common.NCLocator;
 import nc.bs.framework.comn.NetStreamContext;
 import nc.bs.framework.core.service.IFwLogin;
 import nc.bs.trade.business.HYPubBO;
+import nc.itf.uap.pf.IPFBusiAction;
+import nc.itf.vehicle.IVehicleMaintain;
 import nc.itf.vehicle.IVorderMaintain;
 import nc.itf.vehicle.util.YonyouMessageUtil;
 import nc.jdbc.framework.processor.ColumnProcessor;
@@ -247,8 +249,8 @@ public class VorderManagerServlet extends HttpServlet {
 		AggVorderHVO[] aggvos = { aggvo };
 		IVorderMaintain iVorderMaintain = (IVorderMaintain) NCLocator
 				.getInstance().lookup(IVorderMaintain.class);
-		
-		AggVorderHVO[] aggdfVO = iVorderMaintain.insert(aggvos, null);
+		IPFBusiAction ipfBusiAction = (IPFBusiAction) NCLocator.getInstance().lookup(IPFBusiAction.class);
+		aggvos = (AggVorderHVO[]) ipfBusiAction.processAction("SAVEBASE", "VORD", null, aggvo, null, null);//新增一条申请单
 		result.put("result", "true");
 		
 		return result;

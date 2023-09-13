@@ -157,14 +157,14 @@ public class YonyouMessageUtil {
      */
     public static boolean sendMessage(String accessToken, List<Map<String, Object>> param) {
         // begin modifly by 2023-06-15
-        String URL = SENDMESSAGE_URL + "access_token=" + accessToken;
-        JSONObject memberIdRes = HttpRequest.sendPost(URL, param);
-        if (memberIdRes != null && !memberIdRes.isEmpty()) {
-
-            if (Integer.parseInt(memberIdRes.getString("code")) == 200) {
-                return true;
-            }
-        }
+//        String URL = SENDMESSAGE_URL + "access_token=" + accessToken;
+//        JSONObject memberIdRes = HttpRequest.sendPost(URL, param);
+//        if (memberIdRes != null && !memberIdRes.isEmpty()) {
+//
+//            if (Integer.parseInt(memberIdRes.getString("code")) == 200) {
+//                return true;
+//            }
+//        }
         return false;
     }
     // end  modifly by 2023-06-15

@@ -159,7 +159,7 @@ public class QueryPostServlet extends HttpServlet {
 				+ "from om_post p, org_dept d,"
 				+ " sm_user u where p.dr = 0 and  pk_post in (select pk_post  from hi_psnjob  where dr = 0 and  "
 				+ "pk_psndoc =  (select pk_psndoc from bd_psndoc where code = "
-				+ "'"+staffNo+"' and dr = 0) and pk_org = (select pk_org from bd_psndoc where dr = 0 and code = '"+staffNo+"') and lastflag = 'Y') and p.pk_dept "
+				+ "'"+staffNo+"' and dr = 0) and pk_org = (select pk_org from bd_psndoc where dr = 0 and code = '"+staffNo+"') and lastflag = 'Y' and ISMAINJOB = 'Y') and p.pk_dept "
 				+ "= d.pk_dept  and pk_psndoc = (select pk_psndoc from bd_psndoc"
 				+ " where code = '"+staffNo+"'and dr = 0)) post left join "
 				+ "(select distinct u.cuserid,r.role_name from bd_psndoc p,sm_user u,sm_user_role ur,sm_role r "

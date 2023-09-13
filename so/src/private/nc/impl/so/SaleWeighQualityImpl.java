@@ -22,13 +22,13 @@ public class SaleWeighQualityImpl implements ISaleWeighQuality {
             Statement stm = con.createStatement();
             //循环
             for(int i =0;i<vehiclenos.length;i++){
-                String vehicleno = vehiclenos[i];
+                String vehicleno = vehiclenos[i].replace(" ","");
                 String lsh = lshs[i];
                 String tfe = tfes[i];
                 String Technician = Technicians[i];
                 String h2o = h2os[i];
 //				 stm.addBatch("update so_saleorder_b set vbdef3='"+tfe+"',vbdef4='"+h2o+"',vbdef5='"+Technician+"' where vbdef1='"+vehicleno+"' and vbdef2='"+checkjtime+"' and dr = 0");
-                stm.addBatch("update so_saleorder_b set factorygrade_tfe='"+tfe+"',factorygrad_h2o='"+h2o+"',vbdef20='"+Technician+"' where vbdef2='"+vehicleno+"' and csaleorderid in (select csaleorderid from so_saleorder where vdef2 ='"+lsh+"' and fstatusflag = 1 and dr = 0) and dr = 0");//子表vdef2  车牌号 主表 流水号
+                stm.addBatch("update so_saleorder_b set factorygrade_tfe='"+tfe+"',factorygrad_h2o='"+h2o+"',vbdef20='"+Technician+"' where REPLACE(vbdef2,' ','')='"+vehicleno+"' and csaleorderid in (select csaleorderid from so_saleorder where vdef2 ='"+lsh+"' and fstatusflag = 1 and dr = 0) and dr = 0");//子表vdef2  车牌号 主表 流水号
             }
             j = stm.executeBatch();
 

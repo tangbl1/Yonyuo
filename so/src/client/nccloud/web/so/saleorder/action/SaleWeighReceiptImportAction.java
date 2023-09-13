@@ -251,7 +251,7 @@ public class SaleWeighReceiptImportAction implements IUploadAction {
                         String sql =
                                 " substr(vbdef18,0,10)= '" + checkjtime.substring(0, 10) + "' "
                                         + " and " +
-                                        " vbdef2='" + vehicleno + "'"
+                                        " REPLACE(vbdef2,' ','') ='" + vehicleno.replace(" ","")+ "'"//车号去空格
                                         + "and firstreceiptnum='" + sz + "'";
                         SaleOrderBVO[] bvos = (SaleOrderBVO[]) hypubbo.queryByCondition(SaleOrderBVO.class, sql);
                         if (bvos.length == 0) {

@@ -20,11 +20,16 @@
       <sourceFolder url="file://$MODULE_DIR$/hrhi/src/private" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/hrhi/src/public" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/hrhi/src/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/ic/src/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/vehicle/src/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/ufoc/src/client" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/ufoc/src/private" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/ufoc/src/public" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/riart/src/private" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/riart/src/public" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="DB_Drive_Library" level="project" />
-    <orderEntry type="library" name="Ant_Library" level="project" />
     <orderEntry type="library" name="Product_Common_Library" level="project" />
     <orderEntry type="library" name="Middleware_Library" level="project" />
     <orderEntry type="library" name="Framework_Library" level="project" />
@@ -41,8 +46,10 @@
     <orderEntry type="library" name="Generated_EJB" level="project" />
     <orderEntry type="library" name="NCCloud_Library" level="project" />
     <orderEntry type="library" name="resources" level="project" />
-    <orderEntry type="library" name="org.apache.httpcomponents.httpclient_4.2.1" level="project" />
-    <orderEntry type="library" name="axis" level="project" />
-    <orderEntry type="library" name="commons-discovery-0.2" level="project" />
+        <orderEntry type="library" name="org.apache.httpcomponents.httpclient_4.2.1" level="project" />
+        <orderEntry type="library" name="axis" level="project" />
+        <orderEntry type="library" name="commons-discovery-0.2" level="project" />
+        <orderEntry type="library" name="DB_Drive_Library" level="project" />
+        <orderEntry type="library" name="Ant_Library" level="project" />
   </component>
 </module>

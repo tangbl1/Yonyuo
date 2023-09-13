@@ -8,7 +8,10 @@ import com.yonyou.iuap.corp.demo.utils.RequestTool;
 import nc.itf.vehicle.util.HttpRequest;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class demo {

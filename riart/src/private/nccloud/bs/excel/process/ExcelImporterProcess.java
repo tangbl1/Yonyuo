@@ -695,11 +695,7 @@ public class ExcelImporterProcess implements IExcelImporterProcess {
 	}
 	/**
 	 *
-	 * @param deli
-	 * @param custName 供应商
-	 * @param ph 批次号
-	 * @param rq 日期
-	 * @param gjzl 湿重
+	 * @param deliveryvo
 	 * @return
 	 * @throws BusinessException
 	 */

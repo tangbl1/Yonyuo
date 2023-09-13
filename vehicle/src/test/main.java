@@ -13,9 +13,10 @@ public class main {
 
     public static void main(String[] args) {
 
-        String accessToken = "e860920ec26b7ecf6c16e4653ac8adfbc3858b5e6dad96e469bace0f687453c0";
+        String accessToken = "ZyQAAAAAAAABMAAAAAAAAAEwyHHZczSKAQAAAAAAAADEQinrZMSinOpkDWl1YXAtdXVhcy1jYXMAAJA3Ffz7R6VHRrUfArfvs2x5B2RjY29yZTAA";
         List<String> tos = new ArrayList<String>();
-        tos.add("3675182");//memberId
+//        tos.add("3675182");//memberId
+        tos.add("55c77f65-022d-42b1-b98b-ec991a706515");
         List<Map<String, Object>> mapList = messagePojo(tos,"车辆管理通知测试","您的用车申请单已审批完成！");
         sendMessage(accessToken,mapList);
 
